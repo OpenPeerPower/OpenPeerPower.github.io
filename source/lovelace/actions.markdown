@@ -23,11 +23,6 @@ Action that will be performed when an object on a card is tapped.
 
 Action that will be performed when an object on a card is tapped and held.
 
-```yaml
-hold_action:
-  action: toggle
-```
-
 {% configuration hold_action %}
 hold_action:
   required: false
