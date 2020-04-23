@@ -140,11 +140,11 @@ views:
 
         # The picture entity card will represent an entity with a picture
       - type: picture-entity
-        image: https://www.home-assistant.io/images/default-social.png
+        image: https://www.openpeerpower.io/images/default-social.png
         entity: light.bed_light
 
     # Specify a tab icon if you want the view tab to be an icon.
-  - icon: mdi:home-assistant
+  - icon: mdi:open-peer-power
     # Title of the view. Will be used as the tooltip for tab icon
     title: Second view
     cards:
@@ -410,7 +410,7 @@ tap_action:
       default: none
     url_path:
       required: false
-      description: "Path to navigate to (e.g.,  `https://www.home-assistant.io`) when `action` defined as `url`"
+      description: "Path to navigate to (e.g.,  `https://www.openpeerpower.io`) when `action` defined as `url`"
       type: string
       default: none
     service:
@@ -445,7 +445,7 @@ hold_action:
       default: none
     url_path:
       required: false
-      description: "Path to navigate to (e.g.,  `https://www.home-assistant.io`) when `action` defined as `url`"
+      description: "Path to navigate to (e.g.,  `https://www.openpeerpower.io`) when `action` defined as `url`"
       type: string
       default: none
     service:
@@ -480,7 +480,7 @@ double_tap_action:
       default: none
     url_path:
       required: false
-      description: "Path to navigate to (e.g.,  `https://www.home-assistant.io`) when `action` defined as `url`"
+      description: "Path to navigate to (e.g.,  `https://www.openpeerpower.io`) when `action` defined as `url`"
       type: string
       default: none
     service:
