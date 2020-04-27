@@ -39,7 +39,7 @@ liquid:
   error_mode: strict
 
 commonmark:
-  options: ["SMART", "FOOTNOTES", "UNSAFE"]
+  options: ["SMART", "FOOTNOTES"]
   extensions: ["strikethrough", "autolink", "table"]
 
 highlighter: none
