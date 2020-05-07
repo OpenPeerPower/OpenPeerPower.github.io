@@ -1,0 +1,65 @@
+I"‹<p>The <code>sms</code> integration allows having a local execution SMS notification via <a href="https://wammu.eu/gammu/">Gammu</a>. This is ideal when the internet is offline or when the power goes out.</p>
+<p>This integration provides the following platforms:</p>
+<ul>
+<li>Notify</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable those notifications in your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+sms:
+  device: /dev/ttyUSB2
+<p>notify:</p>
+<ul>
+<li>platform: sms
+name: sms_person1
+recipient: PHONE_NUMBER</li>
+<li>platform: sms
+name: sms_person2
+recipient: PHONE_NUMBER</code></pre></figure></li>
+</ul>
+<p>To use notifications, please see the <a href="/getting-started/automation/">getting started with automation page</a>.</p>
+<p>If the integration is used with the Open Peer Power Operating System, then version <a href="https://github.com/OpenPeerPower/hassos/releases/tag/3.6">3.6</a> or higher is required.</p>
+<p>For installations not running on Open Peer Power or Open Peer Power Core using Docker, you must install <code>gammu-dev</code> package:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install libgammu-dev</code></pre></figure>
+<p>Before running for the first time, check that the system recognizes the modem by running:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ls -l /dev/*USB*</code></pre></figure>
+<p>Note: When running Open Peer Power, you need to install the SSH add-on.</p>
+<h2>Required Hardware</h2>
+<p>You will need a USB GSM stick modem.</p>
+<h3>List of modems known to work</h3>
+<ul>
+<li><a href="https://www.amazon.com/gp/product/B01N6P3HI2/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1">Huawei E3372-510</a>(
+Need to unlock it using <a href="http://blog.asiantuntijakaveri.fi/2015/07/convert-huawei-e3372h-153-from.html">this guide</a>)</li>
+<li><a href="https://www.amazon.com/Modem-Huawei-Unlocked-Caribbean-Desbloqueado/dp/B011YZZ6Q2/ref=sr_1_1?keywords=Huawei+E3531&amp;qid=1581447800&amp;sr=8-1">Huawei E3531</a></li>
+</ul>
+<p><a href="https://www.asus.com/event/networks_3G4G_support/">List of modems that may work</a></p>
+<h3>Huawei modems on Raspberry Pi (and similar) devices</h3>
+<p>For some unknown reason, the rule that converts these modems from storage devices into serial devices does not run automatically. To work around this problem, follow the procedure to create <code>udev</code> rule on a configuration USB stick for the device to switch to serial mode.</p>
+<ol>
+<li>Run <code>lsusb</code>, its output looks like this:</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bus 000 device 001: ID 1FFF:342a
+bus 001 device 005: ID 12d1:15ca   &lt;-------- Huawei is usually 12d1
+bus 000 device 002: ID 2354:5352
+bus 000 device 002: ID 1232:15ca</code></pre></figure>
+<p>Identify the brand for your GSM modem, copy the <code>brand_Id</code> and <code>product_id</code> (In this case <code>brand_id = 12d1</code> and <code>product_Id = 15ca</code>)</p>
+<p>Set this content in file <code>udev\10-gsm-modem.rules</code> in the configuration USB:
+(Replace <code>brand_Id</code> and <code>product_id</code> for the numbers reported by <code>lsusb</code>)</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ACTION==&quot;add&quot; \
+, ATTRS{idVendor}==&quot;brand_Id&quot; \
+, ATTRS{idProduct}==&quot;product_Id&quot; \
+, RUN+=&quot;/sbin/usb_modeswitch -X -v brand_Id -p product_Id&quot;</code></pre></figure>
+<p>Here is a sample configuration file:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ACTION==&quot;add&quot; \
+, ATTRS{idVendor}==&quot;12d1&quot; \
+, ATTRS{idProduct}==&quot;15ca&quot; \
+, RUN+=&quot;/sbin/usb_modeswitch -X -v 12d1 -p 15ca&quot;</code></pre></figure>
+<p>Plug the USB stick, reboot the device, run <code>lsusb</code> again.
+The resulting product id now should be different and the brand id should be the same.
+And <code>ls -l /dev/*USB*</code> should now report your device.</p>
+<p>If the device is still not recognized, remove the parameter -X from the usb_modesiwtch command and reboot again.</p>
+<h2>More details:</h2>
+<ul>
+<li><a href="https://community.openpeerpower.io/t/send-sms-with-usb-gsm-modem-when-alarm-triggered/28942/38">Original thread discussion</a></li>
+</ul>
+:ET

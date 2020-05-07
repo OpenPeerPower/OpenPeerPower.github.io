@@ -1,0 +1,144 @@
+I"<p>The Fan integration allows you to control and monitor Fan devices.</p>
+<h2>Services</h2>
+<h3>Fan control services</h3>
+<p>Available services:
+<code>fan.set_speed</code>, <code>fan.set_direction</code>, <code>fan.oscillate</code>, <code>fan.turn_on</code>, <code>fan.turn_off</code>, <code>fan.toggle</code></p>
+<div class='note'>
+<p>Not all fan services may be available for your platform. Be sure to check the available services Open Peer Power has enabled by checking <img src='/images/screenshots/developer-tool-services-icon.png' alt='service developer tool icon' class="no-shadow" height="38" /> <strong>Services</strong>.</p>
+</div>
+<h3>Service <code>fan.set_speed</code></h3>
+<p>Sets the speed for fan device</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that define the entity ID(s) of fan device(s) to control. To target all fan devices, use <code>all</code>.</td>
+</tr>
+<tr>
+<td><code>speed</code></td>
+<td>no</td>
+<td>Speed setting</td>
+</tr>
+</tbody>
+</table>
+<h4>Automation example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: time
+    at: &quot;07:15:00&quot;
+  action:
+    - service: fan.set_speed
+      data:
+        entity_id: fan.kitchen
+        speed: low</code></pre></figure>
+<h3>Service <code>fan.set_direction</code></h3>
+<p>Sets the rotation for fan device</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that define the entity ID(s) of fan device(s) to control. To target all fan devices, use <code>all</code>.</td>
+</tr>
+<tr>
+<td><code>direction</code></td>
+<td>no</td>
+<td>The direction to rotate. Either <code>forward</code> or <code>reverse</code></td>
+</tr>
+</tbody>
+</table>
+<h4>Automation example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: time
+    at: &quot;07:15:00&quot;
+  action:
+    - service: fan.set_direction
+      data:
+        entity_id: fan.kitchen
+        direction: forward</code></pre></figure>
+<h3>Service <code>fan.oscillate</code></h3>
+<p>Sets the oscillation for fan device</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that define the entity ID(s) of fan device(s) to control. To target all fan devices, use <code>all</code>.</td>
+</tr>
+<tr>
+<td><code>oscillating</code></td>
+<td>no</td>
+<td>Flag to turn on/off oscillation. Either <code>True</code> or <code>False</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4>Automation example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: time
+    at: &quot;07:15:00&quot;
+  action:
+    - service: fan.oscillate
+      data:
+        entity_id: fan.kitchen
+        oscillating: True</code></pre></figure>
+<h3>Service <code>fan.turn_on</code></h3>
+<p>Turn fan device on. This is only supported if the fan device supports being turned off.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that define the entity ID(s) of fan device(s) to control. To target all fan devices, use <code>all</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Service <code>fan.turn_off</code></h3>
+<p>Turn fan device off. This is only supported if the fan device supports being turned on.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>String or list of strings that define the entity ID(s) of fan device(s) to control. To target all fan devices, use <code>all</code>.</td>
+</tr>
+</tbody>
+</table>
+:ET

@@ -1,0 +1,29 @@
+I"O
+<p>Synology NAS are the perfect companion to running Open Peer Power. But by default, the DSM Reverse Proxy does not configure its NGINX settings to allow WebSocket, and some extra configuration will be required to get the Open Peer Power frontend working with the DSM.</p>
+<h3>Setup headers</h3>
+<p>Starting with DSM 6.2.1+, you can create “custom headers” in the Application Portal:</p>
+<ul>
+<li>Go to Application Portal and edit your entry</li>
+<li>Click on “custom headers” tab and click the dropdon on the “Create” button</li>
+<li>Select “Websocket”. This will automatically add the required headers for websocket to this reverse proxy.</li>
+<li>Click “OK”. Open Peer Power should work now with the reverse proxy.</li>
+</ul>
+<p>It’s not necessary anymore to change the template anymore since Version DSM 6.2.1. Changing the <code>Portal.mustache</code> is not recommended! You should use the following part only if you’re using a Version before DSM 6.2.1. on your Synology.</p>
+<h3>Template change</h3>
+<p>To allow WebSocket by default for all service exposed by NGINX, you can enable it in the template file located in <code>/usr/syno/share/nginx/Portal.mustache</code>. Please be really careful in editing this file since you may break access to the DSM UI. Please backup this file before any edition.</p>
+<p>Open <code>/usr/syno/share/nginx/Portal.mustache</code> and add the followings in the <code>Location</code> section:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">proxy_set_header        Upgrade             $http_upgrade;
+        proxy_set_header        Connection          &quot;upgrade&quot;;
+        proxy_read_timeout      86400;</code></pre></figure>
+<p>Then restart the NGINX daemon:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo synoservicecfg --restart nginx</code></pre></figure>
+<p>This will restart the running HTTP service, not only reverse proxy, as a single instance of NGINX runs everything.</p>
+<p>You can find more information <a href="https://github.com/orobardet/dsm-reverse-proxy-websocket">here</a>.</p>
+<h4>HTTP Configuration</h4>
+<ul>
+<li>Copy the Open Peer Power specific Reverse Proxy settings from the existing <code>/etc/nginx/app.d/server.ReverseProxy.conf</code> file to <code>/usr/local/etc/nginx/conf.d/http.OpenPeerPower.conf</code>.</li>
+<li>Include these lines in the location declaration:</li>
+</ul>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection &quot;upgrade&quot;;</code></pre></figure>
+:ET

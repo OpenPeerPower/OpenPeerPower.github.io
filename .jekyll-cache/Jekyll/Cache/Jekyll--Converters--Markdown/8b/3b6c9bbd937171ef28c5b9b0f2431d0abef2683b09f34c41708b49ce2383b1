@@ -1,0 +1,284 @@
+I"�m<p>The Picture Elements card is one of the most versatile types of cards.</p>
+<p>The cards allow you to position icons or text and even services! On an image based on coordinates. Imagine floor plan, imagine <a href="/lovelace/picture-glance/">picture-glance</a> with no restrictions!</p>
+<p class='img'>
+  <img src='/images/lovelace/lovelace_picture_elements.gif' alt='A functional floorplan powered by picture elements'>
+  A functional floorplan powered by picture elements.
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>picture-elements</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL of an image.</p>
+</span></p></dd><dt><a class='title-link' name='elements' href='#elements'></a> elements</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of elements</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Card title</p>
+</span></p></dd><dt><a class='title-link' name='state_filter' href='#state_filter'></a> state_filter</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="#how-to-use-state_filter">State-based CSS filters</a></p>
+</span></p></dd><dt><a class='title-link' name='theme' href='#theme'></a> theme</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to any theme within <code>themes.yaml</code></p>
+</span></p></dd></dl>
+</div>
+<h2>Elements</h2>
+<h3>State Badge</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>state-badge</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Entity id</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>State badge tooltip. Set to null to hide.</p>
+</span></p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h3>Icon representing an entity state</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>state-icon</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The entity id to use.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites icon.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon tooltip. Set to null to hide.</p>
+</span></p></dd><dt><a class='title-link' name='state_color' href='#state_color'></a> state_color</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to have icons colored when entity is active</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd></dl>
+</div>
+<h3>Label with state text</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>state-label</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Entity id</p>
+</span></p></dd><dt><a class='title-link' name='attribute' href='#attribute'></a> attribute</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>If present, the corresponding attribute will be shown, instead of the entity’s state</p>
+</span></p></dd><dt><a class='title-link' name='prefix' href='#prefix'></a> prefix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Text before entity state.</p>
+</span></p></dd><dt><a class='title-link' name='suffix' href='#suffix'></a> suffix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Text after entity state.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Label tooltip. Set to null to hide.</p>
+</span></p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd></dl>
+</div>
+<h3>Service Call Button</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>service-button</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Button label</p>
+</span></p></dd><dt><a class='title-link' name='service' href='#service'></a> service</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>light.turn_on</p>
+</span></p></dd><dt><a class='title-link' name='service_data' href='#service_data'></a> service_data</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The service data to use.</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd></dl>
+</div>
+<h3>Icon Element</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>icon</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Icon to display (e.g., <code>mdi:home</code>)</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon tooltip. Set to null to hide.</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity to use for more-info/toggle</p>
+</span></p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd></dl>
+</div>
+<h3>Image Element</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>image</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity to use for state_image and state_filter and also target for actions.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Image tooltip. Set to null to hide.</p>
+</span></p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The image to display.</p>
+</span></p></dd><dt><a class='title-link' name='camera_image' href='#camera_image'></a> camera_image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>A camera entity.</p>
+</span></p></dd><dt><a class='title-link' name='camera_view' href='#camera_view'></a> camera_view</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>“live” will show the live view if <code>stream</code> is enabled.</p>
+</span></p><p class='default'>
+Default value: <p>auto</p>
+</p></dd><dt><a class='title-link' name='state_image' href='#state_image'></a> state_image</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="#how-to-use-state_image">State-based images</a></p>
+</span></p></dd><dt><a class='title-link' name='filter' href='#filter'></a> filter</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Default CSS filter</p>
+</span></p></dd><dt><a class='title-link' name='state_filter' href='#state_filter'></a> state_filter</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="#how-to-use-state_filter">State-based CSS filters</a></p>
+</span></p></dd><dt><a class='title-link' name='aspect_ratio' href='#aspect_ratio'></a> aspect_ratio</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Height-width-ratio.</p>
+</span></p><p class='default'>
+Default value: <p>50%</p>
+</p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd></dl>
+</div>
+<h3>Conditional Element</h3>
+<p>Much like the Conditional card, this element will let you show its sub-elements based on entity states.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>conditional</p>
+</span></p></dd><dt><a class='title-link' name='conditions' href='#conditions'></a> conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of entity IDs and matching states.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Open Peer Power entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='state' href='#state'></a> state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity state is equal to this value.*</p>
+</span></p></dd><dt><a class='title-link' name='state_not' href='#state_not'></a> state_not</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity state is unequal to this value.*</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='elements' href='#elements'></a> elements</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>One or more elements of any type to show when conditions are met. See below for an example.</p>
+</span></p></dd></dl>
+</div>
+<h2>Options For Exemptions</h2>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='user' href='#user'></a> user</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>User id that can see the view tab.</p>
+</span></p></dd></dl>
+</div>
+<h3>Custom Elements</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Card name with <code>custom:</code> prefix (e.g., <code>custom:my-custom-card</code>)</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Position and style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>position: absolute, transform: translate(-50%, -50%)</p>
+</p></dd></dl>
+</div>
+<h2>How to use the style object</h2>
+<p>Position and style your elements using <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a>. More/other keys are also possible.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">style:
+  # Positioning of the element
+  left: 50%
+  top: 50%
+  # Overwrite color for icons
+  &quot;--paper-item-icon-color&quot;: pink</code></pre></figure>
+<h2>How to use state_image</h2>
+<p>Specify a different image to display based on the state of the entity.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">state_image:
+  &quot;on&quot;: /local/living_room_on.jpg
+  &quot;off&quot;: /local/living_room_off.jpg</code></pre></figure>
+<h2>How to use state_filter</h2>
+<p>Specify different <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">CSS filters</a></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">state_filter:
+  &quot;on&quot;: brightness(110%) saturate(1.2)
+  &quot;off&quot;: brightness(50%) hue-rotate(45deg)</code></pre></figure>
+<h2>How to use click-and-hold</h2>
+<p>If the option <code>hold_action</code> is specified, that action will be performed when the entity is clicked and held for half a second or more.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">tap_action:
+  action: toggle
+hold_action:
+  action: call-service
+  service: light.turn_on
+  service_data:
+    entity_id: light.bed_light
+    brightness_pct: 100</code></pre></figure>
+<h2>Example</h2>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-elements
+image: /local/floorplan.png
+elements:
+  - type: state-icon
+    tap_action:
+      action: toggle
+    entity: light.ceiling_lights
+    style:
+      top: 47%
+      left: 42%
+  - type: state-icon
+    tap_action:
+      action: toggle
+    entity: light.kitchen_lights
+    style:
+      top: 30%
+      left: 15%
+  - type: state-label
+    entity: sensor.outside_temperature
+    style:
+      top: 82%
+      left: 79%
+  - type: state-label
+    entity: climate.kitchen
+    attribute: current_temperature
+    suffix: &quot;°C&quot;
+    style:
+      top: 33%
+      left: 15%
+  - type: service-button
+    title: Turn lights off
+    style:
+      top: 95%
+      left: 60%
+    service: openpeerpower.turn_off
+    service_data:
+      entity_id: group.all_lights
+  - type: icon
+    icon: mdi:home
+    tap_action:
+      action: navigate
+      navigation_path: /lovelace/0
+    style:
+      top: 10%
+      left: 10%</code></pre></figure>
+<h2>Images Example</h2>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-elements
+image: /local/floorplan.png
+elements:
+  # state_image &amp; state_filter - toggle on click
+  - type: image
+    entity: light.living_room
+    tap_action:
+      action: toggle
+    image: /local/living_room.png
+    state_image:
+      &quot;off&quot;: /local/living_room_off.png
+    filter: saturate(.8)
+    state_filter:
+      &quot;on&quot;: brightness(120%) saturate(1.2)
+      style:
+        top: 25%
+        left: 75%
+        width: 15%
+  # Camera, red border, rounded-rectangle - show more-info on click
+  - type: image
+    entity: camera.driveway_camera
+    camera_image: camera.driveway_camera
+    style:
+      top: 5%
+      left: 10%
+      width: 10%
+      border: 2px solid red
+      border-radius: 10%
+  # Single image, state_filter - call-service on click
+  - type: image
+    entity: media_player.living_room
+    tap_action:
+      action: call-service
+      service: media_player.media_play_pause
+      service_data:
+        entity_id: media_player.living_room
+    image: /local/television.jpg
+    filter: brightness(5%)
+    state_filter:
+      playing: brightness(100%)
+    style:
+      top: 40%
+      left: 75%
+      width: 5%</code></pre></figure>
+<h2>Conditional Example</h2>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-elements
+image: /local/House.png
+elements:
+  # conditionally show TV off button shortcut when dad&#39;s away and daughter is home
+  - type: conditional
+    conditions:
+      - entity: sensor.presence_daughter
+        state: &#39;home&#39;
+      - entity: sensor.presence_dad
+        state: &#39;not_home&#39;
+    elements:
+      - type: state-icon
+        entity: switch.tv
+        tap_action:
+          action: toggle
+        style:
+          top: 47%
+          left: 42%</code></pre></figure>
+:ET

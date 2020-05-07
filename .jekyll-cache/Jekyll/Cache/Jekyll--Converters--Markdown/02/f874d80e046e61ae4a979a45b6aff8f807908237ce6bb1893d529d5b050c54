@@ -1,0 +1,135 @@
+I"�<p>The Open Peer Power integration provides generic implementations like the generic <code>openpeerpower.turn_on</code>.</p>
+<h2>Services</h2>
+<p>The <code>openpeerpower</code> integration provides services for controlling Open Peer Power itself, as well as generic controls for any entity.</p>
+<h3>Service <code>openpeerpower.check_config</code></h3>
+<p>Reads the configuration files and checks them for correctness, but <strong>does not</strong> load them into Open Peer Power. Creates a persistent notification and log entry if errors are found.</p>
+<h3>Service <code>openpeerpower.reload_core_config</code></h3>
+<p>Loads the main configuration file (<code>configuration.yaml</code>) and all linked files. Once loaded the new configuration is applied.</p>
+<h3>Service <code>openpeerpower.restart</code></h3>
+<p>Restarts the Open Peer Power instance (also reloading the configuration on start).</p>
+<h3>Service <code>openpeerpower.stop</code></h3>
+<p>Stops the Open Peer Power instance. Open Peer Power must be restarted from the Host device to run again.</p>
+<h3>Service <code>openpeerpower.set_location</code></h3>
+<p>Update the location of the Open Peer Power default zone (usually “Home”).</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>latitude</code></td>
+<td>no</td>
+<td>Latitude of your location.</td>
+</tr>
+<tr>
+<td><code>longitude</code></td>
+<td>no</td>
+<td>Longitude of your location.</td>
+</tr>
+</tbody>
+</table>
+<h4>Example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">action:
+  service: openpeerpower.set_location
+  data:
+    latitude: 32.87336
+    longitude: 117.22743</code></pre></figure>
+<h3>Service <code>openpeerpower.toggle</code></h3>
+<p>Generic service to toggle devices on/off under any domain. Same usage as the light.turn_on, switch.turn_on, etc. services.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>The entity_id of the device to toggle on/off.</td>
+</tr>
+</tbody>
+</table>
+<h4>Example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">action:
+  service: openpeerpower.toggle
+  data:
+    entity_id: light.living_room</code></pre></figure>
+<h4>Service <code>openpeerpower.turn_on</code></h4>
+<p>Generic service to turn devices on under any domain. Same usage as the light.turn_on, switch.turn_on, etc. services.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>The entity_id of the device to turn on.</td>
+</tr>
+</tbody>
+</table>
+<h4>Example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">action:
+  service: openpeerpower.turn_on
+  data:
+    entity_id: light.living_room</code></pre></figure>
+<h3>Service <code>openpeerpower.turn_off</code></h3>
+<p>Generic service to turn devices off under any domain. Same usage as the light.turn_on, switch.turn_on, etc. services.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>yes</td>
+<td>The entity_id of the device to turn off.</td>
+</tr>
+</tbody>
+</table>
+<h4>Example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">action:
+  service: openpeerpower.turn_off
+  data:
+    entity_id: light.living_room</code></pre></figure>
+<h3>Service <code>openpeerpower.update_entity</code></h3>
+<p>Force one or more entities to update its data rather than wait for the next scheduled update.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>entity_id</code></td>
+<td>no</td>
+<td>One or multiple entity_ids to update. It can be a list.</td>
+</tr>
+</tbody>
+</table>
+<h4>Example</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">action:
+  service: openpeerpower.update_entity
+  data:
+    entity_id:
+    - light.living_room
+    - switch.coffe_pot</code></pre></figure>
+:ET

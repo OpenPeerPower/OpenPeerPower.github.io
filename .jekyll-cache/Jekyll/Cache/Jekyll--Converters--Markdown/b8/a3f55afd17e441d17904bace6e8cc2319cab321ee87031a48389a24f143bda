@@ -1,0 +1,97 @@
+I"�<p>The <code>history_stats</code> sensor platform provides quick statistics about another integration or platforms, using data from the <a href="/integrations/history/">history</a>.</p>
+<p>It can track how long the integration has been in a specific state, in a custom time period.</p>
+<p>Examples of what you can track:</p>
+<ul>
+<li>How long you were at home this week</li>
+<li>How long the lights were ON yesterday</li>
+<li>How long you watched TV today</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable the history statistics sensor, add the following lines to your <code>configuration.yaml</code>:</p>
+<p>{% highlight yaml %}</p>
+<h1>Example configuration.yaml entry</h1>
+<p>sensor:</p>
+<ul>
+<li>platform: history_stats
+name: Lamp ON today
+entity_id: light.my_lamp
+state: ‘on’
+type: time
+start: ‘{{ now().replace(hour=0, minute=0, second=0) }}’
+end: ‘{{ now() }}’
+{% endhighlight %}</li>
+</ul>
+<div class='note'>
+<p>You have to provide <strong>exactly 2</strong> of <code>start</code>, <code>end</code> and <code>duration</code>.
+<br/>
+You can use <a href="/topics/templating/#open-peer-power-template-extensions">template extensions</a> such as <code>now()</code> or <code>as_timestamp()</code> to handle dynamic dates, as shown in the examples below.</p>
+</div>
+<h2>Sensor type</h2>
+<p>Depending on the sensor type you choose, the <code>history_stats</code> integration can show different values:</p>
+<ul>
+<li><strong>time</strong>: The default value, which is the tracked time, in hours</li>
+<li><strong>ratio</strong>: The tracked time divided by the length of your period, as a percentage</li>
+<li><strong>count</strong>: How many times the integration you track was changed to the state you track</li>
+</ul>
+<h2>Time periods</h2>
+<p>The <code>history_stats</code> integration will execute a measure within a precise time period. You should always provide 2 of the following :</p>
+<ul>
+<li>When the period starts (<code>start</code> variable)</li>
+<li>When the period ends (<code>end</code> variable)</li>
+<li>How long is the period (<code>duration</code> variable)</li>
+</ul>
+<p>As <code>start</code> and <code>end</code> variables can be either datetimes or timestamps, you can configure almost any period you want.</p>
+<h3>Duration</h3>
+<p>The duration variable is used when the time period is fixed. Different syntaxes for the duration are supported, as shown below.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># 6 hours
+duration: 06:00</code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># 1 minute, 30 seconds
+duration: 00:01:30</code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># 2 hours and 30 minutes
+duration:
+  # supports seconds, minutes, hours, days
+  hours: 2
+  minutes: 30</code></pre></figure>
+<div class='note'>
+<p>If the duration exceeds the number of days of history stored by the <code>recorder</code> component (<code>purge_keep_days</code>), the history statistics sensor will not have all the information it needs to look at the entire duration. For example, if <code>purge_keep_days</code> is set to 7, a history statistics sensor with a duration of 30 days will only report a value based on the last 7 days of history.</p>
+</div>
+<h3>Examples</h3>
+<p>Here are some examples of periods you could work with, and what to write in your <code>configuration.yaml</code>:</p>
+<p><strong>Today</strong>: starts at 00:00 of the current day and ends right now.</p>
+<p>{% highlight yaml %}
+start: ‘{{ now().replace(hour=0, minute=0, second=0) }}’
+end: ‘{{ now() }}’
+{% endhighlight %}</p>
+<p><strong>Yesterday</strong>: ends today at 00:00, lasts 24 hours.</p>
+<p>{% highlight yaml %}
+end: ‘{{ now().replace(hour=0, minute=0, second=0) }}’
+duration:
+hours: 24
+{% endhighlight %}</p>
+<p><strong>This morning (6AM - 11AM)</strong>: starts today at 6, lasts 5 hours.</p>
+<p>{% highlight yaml %}
+start: ‘{{ now().replace(hour=6, minute=0, second=0) }}’
+duration:
+hours: 5
+{% endhighlight %}</p>
+<p><strong>Current week</strong>: starts last Monday at 00:00, ends right now.</p>
+<p>Here, last Monday is <em>today</em> as a timestamp, minus 86400 times the current weekday (86400 is the number of seconds in one day, the weekday is 0 on Monday, 6 on Sunday).</p>
+<p>{% highlight yaml %}
+start: ‘{{ as_timestamp( now().replace(hour=0, minute=0, second=0) ) - now().weekday() * 86400 }}’
+end: ‘{{ now() }}’
+{% endhighlight %}</p>
+<p><strong>Last 30 days</strong>: ends today at 00:00, lasts 30 days. Easy one.</p>
+<p>{% highlight yaml %}
+end: ‘{{ now().replace(hour=0, minute=0, second=0) }}’
+duration:
+days: 30
+{% endhighlight %}</p>
+<p><strong>All your history</strong> starts at timestamp = 0, and ends right now.</p>
+<p>{% highlight yaml %}
+start: ‘{{ 0 }}’
+end: ‘{{ now() }}’
+{% endhighlight %}</p>
+<div class='note'>
+<p>The <code>/developer-tools/template</code> page of your Open Peer Power UI can help you check if the values for <code>start</code>, <code>end</code> or <code>duration</code> are correct. If you want to check if your period is right, just click on your component, the <code>from</code> and <code>to</code> attributes will show the start and end of the period, nicely formatted.</p>
+</div>
+:ET

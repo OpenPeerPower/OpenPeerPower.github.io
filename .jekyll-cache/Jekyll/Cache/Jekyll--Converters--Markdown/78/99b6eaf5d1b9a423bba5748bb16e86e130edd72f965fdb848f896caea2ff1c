@@ -1,0 +1,149 @@
+I"�<p>The <code>input_datetime</code> integration allows the user to define date and time values
+that can be controlled via the frontend and can be used within automations and
+templates.</p>
+<p>To add three datetime inputs to your installation,
+one with both date and time, and one with date or time each,
+add the following lines to your <code>configuration.yaml</code>:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+input_datetime:
+  both_date_and_time:
+    name: Input with both date and time
+    has_date: true
+    has_time: true
+  only_date:
+    name: Input with only date
+    has_date: true
+    has_time: false
+  only_time:
+    name: Input with only time
+    has_date: false
+    has_time: true</code></pre></figure>
+<h3>Attributes</h3>
+<p>A datetime input entity’s state exports several attributes that can be useful in
+automations and templates.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>has_time</code></td>
+<td><code>true</code> if this entity has a time.</td>
+</tr>
+<tr>
+<td><code>has_date</code></td>
+<td><code>true</code> if this entity has a date.</td>
+</tr>
+<tr>
+<td><code>year</code><br><code>month</code><br><code>day</code></td>
+<td>The year, month and day of the date.<br>(only available if <code>has_date: true</code>)</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>A timestamp representing the time held in the input.<br>(only available if <code>has_time: true</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3>Restore State</h3>
+<p>If you set a valid value for <code>initial</code> this integration will start with state set to that value. Otherwise, it will restore the state it had prior to Open Peer Power stopping.</p>
+<h3>Services</h3>
+<p>Available service: <code>input_datetime.set_datetime</code> and <code>input_datetime.reload</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Format String</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>%Y-%m-%d</code></td>
+<td>This can be used to dynamically set the date.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td><code>%H:%M:%S</code></td>
+<td>This can be used to dynamically set the time.</td>
+</tr>
+<tr>
+<td><code>datetime</code></td>
+<td><code>%Y-%m-%d %H:%M:%S</code></td>
+<td>This can be used to dynamically set both the date &amp; time.</td>
+</tr>
+</tbody>
+</table>
+<p>To set both the date and time in the same call, use <code>date</code> and <code>time</code> together, or use <code>datetime</code> by itself. Using <code>datetime</code> has the advantage that both can be set using one template.</p>
+<p><code>input_dateteime.reload</code> service allows one to reload <code>input_datetime</code>’s configuration without restarting Open Peer Power itself.</p>
+<h2>Automation Examples</h2>
+<p>The following example shows the usage of the <code>input_datetime</code> as a trigger in an
+automation (note that you will need a
+<a href="/integrations/time_date">time sensor</a> elsewhere in your configuration):</p>
+<p>{% highlight yaml %}</p>
+<h1>Example configuration.yaml entry</h1>
+<h1>Turns on bedroom light at the time specified.</h1>
+<p>automation:
+trigger:
+platform: template
+   value_template: “{{ states(‘sensor.time’) == (state_attr(‘input_datetime.bedroom_alarm_clock_time’, ‘timestamp’) | int | timestamp_custom(’%H:%M’, True)) }}”
+ action:
+service: light.turn_on
+entity_id: light.bedroom
+{% endhighlight %}</p>
+<p>To dynamically set the <code>input_datetime</code> you can call
+<code>input_datetime.set_datetime</code>. The values for <code>date</code> and <code>time</code> must be in a certain format for the call to be successful. (See service description above.)
+If you have a <code>datetime</code> object you can use its <code>strftime</code> method. Of if you have a timestamp you can use the <code>timestamp_custom</code> filter.
+The following example shows the different methods in an automation rule:</p>
+<p>{% highlight yaml %}</p>
+<h1>Example configuration.yaml entry</h1>
+<h1>Shows different ways to set input_datetime when an input_boolean is turned on</h1>
+<p>automation:
+trigger:
+platform: state
+entity_id: input_boolean.example
+to: ‘on’
+action:</p>
+<h1>Sets time to ’05:30:00</h1>
+<ul>
+<li>service: input_datetime.set_datetime
+entity_id: input_datetime.bedroom_alarm_clock_time
+data:
+time: ‘05:30:00’</li>
+</ul>
+<h1>Sets time to time from datetime object (current time in this example)</h1>
+<ul>
+<li>service: input_datetime.set_datetime
+entity_id: input_datetime.another_time
+data_template:
+time: “{{ now().strftime(’%H:%M:%S’) }}”</li>
+</ul>
+<h1>Sets date to date from timestamp (current date in this example)</h1>
+<ul>
+<li>service: input_datetime.set_datetime
+entity_id: input_datetime.another_date
+data_template:
+date: “{{ as_timestamp(now())|timestamp_custom(’%Y-%m-%d’) }}”</li>
+</ul>
+<h1>Sets date and time to date and time from datetime object (current date and time in this example)</h1>
+<ul>
+<li>service: input_datetime.set_datetime
+entity_id: input_datetime.date_and_time
+data_template:
+datetime: “{{ now().strftime(’%Y-%m-%d %H:%M:%S’) }}”</li>
+</ul>
+<h1>Sets date and time to date and time from timestamp (current date and time in this example)</h1>
+<ul>
+<li>service: input_datetime.set_datetime
+data_template:
+entity_id: input_datetime.date_and_time
+date: &gt;
+{{ now().timestamp() | timestamp_custom(”%Y-%m-%d”, true) }}
+time: &gt;
+{{ now().timestamp() | timestamp_custom(”%H:%M:%S”, true) }}
+{% endhighlight %}</li>
+</ul>
+:ET

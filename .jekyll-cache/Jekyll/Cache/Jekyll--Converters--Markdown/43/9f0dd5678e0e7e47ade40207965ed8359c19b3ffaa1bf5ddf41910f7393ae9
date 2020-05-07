@@ -1,0 +1,34 @@
+I"<p>Backing up and regularly syncing your Open Peer Power configuration to <a href="http://dropbox.com">Dropbox</a> is similar to <a href="/docs/ecosystem/backup/backup_github/">GitHub Backup</a></p>
+<h2>Requirements</h2>
+<p>You need two parts in order to get it working correctly.</p>
+<p>Become the user that run Open Peer Power.</p>
+<ul>
+<li>A separate Python script that syncs a specific folder. Which can be found <a href="https://gist.github.com/riemers/31e3350041fd3e47e489cbc811209d6f">here</a></li>
+<li>The excellent <a href="https://github.com/andreafabrizi/Dropbox-Uploader/blob/master/dropbox_uploader.sh">dropbox uploader script</a> you can grab the .sh file only.</li>
+</ul>
+<p>Download those files to a folder of your liking, after that edit both files and change paths accordingly.</p>
+<p>In the Python script you can specify which files and directories should be excluded. This allows you to skip <code>secrets.yaml</code> or the <code>deps</code> folder.</p>
+<h3>Step 1: Linking your Dropbox account</h3>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">chmod +x dropbox_uploader.sh
+./dropbox_uploader.sh</code></pre></figure>
+<p>Follow the instructions you see on your screen.</p>
+<h3>Step 2: Running the Dropbox uploader</h3>
+<p>Go to the folder you have placed <code>dropbox.py</code>.</p>
+<ul>
+<li><strong>Option A:</strong>
+Copy file <code>dropbox_uploader.sh</code> to : <code>.openpeerpower/extraconfig/shell_code/</code> (so the full path would be similar to: <code>/home/openpeerpower/.openpeerpower/extraconfig/shell_code/dropbox_uploader.sh</code>)</li>
+<li><strong>Option B:</strong>
+Edit <code>dropbox.py</code>:
+Change the following line:</li>
+</ul>
+<figure class="highlight"><pre><code class="language-txt" data-lang="txt">uploader = &quot;/home/openpeerpower/.openpeerpower/extraconfig/shell_code/dropbox_uploader.sh&quot;</code></pre></figure>
+<p>to where you placed your file: (for example):</p>
+<figure class="highlight"><pre><code class="language-txt" data-lang="txt">uploader = &quot;/home/openpeerpower/MyFolder/dropbox_uploader.sh&quot;</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python dropbox.py</code></pre></figure>
+<p>The first time can take a lot of time since it will upload all your files!
+Do note, this will <strong>backup your passwords to Dropbox</strong>.</p>
+<h3>Automate the backup</h3>
+<p>So you just made a full backup, next time you want it to be done automatically. Since your database can change and so do other files over time.
+Add it to your crontab, edit the <strong>path/to</strong> part.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">(crontab -l 2&gt;/dev/null; echo &quot;0 3 * * * python /path/to/dropbox.py&quot;) | crontab -</code></pre></figure>
+:ET

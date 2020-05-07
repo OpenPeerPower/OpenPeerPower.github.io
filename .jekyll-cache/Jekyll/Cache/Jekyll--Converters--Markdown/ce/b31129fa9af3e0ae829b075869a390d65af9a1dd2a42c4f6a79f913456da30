@@ -1,0 +1,10 @@
+I"l<p>Setting up Open Peer Power to run as a background service is simple; macOS will start Open Peer Power after the system has booted, the user has logged in, and make sure it’s always running.</p>
+<p>To get Open Peer Power installed as a background service, run:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ hass --script macos install
+<p>Open Peer Power has been installed.         Open it here: <a href="http://localhost:8123">http://localhost:8123</a></code></pre></figure></p>
+<p>Open Peer Power will log to <code>~/Library/Logs/openpeerpower.log</code></p>
+<p>Configuration is kept in <code>~/.openpeerpower</code></p>
+<p>To uninstall the service, run:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ hass --script macos uninstall
+<p>Open Peer Power has been uninstalled.</code></pre></figure></p>
+:ET

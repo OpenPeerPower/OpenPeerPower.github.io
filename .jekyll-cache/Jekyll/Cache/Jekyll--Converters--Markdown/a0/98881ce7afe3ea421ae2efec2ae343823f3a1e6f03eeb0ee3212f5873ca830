@@ -1,0 +1,818 @@
+I"u<p><a href='/integrations/#version/0.105'><img src='/images/blog/2020-02-0.105/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p>In case you have missed it, we decided to change the names we use here at Open Peer Power, you can read all about it in <a href="/blog/2020/01/29/changing-the-open-peer-power-brand/">this blog post</a>.</p>
+<p>Therefore, this is release 0.105 of the Open Peer Power Core!</p>
+<h2>The old “States UI” is now deprecated</h2>
+<p>In June 2018, we released <a href="/blog/2018/06/22/release-72/">Open Peer Power 0.72</a>, which introduced Lovelace. It became our official default user interface in January 2019, with the release of <a href="/blog/2019/01/23/lovelace-released/">Open Peer Power 0.86</a>.</p>
+<p>This means, it is now over a year ago that Lovelace was officially introduced as a replacement for the states UI, so it is time to say goodbye to the old states UI. This release deprecates it and in version 0.107, the states UI will be removed from Open Peer Power completely.</p>
+<p>If you are not using Lovelace yet, we advise you to switch to it today. Lovelace is, by default, almost the same as old states UI with the bonus of a lot of flexibility, if you want it.</p>
+<p>In addition to this, all configuration options for the States UI are deprecated as well. Please be sure to read the <a href="#breaking-changes">breaking changes</a> to see if you have options that need to be removed from your configuration.</p>
+<h2>Safe mode</h2>
+<p>We are humans, and we do make typos. However, if we make a typo in our configuration, we might end up with Open Peer Power being completely unreachable. That really is not helpful. You lose access to Open Peer Power and have to do a deep dive via other methods to find out: Why did this happen?</p>
+<p>This release introduces a “Safe mode” for Open Peer Power. If during startup, Open Peer Power has problems reading your configuration (for whatever reason), it will still continue to start using bits and pieces from the configuration of the last time it did start.</p>
+<p>When this happens, Open Peer Power will start in “Safe mode”. In this mode, nothing is loaded, but it does give you access to the Open Peer Power frontend, settings and add-ons (for example, the VSCode or Configurator add-on). This gives you the possibility to correct the issue
+and restart Open Peer Power to re-try.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/safe-mode.png' alt='Screenshot of Open Peer Power started in safe mode'></a>
+Screenshot of Open Peer Power started in safe mode.
+</p>
+<p>Please note, that this feature isn’t perfect yet, and only works if Open Peer Power was able to start successfully, after upgrading to this release, at least once.</p>
+<p>We believe this feature makes Open Peer Power more robust, easier to use and more forgiving, even if you made a mistake.</p>
+<h2>Revamped Supervisor panel</h2>
+<p>Remember we used to have a Hass.io panel? Well, with the <a href="/blog/2020/01/29/changing-the-open-peer-power-brand/">new naming</a> for Open Peer Power, it has been renamed to the Supervisor panel.</p>
+<p>So <a href="https://github.com/ludeeus">@ludeeus</a> has been busy! He rewrote the entire Supervisor panel to match our current frontend technologies and added some really slick new visual elements to it.</p>
+<p>Thanks, <a href="https://github.com/ludeeus">@ludeeus</a>, it looks incredible!</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/supervisor.png' alt='Screenshot of the revamped Supervisor panel'></a>
+Screenshot of the revamped Supervisor panel.
+</p>
+<p>The new icons on the add-ons really make the add-on dashboard &amp; store stand out. Also, new status indicators on the add-on cards make it easy to spot add-ons that need to be upgraded, or in case of visiting the add-on store, are installed already.</p>
+<p>Please note, you need to be running Open Peer Power Core 0.105 to see the new icons.</p>
+<h2>Configuration panel changes</h2>
+<p>In this release, we started the overhaul of the configuration panel. We have accumulated a lot of functionality in the configuration section in the last releases; now, it is time to bring it all together.</p>
+<p>In upcoming releases, we will make changes to make things easier to find and connect the different elements with each other, making it easier to navigate around. For now, we implemented configuration sections, a new tabbed UI, as well as some visual tweaks.</p>
+<p>Also updated, the device page to show the automations, scripts, and scenes a device is used in and added the ability to create new ones with the device easily.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/device-info-page.png' alt='Screenshot of the new device info page'></a>
+Screenshot of the new device info page.
+</p>
+<p>In the more info dialog of entities, we changed the settings button to open the entity settings dialog, and added a related tab as well!
+This allows you to can see what device, integration, area, scenes, scripts, automations, entities, and groups belong to that entity.</p>
+<p>For scenes, scripts and automations that are created in the UI, an edit button is added, right in the more info dialog so you can easily edit it without searching for it.</p>
+<h2>Header &amp; Footer for the entities card</h2>
+<p>Two new types are added to the entities card, a header and a footer. At this moment, we have two options for these, an image and buttons.</p>
+<p>It allows you to create some very cool looking cards, but also provides you the option to put buttons in the bottom of the card. Very useful for buttons that activate scenes, for example.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/entities-card-header-footer.png' alt='Screenshot of the new header and footer for entities card'></a>
+Screenshot of the new header and footer for entities card.
+</p>
+<h2>Improved zones editor</h2>
+<p>A brand new zone editor! You can no longer find your zones in the integration list, but they moved to their own section in the configuration panel.</p>
+<p>In this new editor, you can move your zones with drag and drop and even change the size of your zones by dragging the circle.</p>
+<p>Adding, and removing zones or changing the name of a zone, is now easier than ever.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/zone-editor.gif' alt='Screenshot of the zones editor'></a>
+Screen recording of the zones editor.
+</p>
+<p>The new editor will only work for zones that are created in the UI, zones that are set up in <code>configuration.yaml</code> are read-only.
+Additionally, if you define zones in your YAML configuration, please be aware that setting a <a href="#breaking-changes"><code>name</code> is now required</a>.</p>
+<p>As an extra added bonus, a new service was added: <code>zone.reload</code>. This service allows you to reload your zone configuration without restarting Open Peer Power.</p>
+<h2>Icons no longer change color based on state</h2>
+<p>A change that is not really apparent at first, but you probably notice it sooner or later.</p>
+<p>The entities card no longer changes the colors of icons based on states, except for lights.</p>
+<p>Reasoning comes from a request, to make icons to become yellow for all types when an entity is active, and not for just a few entity types. However, this would get out of control very quickly, as shown in the screenshot below.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/out-of-control.png' alt="Yellow icon color on everything, isn't the solution either"></a>
+Yellow icon color on everything, isn't the solution either.
+</p>
+<p>So, that is why we disabled it, by default, for all entity types, except lights. However, we did add a new option: <code>state_color</code>.
+Using this option, you can decide if you want to old behavior back, add it to more entity types or maybe even disable it for lights too!</p>
+<p>Other cards will now display icons from more domains with an active color.</p>
+<h2>Other Lovelace and frontend improvements</h2>
+<p>There is a lot more done on Lovelace, more than we can mention, some other highlights:</p>
+<ul>
+<li>
+<p>In generated mode, entities that start with the name of the area or group they are in will be shown without the name of the area or group.
+So if you have a light named “Living room lights” that is in the area “Living room” they will be shown as “lights” in a card with the header “Living room”.</p>
+</li>
+<li>
+<p>We no longer show <code>device_tracker</code> entities in generated mode. We advise you to bind one or more device trackers to a person that will be shown in the UI.</p>
+</li>
+<li>
+<p>We added many accessibility features to Lovelace; you can navigate almost everything with the tab key.
+We will continue to work on this so that people with disabilities can also enjoy Open Peer Power.</p>
+</li>
+</ul>
+<p>For a full list of changes, see the <a href="/lovelace/changelog/">Lovelace changelog</a>.</p>
+<p>Even more frontend improvements:</p>
+<ul>
+<li>Logbook panel is a lot quicker</li>
+<li>Maps no longer fit zones, but only entities</li>
+<li>ZHA panel now supports binding devices to groups</li>
+<li>Ability to add new areas on the device page</li>
+<li>Material Design Icons are updated to v4.8.95</li>
+<li>A lot, like a really large amount, of bug fixes!</li>
+</ul>
+<h2>In other news</h2>
+<p>This section is now empty, but don’t be sad! The in “In other news” section now has its own dedicated blog post,
+which we will put out regularly:</p>
+<p>Want to read the first edition? <em><a href="/blog/2020/01/31/community-highlights/">Community Highlights, first edition!</a></em></p>
+<p>Have you seen (or made) something awesome, interesting, unique, amazing, inspirational, unusual or funny, using Open Peer Power? <a href="/suggest-community-highlight">Send us your Community Highlight suggestion</a>, so that we can include it in the next blog post.</p>
+<h2>New Integrations</h2>
+<ul>
+<li>Add search integration (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30511">#30511</a>) (<a href="/integrations/search/">search docs</a>) (new-integration)</li>
+<li>Add Safe Mode (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30723">#30723</a>) (<a href="/integrations/frontend/">frontend docs</a>) (<a href="/integrations/http/">http docs</a>) (<a href="/integrations/safe_mode/">safe_mode docs</a>) (breaking change) (new-integration)</li>
+<li>Add Derivative component (<a href="https://github.com/afaucogney">@afaucogney</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/26456">#26456</a>) (<a href="/integrations/derivative/">derivative docs</a>) (new-integration)</li>
+<li>Add sighthound integration (<a href="https://github.com/robmarkcole">@robmarkcole</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28824">#28824</a>) (<a href="/integrations/sighthound/">sighthound docs</a>) (new-integration)</li>
+<li>Add Garmin Connect integration (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30792">#30792</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>) (new-integration)</li>
+<li>Add Gammu based local SMS notifications (<a href="https://github.com/ocalvo">@ocalvo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31233">#31233</a>) (<a href="/integrations/sms/">sms docs</a>) (new-integration)</li>
+<li>Add OPNSense device tracker (<a href="https://github.com/mtreinish">@mtreinish</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/26834">#26834</a>) (<a href="/integrations/opnsense/">opnsense docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Template alarm panel (<a href="https://github.com/alistairg">@alistairg</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30487">#30487</a>) (<a href="/integrations/template/">template docs</a>) (new-platform)</li>
+<li>ZHA cover device support (<a href="https://github.com/billyburly">@billyburly</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30639">#30639</a>) (<a href="/integrations/zha/">zha docs</a>) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>. Make sure to fill in all fields of the issue template.</p>
+<!--more-->
+<h2>Breaking Changes</h2>
+<ul>
+<li>
+<p><strong>Safe Mode</strong> - <code>--demo-mode</code> has been removed. A new safe mode has now been introduced, which loads the bare minimum necessary to load the Open Peer Power frontend and allows for managing the configuration. This is not yet perfect. An invalid core configuration can still cause Open Peer Power to refuse to start up. (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30723">#30723</a>) (<a href="/integrations/frontend/">frontend docs</a>) (<a href="/integrations/http/">http docs</a>) (<a href="/integrations/safe_mode/">safe_mode docs</a>)</p>
+</li>
+<li>
+<p><strong>Google Assistant</strong> - Entities exposed to Google Assistant, that have aliases configured (YAML only feature), will now expose the configured name, instead of the first configured alias.</p>
+<p>Because of that, it might be that entities that have a name and aliases set for Google Assistant, may show up with a “new” name.</p>
+<p>This mitigates an issue with Google Assistant, which seems to ignore the configured name when aliases are configured. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30799">#30799</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>)</p>
+</li>
+<li>
+<p><strong>Hass.io/Supervisor</strong> - The “Hass.io” menu item in the side bar has been renamed to Supervisor. This was done to match the announced re-branding. While not really a breaking change, it still is a change that might cause confusion at first. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31480">#31480</a>)</p>
+</li>
+<li>
+<p><strong>Spotify</strong> - Spotify is now available to be added from the integrations UI! Removing the current Spotify platform and setting up the integration from scratch is recommended.</p>
+<p>The device aliases and the <code>spotify.play_playlist</code> service, have been removed. Be sure to remove calls to that service from your automations.</p>
+<p>If you use the Spotify platform at this moment:</p>
+<ul>
+<li>Remove the current configuration from your <code>configuration.yaml</code> file.</li>
+<li>Remove the <code>.spotify-token-cache</code> file from your configuration directory. It is no longer used, however, it does contain security credentials.</li>
+<li>Follow the documentation on how to set up the new Spotify integration from scratch.</li>
+</ul>
+<p>Please note, if you have an existing Spotify Developer Application, you need to edit it. The URL’s have changed. Consult the integration documentation for the new URL’s to use.</p>
+<p>(<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30717">#30717</a>) (<a href="/integrations/spotify/">spotify docs</a>)</p>
+</li>
+<li>
+<p><strong>Automation</strong> <em>Deprecated</em> - The <code>hide_entity</code> configuration option on an automation is now deprecated and will be removed in Open Peer Power 0.107. With Lovelace now being the standard, this option has become obsolete. Please ensure your automations are not using this option. An example of an <em>invalid</em> configuration is below. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30799">#30799</a>) (<a href="/integrations/automation/">automation docs</a>)</p>
+<p>Bad configuration example YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+    - alias: &quot;Power Management Gone Wrong&quot;
+      hide_entity: true  &lt;-- remove this
+      trigger:
+        platform: state
+        entity_id: all
+      action:
+        service: light.turn_off
+        entity_id: all</code></pre></figure>
+<ul>
+<li>
+<p><strong>Group</strong> <em>Deprecated</em> - Group configurations options, services and service options related to the old states UI are now deprecated and pending for removal in Open Peer Power 0.107.0.</p>
+<p>This includes:</p>
+<ul>
+<li>The <code>view</code> and <code>control</code> configuration options for a group</li>
+<li>The <code>group.set_visibility</code> service call</li>
+<li>The <code>control</code>, <code>visible</code>, and <code>view</code> options on the <code>group.set</code> service call.</li>
+</ul>
+<p>Please ensure your configuration and automations do not use these anymore. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30831">#30831</a>) (<a href="/integrations/group/">group docs</a>)</p>
+</li>
+<li>
+<p><strong>Weblink</strong> <em>Deprecated</em> - The weblink integration is now deprecated and pending removal in Open Peer Power 0.107.0. This integration only works with the old states UI. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30834">#30834</a>)</p>
+</li>
+<li>
+<p><strong>History Graph</strong> <em>Deprecated</em> - The <code>history_graph</code> integration has been deprecated and pending for removal in Open Peer Power 0.107.0. This integration was used for the old states UI. Going ahead, please ensure this configuration option is not used in your configuration. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30835">#30835</a>)</p>
+</li>
+<li>
+<p><strong>Neato</strong> - This change adds a neato boundary name to the state if it exists, requiring to potentially update automations. - (<a href="https://github.com/Olen">@Olen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29915">#29915</a>) (<a href="/integrations/neato/">neato docs</a>)</p>
+</li>
+<li>
+<p><strong>Xiaomi miio (fan)</strong> - This change adjusts some fan speed values according to the Xiaomi app version 5.6.34. and therefore, you will need to update anything that utilizes the following fan speed values:</p>
+<ul>
+<li>Quiet -&gt; Silent</li>
+<li>Balanced -&gt; Standard</li>
+<li>Turbo -&gt; Medium</li>
+<li>Max -&gt; Turbo</li>
+</ul>
+<p>In addition, the <code>hidden</code> configuration option for the <code>xiaomi_miio</code> integration has been removed. (This would only affect remotes.) - (<a href="https://github.com/tiagofreire-pt">@tiagofreire-pt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30614">#30614</a>) (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30727">#30727</a>) (<a href="/integrations/xiaomi_miio/">xiaomi_miio docs</a>)</p>
+</li>
+<li>
+<p><strong>Samsung Smart TV</strong> - Samsung Smart TV is now available to be added from the integrations UI! If you would rather add it manually, please note the new configuration below. - (<a href="https://github.com/escoand">@escoand</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28306">#28306</a>) (<a href="/integrations/samsungtv/">samsungtv docs</a>)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">samsungtv:
+    - host: 192.168.12.34</code></pre></figure>
+<ul>
+<li>
+<p><strong>Netatmo</strong> - Netatmo is now available from the integrations UI and takes advantage of OAuth2 account linking! There are a good number of changes to note:</p>
+<ul>
+<li>For authentication, only client id and secret are required, no need to pass your username and password anymore.</li>
+<li>Public weather sensors are removed and will be added back in a separate PR.</li>
+<li>Service <code>set_schedule</code> now requires the name of the home.</li>
+<li>Webhooks are removed and will be added back in a separate update.</li>
+<li>Services to toggle the light/set it to auto have been removed until implemented in <code>pyatmo</code>.</li>
+</ul>
+<p>If you have an existing configuration, you will need to remove/update that and run the configuration flow dialogue to get their sensors/etc, back using the <code>configuration.yaml</code> option.</p>
+<p>(<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29851">#29851</a>) (<a href="/integrations/netatmo/">netatmo docs</a>)  (new-platform)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">netatmo:
+    client_id: your_client_id
+    client_secret: your_client_secret</code></pre></figure>
+<ul>
+<li>
+<p><strong>Nederlandse Spoorwegen (NS)</strong> - The Nederlandse Spoorwegen API and NSAPI have recently changed and this change accommodates for that. The <code>nederlandse_spoorwegen</code> sensor now requires a single API token instead of username and password credentials.</p>
+<p>The “RetrieveTripInformationPublic” API (“Public-Travel-Information” product) will be deprecated on 31-01-2020. You MUST create a new API token for the “Reisinformatie” API (“Ns-App” product) and use that one instead.</p>
+<p>(<a href="https://github.com/YarmoM">@YarmoM</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30599">#30599</a> <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30971">#30971</a>) (<a href="/integrations/nederlandse_spoorwegen/">nederlandse_spoorwegen docs</a>)</p>
+<p>The following platform attributes are renamed for consistency with <code>time</code> naming:</p>
+<ul>
+<li><code>departure_platform</code> becomes <code>departure_platform_planned</code></li>
+<li><code>departure_platform_changed</code> becomes <code>departure_platform_actual</code></li>
+<li><code>arrival_platform</code> becomes <code>arrival_platform_planned</code></li>
+<li><code>arrival_platform_changed</code> becomes <code>arrival_platform_actual</code></li>
+</ul>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">- platform: nederlandse_spoorwegen
+    password: !secret ns_api_key
+    routes:
+    - name: Rijswijk-Rotterdam
+      from: Rsw
+      to: Rtd</code></pre></figure>
+<ul>
+<li>
+<p><strong>Simplisafe</strong> - Many changes here!</p>
+<p>Simplisafe’s cloud API anticipates receiving updates all at once, which our method did not do, which and could result in failed updates. This change consolidates all of the service calls into a single admin service, and makes <code>set_pin</code> and <code>remove_pin</code> require admin rights.</p>
+<p>It is no longer possible to configure <code>scan_interval</code> for the integration and a code-defined interval has been set, as there was potential for users setting this too low and possibly ruin the integration for everyone.</p>
+<p>Also, the integration now makes us of <code>triggered</code> and <code>arming</code> states. Control panel entities no longer have an <code>alarm_active</code> attribute.</p>
+<p>(<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30567">#30567</a>, <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30909">#30909</a>, <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31060">#31060</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">simplisafe:
+    accounts:
+      username: !secret ss_username
+      password: !secret ss_password</code></pre></figure>
+<ul>
+<li>
+<p><strong>Egardia</strong> - Binary sensors for the Egardia integration were hidden by default, which is no longer the case. This could affect automations that rely on the hidden state attribute of entities created by this integration. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30728">#30728</a>) (<a href="/integrations/egardia/">egardia docs</a>)</p>
+</li>
+<li>
+<p><strong>Emby</strong> - The <code>auto_hide</code> configuration option has been removed from the Emby platform. Please be sure to remove it from your configuration. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30729">#30729</a>) (<a href="/integrations/emby/">emby docs</a>)</p>
+</li>
+<li>
+<p><strong>Fibaro</strong> - Entities from the Fibaro integration were hidden in Open Peer Power if they were hidden in Fibaro, which is no longer the case. This could affect automations that rely on the hidden state attribute of entities created by this integration. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30730">#30730</a>) (<a href="/integrations/fibaro/">fibaro docs</a>)</p>
+</li>
+<li>
+<p><strong>AVM FRITZ!Box Net Monitor</strong> - The attribute <code>wan_access_type</code> has been removed from <code>fritzbox_netmonitor</code> as the new version of the fritzconnection integration no longer exposes it. As a result, the information will no longer be available in the Open Peer Power sensor. - (<a href="https://github.com/basdelfos">@basdelfos</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30210">#30210</a>) (<a href="/integrations/fritz/">fritz docs</a>) (<a href="/integrations/fritzbox_netmonitor/">fritzbox_netmonitor docs</a>)</p>
+</li>
+<li>
+<p><strong>MQTT Fan</strong> - This fixes <code>supported_features</code> for an MQTT fan. Setting speed now requires only a speed command topic.</p>
+<p>Before this change, only a speed state topic had to be set to support the setting of a speed. The speed state topic is not taken into account as it just decides if Open Peer Power gets feedback for state and speed updates.</p>
+<p>Likewise, setting oscillation now requires only an oscillation command topic. Before this change, only an oscillation state topic had to be set to support the setting of the oscillation. The oscillation state topic is not taken into account as it just decides if Open Peer Power gets feedback for state and oscillation update.</p>
+<p>(<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28680">#28680</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">fan:
+    - platform: mqtt
+      name: &quot;room2&quot;
+      state_topic: &quot;stat/bvent/POWER&quot;
+      command_topic: &quot;cmnd/bvent/POWER&quot;
+      availability_topic: &quot;tele/bvent/LWT&quot;
+      payload_available: &quot;Online&quot;
+      payload_not_available: &quot;Offline&quot;
+      payload_on: &quot;ON&quot;
+      payload_off: &quot;OFF&quot;
+      qos: 1
+      retain: false
+      optimistic: false</code></pre></figure>
+<ul>
+<li>
+<p><strong>Vizio SmartCast TV</strong> - The Vizio integration is now available to be added from the integrations UI! When adding a soundbar the options are now between <code>tv</code> or <code>speaker</code> in order to align with the device classes defined in the media_player component and to add Amazon Alexa and Google Assistant support. If you prefer to enter the configuration manually make note of the changes below. - (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30653">#30653</a>, <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30802">#30802</a>) (<a href="/integrations/vizio/">vizio docs</a>)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">vizio:
+    - host: IP_ADDRESS
+      access_token: AUTH_TOKEN
+      device_type: speaker</code></pre></figure>
+<ul>
+<li>
+<p><strong>Statistics</strong> - If max_age is configured, this change will keep updating the statistics even when none of the observed entities change their state. That means that after some time, all recorded states are purged and the statistics sensor itself changes to state unknown instead of just keeping its old state indefinitely. Also, some attributes (<code>total</code>, <code>min_age</code>, <code>change</code>, <code>change_rate</code>, <code>mean</code>, <code>stdev</code>) will change to <code>unknown</code>.</p>
+<p>Users should ensure that any automations that interrogate the statistics sensor’s state and attributes can handle <code>unknown</code>.</p>
+<p>(<a href="https://github.com/exxamalte">@exxamalte</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27372">#27372</a>) (<a href="/integrations/statistics/">statistics docs</a>)</p>
+<p>Example <code>configuration.yaml</code>:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">sensor:
+    - platform: statistics
+      entity_id: sensor.pulse_counter
+      max_age:
+        minutes: 10</code></pre></figure>
+<ul>
+<li>
+<p><strong>PulseAudio Loopback</strong> <em>Revert</em> - The default port was incorrectly changed to 4713, however, the official documentation states that the default port is 4712 for <code>module-cli-protocol</code> which is used in this integration. Therefore, the port has been changed back to 4712 and all previously configured switches now need to listen to port 4712. - (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30939">#30939</a>) (<a href="/integrations/pulseaudio_loopback/">pulseaudio_loopback docs</a>)</p>
+</li>
+<li>
+<p><strong>Apple iCloud</strong> - <code>account_name</code> is removed from the manual configuration; nothing changes when using the integration UI. - (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30898">#30898</a>) (<a href="/integrations/icloud/">icloud docs</a>)</p>
+</li>
+<li>
+<p><strong>Evohome</strong> - Honeywell TCC systems that consist of a single thermostat (i.e., non-evohome systems) will now be split into two climate entities instead of one: a) the whole-house zone (for target temperature), and b) the location (for Away, Eco modes). Functionality will not be lost, but this will affect automations, etc.: the entity_id of these may need changing. - (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30968">#30968</a>) (<a href="/integrations/evohome/">evohome docs</a>)</p>
+</li>
+<li>
+<p><strong>Sonos</strong> - The following Sonos services now need to be called by a user with admin access: <code>sonos.join</code>, <code>sonos.unjoin</code>, <code>sonos.snapshot</code>, <code>sonos.restore</code>. Sonos services now no longer will default to “all” entities if no <code>entity_id</code> is passed in. This has been aligned with the other services in Open Peer Power. To target all, add <code>entity_id: all</code>. - (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30813">#30813</a>) (<a href="/integrations/sonos/">sonos docs</a>)</p>
+</li>
+<li>
+<p><strong>LG webOS Smart TV</strong> - After the discovery of some additional commands, the client library now has much better tracking of TV power state. As a result of the client library changes, the standby_connection parameter is no longer needed/present (since the relevant behavior can be steered automatically by the client library now) - (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31042">#31042</a>) (<a href="/integrations/webostv/">webostv docs</a>)</p>
+</li>
+<li>
+<p><strong>Zone</strong> - If you’re using YAML to configure zones, specifying a name is now required. - (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30774">#30774</a>) (<a href="/integrations/zone/">zone docs</a>)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">- name: Hellmouth
+    latitude: 0.2133478
+    longitude: 6.7242336
+    radius: 200
+    icon: mdi:fire</code></pre></figure>
+<ul>
+<li>
+<p><strong>Openuv</strong> - Openuv is now available to be added from the integrations UI! It is no longer possible to specify monitored conditions within the OpenUV integration; all entities are added by default. - (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31019">#31019</a>) (<a href="/integrations/openuv/">openuv docs</a>)</p>
+<p>Example configuration yaml:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">openuv:
+    api_key: !secret openuv_api_key</code></pre></figure>
+<ul>
+<li>
+<p><strong>RainMachine</strong> - RainMachine is now available to be added from the integrations UI! It is no longer possible to specify monitored conditions within the RainMachine integration; all entities are added by default. Additionally, the <code>zone_run_time</code> parameter is now configured directly within the controller within <code>configuration.yaml</code>. - (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31066">#31066</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>)</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">rainmachine:
+    controllers:
+      - ip_address: !secret rainmachine_ip_address
+        password: !secret rainmachine_password</code></pre></figure>
+<ul>
+<li>
+<p><strong>MaryTTS</strong> - The codec and locale configuration changed to the official config keys from MaryTTS. - (<a href="https://github.com/Poeschl">@Poeschl</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30805">#30805</a>) (<a href="/integrations/marytts/">marytts docs</a>)</p>
+<ul>
+<li><code>en-GB</code>, <code>en-US</code> becomes <code>en_GB</code>,<code>en_US</code></li>
+<li><code>aiff</code>,<code>au</code>,<code>wav</code> becomes <code>AIFF_FILE</code>,<code>AU_FILE</code>, <code>WAVE_FILE</code></li>
+</ul>
+<p>The MaryTTS network logic has been extracted into an external package and the effects setting has been added.</p>
+<p>Example configuration YAML:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">tts:
+    - platform: marytts
+      host: &#39;localhost&#39;
+      port: 59125
+      codec: &#39;WAVE_FILE&#39;
+      voice: &#39;cmu-slt-hsmm&#39;
+      language: &#39;en_US&#39;
+      effect:
+        Volume: &quot;amount:2.0;&quot;,
+        TractScaler: &quot;amount:1.5;&quot;,
+        F0Scale: &quot;f0Scale:2.0;&quot;,
+        F0Add: &quot;f0Add:50.0;&quot;,
+        Rate: &quot;durScale:1.5;&quot;,
+        Robot: &quot;amount:100.0;&quot;,
+        Whisper: &quot;amount:100.0;&quot;,
+        Stadium: &quot;amount:100.0&quot;,
+        Chorus: &quot;delay1:466;amp1:0.54;delay2:600;amp2:-0.10;delay3:250;amp3:0.30&quot;,
+        FIRFilter: &quot;type:3;fc1:500.0;fc2:2000.0&quot;,
+        JetPilot: &quot;&quot;</code></pre></figure>
+<ul>
+<li>
+<p><strong>ZHA remotes</strong> - <code>binary_sensor</code> and <code>switch</code> entities are not going to be available for some Zigbee “remotes”, but they were not supposed to be available to begin with. - (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31146">#31146</a>) (<a href="/integrations/zha/">zha docs</a>)</p>
+<p>Affected devices:</p>
+<ul>
+<li>Centralite 3130 remote dimmer, DeviceType: 0x0001, removes binary_sensor entity</li>
+<li>OSRAM LIGTIFY Dimming Switch, DeviceType: 0x0001, removes binary_sensor entity</li>
+<li>Securifi Ltd. Penut Plug, DeviceType: 0x0000, removes binary_sensor entity</li>
+<li>45856GE Jasco Products, DeviceType: 0x0103</li>
+<li>Aqara Model lumi.remote.b486opcn01, removes switch entity</li>
+<li>Aqara Model lumi.remote.b686opcn01, removes switch entity</li>
+<li>Sercom Corp, SZ-ESW01, removes switch entity</li>
+</ul>
+</li>
+<li>
+<p><strong>NMBS</strong> - The generated <code>unique_id</code> and <code>entity_id</code> have changed for the live sensor. If you were using the live sensor, you will need to update automations and scripts with the newly generated ids, and you might have to clear old entries from the entity registry. - (<a href="https://github.com/thibmaek">@thibmaek</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31078">#31078</a>) (<a href="/integrations/nmbs/">nmbs docs</a>)</p>
+</li>
+<li>
+<p><strong>MikroTik</strong> - MikroTik Integration can now be added from the integrations UI! It also supports importing existing configurations from <code>configuration.yaml</code> (refer to the docs to update your configuration). Now uses the entity registry for managing devices (<code>known_devices.yaml</code> will not be used anymore), this causes devices to be re-discovered. - (<a href="https://github.com/engrbm87">@engrbm87</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27484">#27484</a>) (<a href="/integrations/mikrotik/">mikrotik docs</a>)</p>
+</li>
+</ul>
+<h3>Removed</h3>
+<p>Hats over your heart for these shuttered integrations. Pour one out for:</p>
+<ul>
+<li>
+<p><strong>PostNL</strong> <em>Removed</em> - PostNL changed their unofficial API and implemented protection, which breaks the integration. It has been confirmed through them that there is no workaround and no likely solution any time in the near future, so it is being removed. - (<a href="https://github.com/peternijssen">@peternijssen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30902">#30902</a>)</p>
+</li>
+<li>
+<p><strong>Cisco Spark</strong> <em>Removed</em> - Cisco Spark has been rebranded to Cisco Webex Teams. Cisco Webex Teams is available as integration in Open Peer Power, which can be used as a replacement. - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30738">#30738</a>)</p>
+</li>
+<li>
+<p><strong>Owlet</strong> - <em>Removed</em> - The API that the Owlet component was based on has been deprecated by the vendor. There is no other public API provided by the vendor that the component can be upgraded to use, so the component has been removed. - (<a href="https://github.com/oblogic7">@oblogic7</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31160">#31160</a>)</p>
+</li>
+<li>
+<p><strong>Hook</strong> <em>Removed</em> - The <code>hook</code> integration has been removed due to the shutdown of the connected service. All servers that have been providing this service will be turned off on 31 Jan 2020. - (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31046">#31046</a>)</p>
+</li>
+</ul>
+<h2>Release 0.105.1 - February 5</h2>
+<ul>
+<li>Check for known Hue vulnerability (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31494">#31494</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Move program_mode check (<a href="https://github.com/aneisch">@aneisch</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31501">#31501</a>) (<a href="/integrations/radiotherm/">radiotherm docs</a>)</li>
+<li>Updated frontend to 20200130.2 (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31502">#31502</a>) (<a href="/integrations/frontend/">frontend docs</a>)</li>
+<li>Sonos services to work without admin access (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31506">#31506</a>) (<a href="/integrations/sonos/">sonos docs</a>)</li>
+</ul>
+<h2>Release 0.105.2 - February 6</h2>
+<ul>
+<li>0.105.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31489">#31489</a>) (<a href="/integrations/abode/">abode docs</a>) (<a href="/integrations/adguard/">adguard docs</a>) (<a href="/integrations/airly/">airly docs</a>)</li>
+<li>Fix automation sun import (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31521">#31521</a>) (<a href="/integrations/automation/">automation docs</a>)</li>
+<li>Fix migrating huawei_lte entry without recipient (<a href="https://github.com/chmielowiec">@chmielowiec</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31522">#31522</a>) (<a href="/integrations/huawei_lte/">huawei_lte docs</a>)</li>
+<li>Only normalise Garmin connect data to minutes if the value is not None (<a href="https://github.com/d0ugal">@d0ugal</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31526">#31526</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>)</li>
+<li>Fix iCloud determine_interval: add default interval to max_interval (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31533">#31533</a>) (<a href="/integrations/icloud/">icloud docs</a>)</li>
+<li>Limit OAuth scopes for Netatmo and Open Peer Power Cloud (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31538">#31538</a>) (<a href="/integrations/netatmo/">netatmo docs</a>)</li>
+<li>Use min and m as units in Garmin Connect for consistency and correctness (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31543">#31543</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>) (breaking change)</li>
+<li>Deprecate old netatmo keys (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31544">#31544</a>) (<a href="/integrations/netatmo/">netatmo docs</a>)</li>
+<li>update aiopylgtv to 0.3.3 (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31545">#31545</a>) (<a href="/integrations/webostv/">webostv docs</a>)</li>
+<li>Guard for reloading with no zone config (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31547">#31547</a>) (<a href="/integrations/zone/">zone docs</a>)</li>
+</ul>
+<h2>Release 0.105.3 - February 10</h2>
+<ul>
+<li>Bump ZHA dependencies. (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31555">#31555</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Resolve August integration makes too many requests and hits rate limits (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31558">#31558</a>) (<a href="/integrations/august/">august docs</a>)</li>
+<li>Bump adguardhome to 0.4.1 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31565">#31565</a>) (<a href="/integrations/adguard/">adguard docs</a>)</li>
+<li>Fix librouteros response error handling (<a href="https://github.com/engrbm87">@engrbm87</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31588">#31588</a>) (<a href="/integrations/mikrotik/">mikrotik docs</a>)</li>
+<li>update pynws to 0.10.4 (<a href="https://github.com/MatthewFlamm">@MatthewFlamm</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31591">#31591</a>) (<a href="/integrations/nws/">nws docs</a>)</li>
+<li>Catch garmin_connect keyerrors with unknown entity type updates (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31608">#31608</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>)</li>
+<li>Bump ZHA dependencies. (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31619">#31619</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix hvac_action for mill (<a href="https://github.com/Danielhiversen">@Danielhiversen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31630">#31630</a>) (<a href="/integrations/mill/">mill docs</a>)</li>
+<li>Fix wrong error message in netatmo integration (<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31690">#31690</a>) (<a href="/integrations/netatmo/">netatmo docs</a>)</li>
+</ul>
+<h2>Release 0.105.4 - February 14</h2>
+<ul>
+<li>Guard writing automation/scene/script config (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31568">#31568</a>) (<a href="/integrations/config/">config docs</a>)</li>
+<li>For vizio integration, set unique ID early to prevent multiple zeroconf discovery items for the same device to appear (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31686">#31686</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Fix missing device class in netatmo binary sensors (<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31693">#31693</a>) (<a href="/integrations/netatmo/">netatmo docs</a>)</li>
+<li>Fix person reload service (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31716">#31716</a>) (<a href="/integrations/person/">person docs</a>)</li>
+<li>Fix smoke detection for HomematicIP Cloud (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31753">#31753</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</li>
+<li>Updated frontend to 20200130.3 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31771">#31771</a>) (<a href="/integrations/frontend/">frontend docs</a>)</li>
+<li>Fix person device_trackers null (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31829">#31829</a>) (<a href="/integrations/person/">person docs</a>)</li>
+<li>Google Assistant: Remove speaker type and earlier filter out devices from being locally exposed (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31830">#31830</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>)</li>
+<li>Spotify integration hotfixes (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31835">#31835</a>) (<a href="/integrations/spotify/">spotify docs</a>)</li>
+</ul>
+<h2>Release 0.105.5 - February 17</h2>
+<ul>
+<li>Upgrade bimmer_connected to 0.7.0 (<a href="https://github.com/gerard33">@gerard33</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31894">#31894</a>) (<a href="/integrations/bmw_connected_drive/">bmw_connected_drive docs</a>)</li>
+<li>Report which data causes JSON serialization error (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31901">#31901</a>)</li>
+</ul>
+<h2>Beta Fixes</h2>
+<ul>
+<li>ZHA dependencies bump (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31295">#31295</a>) (<a href="/integrations/zha/">zha docs</a>) (beta fix)</li>
+<li>Add zones services.yaml (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31298">#31298</a>) (beta fix)</li>
+<li>Add zone to defaul config (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31303">#31303</a>) (<a href="/integrations/default_config/">default_config docs</a>) (beta fix)</li>
+<li>Handle service calls that do not refer entity IDs (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31317">#31317</a>) (beta fix)</li>
+<li>Updated frontend to 20200130.0 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31318">#31318</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Fix HTTP config serialization (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31319">#31319</a>) (<a href="/integrations/http/">http docs</a>) (beta fix)</li>
+<li>Guard Z-Wave light HS conversion on None (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31320">#31320</a>) (<a href="/integrations/zwave/">zwave docs</a>) (beta fix)</li>
+<li>Fix wemo lights (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31323">#31323</a>) (<a href="/integrations/wemo/">wemo docs</a>) (beta fix)</li>
+<li>Emulated Hue: changed fallback device-type to fix Alexa compatibility issues (#30013) (<a href="https://github.com/xtools-at">@xtools-at</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31330">#31330</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>) (beta fix)</li>
+<li>Fix async bug in amcrest when registering services (<a href="https://github.com/pnbruckner">@pnbruckner</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31334">#31334</a>) (<a href="/integrations/amcrest/">amcrest docs</a>) (beta fix)</li>
+<li>Guard for callbacks in service helper (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31339">#31339</a>) (<a href="/integrations/camera/">camera docs</a>) (beta fix)</li>
+<li>Fix incorrect annotation async flock notify (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31342">#31342</a>) (<a href="/integrations/flock/">flock docs</a>) (beta fix)</li>
+<li>Update Hue data fetching (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31338">#31338</a>) (<a href="/integrations/hue/">hue docs</a>) (beta fix)</li>
+<li>Upgrade pysma, fix #27154 (<a href="https://github.com/kellerza">@kellerza</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31346">#31346</a>) (<a href="/integrations/sma/">sma docs</a>) (beta fix)</li>
+<li>Partially Revert “Deprecate hide_if_away from device_tracker (#30833) (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31348">#31348</a>) (<a href="/integrations/device_tracker/">device_tracker docs</a>) (beta fix)</li>
+<li>Protect for unknown state attributes. (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31354">#31354</a>) (<a href="/integrations/alexa/">alexa docs</a>) (beta fix)</li>
+<li>bump quirks (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31355">#31355</a>) (<a href="/integrations/zha/">zha docs</a>) (beta fix)</li>
+<li>Fix wemo device types for lights (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31360">#31360</a>) (<a href="/integrations/wemo/">wemo docs</a>) (beta fix)</li>
+<li>Updated wemo lights fix for #31360 (<a href="https://github.com/DanTLehman">@DanTLehman</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31369">#31369</a>) (<a href="/integrations/wemo/">wemo docs</a>) (beta fix)</li>
+<li>Fix auto_bypass in alarmdecoder (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30961">#30961</a>) (<a href="/integrations/alarmdecoder/">alarmdecoder docs</a>) (beta fix)</li>
+<li>deCONZ - Add support for new switch type (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31362">#31362</a>) (<a href="/integrations/deconz/">deconz docs</a>) (beta fix)</li>
+<li>Add dump service to MQTT integration (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31370">#31370</a>) (<a href="/integrations/mqtt/">mqtt docs</a>) (beta fix)</li>
+<li>Filter int in fan speed_list when yielding RangeController in Alexa (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31375">#31375</a>) (<a href="/integrations/alexa/">alexa docs</a>) (beta fix)</li>
+<li>deCONZ - Services normalize bridge id (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31378">#31378</a>) (<a href="/integrations/deconz/">deconz docs</a>) (beta fix)</li>
+<li>Revert “Bump alarmdecoder to 1.13.9 (#30303)” (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31385">#31385</a>) (<a href="/integrations/alarmdecoder/">alarmdecoder docs</a>) (beta fix)</li>
+<li>Fix service annotations (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31402">#31402</a>) (<a href="/integrations/input_select/">input_select docs</a>) (<a href="/integrations/media_player/">media_player docs</a>) (beta fix)</li>
+<li>deCONZ - Fix magic cube awake gesture (<a href="https://github.com/FrengerH">@FrengerH</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31403">#31403</a>) (<a href="/integrations/deconz/">deconz docs</a>) (beta fix)</li>
+<li>Fix rflink commands containing equals sign (<a href="https://github.com/akasma74">@akasma74</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31412">#31412</a>) (<a href="/integrations/rflink/">rflink docs</a>) (beta fix)</li>
+<li>Emulated Hue + Alexa: Fix devices not discovered and error response (#30013 &amp; #29899) (<a href="https://github.com/xtools-at">@xtools-at</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31413">#31413</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>) (beta fix)</li>
+<li>Fix device name Google Assistant when using aliases (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31416">#31416</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>) (breaking change) (beta fix)</li>
+<li>always call set_volume with integer values (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31418">#31418</a>) (<a href="/integrations/webostv/">webostv docs</a>) (beta fix)</li>
+<li>Rework Mikrotik device scanning following Unifi (<a href="https://github.com/engrbm87">@engrbm87</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27484">#27484</a>) (<a href="/integrations/mikrotik/">mikrotik docs</a>) (breaking change) (beta fix)</li>
+<li>Update NSAPI to 3.0.2 (<a href="https://github.com/YarmoM">@YarmoM</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30971">#30971</a>) (<a href="/integrations/nederlandse_spoorwegen/">nederlandse_spoorwegen docs</a>) (breaking change) (beta fix)</li>
+<li>Samsung TV refinements (<a href="https://github.com/escoand">@escoand</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31248">#31248</a>) (<a href="/integrations/samsungtv/">samsungtv docs</a>) (beta fix)</li>
+<li>Fix theme color (<a href="https://github.com/quthla">@quthla</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31366">#31366</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Keep track of the derivative for unit_time (<a href="https://github.com/basnijholt">@basnijholt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31397">#31397</a>) (<a href="/integrations/derivative/">derivative docs</a>) (beta fix)</li>
+<li>Update libpurecool upstream library to latest version (<a href="https://github.com/etheralm">@etheralm</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31457">#31457</a>) (<a href="/integrations/dyson/">dyson docs</a>) (beta fix)</li>
+<li>Updated frontend to 20200130.1 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31460">#31460</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Update vizio host check to handle entries that don’t have port (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31463">#31463</a>) (<a href="/integrations/vizio/">vizio docs</a>) (beta fix)</li>
+<li>Fix coordinator reference (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31467">#31467</a>) (<a href="/integrations/hue/">hue docs</a>) (beta fix)</li>
+<li>Fix iCloud device battery level can be None (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31468">#31468</a>) (<a href="/integrations/icloud/">icloud docs</a>) (beta fix)</li>
+<li>Automation device/entity extraction to include triggers + conditions (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31474">#31474</a>) (<a href="/integrations/automation/">automation docs</a>) (beta fix)</li>
+<li>Re-branding of Hass.io panel to Supervisor (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31480">#31480</a>) (<a href="/integrations/hassio/">hassio docs</a>) (breaking change) (beta fix)</li>
+<li>Remove tests for deprecated key (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31491">#31491</a>) (beta fix)</li>
+<li>Fix Google API key test (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31492">#31492</a>) (beta fix)</li>
+</ul>
+<h2>All changes</h2>
+<ul>
+<li>Add Doorbird events to logbook (<a href="https://github.com/oblogic7">@oblogic7</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30588">#30588</a>) (<a href="/integrations/doorbird/">doorbird docs</a>)</li>
+<li>Template alarm panel (<a href="https://github.com/alistairg">@alistairg</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30487">#30487</a>) (<a href="/integrations/template/">template docs</a>) (new-platform)</li>
+<li>Fix aurora sensor not converting latitude and longitude correctly (<a href="https://github.com/Watchfox">@Watchfox</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28643">#28643</a>) (<a href="/integrations/aurora/">aurora docs</a>)</li>
+<li>Add neato boundary name to state if it exists (<a href="https://github.com/Olen">@Olen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29915">#29915</a>) (<a href="/integrations/neato/">neato docs</a>) (breaking change)</li>
+<li>Fix aurora import order (<a href="https://github.com/MartinHjelmare">@MartinHjelmare</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30606">#30606</a>) (<a href="/integrations/aurora/">aurora docs</a>)</li>
+<li>tweak honeywell manifest (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30612">#30612</a>) (<a href="/integrations/honeywell/">honeywell docs</a>)</li>
+<li>Fix statistics sensor honouring max_age (<a href="https://github.com/exxamalte">@exxamalte</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27372">#27372</a>) (<a href="/integrations/statistics/">statistics docs</a>) (breaking change)</li>
+<li>Add preset scheduling to radiothermostat (<a href="https://github.com/zombielinux">@zombielinux</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29847">#29847</a>) (<a href="/integrations/radiotherm/">radiotherm docs</a>)</li>
+<li>Fix TOD component incorrectly determining the state between sunrise and sunset (<a href="https://github.com/Anonym-tsk">@Anonym-tsk</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30199">#30199</a>) (<a href="/integrations/tod/">tod docs</a>)</li>
+<li>Update PYAEHW4A1 to version 0.3.4 (<a href="https://github.com/bannhead">@bannhead</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30616">#30616</a>) (<a href="/integrations/hisense_aehw4a1/">hisense_aehw4a1 docs</a>)</li>
+<li>Check netgear device_tracker link_rate to ensure device is connected (<a href="https://github.com/dlashua">@dlashua</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30581">#30581</a>) (<a href="/integrations/netgear/">netgear docs</a>)</li>
+<li>Change nomenclature for Roborock fan speeds (<a href="https://github.com/tiagofreire-pt">@tiagofreire-pt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30614">#30614</a>) (<a href="/integrations/xiaomi_miio/">xiaomi_miio docs</a>) (breaking change)</li>
+<li>Add INFO logging to generic_thermostat component for keep-alive turn … (<a href="https://github.com/nemccarthy">@nemccarthy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28740">#28740</a>) (<a href="/integrations/generic_thermostat/">generic_thermostat docs</a>)</li>
+<li>Add Samsung TV config flow (<a href="https://github.com/escoand">@escoand</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28306">#28306</a>) (<a href="/integrations/samsungtv/">samsungtv docs</a>) (breaking change)</li>
+<li>Convert vizio component from sync to async component (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30605">#30605</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Upgrade praw to 6.5.0 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30643">#30643</a>) (<a href="/integrations/reddit/">reddit docs</a>)</li>
+<li>Upgrade shodan to 1.21.2 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30641">#30641</a>) (<a href="/integrations/shodan/">shodan docs</a>)</li>
+<li>Upgrade pylast to 3.2.0 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30644">#30644</a>) (<a href="/integrations/lastfm/">lastfm docs</a>)</li>
+<li>Upgrade colorlog to 4.1.0 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30642">#30642</a>)</li>
+<li>Upgrade pydocstyle to 5.0.2 (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30648">#30648</a>)</li>
+<li>deCONZ - Disable daylight sensor by default (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30625">#30625</a>) (<a href="/integrations/deconz/">deconz docs</a>)</li>
+<li>Add search integration (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30511">#30511</a>) (<a href="/integrations/search/">search docs</a>) (new-integration)</li>
+<li>Fix Alexa ChangeReports Filter non-proactively_reported_properties (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30655">#30655</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Remove self as Emulated Hue codeowner (<a href="https://github.com/NobleKangaroo">@NobleKangaroo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30654">#30654</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>)</li>
+<li>Implement TimeHoldController Interface in Alexa (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30650">#30650</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Add support for variable fan speed list length. (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30574">#30574</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Use storage based collections for input_number entities (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30576">#30576</a>) (<a href="/integrations/input_number/">input_number docs</a>)</li>
+<li>pushover: improve error when image download fails (<a href="https://github.com/Mic92">@Mic92</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30615">#30615</a>) (<a href="/integrations/pushover/">pushover docs</a>)</li>
+<li>Add support for Dyson TP06 fan (<a href="https://github.com/etheralm">@etheralm</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30611">#30611</a>) (<a href="/integrations/dyson/">dyson docs</a>)</li>
+<li>Refactor Netatmo integration (<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29851">#29851</a>) (<a href="/integrations/netatmo/">netatmo docs</a>) (breaking change)</li>
+<li>Use storage collections for input_select entity management (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30604">#30604</a>) (<a href="/integrations/input_number/">input_number docs</a>) (<a href="/integrations/input_select/">input_select docs</a>)</li>
+<li>Fix test_scenes_with_entity (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30684">#30684</a>)</li>
+<li>Update iCloud sensors when service finish its update (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30680">#30680</a>) (<a href="/integrations/icloud/">icloud docs</a>)</li>
+<li>Upgrade huawei-lte-api to 1.4.6 (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30683">#30683</a>) (<a href="/integrations/huawei_lte/">huawei_lte docs</a>)</li>
+<li>Use collection helpers for input_text entities (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30633">#30633</a>) (<a href="/integrations/input_text/">input_text docs</a>)</li>
+<li>Fixing unit of measure for withings hydration. Fixes #30570 (<a href="https://github.com/vangorra">@vangorra</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30685">#30685</a>) (<a href="/integrations/withings/">withings docs</a>)</li>
+<li>Optimistically set tplink light states (<a href="https://github.com/vangorra">@vangorra</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30189">#30189</a>) (<a href="/integrations/tplink/">tplink docs</a>)</li>
+<li>ZHA cover device support (<a href="https://github.com/billyburly">@billyburly</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30639">#30639</a>) (<a href="/integrations/zha/">zha docs</a>) (new-platform)</li>
+<li>Drop timer component microseconds (<a href="https://github.com/inputd">@inputd</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30198">#30198</a>) (<a href="/integrations/timer/">timer docs</a>)</li>
+<li>Make met config flow tests robust (<a href="https://github.com/MartinHjelmare">@MartinHjelmare</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30689">#30689</a>)</li>
+<li>Make hue config flow tests more robust (<a href="https://github.com/MartinHjelmare">@MartinHjelmare</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30678">#30678</a>)</li>
+<li>Bumped oru to 0.1.11 (adds a timeout to the api request) (<a href="https://github.com/bvlaicu">@bvlaicu</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30704">#30704</a>) (<a href="/integrations/oru/">oru docs</a>)</li>
+<li>Update NSAPI to version 3.0.0 (<a href="https://github.com/YarmoM">@YarmoM</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30599">#30599</a>) (<a href="/integrations/nederlandse_spoorwegen/">nederlandse_spoorwegen docs</a>) (breaking change)</li>
+<li>Fix SynologyDSM sensor if network_sensors is None (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30718">#30718</a>) (<a href="/integrations/synologydsm/">synologydsm docs</a>)</li>
+<li>Consolidate SimpliSafe property services (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30567">#30567</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>) (breaking change)</li>
+<li>Unhide SPC binary sensors by default (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30699">#30699</a>) (<a href="/integrations/spc/">spc docs</a>)</li>
+<li>Support yeelight color light with nightlight (<a href="https://github.com/zewelor">@zewelor</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30194">#30194</a>) (<a href="/integrations/yeelight/">yeelight docs</a>)</li>
+<li>Add unique ID to Airly config entries (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30681">#30681</a>) (<a href="/integrations/airly/">airly docs</a>)</li>
+<li>Remove hidden property from xiaomi_miio.remote integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30727">#30727</a>) (<a href="/integrations/xiaomi_miio/">xiaomi_miio docs</a>) (breaking change)</li>
+<li>Bump apprise to 0.8.3 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30731">#30731</a>) (<a href="/integrations/apprise/">apprise docs</a>)</li>
+<li>Remove hidden property from egardia integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30728">#30728</a>) (<a href="/integrations/egardia/">egardia docs</a>) (breaking change)</li>
+<li>Remove hidden property from emby integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30729">#30729</a>) (<a href="/integrations/emby/">emby docs</a>) (breaking change)</li>
+<li>Remove hidden property from fibaro integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30730">#30730</a>) (<a href="/integrations/fibaro/">fibaro docs</a>) (breaking change)</li>
+<li>Bump env_canada to 0.0.34 (<a href="https://github.com/michaeldavie">@michaeldavie</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30713">#30713</a>) (<a href="/integrations/environment_canada/">environment_canada docs</a>)</li>
+<li>Removes unneeded abort if unique id in Oauth2 discovery flow (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30733">#30733</a>)</li>
+<li>Update Hue SSDP discovery (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30695">#30695</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Fix hassfest allowing omitting discovery methods when using OAuth2Flow (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30732">#30732</a>)</li>
+<li>Update config flow test scaffolding (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30694">#30694</a>)</li>
+<li>Removes Cisco Spark integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30738">#30738</a>) (breaking change)</li>
+<li>Fix translation from HA playlist to UPnP playlistItem (<a href="https://github.com/StevenLooman">@StevenLooman</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30743">#30743</a>) (<a href="/integrations/dlna_dmr/">dlna_dmr docs</a>)</li>
+<li>Fix ‘NewIPAddress’ error in component fritz (<a href="https://github.com/basdelfos">@basdelfos</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30210">#30210</a>) (<a href="/integrations/fritz/">fritz docs</a>) (<a href="/integrations/fritzbox_netmonitor/">fritzbox_netmonitor docs</a>) (breaking change)</li>
+<li>Fix small typo in alarmdotcom component (<a href="https://github.com/akinomeroglu">@akinomeroglu</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30758">#30758</a>)</li>
+<li>Fix supported_features in MQTT fan (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28680">#28680</a>) (<a href="/integrations/mqtt/">mqtt docs</a>) (breaking change)</li>
+<li>Add support for the voltage sensor on the greeneye GEM (<a href="https://github.com/garbled1">@garbled1</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30484">#30484</a>) (<a href="/integrations/greeneye_monitor/">greeneye_monitor docs</a>)</li>
+<li>Add Safe Mode (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30723">#30723</a>) (<a href="/integrations/frontend/">frontend docs</a>) (<a href="/integrations/http/">http docs</a>) (<a href="/integrations/safe_mode/">safe_mode docs</a>) (breaking change) (new-integration)</li>
+<li>Hass.io allow to reset password with CLI (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30755">#30755</a>) (<a href="/integrations/hassio/">hassio docs</a>)</li>
+<li>Upgrade youtube_dl to version 2020.01.15 (<a href="https://github.com/BKPepe">@BKPepe</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30767">#30767</a>) (<a href="/integrations/media_extractor/">media_extractor docs</a>)</li>
+<li>Use storage based collections for Timer platform (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30765">#30765</a>) (<a href="/integrations/timer/">timer docs</a>)</li>
+<li>Search: Add search to default config and don’t resolve area (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30762">#30762</a>) (<a href="/integrations/default_config/">default_config docs</a>) (<a href="/integrations/search/">search docs</a>)</li>
+<li>Allow input_* and timer component setup without config (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30772">#30772</a>) (<a href="/integrations/input_boolean/">input_boolean docs</a>) (<a href="/integrations/input_number/">input_number docs</a>) (<a href="/integrations/input_select/">input_select docs</a>) (<a href="/integrations/input_text/">input_text docs</a>) (<a href="/integrations/timer/">timer docs</a>)</li>
+<li>Add Config Flow support, Device Registry support, available property to vizio component (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30653">#30653</a>) (<a href="/integrations/vizio/">vizio docs</a>) (breaking change)</li>
+<li>Update pyubee to 0.8 (<a href="https://github.com/mzdrale">@mzdrale</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30785">#30785</a>) (<a href="/integrations/ubee/">ubee docs</a>)</li>
+<li>Add support for vacuums to Alexa. (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30764">#30764</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Mark hide_entity deprecated in automation integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30799">#30799</a>) (<a href="/integrations/automation/">automation docs</a>) (breaking change)</li>
+<li>Bump librouteros to 3.0.0 (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30800">#30800</a>) (<a href="/integrations/mikrotik/">mikrotik docs</a>)</li>
+<li>Update pynws to v0.10.1 (<a href="https://github.com/MatthewFlamm">@MatthewFlamm</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30662">#30662</a>) (<a href="/integrations/nws/">nws docs</a>)</li>
+<li>Fixed pyyaml requirement from 5.2.0 to 5.2 (<a href="https://github.com/WoLpH">@WoLpH</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30808">#30808</a>)</li>
+<li>Use collection helpers for input_datetime component (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30815">#30815</a>) (<a href="/integrations/input_datetime/">input_datetime docs</a>)</li>
+<li>Handle location API being exhausted (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30798">#30798</a>)</li>
+<li>Deprecate states UI options in group integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30831">#30831</a>) (<a href="/integrations/group/">group docs</a>) (breaking change)</li>
+<li>Deprecate weblink integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30834">#30834</a>) (breaking change)</li>
+<li>Deprecate hide_if_away from device_tracker (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30833">#30833</a>) (<a href="/integrations/device_tracker/">device_tracker docs</a>) (breaking change)</li>
+<li>Deprecate history_graph integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30835">#30835</a>) (breaking change)</li>
+<li>Remove unused import (<a href="https://github.com/dshokouhi">@dshokouhi</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30858">#30858</a>) (<a href="/integrations/ring/">ring docs</a>)</li>
+<li>Bump pyvizio version to 0.1.1 (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30867">#30867</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Update pyatmo to 3.2.2 and add available attribute (<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30882">#30882</a>) (<a href="/integrations/netatmo/">netatmo docs</a>)</li>
+<li>Extract collection entity registry cleaner into a helper (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30844">#30844</a>) (<a href="/integrations/input_boolean/">input_boolean docs</a>) (<a href="/integrations/input_datetime/">input_datetime docs</a>) (<a href="/integrations/input_number/">input_number docs</a>) (<a href="/integrations/input_select/">input_select docs</a>) (<a href="/integrations/input_text/">input_text docs</a>) (<a href="/integrations/person/">person docs</a>) (<a href="/integrations/timer/">timer docs</a>)</li>
+<li>Remove option to configure SimpliSafe scan interval (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30909">#30909</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>) (breaking change)</li>
+<li>remove PostNL component as it is no longer working (<a href="https://github.com/peternijssen">@peternijssen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30902">#30902</a>) (breaking change)</li>
+<li>Adds icon endpoint to NO_AUTH (<a href="https://github.com/ludeeus">@ludeeus</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30910">#30910</a>) (<a href="/integrations/hassio/">hassio docs</a>)</li>
+<li>Add battery voltage state attribute for ZHA devices (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30901">#30901</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Refactor rounding for ZHA electrical measurement sensor (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30923">#30923</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Update outdated documentation links in json files (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30916">#30916</a>) (<a href="/integrations/apprise/">apprise docs</a>) (<a href="/integrations/geonetnz_volcano/">geonetnz_volcano docs</a>) (<a href="/integrations/pcal9535a/">pcal9535a docs</a>) (<a href="/integrations/sinch/">sinch docs</a>) (<a href="/integrations/starline/">starline docs</a>) (<a href="/integrations/versasense/">versasense docs</a>)</li>
+<li>Use default media player device classes for vizio component (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30802">#30802</a>) (<a href="/integrations/vizio/">vizio docs</a>) (breaking change)</li>
+<li>Add services to geniushub (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30918">#30918</a>) (<a href="/integrations/geniushub/">geniushub docs</a>)</li>
+<li>Add services to evohome (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29816">#29816</a>) (<a href="/integrations/evohome/">evohome docs</a>)</li>
+<li>Revert “Pulseaudio: Changed default port from 4712 to 4713 (#28857)” (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30939">#30939</a>) (<a href="/integrations/pulseaudio_loopback/">pulseaudio_loopback docs</a>) (breaking change)</li>
+<li>Don’t use unit_of_measurement in state attributes. (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30941">#30941</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Add play media support and Spotify control to Openhome (<a href="https://github.com/bazwilliams">@bazwilliams</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28698">#28698</a>) (<a href="/integrations/openhome/">openhome docs</a>)</li>
+<li>Minor enhancements to jewish_calendar (<a href="https://github.com/ajmarks">@ajmarks</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30632">#30632</a>) (<a href="/integrations/jewish_calendar/">jewish_calendar docs</a>)</li>
+<li>Add logical Zigbee device type to ZHA device info (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30954">#30954</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix can’t add multiple iCloud accounts (remove account name) (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30898">#30898</a>) (<a href="/integrations/icloud/">icloud docs</a>) (breaking change)</li>
+<li>Improve Wemo config entry support, add device info (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30963">#30963</a>) (<a href="/integrations/wemo/">wemo docs</a>)</li>
+<li>initial commit (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30968">#30968</a>) (<a href="/integrations/evohome/">evohome docs</a>) (breaking change)</li>
+<li>Add foundation for integration services (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30813">#30813</a>) (<a href="/integrations/sonos/">sonos docs</a>) (breaking change)</li>
+<li>Fix options update during import config flow step for vizio component (Bugfix for #30653) (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30977">#30977</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>print component import error to logfile (<a href="https://github.com/zhumuht">@zhumuht</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30346">#30346</a>)</li>
+<li>Add Derivative component (<a href="https://github.com/afaucogney">@afaucogney</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/26456">#26456</a>) (<a href="/integrations/derivative/">derivative docs</a>) (new-integration)</li>
+<li>Add state reproduction to remotes (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30990">#30990</a>) (<a href="/integrations/remote/">remote docs</a>)</li>
+<li>Add attributes departure_minutes and delay_minutes to the nmbs sensor (<a href="https://github.com/rdehuyss">@rdehuyss</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30958">#30958</a>) (<a href="/integrations/nmbs/">nmbs docs</a>)</li>
+<li>Minor fixes for webostv (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30998">#30998</a>) (<a href="/integrations/webostv/">webostv docs</a>)</li>
+<li>Add kef supports_on option (<a href="https://github.com/basnijholt">@basnijholt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30937">#30937</a>) (<a href="/integrations/kef/">kef docs</a>)</li>
+<li>Small tweaks for evohome (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31007">#31007</a>) (<a href="/integrations/evohome/">evohome docs</a>)</li>
+<li>Adds missing strings to Almond (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31013">#31013</a>) (<a href="/integrations/almond/">almond docs</a>)</li>
+<li>Adds missing strings to Withings (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31012">#31012</a>) (<a href="/integrations/withings/">withings docs</a>)</li>
+<li>Enable some more bandit checks (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30857">#30857</a>) (<a href="/integrations/command_line/">command_line docs</a>) (<a href="/integrations/vicare/">vicare docs</a>) (<a href="/integrations/x10/">x10 docs</a>) (<a href="/integrations/yi/">yi docs</a>)</li>
+<li>Use config_entry.unique_id in iCloud (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30984">#30984</a>) (<a href="/integrations/icloud/">icloud docs</a>)</li>
+<li>Bump zigpy-zigate to 0.5.1 (<a href="https://github.com/doudz">@doudz</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31004">#31004</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Allow OpenUV entities to be unavailable (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31018">#31018</a>) (<a href="/integrations/openuv/">openuv docs</a>)</li>
+<li>Handle ghost zones gracefully (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31008">#31008</a>) (<a href="/integrations/evohome/">evohome docs</a>)</li>
+<li>Upgrade importlib-metadata to version 1.4.0 (<a href="https://github.com/BKPepe">@BKPepe</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31027">#31027</a>)</li>
+<li>Upgrade pyyaml to 5.3 (<a href="https://github.com/BKPepe">@BKPepe</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31026">#31026</a>)</li>
+<li>Allow ZHA device creation for the Zigbee coordinator (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31032">#31032</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Remove all empty *_setup_platform() from integrations (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31025">#31025</a>)</li>
+<li>Bump pyintesishome to v1.6 (<a href="https://github.com/jnimmo">@jnimmo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31044">#31044</a>) (<a href="/integrations/intesishome/">intesishome docs</a>)</li>
+<li>Update pyipma to 2.0 (<a href="https://github.com/abmantis">@abmantis</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30746">#30746</a>) (<a href="/integrations/ipma/">ipma docs</a>)</li>
+<li>Add xiaomi miio sensors cgllc.airmonitor.s1 &amp; cgllc.airmonitor.b1 (<a href="https://github.com/zhumuht">@zhumuht</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30345">#30345</a>) (<a href="/integrations/xiaomi_miio/">xiaomi_miio docs</a>)</li>
+<li>Update issue and PR templates (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31056">#31056</a>)</li>
+<li>switch evohome to use a whitelist for valid zonetype (<a href="https://github.com/zxdavb">@zxdavb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31047">#31047</a>) (<a href="/integrations/evohome/">evohome docs</a>)</li>
+<li>Bump pytest to 5.3.4 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31045">#31045</a>)</li>
+<li>Iteration on issue and PR templates (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31058">#31058</a>)</li>
+<li>Fix prometheus component to fully sanitize Unicode characters (<a href="https://github.com/joegross">@joegross</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31037">#31037</a>) (<a href="/integrations/prometheus/">prometheus docs</a>)</li>
+<li>Add tahoma io:AwningValanceIOComponent (<a href="https://github.com/jensihnow">@jensihnow</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30944">#30944</a>) (<a href="/integrations/tahoma/">tahoma docs</a>)</li>
+<li>Fix fan_modes in tuya climate (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30942">#30942</a>) (<a href="/integrations/tuya/">tuya docs</a>)</li>
+<li>Fix luftdaten broken icon for “Pressure at sealevel” (<a href="https://github.com/reuank">@reuank</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31053">#31053</a>) (<a href="/integrations/luftdaten/">luftdaten docs</a>)</li>
+<li>Enhance info_from_service function in zeroconf integration (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31059">#31059</a>) (<a href="/integrations/zeroconf/">zeroconf docs</a>)</li>
+<li>Add zeroconf discovery support for vizio integration (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30949">#30949</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Add the Open Peer Power version as a Sentry release (<a href="https://github.com/d0ugal">@d0ugal</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31065">#31065</a>) (<a href="/integrations/sentry/">sentry docs</a>)</li>
+<li>Add disabled entities support to WLED (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31040">#31040</a>) (<a href="/integrations/wled/">wled docs</a>)</li>
+<li>change group id creation (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31075">#31075</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Allow unloading mobile app (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30995">#30995</a>) (<a href="/integrations/mobile_app/">mobile_app docs</a>)</li>
+<li>Improve state tracking for WebOsTV (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31042">#31042</a>) (<a href="/integrations/webostv/">webostv docs</a>) (breaking change)</li>
+<li>Add DIRECTORY and PLUGIN to kodi media types (<a href="https://github.com/thoscut">@thoscut</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28336">#28336</a>) (<a href="/integrations/kodi/">kodi docs</a>)</li>
+<li>Add zeroconf discovery support to Brother Printer integration (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30959">#30959</a>) (<a href="/integrations/brother/">brother docs</a>)</li>
+<li>Migrate zone to use collection helpers (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30774">#30774</a>) (<a href="/integrations/zone/">zone docs</a>) (breaking change)</li>
+<li>Code Cleanup for Vizio component (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31076">#31076</a>)</li>
+<li>Simplify automation services (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30996">#30996</a>) (<a href="/integrations/automation/">automation docs</a>)</li>
+<li>Remove monitored conditions from OpenUV (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31019">#31019</a>) (<a href="/integrations/openuv/">openuv docs</a>) (breaking change)</li>
+<li>Add myself to owners for components I contributed (<a href="https://github.com/jkeljo">@jkeljo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31020">#31020</a>) (<a href="/integrations/greeneye_monitor/">greeneye_monitor docs</a>) (<a href="/integrations/sisyphus/">sisyphus docs</a>)</li>
+<li>Deprecate hook integration (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31046">#31046</a>) (breaking change)</li>
+<li>Add keep-alive which is required for some hlk-sw16 variants (<a href="https://github.com/jameshilliard">@jameshilliard</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31062">#31062</a>) (<a href="/integrations/hlk_sw16/">hlk_sw16 docs</a>)</li>
+<li>pydaikin version bump (<a href="https://github.com/fredrike">@fredrike</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31080">#31080</a>) (<a href="/integrations/daikin/">daikin docs</a>)</li>
+<li>Remove monitored conditions from RainMachine (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31066">#31066</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>) (breaking change)</li>
+<li>Add sighthound integration (<a href="https://github.com/robmarkcole">@robmarkcole</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28824">#28824</a>) (<a href="/integrations/sighthound/">sighthound docs</a>) (new-integration)</li>
+<li>Cleanup of PR and issue templates (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31070">#31070</a>)</li>
+<li>Upgrade sqlalchemy to 1.3.13 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31101">#31101</a>) (<a href="/integrations/recorder/">recorder docs</a>) (<a href="/integrations/sql/">sql docs</a>)</li>
+<li>Fix HomeKit window covering to support float numbers in the position (<a href="https://github.com/dokmic">@dokmic</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31081">#31081</a>) (<a href="/integrations/homekit/">homekit docs</a>)</li>
+<li>Add temperature support to light template (<a href="https://github.com/tetienne">@tetienne</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30595">#30595</a>) (<a href="/integrations/template/">template docs</a>)</li>
+<li>Allow framerates less than 1 (<a href="https://github.com/uvjustin">@uvjustin</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31108">#31108</a>) (<a href="/integrations/generic/">generic docs</a>)</li>
+<li>Upgrade shodan to 1.21.3 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31111">#31111</a>) (<a href="/integrations/shodan/">shodan docs</a>)</li>
+<li>Add update_entry dict to unique ID flow abort helper (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31090">#31090</a>)</li>
+<li>Change Samsung TV state detection (<a href="https://github.com/tulindo">@tulindo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30236">#30236</a>) (<a href="/integrations/samsungtv/">samsungtv docs</a>)</li>
+<li>Use speak2mary for MaryTTS integration and enable sound effects (<a href="https://github.com/Poeschl">@Poeschl</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30805">#30805</a>) (<a href="/integrations/marytts/">marytts docs</a>) (breaking change)</li>
+<li>Add disabled entities support to AdGuard (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31106">#31106</a>) (<a href="/integrations/adguard/">adguard docs</a>)</li>
+<li>Fix connection failure log message in async_setup_entry for Vizio component (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31097">#31097</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Upgrade youtube_dl to version 2020.01.24 (<a href="https://github.com/BKPepe">@BKPepe</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31124">#31124</a>) (<a href="/integrations/media_extractor/">media_extractor docs</a>)</li>
+<li>Update cast to 4.1.1 (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31113">#31113</a>) (<a href="/integrations/cast/">cast docs</a>)</li>
+<li>Add Buienradar camera for Belgium (<a href="https://github.com/MiniLau">@MiniLau</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30399">#30399</a>) (<a href="/integrations/buienradar/">buienradar docs</a>)</li>
+<li>Fix Template components to process entity_id configuration option (<a href="https://github.com/dokmic">@dokmic</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31084">#31084</a>) (<a href="/integrations/template/">template docs</a>)</li>
+<li>Remove unused async_setup_platform (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31132">#31132</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</li>
+<li>Update Hue existing config entry with discovery data (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31087">#31087</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Rewrite of Spotify integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30717">#30717</a>) (<a href="/integrations/spotify/">spotify docs</a>) (breaking change)</li>
+<li>Validate coveragerc with hassfest (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31112">#31112</a>)</li>
+<li>Make pylint fail on informational messages too (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31136">#31136</a>)</li>
+<li>Add logo &amp; icon support to Manifest (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31131">#31131</a>)</li>
+<li>Fix when you have two wemo devices (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31139">#31139</a>) (<a href="/integrations/wemo/">wemo docs</a>)</li>
+<li>Include supported states in Alexa SecurityPanelController configuration object (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31120">#31120</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Make SimpliSafe integration more resilient to SimpliSafe cloud issues (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31116">#31116</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>)</li>
+<li>Add smarter API usage for RainMachine (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31115">#31115</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>)</li>
+<li>Fix RainMachine update action (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31147">#31147</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>)</li>
+<li>Fix Huawei LTE SMS recipient setting from options UI (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31117">#31117</a>) (<a href="/integrations/huawei_lte/">huawei_lte docs</a>)</li>
+<li>Remove no longer used Hound config (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31154">#31154</a>)</li>
+<li>Update ZHA remotes registry to proper identify “remotes (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31146">#31146</a>) (<a href="/integrations/zha/">zha docs</a>) (breaking change)</li>
+<li>improvements to zha cover (<a href="https://github.com/billyburly">@billyburly</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31144">#31144</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix state handling for older webos versions (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31099">#31099</a>) (<a href="/integrations/webostv/">webostv docs</a>)</li>
+<li>Separate iCloud class (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31022">#31022</a>) (<a href="/integrations/icloud/">icloud docs</a>)</li>
+<li>Remove Owlet component (<a href="https://github.com/oblogic7">@oblogic7</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31160">#31160</a>) (breaking change)</li>
+<li>Fix the ihc.set_runtime_value_int service function not working with templates (<a href="https://github.com/dingusdk">@dingusdk</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31145">#31145</a>) (<a href="/integrations/ihc/">ihc docs</a>)</li>
+<li>Add additional alarm states to SimpliSafe (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31060">#31060</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>) (breaking change)</li>
+<li>Refactor RainMachine switch platform (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31148">#31148</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>)</li>
+<li>Implement ‘volume_set’ service for Android TV devices (<a href="https://github.com/JeffLIrion">@JeffLIrion</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31161">#31161</a>) (<a href="/integrations/androidtv/">androidtv docs</a>)</li>
+<li>Introduce unique_id for lastfm to allow changing entity_id in backwards compatible way (<a href="https://github.com/inverse">@inverse</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31163">#31163</a>) (<a href="/integrations/lastfm/">lastfm docs</a>)</li>
+<li>Fix Velbus covers (includes velbus lib upgrade) (<a href="https://github.com/Cereal2nd">@Cereal2nd</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31153">#31153</a>) (<a href="/integrations/velbus/">velbus docs</a>)</li>
+<li>Use unique_id for config_entries of HomematicIP Cloud (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31133">#31133</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</li>
+<li>Add counters sensors for Velbus (<a href="https://github.com/brefra">@brefra</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31165">#31165</a>) (<a href="/integrations/velbus/">velbus docs</a>)</li>
+<li>Bump insteonplm to 0.16.6 (<a href="https://github.com/teharris1">@teharris1</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31182">#31182</a>) (<a href="/integrations/insteon/">insteon docs</a>)</li>
+<li>Add hassfest URL validation to documentation link (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31143">#31143</a>) (<a href="/integrations/soma/">soma docs</a>)</li>
+<li>Bump aiobotocore to 0.11.1 (<a href="https://github.com/finnysamuel">@finnysamuel</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30951">#30951</a>) (<a href="/integrations/aws/">aws docs</a>)</li>
+<li>Use non-deprecated method of instantiating RainMachine client (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31149">#31149</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>)</li>
+<li>Upgrade huawei-lte-api to 1.4.7 (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31155">#31155</a>) (<a href="/integrations/huawei_lte/">huawei_lte docs</a>)</li>
+<li>Add unique IDs to automation/scenes (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31150">#31150</a>) (<a href="/integrations/automation/">automation docs</a>) (<a href="/integrations/config/">config docs</a>) (<a href="/integrations/openpeerpower/">openpeerpower docs</a>) (<a href="/integrations/script/">script docs</a>)</li>
+<li>Add webostv sound_output capability (<a href="https://github.com/starkillerOG">@starkillerOG</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31121">#31121</a>) (<a href="/integrations/webostv/">webostv docs</a>)</li>
+<li>Check that documentation urls are valid (<a href="https://github.com/rohankapoorcom">@rohankapoorcom</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31188">#31188</a>) (<a href="/integrations/solarlog/">solarlog docs</a>)</li>
+<li>Disable failing dsmr tests (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31202">#31202</a>)</li>
+<li>Fix unnecessary regeneration of access token in Tesla component (<a href="https://github.com/alandtse">@alandtse</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31193">#31193</a>) (<a href="/integrations/tesla/">tesla docs</a>)</li>
+<li>Upgrade HAP-python to 2.7.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31201">#31201</a>) (<a href="/integrations/homekit/">homekit docs</a>)</li>
+<li>Added missing file (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31189">#31189</a>)</li>
+<li>update remove service (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31164">#31164</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix ps4 errors if pin begins with a 0 (<a href="https://github.com/ktnrg45">@ktnrg45</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31198">#31198</a>) (<a href="/integrations/ps4/">ps4 docs</a>)</li>
+<li>Use config_entry.unique_id in Linky (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31051">#31051</a>) (<a href="/integrations/linky/">linky docs</a>)</li>
+<li>Add Garmin Connect integration (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30792">#30792</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>) (new-integration)</li>
+<li>Constrain SimpliSafe’s check for emergency token usage (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31214">#31214</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>)</li>
+<li>Update Hue discovery (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31215">#31215</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Fix typo: serivce –&gt; service (<a href="https://github.com/cclauss">@cclauss</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31217">#31217</a>)</li>
+<li>Cleanup of HomematicIP Cloud tests (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31181">#31181</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</li>
+<li>Bump python-synology to 0.4.0 : Add support for DSM v5 + fix sensors unknown for 15 min (<a href="https://github.com/aaska">@aaska</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31049">#31049</a>) (<a href="/integrations/synologydsm/">synologydsm docs</a>)</li>
+<li>Update ZHA entity discovery tests (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31191">#31191</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Add test for adding a device to HomematicIP Cloud (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31224">#31224</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</li>
+<li>Add Gammu based local SMS notifications (<a href="https://github.com/ocalvo">@ocalvo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31233">#31233</a>) (<a href="/integrations/sms/">sms docs</a>) (new-integration)</li>
+<li>Add gammu to wheels (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31239">#31239</a>)</li>
+<li>Mill, correct hvac_mode. Fixes #31236 (<a href="https://github.com/Danielhiversen">@Danielhiversen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31242">#31242</a>) (<a href="/integrations/mill/">mill docs</a>)</li>
+<li>Add brefra to codeowners list Velbus integration (<a href="https://github.com/brefra">@brefra</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31245">#31245</a>) (<a href="/integrations/velbus/">velbus docs</a>)</li>
+<li>Google Assistant: Track if request is local (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31226">#31226</a>) (<a href="/integrations/cloud/">cloud docs</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>)</li>
+<li>Add proxmoxve SSLError check and remove log spam (<a href="https://github.com/jhollowe">@jhollowe</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30818">#30818</a>) (<a href="/integrations/proxmoxve/">proxmoxve docs</a>)</li>
+<li>Upgrade iaqualink to 0.3.1 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31257">#31257</a>) (<a href="/integrations/iaqualink/">iaqualink docs</a>)</li>
+<li>Upgrade dsmr_parser to 0.18, re-enable tests (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31256">#31256</a>) (<a href="/integrations/dsmr/">dsmr docs</a>)</li>
+<li>Mark device unavailable when it leaves Zigbee network. (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31264">#31264</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>deCONZ - New light level sensor attribute (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31255">#31255</a>) (<a href="/integrations/deconz/">deconz docs</a>)</li>
+<li>Bump abodepy version to 0.17.0 (<a href="https://github.com/shred86">@shred86</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31250">#31250</a>) (<a href="/integrations/abode/">abode docs</a>)</li>
+<li>Bump pyhaversion to 3.2.0 (<a href="https://github.com/basnijholt">@basnijholt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31241">#31241</a>)</li>
+<li>Fix Plugwise climate issues (<a href="https://github.com/bouwew">@bouwew</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31209">#31209</a>) (<a href="/integrations/plugwise/">plugwise docs</a>)</li>
+<li>Fix reporting of battery sensor for Tesla (<a href="https://github.com/alandtse">@alandtse</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31232">#31232</a>) (<a href="/integrations/tesla/">tesla docs</a>)</li>
+<li>Add channel-mapping for HomeMatic (<a href="https://github.com/danielperna84">@danielperna84</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31178">#31178</a>) (<a href="/integrations/homematic/">homematic docs</a>)</li>
+<li>Update openpeerpower-pyozw to 0.1.8 (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31270">#31270</a>) (<a href="/integrations/zwave/">zwave docs</a>)</li>
+<li>Upgrade pre-commit to 2.0.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31267">#31267</a>)</li>
+<li>fix knx light turn_on with ct (<a href="https://github.com/farmio">@farmio</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31184">#31184</a>) (<a href="/integrations/knx/">knx docs</a>)</li>
+<li>Fix example for set_datetime service (<a href="https://github.com/l3d00m">@l3d00m</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31159">#31159</a>)</li>
+<li>Fix light.turn_on for emulated_hue (<a href="https://github.com/rslota">@rslota</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31195">#31195</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>)</li>
+<li>Create truly live unique id (<a href="https://github.com/thibmaek">@thibmaek</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31078">#31078</a>) (<a href="/integrations/nmbs/">nmbs docs</a>) (breaking change)</li>
+<li>Add device_class to Tesla sensors (<a href="https://github.com/alandtse">@alandtse</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31231">#31231</a>) (<a href="/integrations/tesla/">tesla docs</a>)</li>
+<li>Remove useless assignment (<a href="https://github.com/tetienne">@tetienne</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31272">#31272</a>) (<a href="/integrations/template/">template docs</a>)</li>
+<li>Bump iCloud to 0.9.2 + fix setup log (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31273">#31273</a>) (<a href="/integrations/icloud/">icloud docs</a>)</li>
+<li>Catch ‘ConnectionResetError’ exceptions for Android TV integra… (<a href="https://github.com/JeffLIrion">@JeffLIrion</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31274">#31274</a>) (<a href="/integrations/androidtv/">androidtv docs</a>)</li>
+<li>Add OPNSense device tracker (<a href="https://github.com/mtreinish">@mtreinish</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/26834">#26834</a>) (<a href="/integrations/opnsense/">opnsense docs</a>) (new-integration)</li>
+<li>Add PowerController to covers in Alexa (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31265">#31265</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Add support for rangeValueDeltaDefault in Alexa AdjustRangeValue directive (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31258">#31258</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Fix tests for opnsense (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31277">#31277</a>)</li>
+<li>ZHA group and device cleanup (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31260">#31260</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Add code owner for amcrest integration (<a href="https://github.com/pnbruckner">@pnbruckner</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31276">#31276</a>) (<a href="/integrations/amcrest/">amcrest docs</a>)</li>
+<li>Allow filtering of sources for Android TV (<a href="https://github.com/JeffLIrion">@JeffLIrion</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30994">#30994</a>) (<a href="/integrations/androidtv/">androidtv docs</a>)</li>
+<li>Updated frontend to 20200129.0 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31279">#31279</a>) (<a href="/integrations/frontend/">frontend docs</a>)</li>
+<li>Add command ‘ps_hold’ to PS4 (<a href="https://github.com/ktnrg45">@ktnrg45</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31283">#31283</a>) (<a href="/integrations/ps4/">ps4 docs</a>)</li>
+<li>Fix callback and async (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31281">#31281</a>)</li>
+<li>Catch error when searching for scenes or automations (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31288">#31288</a>) (<a href="/integrations/search/">search docs</a>)</li>
+<li>Find related items scripts/automations (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31293">#31293</a>) (<a href="/integrations/automation/">automation docs</a>) (<a href="/integrations/script/">script docs</a>) (<a href="/integrations/search/">search docs</a>)</li>
+<li>Use all new helper functions (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31278">#31278</a>) (<a href="/integrations/deconz/">deconz docs</a>)</li>
+<li>Fix service helper not handling sync methods (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31254">#31254</a>)</li>
+<li>ZHA dependencies bump (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31295">#31295</a>) (<a href="/integrations/zha/">zha docs</a>) (beta fix)</li>
+<li>Add zones services.yaml (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31298">#31298</a>) (beta fix)</li>
+<li>Add zone to defaul config (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31303">#31303</a>) (<a href="/integrations/default_config/">default_config docs</a>) (beta fix)</li>
+<li>Handle service calls that do not refer entity IDs (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31317">#31317</a>) (beta fix)</li>
+<li>Updated frontend to 20200130.0 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31318">#31318</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Fix HTTP config serialization (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31319">#31319</a>) (<a href="/integrations/http/">http docs</a>) (beta fix)</li>
+<li>Guard Z-Wave light HS conversion on None (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31320">#31320</a>) (<a href="/integrations/zwave/">zwave docs</a>) (beta fix)</li>
+<li>Fix wemo lights (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31323">#31323</a>) (<a href="/integrations/wemo/">wemo docs</a>) (beta fix)</li>
+<li>Emulated Hue: changed fallback device-type to fix Alexa compatibility issues (#30013) (<a href="https://github.com/xtools-at">@xtools-at</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31330">#31330</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>) (beta fix)</li>
+<li>Fix async bug in amcrest when registering services (<a href="https://github.com/pnbruckner">@pnbruckner</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31334">#31334</a>) (<a href="/integrations/amcrest/">amcrest docs</a>) (beta fix)</li>
+<li>Guard for callbacks in service helper (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31339">#31339</a>) (<a href="/integrations/camera/">camera docs</a>) (beta fix)</li>
+<li>Fix incorrect annotation async flock notify (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31342">#31342</a>) (<a href="/integrations/flock/">flock docs</a>) (beta fix)</li>
+<li>Update Hue data fetching (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31338">#31338</a>) (<a href="/integrations/hue/">hue docs</a>) (beta fix)</li>
+<li>Upgrade pysma, fix #27154 (<a href="https://github.com/kellerza">@kellerza</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31346">#31346</a>) (<a href="/integrations/sma/">sma docs</a>) (beta fix)</li>
+<li>Partially Revert “Deprecate hide_if_away from device_tracker (#30833) (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31348">#31348</a>) (<a href="/integrations/device_tracker/">device_tracker docs</a>) (beta fix)</li>
+<li>Protect for unknown state attributes. (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31354">#31354</a>) (<a href="/integrations/alexa/">alexa docs</a>) (beta fix)</li>
+<li>bump quirks (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31355">#31355</a>) (<a href="/integrations/zha/">zha docs</a>) (beta fix)</li>
+<li>Fix wemo device types for lights (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31360">#31360</a>) (<a href="/integrations/wemo/">wemo docs</a>) (beta fix)</li>
+<li>Updated wemo lights fix for #31360 (<a href="https://github.com/DanTLehman">@DanTLehman</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31369">#31369</a>) (<a href="/integrations/wemo/">wemo docs</a>) (beta fix)</li>
+<li>Fix auto_bypass in alarmdecoder (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30961">#30961</a>) (<a href="/integrations/alarmdecoder/">alarmdecoder docs</a>) (beta fix)</li>
+<li>deCONZ - Add support for new switch type (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31362">#31362</a>) (<a href="/integrations/deconz/">deconz docs</a>) (beta fix)</li>
+<li>Add dump service to MQTT integration (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31370">#31370</a>) (<a href="/integrations/mqtt/">mqtt docs</a>) (beta fix)</li>
+<li>Filter int in fan speed_list when yielding RangeController in Alexa (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31375">#31375</a>) (<a href="/integrations/alexa/">alexa docs</a>) (beta fix)</li>
+<li>deCONZ - Services normalize bridge id (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31378">#31378</a>) (<a href="/integrations/deconz/">deconz docs</a>) (beta fix)</li>
+<li>Revert “Bump alarmdecoder to 1.13.9 (#30303)” (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31385">#31385</a>) (<a href="/integrations/alarmdecoder/">alarmdecoder docs</a>) (beta fix)</li>
+<li>Fix service annotations (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31402">#31402</a>) (<a href="/integrations/input_select/">input_select docs</a>) (<a href="/integrations/media_player/">media_player docs</a>) (beta fix)</li>
+<li>deCONZ - Fix magic cube awake gesture (<a href="https://github.com/FrengerH">@FrengerH</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31403">#31403</a>) (<a href="/integrations/deconz/">deconz docs</a>) (beta fix)</li>
+<li>Fix rflink commands containing equals sign (<a href="https://github.com/akasma74">@akasma74</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31412">#31412</a>) (<a href="/integrations/rflink/">rflink docs</a>) (beta fix)</li>
+<li>Emulated Hue + Alexa: Fix devices not discovered and error response (#30013 &amp; #29899) (<a href="https://github.com/xtools-at">@xtools-at</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31413">#31413</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>) (beta fix)</li>
+<li>Fix device name Google Assistant when using aliases (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31416">#31416</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>) (breaking change) (beta fix)</li>
+<li>always call set_volume with integer values (<a href="https://github.com/bendavid">@bendavid</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31418">#31418</a>) (<a href="/integrations/webostv/">webostv docs</a>) (beta fix)</li>
+<li>Rework Mikrotik device scanning following Unifi (<a href="https://github.com/engrbm87">@engrbm87</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27484">#27484</a>) (<a href="/integrations/mikrotik/">mikrotik docs</a>) (breaking change) (beta fix)</li>
+<li>Update NSAPI to 3.0.2 (<a href="https://github.com/YarmoM">@YarmoM</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30971">#30971</a>) (<a href="/integrations/nederlandse_spoorwegen/">nederlandse_spoorwegen docs</a>) (breaking change) (beta fix)</li>
+<li>Samsung TV refinements (<a href="https://github.com/escoand">@escoand</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31248">#31248</a>) (<a href="/integrations/samsungtv/">samsungtv docs</a>) (beta fix)</li>
+<li>Fix theme color (<a href="https://github.com/quthla">@quthla</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31366">#31366</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Keep track of the derivative for unit_time (<a href="https://github.com/basnijholt">@basnijholt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31397">#31397</a>) (<a href="/integrations/derivative/">derivative docs</a>) (beta fix)</li>
+<li>Update libpurecool upstream library to latest version (<a href="https://github.com/etheralm">@etheralm</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31457">#31457</a>) (<a href="/integrations/dyson/">dyson docs</a>) (beta fix)</li>
+<li>Updated frontend to 20200130.1 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31460">#31460</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Update vizio host check to handle entries that don’t have port (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31463">#31463</a>) (<a href="/integrations/vizio/">vizio docs</a>) (beta fix)</li>
+<li>Fix coordinator reference (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31467">#31467</a>) (<a href="/integrations/hue/">hue docs</a>) (beta fix)</li>
+<li>Fix iCloud device battery level can be None (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31468">#31468</a>) (<a href="/integrations/icloud/">icloud docs</a>) (beta fix)</li>
+<li>Automation device/entity extraction to include triggers + conditions (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31474">#31474</a>) (<a href="/integrations/automation/">automation docs</a>) (beta fix)</li>
+<li>Re-branding of Hass.io panel to Supervisor (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31480">#31480</a>) (<a href="/integrations/hassio/">hassio docs</a>) (breaking change) (beta fix)</li>
+<li>Remove tests for deprecated key (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31491">#31491</a>) (beta fix)</li>
+<li>Fix Google API key test (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31492">#31492</a>) (beta fix)</li>
+</ul>
+:ET

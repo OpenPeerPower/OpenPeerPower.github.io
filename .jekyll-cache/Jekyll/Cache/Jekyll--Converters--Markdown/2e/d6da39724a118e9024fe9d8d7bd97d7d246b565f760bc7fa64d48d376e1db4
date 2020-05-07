@@ -1,0 +1,160 @@
+I"|-<p><a href='/integrations/#version/0.108'><img src='/images/blog/2020-04-0.108/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p>Before we talk about anything that matches the title of this blog post:</p>
+<p>On behalf of everybody working on the Open Peer Power project, we hope you, your
+family and loved ones are safe and remain healthy during this pandemic.
+Our thoughts are with everyone that has been deeply affected by the current situation.</p>
+<p>Stay strong, keep distance from each other, wash your hands and stay safe.</p>
+<p>❤️</p>
+<p>We made it all up to 0.107.7 the previous release, 7! patch releases.</p>
+<p>Some have noticed and commented on the fact we do a lot more patch releases
+the past months, which is correct. This is not because everything was shipped
+in a broken state, but we are trying to ship <strong>any</strong> bug fix to you as soon as
+possible! Just so you don’t have to wait 3 weeks for something to get fixed.</p>
+<p>So let’s talk about the elephant in the room: Open Peer Power Core 0.108!</p>
+<h2>Martin Hjelmare &amp; Ashton Lafferty join Nabu Casa</h2>
+<p>We want to start by announcing <a href="https://github.com/MartinHjelmare">Martin Hjelmare</a>
+has joined <a href="https://www.nabucasa.com">Nabu Casa</a>!</p>
+<p>Martin is a core team member for a long time, and initially started out
+contributing to the project by his work on the
+<a href="https://www.openpeerpower.io/integrations/mysensors/">MySensors</a> integration
+back in <a href="https://www.openpeerpower.io/blog/2016/01/17/extended-support-for-diy-solutions/">Open Peer Power 0.11</a>
+(2016)! Most contributors to Open Peer Power, will know Martin for his endless
+patience on the incredible code reviews he does.</p>
+<p>Furthermore, Ashton Lafferty (cogneato) has been working some hours for
+Nabu Casa, to help out with things like support. Most of you probably know him
+from that already, as he is very active in helping out on our
+<a href="/join-chat">Discord server</a>.</p>
+<p>We are happy to announce that Ashton will now join Nabu Casa full-time as well!</p>
+<p>Congratulations Martin and Ashton! 🎉</p>
+<h2>Integration logos &amp; icons</h2>
+<p>We have created a <a href="https://github.com/OpenPeerPower/brands">new repository</a>
+on GitHub containing all the brand icons and logos Open Peer Power is able to
+integrate with. These images are, for example, used in our documentation.</p>
+<p>In 0.108, we made a start on using the content from this repository in the
+Open Peer Power frontend. The device information page got a layout update and
+the integrations page as well.</p>
+<p>These pages will now show the icons and logos matching the integration.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/device-info-page.png' alt='Screenshot of the device information page showing the Hue logo'></a>
+Device information page showing the Hue logo.
+</p>
+<p>Looking for a way to contribute to the Open Peer Power project?
+We still are missing a lot of images; So we are
+<a href="https://github.com/OpenPeerPower/brands/issues">calling out for help</a>!</p>
+<h2>Many integrations now available to set up from the UI</h2>
+<p>It is absolutely amazing to see all the upgraded integrations this release!
+Many contributors have gone out and added support to a lot of integrations
+to allow them to be configured via the Open Peer Power frontend.</p>
+<p>Not all of them were ready in time for this release; nevertheless, the list is
+amazing already:</p>
+<ul>
+<li><a href="/integrations/freebox/">Freebox</a>, done by <a href="https://github.com/Quentame">@Quentame</a></li>
+<li><a href="/integrations/monoprice/">Monoprice</a>, done by <a href="https://github.com/OnFreund">@OnFreund</a></li>
+<li><a href="/integrations/roku/">Roku</a>, done by <a href="https://github.com/ctalkington">@ctalkington</a></li>
+<li><a href="/integrations/doorbird/">Doorbird</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/elkm1/">Elk-M1 Control</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/harmony/">Logitech Harmony</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/myq/">MyQ</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/nut/">Network UPS Tools (NUT)</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/nuheat/">NuHeat</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/rachio/">Rachio</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+</ul>
+<p>Yes, <a href="https://github.com/bdraco">@bdraco</a> has been on fire this release! Amazing job!</p>
+<h2>Lovelace Map history</h2>
+<p>Maybe not very useful during home quarantine, but a very cool feature for when
+we are allowed to get out of our homes again.
+<a href="https://github.com/Hoytron">@Hoytron</a> added the ability to show the history of
+persons or device trackers on the Lovelace map card. You can define how many hours of history
+you want to show and it will draw lines between all the points in that
+time frame.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/map-history.png' alt='Screenshot of the map card with history'></a>
+Screenshot of the map card with history.
+</p>
+<h2>New Lovelace card: Entity</h2>
+<p><a href="https://github.com/zsarnett">@zsarnett</a> added a new Lovelace card, the entity card. This card looks like the sensor card, but allows you to use any entity (not just sensors).</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/entity-card.png' alt='Screenshot of the entity card'></a>
+Screenshot of the entity card.
+</p>
+<h2>Area configuration page</h2>
+<p>We added an overview page for your areas. On this page you can see all the devices in the area, but also the automations, scenes and scripts that affect that area.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/area-config-page.png' alt='Screenshot of the area config page'></a>
+Screenshot of the area config page.
+</p>
+<h2>Horizontal stack now handles different heights better</h2>
+<p>When creating a Horizontal stack, the cards in the stack don’t always line up
+nicely. This has been adjusted. Horizontal stacks now deal better with the
+difference in heights of the cards on the stack.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/horizontal-stack.png' alt='Before and after screenshot for the Horizontal Stack improvements.'></a>
+Before and after screenshot for the Horizontal Stack improvements.
+</p>
+<h2>Other noteworthy changes</h2>
+<ul>
+<li>
+<p><em><strong>“Alexa, show the front door camera.”</strong></em> 😲<br />
+<a href="/integrations/alexa/">Alexa</a> now has support for Cameras, thanks <a href="https://github.com/ochlocracy">@ochlocracy</a>!</p>
+</li>
+<li>
+<p>Selecting your default Lovelace dashboard has been moved to the user
+profile page.</p>
+</li>
+<li>
+<p>A lot of configuration pages are migrated to data tables, this means you can
+now search in your automations, scenes, scripts, users and areas.</p>
+</li>
+<li>
+<p>Lovelace cards in panel views can now also be edited with the UI editor.</p>
+</li>
+<li>
+<p>The graph from the sensor card is now also available as a footer for the
+entities and entity card.</p>
+</li>
+<li>
+<p>The Markdown card has a new <code>user</code> variable that can be used to display the
+currently logged in user.</p>
+</li>
+<li>
+<p>With the ZHA Zigbee integration, Zigbee groups now dynamically create
+entities for lights, switches and fans that are grouped together. This
+enables near-simultaneous control over a large group of lights allowing
+them to turn on or off at the exact same time. Thank you <a href="https://github.com/dmulcahey">@dmulcahey</a>!</p>
+</li>
+<li>
+<p>Cameras added using the <a href="/integrations/onvif/">ONVIF</a> integration now automatically
+use the still images provided by the camera, instead of Open Peer Power
+generating one. Nice work <a href="https://github.com/roleoroleo">@roleoroleo</a>!</p>
+</li>
+<li>
+<p><a href="/integrations/wled/">WLED</a> got quite a few internal upgrades, has added new Wi-Fi
+sensors and now has a service to control the effects of your WLED device.</p>
+</li>
+<li>
+<p>Docker images for Open Peer Power are now using Jemalloc, to reduce memory
+fragmentation and speed up memory allocation. So, less memory and generally
+a faster Open Peer Power.</p>
+</li>
+</ul>
+<h2>New Integrations</h2>
+<ul>
+<li>Add Powerwalls integration (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32851">#32851</a>) (<a href="/integrations/powerwall/">powerwall docs</a>) (new-integration)</li>
+<li>Add Nexia thermostat support (Trane / American Standard) (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32826">#32826</a>) (<a href="/integrations/nexia/">nexia docs</a>) (new-integration)</li>
+<li>Add pvpc electricity prices integration (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/32092">#32092</a>) (<a href="/integrations/pvpc_hourly_pricing/">pvpc_hourly_pricing docs</a>) (new-integration)</li>
+<li>Add support for Bosch BMP280 Sensor (<a href="https://github.com/belidzs">@belidzs</a> - <a href="https://github.com/OpenPeerPower/core/pull/30837">#30837</a>) (<a href="/integrations/bmp280/">bmp280 docs</a>) (new-integration)</li>
+<li>Add Nextcloud Integration (<a href="https://github.com/meichthys">@meichthys</a> - <a href="https://github.com/OpenPeerPower/core/pull/30871">#30871</a>) (<a href="/integrations/nextcloud/">nextcloud docs</a>) (new-integration)</li>
+<li>Add integration for Schluter (<a href="https://github.com/prairieapps">@prairieapps</a> - <a href="https://github.com/OpenPeerPower/core/pull/31088">#31088</a>) (<a href="/integrations/schluter/">schluter docs</a>) (new-integration)</li>
+<li>Add Internet Printing Protocol (IPP) integration (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/32859">#32859</a>) (<a href="/integrations/ipp/">ipp docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Add support for nexia automations (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33049">#33049</a>) (<a href="/integrations/nexia/">nexia docs</a>) (new-platform)</li>
+<li>Add support for occupancy/vacancy groups in Lutron Caseta component (<a href="https://github.com/swails">@swails</a> - <a href="https://github.com/OpenPeerPower/core/pull/33032">#33032</a>) (<a href="/integrations/lutron_caseta/">lutron_caseta docs</a>) (new-platform)</li>
+<li>Fire events for hue remote buttons pressed (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33277">#33277</a>) (<a href="/integrations/hue/">hue docs</a>) (new-platform)</li>
+<li>Add binary sensor for myq gateway connectivity (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33423">#33423</a>) (<a href="/integrations/myq/">myq docs</a>) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>. Make sure to fill in all fields of the issue template.</p>
+:ET

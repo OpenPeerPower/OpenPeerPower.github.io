@@ -1,0 +1,118 @@
+I"�1<p><a href='/integrations/#version/0.105'><img src='/images/blog/2020-02-0.105/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p>In case you have missed it, we decided to change the names we use here at Open Peer Power, you can read all about it in <a href="/blog/2020/01/29/changing-the-open-peer-power-brand/">this blog post</a>.</p>
+<p>Therefore, this is release 0.105 of the Open Peer Power Core!</p>
+<h2>The old “States UI” is now deprecated</h2>
+<p>In June 2018, we released <a href="/blog/2018/06/22/release-72/">Open Peer Power 0.72</a>, which introduced Lovelace. It became our official default user interface in January 2019, with the release of <a href="/blog/2019/01/23/lovelace-released/">Open Peer Power 0.86</a>.</p>
+<p>This means, it is now over a year ago that Lovelace was officially introduced as a replacement for the states UI, so it is time to say goodbye to the old states UI. This release deprecates it and in version 0.107, the states UI will be removed from Open Peer Power completely.</p>
+<p>If you are not using Lovelace yet, we advise you to switch to it today. Lovelace is, by default, almost the same as old states UI with the bonus of a lot of flexibility, if you want it.</p>
+<p>In addition to this, all configuration options for the States UI are deprecated as well. Please be sure to read the <a href="#breaking-changes">breaking changes</a> to see if you have options that need to be removed from your configuration.</p>
+<h2>Safe mode</h2>
+<p>We are humans, and we do make typos. However, if we make a typo in our configuration, we might end up with Open Peer Power being completely unreachable. That really is not helpful. You lose access to Open Peer Power and have to do a deep dive via other methods to find out: Why did this happen?</p>
+<p>This release introduces a “Safe mode” for Open Peer Power. If during startup, Open Peer Power has problems reading your configuration (for whatever reason), it will still continue to start using bits and pieces from the configuration of the last time it did start.</p>
+<p>When this happens, Open Peer Power will start in “Safe mode”. In this mode, nothing is loaded, but it does give you access to the Open Peer Power frontend, settings and add-ons (for example, the VSCode or Configurator add-on). This gives you the possibility to correct the issue
+and restart Open Peer Power to re-try.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/safe-mode.png' alt='Screenshot of Open Peer Power started in safe mode'></a>
+Screenshot of Open Peer Power started in safe mode.
+</p>
+<p>Please note, that this feature isn’t perfect yet, and only works if Open Peer Power was able to start successfully, after upgrading to this release, at least once.</p>
+<p>We believe this feature makes Open Peer Power more robust, easier to use and more forgiving, even if you made a mistake.</p>
+<h2>Revamped Supervisor panel</h2>
+<p>Remember we used to have a Hass.io panel? Well, with the <a href="/blog/2020/01/29/changing-the-open-peer-power-brand/">new naming</a> for Open Peer Power, it has been renamed to the Supervisor panel.</p>
+<p>So <a href="https://github.com/ludeeus">@ludeeus</a> has been busy! He rewrote the entire Supervisor panel to match our current frontend technologies and added some really slick new visual elements to it.</p>
+<p>Thanks, <a href="https://github.com/ludeeus">@ludeeus</a>, it looks incredible!</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/supervisor.png' alt='Screenshot of the revamped Supervisor panel'></a>
+Screenshot of the revamped Supervisor panel.
+</p>
+<p>The new icons on the add-ons really make the add-on dashboard &amp; store stand out. Also, new status indicators on the add-on cards make it easy to spot add-ons that need to be upgraded, or in case of visiting the add-on store, are installed already.</p>
+<p>Please note, you need to be running Open Peer Power Core 0.105 to see the new icons.</p>
+<h2>Configuration panel changes</h2>
+<p>In this release, we started the overhaul of the configuration panel. We have accumulated a lot of functionality in the configuration section in the last releases; now, it is time to bring it all together.</p>
+<p>In upcoming releases, we will make changes to make things easier to find and connect the different elements with each other, making it easier to navigate around. For now, we implemented configuration sections, a new tabbed UI, as well as some visual tweaks.</p>
+<p>Also updated, the device page to show the automations, scripts, and scenes a device is used in and added the ability to create new ones with the device easily.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/device-info-page.png' alt='Screenshot of the new device info page'></a>
+Screenshot of the new device info page.
+</p>
+<p>In the more info dialog of entities, we changed the settings button to open the entity settings dialog, and added a related tab as well!
+This allows you to can see what device, integration, area, scenes, scripts, automations, entities, and groups belong to that entity.</p>
+<p>For scenes, scripts and automations that are created in the UI, an edit button is added, right in the more info dialog so you can easily edit it without searching for it.</p>
+<h2>Header &amp; Footer for the entities card</h2>
+<p>Two new types are added to the entities card, a header and a footer. At this moment, we have two options for these, an image and buttons.</p>
+<p>It allows you to create some very cool looking cards, but also provides you the option to put buttons in the bottom of the card. Very useful for buttons that activate scenes, for example.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/entities-card-header-footer.png' alt='Screenshot of the new header and footer for entities card'></a>
+Screenshot of the new header and footer for entities card.
+</p>
+<h2>Improved zones editor</h2>
+<p>A brand new zone editor! You can no longer find your zones in the integration list, but they moved to their own section in the configuration panel.</p>
+<p>In this new editor, you can move your zones with drag and drop and even change the size of your zones by dragging the circle.</p>
+<p>Adding, and removing zones or changing the name of a zone, is now easier than ever.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/zone-editor.gif' alt='Screenshot of the zones editor'></a>
+Screen recording of the zones editor.
+</p>
+<p>The new editor will only work for zones that are created in the UI, zones that are set up in <code>configuration.yaml</code> are read-only.
+Additionally, if you define zones in your YAML configuration, please be aware that setting a <a href="#breaking-changes"><code>name</code> is now required</a>.</p>
+<p>As an extra added bonus, a new service was added: <code>zone.reload</code>. This service allows you to reload your zone configuration without restarting Open Peer Power.</p>
+<h2>Icons no longer change color based on state</h2>
+<p>A change that is not really apparent at first, but you probably notice it sooner or later.</p>
+<p>The entities card no longer changes the colors of icons based on states, except for lights.</p>
+<p>Reasoning comes from a request, to make icons to become yellow for all types when an entity is active, and not for just a few entity types. However, this would get out of control very quickly, as shown in the screenshot below.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.105/out-of-control.png' alt="Yellow icon color on everything, isn't the solution either"></a>
+Yellow icon color on everything, isn't the solution either.
+</p>
+<p>So, that is why we disabled it, by default, for all entity types, except lights. However, we did add a new option: <code>state_color</code>.
+Using this option, you can decide if you want to old behavior back, add it to more entity types or maybe even disable it for lights too!</p>
+<p>Other cards will now display icons from more domains with an active color.</p>
+<h2>Other Lovelace and frontend improvements</h2>
+<p>There is a lot more done on Lovelace, more than we can mention, some other highlights:</p>
+<ul>
+<li>
+<p>In generated mode, entities that start with the name of the area or group they are in will be shown without the name of the area or group.
+So if you have a light named “Living room lights” that is in the area “Living room” they will be shown as “lights” in a card with the header “Living room”.</p>
+</li>
+<li>
+<p>We no longer show <code>device_tracker</code> entities in generated mode. We advise you to bind one or more device trackers to a person that will be shown in the UI.</p>
+</li>
+<li>
+<p>We added many accessibility features to Lovelace; you can navigate almost everything with the tab key.
+We will continue to work on this so that people with disabilities can also enjoy Open Peer Power.</p>
+</li>
+</ul>
+<p>For a full list of changes, see the <a href="/lovelace/changelog/">Lovelace changelog</a>.</p>
+<p>Even more frontend improvements:</p>
+<ul>
+<li>Logbook panel is a lot quicker</li>
+<li>Maps no longer fit zones, but only entities</li>
+<li>ZHA panel now supports binding devices to groups</li>
+<li>Ability to add new areas on the device page</li>
+<li>Material Design Icons are updated to v4.8.95</li>
+<li>A lot, like a really large amount, of bug fixes!</li>
+</ul>
+<h2>In other news</h2>
+<p>This section is now empty, but don’t be sad! The in “In other news” section now has its own dedicated blog post,
+which we will put out regularly:</p>
+<p>Want to read the first edition? <em><a href="/blog/2020/01/31/community-highlights/">Community Highlights, first edition!</a></em></p>
+<p>Have you seen (or made) something awesome, interesting, unique, amazing, inspirational, unusual or funny, using Open Peer Power? <a href="/suggest-community-highlight">Send us your Community Highlight suggestion</a>, so that we can include it in the next blog post.</p>
+<h2>New Integrations</h2>
+<ul>
+<li>Add search integration (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30511">#30511</a>) (<a href="/integrations/search/">search docs</a>) (new-integration)</li>
+<li>Add Safe Mode (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30723">#30723</a>) (<a href="/integrations/frontend/">frontend docs</a>) (<a href="/integrations/http/">http docs</a>) (<a href="/integrations/safe_mode/">safe_mode docs</a>) (breaking change) (new-integration)</li>
+<li>Add Derivative component (<a href="https://github.com/afaucogney">@afaucogney</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/26456">#26456</a>) (<a href="/integrations/derivative/">derivative docs</a>) (new-integration)</li>
+<li>Add sighthound integration (<a href="https://github.com/robmarkcole">@robmarkcole</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28824">#28824</a>) (<a href="/integrations/sighthound/">sighthound docs</a>) (new-integration)</li>
+<li>Add Garmin Connect integration (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30792">#30792</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>) (new-integration)</li>
+<li>Add Gammu based local SMS notifications (<a href="https://github.com/ocalvo">@ocalvo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31233">#31233</a>) (<a href="/integrations/sms/">sms docs</a>) (new-integration)</li>
+<li>Add OPNSense device tracker (<a href="https://github.com/mtreinish">@mtreinish</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/26834">#26834</a>) (<a href="/integrations/opnsense/">opnsense docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Template alarm panel (<a href="https://github.com/alistairg">@alistairg</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30487">#30487</a>) (<a href="/integrations/template/">template docs</a>) (new-platform)</li>
+<li>ZHA cover device support (<a href="https://github.com/billyburly">@billyburly</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30639">#30639</a>) (<a href="/integrations/zha/">zha docs</a>) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>. Make sure to fill in all fields of the issue template.</p>
+:ET

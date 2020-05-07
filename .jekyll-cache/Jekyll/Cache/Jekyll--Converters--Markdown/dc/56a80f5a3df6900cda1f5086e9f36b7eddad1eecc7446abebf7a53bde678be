@@ -1,0 +1,122 @@
+I"='<p>The <code>http</code> integration serves all files and data required for the Open Peer Power frontend. You only need to add this to your configuration file if you want to change any of the default settings.</p>
+<p>There is currently support for the following device types within Open Peer Power:</p>
+<ul>
+<li><a href="#binary-sensor">Binary Sensor</a></li>
+<li><a href="#sensor">Sensor</a></li>
+</ul>
+<div class='note'>
+<p>The option option <code>server_host</code> should only be used on a Open Peer Power Core installation!</p>
+</div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+http:</code></pre></figure>
+<div class='note'>
+<p>Configuring trusted_networks via the <code>http</code> integration will be deprecated and moved to <code>auth_providers</code> instead. For instructions, see <a href="/docs/authentication/providers/#trusted-networks">trusted networks</a>. In Open Peer Power 0.89.0 and 0.89.1, you need place the trusted network under both <code>http</code> and <code>auth_providers</code> if you still want to use trusted networks features. You can remove it from <code>http</code> section starting from 0.89.2.</p>
+</div>
+<p>The sample below shows a configuration entry with possible values:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+http:
+  server_port: 12345
+  ssl_certificate: /etc/letsencrypt/live/hass.example.com/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/hass.example.com/privkey.pem
+  cors_allowed_origins:
+    - https://google.com
+    - https://www.openpeerpower.io
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 10.0.0.200
+  ip_ban_enabled: true
+  login_attempts_threshold: 5</code></pre></figure>
+<p>The <a href="/blog/2015/12/13/setup-encryption-using-lets-encrypt/">Set up encryption using Let’s Encrypt</a> blog post gives you details about the encryption of your traffic using free certificates from <a href="https://letsencrypt.org/">Let’s Encrypt</a>.</p>
+<p>Or use a self signed certificate following the instructions here <a href="/docs/ecosystem/certificates/tls_self_signed_certificate/">Self-signed certificate for SSL/TLS</a>.</p>
+<h2>HTTP sensors</h2>
+<p>To use those kind of <a href="#sensor">sensors</a> or <a href="#binary-sensor">binary sensors</a> in your installation no configuration in Open Peer Power is needed. All configuration is done on the devices themselves. This means that you must be able to edit the target URL or endpoint and the payload. The entity will be created after the first message has arrived.</p>
+<h2>IP filtering and banning</h2>
+<p>If you want to apply additional IP filtering, and automatically ban brute force attempts, set <code>ip_ban_enabled</code> to <code>true</code> and the maximum number of attempts. After the first ban, an <code>ip_bans.yaml</code> file will be created in the root configuration folder. It will have the banned IP address and time in UTC when it was added:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">127.0.0.1:
+  banned_at: &#39;2016-11-16T19:20:03&#39;</code></pre></figure>
+<p>After a ban is added a Persistent Notification is populated to the Open Peer Power frontend.</p>
+<div class='note warning'>
+<p>Please note, that sources from <code>trusted_networks</code> won’t be banned automatically.</p>
+</div>
+<h2>Hosting files</h2>
+<p>If you want to use Open Peer Power to host or serve static files then create a directory called <code>www</code> under the configuration path (<code>/config</code>). The static files in <code>www/</code> can be accessed by the following URL <code>http://your.domain:8123/local/</code>, for example <code>audio.mp3</code> would be accessed as <code>http://your.domain:8123/local/audio.mp3</code>.</p>
+<div class='note'>
+<p>If you’ve had to create the <code>www/</code> folder for the first time, you’ll need to restart Open Peer Power.</p>
+</div>
+<div class='note warning'>
+<p>Files served from the <code>www</code>/<code>local</code> folder, aren’t protected by the Open Peer Power authentication. Files stored in this folder, if the URL is known, can be accessed by anybody without authentication.</p>
+</div>
+<h2>Binary Sensor</h2>
+<p>The HTTP binary sensor is dynamically created with the first request that is made to its URL. You don’t have to define it in the configuration first.</p>
+<p>The sensor will then exist as long as Open Peer Power is running. After a restart of Open Peer Power the sensor will be gone until it is triggered again.</p>
+<p>The URL for a binary sensor looks like the example below:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">http://IP_ADDRESS:8123/api/states/binary_sensor.DEVICE_NAME</code></pre></figure>
+<div class='note'>
+You should choose a unique device name (DEVICE_NAME) to avoid clashes with other devices.
+</div>
+<p>The JSON payload must contain the new state and can have a friendly name. The friendly name is used in the frontend to name the sensor.</p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json">{&quot;state&quot;: &quot;on&quot;, &quot;attributes&quot;: {&quot;friendly_name&quot;: &quot;Radio&quot;}}</code></pre></figure>
+<p>For a quick test <code>curl</code> can be useful to “simulate” a device.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ curl -X POST -H &quot;Authorization: Bearer LONG_LIVED_ACCESS_TOKEN&quot; \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{&quot;state&quot;: &quot;off&quot;, &quot;attributes&quot;: {&quot;friendly_name&quot;: &quot;Radio&quot;}}&#39; \
+    http://localhost:8123/api/states/binary_sensor.radio</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ curl -X GET -H &quot;Authorization: Bearer LONG_LIVED_ACCESS_TOKEN&quot; \
+       -H &quot;Content-Type: application/json&quot; \
+       http://localhost:8123/api/states/binary_sensor.radio
+{
+    &quot;attributes&quot;: {
+        &quot;friendly_name&quot;: &quot;Radio&quot;
+    },
+    &quot;entity_id&quot;: &quot;binary_sensor.radio&quot;,
+    &quot;last_changed&quot;: &quot;16:45:51 05-02-2016&quot;,
+    &quot;last_updated&quot;: &quot;16:45:51 05-02-2016&quot;,
+    &quot;state&quot;: &quot;off&quot;
+}</code></pre></figure>
+<h3>Examples</h3>
+<p>In this section you’ll find some real-life examples of how to use this sensor, besides <code>curl</code>, which was shown earlier.</p>
+<h4>Using Python request module</h4>
+<figure class="highlight"><pre><code class="language-python" data-lang="python">response = requests.post(
+    &quot;http://localhost:8123/api/states/binary_sensor.radio&quot;,
+    headers={
+        &quot;Authorization&quot;: &quot;Bearer LONG_LIVED_ACCESS_TOKEN&quot;,
+        &quot;content-type&quot;: &quot;application/json&quot;,
+    },
+    data=json.dumps({&quot;state&quot;: &quot;on&quot;, &quot;attributes&quot;: {&quot;friendly_name&quot;: &quot;Radio&quot;}}),
+)
+print(response.text)</code></pre></figure>
+<h4>Using <code>httpie</code></h4>
+<p><a href="https://github.com/jkbrzt/httpie"><code>httpie</code></a> is a user-friendly CLI HTTP client.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ http -v POST http://localhost:8123/api/states/binary_sensor.radio \
+      &#39;Authorization:Bearer LONG_LIVED_ACCESS_TOKEN&#39; content-type:application/json state=off \
+      attributes:=&#39;{&quot;friendly_name&quot;: &quot;Radio&quot;}&#39;</code></pre></figure>
+<h2>Sensor</h2>
+<p>The HTTP sensor is dynamically created with the first request that is made to its URL. You don’t have to define it in the configuration first.</p>
+<p>The sensor will then exist as long as Open Peer Power is running. After a restart of Open Peer Power the sensor will be gone until it is triggered again.</p>
+<p>The URL for a sensor looks like the example below:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">http://IP_ADDRESS:8123/api/states/sensor.DEVICE_NAME</code></pre></figure>
+<div class='note'>
+You should choose a unique device name (DEVICE_NAME) to avoid clashes with other devices.
+</div>
+<p>The JSON payload must contain the new state and should include the unit of measurement and a friendly name. The friendly name is used in the frontend to name the sensor.</p>
+<figure class="highlight"><pre><code class="language-json" data-lang="json">{&quot;state&quot;: &quot;20&quot;, &quot;attributes&quot;: {&quot;unit_of_measurement&quot;: &quot;°C&quot;, &quot;friendly_name&quot;: &quot;Bathroom Temperature&quot;}}</code></pre></figure>
+<p>For a quick test, <code>curl</code> can be useful to “simulate” a device.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ curl -X POST -H &quot;Authorization: Bearer LONG_LIVED_ACCESS_TOKEN&quot; \
+       -H &quot;Content-Type: application/json&quot; \
+       -d &#39;{&quot;state&quot;: &quot;20&quot;, &quot;attributes&quot;: {&quot;unit_of_measurement&quot;: &quot;°C&quot;, &quot;friendly_name&quot;: &quot;Bathroom Temp&quot;}}&#39; \
+       http://localhost:8123/api/states/sensor.bathroom_temperature</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ curl -X GET -H &quot;Authorization: Bearer LONG_LIVED_ACCESS_TOKEN&quot; \
+       -H &quot;Content-Type: application/json&quot; \
+       http://localhost:8123/api/states/sensor.bathroom_temperature
+{
+    &quot;attributes&quot;: {
+        &quot;friendly_name&quot;: &quot;Bathroom Temp&quot;,
+        &quot;unit_of_measurement&quot;: &quot;\u00b0C&quot;
+    },
+    &quot;entity_id&quot;: &quot;sensor.bathroom_temperature&quot;,
+    &quot;last_changed&quot;: &quot;09:46:17 06-02-2016&quot;,
+    &quot;last_updated&quot;: &quot;09:48:46 06-02-2016&quot;,
+    &quot;state&quot;: &quot;20&quot;
+}</code></pre></figure>
+<p>For more examples please visit the <a href="#examples">HTTP Binary Sensor</a> page.</p>
+:ET

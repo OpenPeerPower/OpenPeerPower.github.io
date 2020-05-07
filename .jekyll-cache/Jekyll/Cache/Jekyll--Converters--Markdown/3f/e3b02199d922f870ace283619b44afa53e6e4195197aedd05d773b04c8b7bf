@@ -1,0 +1,198 @@
+I"3<p><a href="https://www.freenas.org">FreeNAS</a> is a free and open-source network-attached storage (NAS) software based on FreeBSD and the OpenZFS file system. It is licensed under the terms of the BSD License and runs on commodity x86-64 hardware.</p>
+<p>This has been tested on FreeNAS 11.2 and should also work on FreeBSD 11.x as well. These instructions assume you already have a running and accessible jail. For more information on creating a jail read the official FreeNAS User Guide regarding <a href="https://www.ixsystems.com/documentation/freenas/11.2/jails.html">Jails</a>. Once you have the jail available, follow the steps below. Directories used follow standard BSD conventions but can be adjusted as you wish.</p>
+<p>Enter the Open Peer Power jail. If you don’t know which name you have given the jail, you can use the <code>iocage list</code> command to check.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"># If the jail is called &#39;OpenPeerPower&#39;
+iocage exec OpenPeerPower</code></pre></figure>
+<p>Install the suggested packages:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pkg update
+pkg upgrade
+pkg install -y autoconf bash ca_root_nss gmake pkgconf python37 py37-sqlite3</code></pre></figure>
+<p>Create the user and group that Open Peer Power will run as. The user/group ID of <code>8123</code> can be replaced if this is already in use in your environment.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pw groupadd -n openpeerpower -g 8123
+echo &#39;openpeerpower:8123:8123::::::/usr/local/bin/bash:&#39; | adduser -f -</code></pre></figure>
+<p>Create the installation directory:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir -p /usr/local/share/openpeerpower
+chown -R openpeerpower:openpeerpower /usr/local/share/openpeerpower</code></pre></figure>
+<p>Create the virtualenv and install Open Peer Power itself:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">su openpeerpower
+cd /usr/local/share/openpeerpower
+python3.7 -m venv .
+source ./bin/activate
+pip3 install --upgrade pip
+pip3 install openpeerpower</code></pre></figure>
+<p>While still in the <code>venv</code>, start Open Peer Power to populate the configuration directory.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">hass --open-ui</code></pre></figure>
+<p>Wait until you see:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">(MainThread) [openpeerpower.core] Starting Open Peer Power</code></pre></figure>
+<p>Then escape and exit the <code>venv</code>.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">deactivate
+exit</code></pre></figure>
+<p>Create the directory and the <code>rc.d</code> script for the system-level service that enables Open Peer Power to start when the jail starts.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir /usr/local/etc/rc.d/</code></pre></figure>
+<p>Then create a file at <code>/usr/local/etc/rc.d/openpeerpower</code> and insert the content below:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vi /usr/local/etc/rc.d/openpeerpower</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">#!/bin/sh
+#
+# Based upon work by tprelog at https://github.com/tprelog/iocage-openpeerpower/blob/11.3-RELEASE/overlay/usr/local/etc/rc.d/openpeerpower
+#
+# PROVIDE: openpeerpower
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# openpeerpower_user: The user account used to run the openpeerpower daemon.
+#   This is optional, however do not specifically set this to an
+#   empty string as this will cause the daemon to run as root.
+#   Default: openpeerpower
+# openpeerpower_group: The group account used to run the openpeerpower daemon.
+#   This is optional, however do not specifically set this to an
+#   empty string as this will cause the daemon to run with group wheel.
+#   Default: openpeerpower
+#
+# openpeerpower_venv: Directory where openpeerpower virtualenv is installed.
+#       Default:  &quot;/usr/local/share/openpeerpower&quot;
+#       Change:   `sysrc openpeerpower_venv=&quot;/srv/openpeerpower&quot;`
+#       UnChange: `sysrc -x openpeerpower_venv`
+#
+# openpeerpower_config_dir: Directory where openpeerpower config is located.
+#       Default:  &quot;/home/openpeerpower/.openpeerpower&quot;
+#       Change:   `sysrc openpeerpower_config_dir=&quot;/home/hass/openpeerpower&quot;`
+#       UnChange: `sysrc -x openpeerpower_config_dir`
+<h1>—————————————————––</h1>
+<h1>Copy this file to '/usr/local/etc/rc.d/openpeerpower'</h1>
+<h1><code>chmod +x /usr/local/etc/rc.d/openpeerpower</code></h1>
+<h1><code>sysrc openpeerpower_enable=yes</code></h1>
+<h1><code>service openpeerpower start</code></h1>
+<h1>—————————————————––</h1>
+<p>. /etc/rc.subr
+name=openpeerpower
+rcvar=${name}_enable</p>
+<p>pidfile_child=&quot;/var/run/${name}.pid&quot;
+pidfile=&quot;/var/run/${name}_daemon.pid&quot;
+logfile=&quot;/var/log/${name}.log&quot;</p>
+<p>load_rc_config ${name}
+: ${openpeerpower_enable:=&quot;NO&quot;}
+: ${openpeerpower_user:=&quot;openpeerpower&quot;}
+: ${openpeerpower_group:=&quot;openpeerpower&quot;}
+: ${openpeerpower_config_dir:=&quot;/home/openpeerpower/.openpeerpower&quot;}
+: ${openpeerpower_venv:=&quot;/usr/local/share/openpeerpower&quot;}</p>
+<p>command=&quot;/usr/sbin/daemon&quot;
+extra_commands=&quot;check_config restart test upgrade&quot;</p>
+<p>start_precmd=${name}_precmd
+openpeerpower_precmd() {
+rc_flags=&quot;-f -o ${logfile} -P ${pidfile} -p ${pidfile_child} ${openpeerpower_venv}/bin/hass –config ${openpeerpower_config_dir} ${rc_flags}&quot;
+[ ! -e &quot;${pidfile_child}&quot; ] &amp;&amp; install -g ${openpeerpower_group} -o ${openpeerpower_user} – /dev/null &quot;${pidfile_child}&quot;
+[ ! -e &quot;${pidfile}&quot; ] &amp;&amp; install -g ${openpeerpower_group} -o ${openpeerpower_user} – /dev/null &quot;${pidfile}&quot;
+[ -e &quot;${logfile}&quot; ] &amp;&amp; rm -f – &quot;${logfile}&quot;
+install -g ${openpeerpower_group} -o ${openpeerpower_user} – /dev/null &quot;${logfile}&quot;
+if [ ! -d &quot;${openpeerpower_config_dir}&quot; ]; then
+install -d -g ${openpeerpower_group} -o ${openpeerpower_user} -m 775 – &quot;${openpeerpower_config_dir}&quot;
+fi
+}</p>
+<p>stop_postcmd=${name}_postcmd
+openpeerpower_postcmd() {
+rm -f – &quot;${pidfile}&quot;
+rm -f – &quot;${pidfile_child}&quot;
+}</p>
+<p>upgrade_cmd=&quot;${name}_upgrade&quot;
+openpeerpower_upgrade() {
+service ${name} stop
+su ${openpeerpower_user} -c '
+source ${@}/bin/activate || exit 1
+pip3 install –upgrade openpeerpower
+deactivate
+' _ ${openpeerpower_venv} || exit 1
+[ $? == 0 ] &amp;&amp; openpeerpower_check_config &amp;&amp; service ${name} start
+}</p>
+<p>check_config_cmd=&quot;${name}_check_config&quot;
+openpeerpower_check_config() {
+[ ! -e &quot;${openpeerpower_config_dir}/configuration.yaml&quot; ] &amp;&amp; return 0
+echo &quot;Performing check on Open Peer Power configuration:&quot;
+#eval &quot;${openpeerpower_venv}/bin/hass –config ${openpeerpower_config_dir} –script check_config&quot;
+su ${openpeerpower_user} -c '
+source ${1}/bin/activate || exit 2
+hass –config ${2} –script check_config || exit 3
+deactivate
+' _ ${openpeerpower_venv} ${openpeerpower_config_dir}
+}</p>
+<p>restart_cmd=&quot;${name}_restart&quot;
+openpeerpower_restart() {
+openpeerpower_check_config || exit 1
+echo &quot;Restarting Open Peer Power&quot;
+service ${name} stop
+service ${name} start
+}</p>
+<p>test_cmd=&quot;${name}_test&quot;
+openpeerpower_test() {
+echo -e &quot;\nTesting virtualenv…\n&quot;
+[ ! -d &quot;${openpeerpower_venv}&quot; ] &amp;&amp; echo -e &quot; NO DIRECTORY: ${openpeerpower_venv}\n&quot; &amp;&amp; exit
+[ ! -f &quot;${openpeerpower_venv}/bin/activate&quot; ] &amp;&amp; echo -e &quot; NO FILE: ${openpeerpower_venv}/bin/activate\n&quot; &amp;&amp; exit</p>
+<pre><code>## switch users / activate virtualenv / get version
+su &amp;quot;${openpeerpower_user}&amp;quot; -c &amp;#39;
+  source ${1}/bin/activate || exit 2
+  echo &amp;quot; $(python --version)&amp;quot; || exit 3
+  echo &amp;quot; Open Peer Power $(pip3 show openpeerpower | grep Version | cut -d&amp;quot; &amp;quot; -f2)&amp;quot; || exit 4
+  deactivate
+&amp;#39; _ ${openpeerpower_venv}
+
+[ $? != 0 ] &amp;amp;&amp;amp; echo &amp;quot;exit $?&amp;quot;
+</code></pre>
+<p>}</p>
+<p>load_rc_config ${name}
+run_rc_command &quot;$1&quot;</code></pre></figure></p>
+<p>Make the <code>rc.d</code> script executable:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">chmod +x /usr/local/etc/rc.d/openpeerpower</code></pre></figure>
+<p>Configure the service to start on boot and start the Open Peer Power service:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sysrc openpeerpower_enable=&quot;YES&quot;
+service openpeerpower start</code></pre></figure>
+<p>You can also restart the jail to ensure that Open Peer Power starts on boot.</p>
+<div class='note'>
+<p>USB Z-Wave sticks may give <code>dmesg</code> warnings similar to “data interface 1, has no CM over data, has no break”. This doesn’t impact the function of the Z-Wave stick in Open Peer Power. Just make sure the proper <code>/dev/cu*</code> is used in the Open Peer Power <code>configuration.yaml</code> file.</p>
+</div>
+<h2>Adding support for Z-Wave stick</h2>
+<p>The following two packages need to be installed in the jail</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pkg install gmake
+pkg install libudev-devd</code></pre></figure>
+<p>Then you can install the Z-Wave package</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">su openpeerpower
+cd /usr/local/share/openpeerpower
+source ./bin/activate.csh
+pip3 install openpeerpower-pyozw==0.1.7
+deactivate
+exit</code></pre></figure>
+<p>Stop the Open Peer Power Jail</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo iocage stop OpenPeerPower</code></pre></figure>
+<p>Edit the devfs rules on the FreenNAS Host</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vi /etc/devfs.rules</code></pre></figure>
+<p>Add the following lines</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">[devfsrules_jail_allow_usb=7]
+add path &#39;cu\*&#39; mode 0660 group 8123 unhide</code></pre></figure>
+<p>Reload devfs</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo service devfs restart</code></pre></figure>
+<p>Edit the ruleset used by the jail in the FreeNAS GUI by going to Jails -&gt; <code>hass</code> -&gt; Edit -&gt;  Jail Properties -&gt;  devfs_ruleset
+Set it to 7</p>
+<p>Start the Open Peer Power jail</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo iocage start OpenPeerPower</code></pre></figure>
+<p>Connect to the Open Peer Power jail and verify that you see the modem devices</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo iocage console OpenPeerPower</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ls /dev/cu*</code></pre></figure>
+<p>This should output the following</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/dev/cuau0      /dev/cuaU0</code></pre></figure>
+<p>Add the Z-Wave configuration to your <code>configuration.yaml</code> and restart Open Peer Power</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vi /home/openpeerpower/.openpeerpower/configuration.yaml</code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">zwave:
+  usb_path: /dev/cuaU0
+  polling_interval: 10000</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">service openpeerpower restart</code></pre></figure>
+<h2>Updating</h2>
+<p>Before updating, read the changelog to see what has changed and how it affects your Open Peer Power instance. Enter the jail using <code>iocage exec &lt;jailname&gt;</code>. Stop the Open Peer Power service:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">service openpeerpower stop</code></pre></figure>
+<p>Then, enter the <code>venv</code>:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">su openpeerpower
+cd /usr/local/share/openpeerpower
+source ./bin/activate</code></pre></figure>
+<p>Upgrade Open Peer Power:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip3 install openpeerpower --upgrade</code></pre></figure>
+<p>Log out of the <code>openpeerpower</code> user and start Open Peer Power:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">exit
+service openpeerpower start</code></pre></figure>
+:ET

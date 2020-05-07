@@ -1,0 +1,115 @@
+I"�$<p><a href='/integrations/#version/0.107'><img src='/images/blog/2020-03-0.107/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p><a href="https://en.wikipedia.org/wiki/George_Will">George F. Will</a> once said:
+<em>“The future has a way of arriving unannounced.”</em></p>
+<p>Well, George, we don’t agree:
+Announcing the release of Open Peer Power Core 0.107!</p>
+<p>This release brings a crazy amount of awesome new features and beautiful
+improvements to the frontend.</p>
+<h2>Bye old State UI</h2>
+<p>As announced with <a href="/blog/2020/02/05/release-105">0.105</a>, the old States UI is
+now removed from Open Peer Power. If you are using Open Peer Power for a year or
+less, you might not have an idea what it is, since the “new” Lovelace UI has
+been the default. It is the UI we used before Lovelace.</p>
+<p>If you are up for a flashback, maybe it is worth reading
+<a href="/blog/2015/08/31/version-7-revamped-ui-and-improved-distribution/">the release notes for Open Peer Power 0.7</a>
+were the revamped (and now removed) States UI was originally announced.
+Now exactly 100 releases later, it is time to say goodbye to the states UI that
+has been with us for a long, long time…</p>
+<p>As we announced the deprecation of the old States UI in
+<a href="/blog/2020/02/05/release-105">0.105</a>, not everybody seemed to be that happy
+about it. So we surveyed to see what one would miss from States UI and
+learned that it is mostly used as an overview of all entities (besides having
+a nice layout that can be made in Lovelace).</p>
+<p>In this release, we bring you a Lovelace solution for that and added a bit more…</p>
+<h2>Hello multiple Lovelace dashboards</h2>
+<p>You are now able to create multiple Lovelace configurations, called:
+Lovelace Dashboards!</p>
+<p>You can have a dashboard with your main layout, one that is auto-generated
+(like the old State UI), one for experimenting, one for admins,
+one for your wall-mounted tablet, etc.</p>
+<p>And, yes, you can even mix and match multiple YAML mode managed
+Lovelace Dashboard, UI managed Lovelace Dashboards and auto-generated
+Lovelace Dashboards at the same time.</p>
+<p class='img'>
+<img src='/images/blog/2020-03-0.107/lovelace-config-panel.png' alt='Screenshot of the new Lovelace configuration panel'></a>
+Screenshot of the new Lovelace configuration panel.
+</p>
+<p>Each dashboard can be added to the menu sidebar as well, with a configurable
+title and icon. Furthermore, it is possible to limit access to a dashboard to
+admin users only.</p>
+<p>An unlimited amount of dashboards can be created right from the UI in the new
+Lovelace configuration panel, and YAML dashboards can be set up in
+<code>configuration.yaml</code>, see <a href="/lovelace/yaml-mode/">the documentation</a>.</p>
+<p>This awesome new feature comes with a deprecation if you use Lovelace in
+manual YAML mode: You need to move the <code>resources</code> section from
+your <code>ui-lovelace.yaml</code> to the <code>lovelace:</code> section in <code>configuration.yaml</code>.
+It is not a breaking change yet; we still load them from the previous location
+if we didn’t find anything in the <code>lovelace:</code> section, however, this fallback
+is being removed in a future version.</p>
+<p>If you manage your Lovelace via the frontend, we automatically migrate your
+resources. Please note that resources are not in the raw Lovelace
+configuration editor anymore, but in the Lovelace configuration panel.</p>
+<h2>New media player card</h2>
+<p><a href="https://github.com/zsarnett">@zsarnett</a> is back on the frontend team and is
+not planning on letting that happen unnoticed. He did a ton of work on the
+frontend and created a beautiful new media control card for Lovelace.</p>
+<p>It is inspired by the media control widget in Android and changes color based
+on the artwork of the played media. We think it looks absolutely gorgeous!</p>
+<p class='img'>
+<img src='/images/blog/2020-03-0.107/new-media-control-card.png' alt='Screenshot of the new Media Control Card'></a>
+Screenshot of the new Media Control Card.
+</p>
+<h2>Helpers Configuration Panel</h2>
+<p>When you create advanced automations, you often need a helper. Like a toggle,
+to save a state, or another input field. Until now, you always had to define
+them in YAML and are known as the <code>input_*</code> fields/integrations.</p>
+<p>We now have a UI to add and manage these Helper elements; this allows non-expert
+users, or anybody that prefers the frontend to manage their system,
+to also access this functionality.</p>
+<p class='img'>
+<img src='/images/blog/2020-03-0.107/helper-config-dialog.png' alt='Screenshot of a helper configuration dialog'></a>
+Screenshot of a helper configuration dialog.
+</p>
+<p>Thanks <a href="https://github.com/Adminiuga">@Adminiuga</a>, for implementing the backend features that made this
+frontend change possible! Not only that, if you prefer YAML, these changes
+made by <a href="https://github.com/Adminiuga">@Adminiuga</a> also made it possible to reload the <code>input_*</code> YAML
+configuration without restarting Open Peer Power.</p>
+<h2>Improvements to Lovelace editing experience</h2>
+<p><a href="https://github.com/zsarnett">@zsarnett</a> changed the looks of our card picker, instead of a simple button to
+pick a card, you now get a live preview with your own entities.
+<a href="https://github.com/thomasloven">@thomasloven</a> added a UI editor for the
+horizontal and vertical stack cards and the conditional card.</p>
+<p class='img'>
+<img src='/images/blog/2020-03-0.107/lovelace-edit-improvements.gif' alt='Screen recording of the new card picker and stack editor'></a>
+Screen recording of the new card picker and stack editor.
+</p>
+<h2>Other noteworthy changes</h2>
+<ul>
+<li><a href="https://github.com/Misiu">@Misiu</a> added a UI to set the visibility per user for views.</li>
+<li>Data tables, for example, the Entities configuration panel, are now lightning fast! Even on mobile 🚀.</li>
+<li>The logbook had some speed improvements, thanks <a href="https://github.com/KapJI">@KapJI</a>!</li>
+<li><a href="https://github.com/bdraco">@bdraco</a> just went all-in on the August integration, making it a top-notch integration! Awesome job there!</li>
+<li>Initial support for HomeKit enabled televisions and support for occupancy sensors was added by <a href="https://github.com/Jc2k">@Jc2k</a>.</li>
+<li><a href="https://github.com/tulindo">@tulindo</a> added support for newer SamsungTV models.</li>
+<li>Alexa now supports starting and cancelling timers, thanks to <a href="https://github.com/Tho85">@Tho85</a>.</li>
+</ul>
+<h2>New Integrations</h2>
+<ul>
+<li>Add platform Ezviz (<a href="https://github.com/BaQs">@BaQs</a> - <a href="https://github.com/OpenPeerPower/core/pull/30378">#30378</a>) (<a href="/integrations/ezviz/">ezviz docs</a>) (new-integration)</li>
+<li>Add Avri waste collection sensor (<a href="https://github.com/timvancann">@timvancann</a> - <a href="https://github.com/OpenPeerPower/core/pull/31134">#31134</a>) (<a href="/integrations/avri/">avri docs</a>) (new-integration)</li>
+<li>Add Tankerkoenig integration (<a href="https://github.com/guillempages">@guillempages</a> - <a href="https://github.com/OpenPeerPower/core/pull/28661">#28661</a>) (<a href="/integrations/tankerkoenig/">tankerkoenig docs</a>) (new-integration)</li>
+<li>Add QVR Pro integration (<a href="https://github.com/oblogic7">@oblogic7</a> - <a href="https://github.com/OpenPeerPower/core/pull/31173">#31173</a>) (<a href="/integrations/qvr_pro/">qvr_pro docs</a>) (new-integration)</li>
+<li>Add edl21 component for SML-based smart meters (<a href="https://github.com/mtdcr">@mtdcr</a> - <a href="https://github.com/OpenPeerPower/core/pull/27962">#27962</a>) (<a href="/integrations/edl21/">edl21 docs</a>) (new-integration)</li>
+<li>Add IamMeter integration (<a href="https://github.com/lewei50">@lewei50</a> - <a href="https://github.com/OpenPeerPower/core/pull/30465">#30465</a>) (<a href="/integrations/iammeter/">iammeter docs</a>) (new-integration)</li>
+<li>Add griddy integration (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32591">#32591</a>) (<a href="/integrations/griddy/">griddy docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Add Config flow to august (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32133">#32133</a>) (<a href="/integrations/august/">august docs</a>) (new-platform)</li>
+<li>Add Dynalite switch platform (<a href="https://github.com/ziv1234">@ziv1234</a> - <a href="https://github.com/OpenPeerPower/core/pull/32389">#32389</a>) (<a href="/integrations/dynalite/">dynalite docs</a>) (new-platform)</li>
+<li>Add support for MELCloud Air-to-Water devices (<a href="https://github.com/vilppuvuorinen">@vilppuvuorinen</a> - <a href="https://github.com/OpenPeerPower/core/pull/32078">#32078</a>) (<a href="/integrations/melcloud/">melcloud docs</a>) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>. Make sure to fill in all fields of the issue template.</p>
+:ET

@@ -1,0 +1,79 @@
+I"�<p>Just some sample automation rules to get you started.</p>
+<p>{% highlight yaml %}</p>
+<h1>Example of entry in configuration.yaml</h1>
+<p>automation:</p>
+<h1>Turns on lights 1 hour before sunset if people are home</h1>
+<h1>and if people get home between 16:00-23:00</h1>
+<ul>
+<li>alias: ‘Rule 1 Light on in the evening’
+trigger:
+<h1>Prefix the first line of each trigger configuration</h1>
+<h1>with a ‘-’ to enter multiple</h1>
+<ul>
+<li>platform: sun
+event: sunset
+offset: ‘-01:00:00’</li>
+<li>platform: state
+entity_id: all
+to: ‘home’
+condition:</li>
+</ul>
+<h1>Prefix the first line of each condition configuration</h1>
+<h1>with a ‘-’’ to enter multiple</h1>
+<ul>
+<li>condition: state
+entity_id: all
+state: ‘home’</li>
+<li>condition: time
+after: ‘16:00:00’
+before: ‘23:00:00’
+action:</li>
+</ul>
+<h1>With a single service call, we don’t need a ‘-’ before service - though you can if you want to</h1>
+service: openpeerpower.turn_on
+entity_id: group.living_room</li>
+</ul>
+<h1>Turn off lights when everybody leaves the house</h1>
+<ul>
+<li>alias: ‘Rule 2 - Away Mode’
+trigger:
+platform: state
+entity_id: all
+to: ‘not_home’
+action:
+service: light.turn_off
+entity_id: all</li>
+</ul>
+<h1>Notify when Paulus leaves the house in the evening</h1>
+<ul>
+<li>alias: ‘Leave Home notification’
+trigger:
+platform: zone
+event: leave
+zone: zone.home
+entity_id: device_tracker.paulus
+condition:
+condition: time
+after: ‘20:00’
+action:
+service: notify.notify
+data:
+message: ‘Paulus left the house’</li>
+</ul>
+<h1>Send a notification via Pushover with the event of a Xiaomi cube. Custom event from the Xiaomi component.</h1>
+<ul>
+<li>alias: ‘Xiaomi Cube Action’
+initial_state: false
+trigger:
+platform: event
+event_type: cube_action
+event_data:
+entity_id: binary_sensor.cube_158d000103a3de
+action:
+service_template: notify.pushover
+data_template:
+title: “Cube event detected”
+message: “Cube has triggered this event: {{ trigger.event }}”
+{% endhighlight %}</li>
+</ul>
+:ET

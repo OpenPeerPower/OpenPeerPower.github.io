@@ -1,0 +1,153 @@
+I"J<p>The <code>alert</code> integration is designed to notify you when problematic issues arise.
+For example, if the garage door is left open, the <code>alert</code> integration can be used
+remind you of this by sending you repeating notifications at customizable
+intervals. This is also used for low battery sensors,
+water leak sensors, or any condition that may need your attention.</p>
+<p>Alerts will add an entity to the front end only when they are firing.
+This entity allows you to silence an alert until it is resolved.</p>
+<h3>Basic Example</h3>
+<p>The <code>alert</code> integration makes use of any of the <code>notifications</code> integrations. To
+setup the <code>alert</code> integration, first, you must setup a <code>notification</code> integration.
+Then, add the following to your configuration file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+alert:
+  garage_door:
+    name: Garage is open
+    done_message: Garage is closed
+    entity_id: input_boolean.garage_door
+    state: &#39;on&#39;
+    repeat: 30
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - ryans_phone
+      - kristens_phone</code></pre></figure>
+<p>In this example, the garage door status (<code>input_boolean.garage_door</code>) is watched
+and this alert will be triggered when its status is equal to <code>on</code>.
+This indicates that the door has been opened. Because the <code>skip_first</code> option
+was set to <code>true</code>, the first notification will not be delivered immediately.
+However, every 30 minutes, a notification will be delivered until either
+<code>input_boolean.garage_door</code> no longer has a state of <code>on</code> or until the alert is
+acknowledged using the Open Peer Power frontend.</p>
+<p>For notifiers that require other parameters (such as <code>twilio_sms</code> which requires
+you specify a <code>target</code> parameter when sending the notification), you can use the
+<code>group</code> notification to wrap them for an alert.
+Simply create a <code>group</code> notification type with a single notification member
+(such as <code>twilio_sms</code>) specifying the required parameters other than <code>message</code>
+provided by the <code>alert</code> component:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">- platform: group
+  name: john_phone_sms
+  services:
+    - service: twilio_sms
+      data:
+        target: !secret john_phone</code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">alert:
+  freshwater_temp_alert:
+    name: &quot;Warning: I have detected a problem with the freshwater tank temperature&quot;
+    entity_id: binary_sensor.freshwater_temperature_status
+    state: &#39;on&#39;
+    repeat: 5
+    can_acknowledge: true
+    skip_first: false
+    notifiers:
+      - john_phone_sms</code></pre></figure>
+<h3>Complex Alert Criteria</h3>
+<p>By design, the <code>alert</code> integration only handles very simple criteria for firing.
+That is, it only checks if a single entity’s state is equal to a value. At some
+point, it may be desirable to have an alert with a more complex criteria.
+Possibly, when a battery percentage falls below a threshold. Maybe you want to
+disable the alert on certain days. Maybe the alert firing should depend on more
+than one input. For all of these situations, it is best to use the alert in
+conjunction with a <code>Template Binary Sensor</code>. The following example does that.</p>
+<p>{% highlight yaml %}
+binary_sensor:</p>
+<ul>
+<li>platform: template
+sensors:
+motion_battery_low:
+value_template: “{{ state_attr(‘sensor.motion’, ‘battery’) &lt; 15 }}”
+friendly_name: ‘Motion battery is low’</li>
+</ul>
+<p>alert:
+motion_battery:
+name: Motion Battery is Low
+entity_id: binary_sensor.motion_battery_low
+repeat: 30
+notifiers:
+- ryans_phone
+- kristens_phone
+{% endhighlight %}</p>
+<p>This example will begin firing as soon as the entity <code>sensor.motion</code>’s <code>battery</code>
+attribute falls below 15. It will continue to fire until the battery attribute
+raises above 15 or the alert is acknowledged on the frontend.</p>
+<h3>Dynamic Notification Delay Times</h3>
+<p>It may be desirable to have the delays between alert notifications dynamically
+change as the alert continues to fire. This can be done by setting the <code>repeat</code>
+configuration key to a list of numbers rather than a single number.
+Altering the first example would look like the following.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+alert:
+  garage_door:
+    name: Garage is open
+    entity_id: input_boolean.garage_door
+    state: &#39;on&#39;   # Optional, &#39;on&#39; is the default value
+    repeat:
+      - 15
+      - 30
+      - 60
+    can_acknowledge: true  # Optional, default is true
+    skip_first: true  # Optional, false is the default
+    notifiers:
+      - ryans_phone
+      - kristens_phone</code></pre></figure>
+<p>Now the first message will be sent after a 15 minute delay, the second will be
+sent 30 minutes after that, and a 60 minute delay will fall between every
+following notification.
+For example, if the garage door opens at 2:00, a notification will be
+sent at 2:15, 2:45, 3:45, 4:45, etc., continuing every 60 minutes.</p>
+<h3>Message Templates</h3>
+<p>It may be desirable to have the alert notifications include information
+about the state of the entity. <a href="/docs/configuration/templating/">Templates</a>
+can be used in the message or name of the alert to make it more relevant.
+The following will show for a plant how to include the problem <code>attribute</code>
+of the entity.</p>
+<p>{% highlight yaml %}</p>
+<h1>Example configuration.yaml entry</h1>
+<p>alert:
+office_plant:
+name: Plant in office needs help
+entity_id: plant.plant_office
+state: ‘problem’
+repeat: 30
+can_acknowledge: true
+skip_first: true
+message: “Plant {{ states.plant.plant_office }} needs help ({{ state_attr(‘plant.plant_office’, ‘problem’) }})”
+done_message: Plant in office is fine
+notifiers:
+- ryans_phone
+- kristens_phone
+{% endhighlight %}</p>
+<p>The resulting message could be <code>Plant Officeplant needs help (moisture low)</code>.</p>
+<h3>Additional parameters for notifiers</h3>
+<p>Some notifiers support more parameters (e.g., to set text color or action
+buttons). These can be supplied via the <code>data</code> parameter:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+alert:
+  garage_door:
+    name: Garage is open
+    entity_id: input_boolean.garage_door
+    state: &#39;on&#39;   # Optional, &#39;on&#39; is the default value
+    repeat:
+      - 15
+      - 30
+      - 60
+    can_acknowledge: true  # Optional, default is true
+    skip_first: true  # Optional, false is the default
+    data:
+      inline_keyboard:
+        - &#39;Close garage:/close_garage, Acknowledge:/garage_acknowledge&#39;
+    notifiers:
+      - frank_telegram</code></pre></figure>
+<p>This particular example relies on the <code>inline_keyboard</code> functionality of
+Telegram, where the user is presented with buttons to execute certain actions.</p>
+:ET

@@ -1,0 +1,65 @@
+I"~<p>This offers the official frontend to control Open Peer Power. This integration is by default enabled, unless you’ve disabled or removed the <a href="https://www.openpeerpower.io/integrations/default_config/"><code>default_config:</code></a> line from your configuration. If that is the case, the following example shows you how to enable this integration manually:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+frontend:</code></pre></figure>
+<h2>Defining Themes</h2>
+<p>Starting with version 0.49 you can define themes:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+frontend:
+  themes:
+    happy:
+      primary-color: pink
+    sad:
+      primary-color: blue</code></pre></figure>
+<p>The example above defined two themes named <code>happy</code> and <code>sad</code>. For each theme you can set values for CSS variables. For a partial list of variables used by the main frontend see <a href="https://github.com/OpenPeerPower/Open-Peer-Power-polymer/blob/master/src/resources/ha-style.ts">ha-style.ts</a>.</p>
+<p>Check our <a href="https://community.openpeerpower.io/c/projects/themes">community forums</a> to find themes to use.</p>
+<h3>Theme automation</h3>
+<p>There are 2 themes-related services:</p>
+<ul>
+<li><code>frontend.reload_themes</code>: reloads theme configuration from your <code>configuration.yaml</code> file.</li>
+<li><code>frontend.set_theme(name)</code>: sets backend-preferred theme name.</li>
+</ul>
+<p>Example in automation:</p>
+<p>Set a theme at the startup of Open Peer Power:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  - alias: &#39;Set theme at startup&#39;
+    trigger:
+     - platform: openpeerpower
+       event: start
+    action:
+      service: frontend.set_theme
+      data:
+        name: happy</code></pre></figure>
+<p>To enable “night mode”:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  - alias: &#39;Set dark theme for the night&#39;
+    trigger:
+      - platform: time
+        at: &#39;21:00:00&#39;
+    action:
+      - service: frontend.set_theme
+        data:
+          name: darkred</code></pre></figure>
+<h3>Manual Theme Selection</h3>
+<p>When themes are enabled in the <code>configuration.yaml</code> file, a new option will show up in the user profile page (accessed by clicking your user account initials at the bottom of the sidebar). You can then choose any installed theme from the dropdown list and it will be applied immediately.</p>
+<p class='img'>
+  <img src='/images/frontend/user-theme.png' />
+  Set a theme
+</p>
+<h2>Loading extra HTML</h2>
+<p>Starting with version 0.53 you can specify extra HTML files to load, and starting with version 0.95 extra JS modules.</p>
+<p>Example:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+frontend:
+  extra_html_url:
+    - https://example.com/file1.html
+    - /local/file2.html
+  extra_module_url:
+    - /local/my_module.js</code></pre></figure>
+<p>HTML will be loaded via <code>&lt;link rel='import' href='' async&gt;</code> on any page (states and panels), and modules via <code>&lt;script type='module' scr=''&gt;&lt;/script&gt;</code>.</p>
+<h3>Manual Language Selection</h3>
+<p>The browser language is automatically detected. To use a different language, go to the user profile page (accessed by clicking your user account initials at the bottom of the sidebar) and select one. It will be applied immediately.</p>
+<p class='img'>
+  <img src='/images/frontend/user-language.png' />
+  Choose a Language
+</p>
+:ET

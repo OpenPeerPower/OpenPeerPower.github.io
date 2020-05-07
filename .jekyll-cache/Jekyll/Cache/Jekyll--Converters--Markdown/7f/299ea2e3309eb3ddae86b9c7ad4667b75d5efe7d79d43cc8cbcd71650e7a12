@@ -1,0 +1,35 @@
+I"4<p>The Entity card gives you a quick overview of your entity’s state.</p>
+<p class='img'>
+  <img src='/images/lovelace/lovelace_entity_card.png' alt='Screenshot of the entity card'>
+  Screenshot of the entity card.
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>entity</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Open Peer Power entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name of Entity</p>
+</span></p><p class='default'>
+Default value: <p>Entity Name</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites icon.</p>
+</span></p></dd><dt><a class='title-link' name='attribute' href='#attribute'></a> attribute</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An attribute associated with the <code>entity</code></p>
+</span></p></dd><dt><a class='title-link' name='unit' href='#unit'></a> unit</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Unit of Measurement given to data</p>
+</span></p><p class='default'>
+Default value: <p>Unit Of Measurement given by entity</p>
+</p></dd><dt><a class='title-link' name='theme' href='#theme'></a> theme</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to any theme within <code>themes.yaml</code></p>
+</span></p></dd><dt><a class='title-link' name='footer' href='#footer'></a> footer</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Footer widget to render. See <a href="/lovelace/header-footer/">footer documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Example</h2>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">- type: entity
+  entity: cover.kitchen_window
+- type: entity
+  entity: light.bedroom
+  attribute: brightness
+  unit: &#39;%&#39;
+- type: entity
+  entity: vacuum.downstairs
+  name: Vacuum
+  icon: &#39;mdi:battery&#39;
+  attribute: battery_level
+  unit: &#39;%&#39;</code></pre></figure>
+:ET

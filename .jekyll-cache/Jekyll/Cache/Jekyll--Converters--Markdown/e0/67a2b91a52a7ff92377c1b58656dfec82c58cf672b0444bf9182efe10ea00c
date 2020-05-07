@@ -1,0 +1,175 @@
+I"�V<p>The Entities card is the most common type of card. It groups items together into lists.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>entities</p>
+</span></p></dd><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of entity IDs or <code>entity</code> objects, see below.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The card title.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>An icon to display to the left of the title</p>
+</span></p></dd><dt><a class='title-link' name='show_header_toggle' href='#show_header_toggle'></a> show_header_toggle</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Button to turn on/off all entities.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='theme' href='#theme'></a> theme</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to any theme within <code>themes.yaml</code>.</p>
+</span></p></dd><dt><a class='title-link' name='state_color' href='#state_color'></a> state_color</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to have icons colored when entity is active</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='header' href='#header'></a> header</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Header widget to render. See <a href="/lovelace/header-footer/">header documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='footer' href='#footer'></a> footer</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Footer widget to render. See <a href="/lovelace/header-footer/">footer documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Options For Entities</h2>
+<p>If you define entities as objects instead of strings (by adding <code>entity:</code> before entity ID), you can add more customization and configuration:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Open Peer Power entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Sets a custom card type: <code>custom:my-custom-card</code></p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites friendly name.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites icon or entity picture.</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites entity picture.</p>
+</span></p></dd><dt><a class='title-link' name='secondary_info' href='#secondary_info'></a> secondary_info</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Show additional info. Values: <code>entity-id</code>, <code>last-changed</code>, <code>last-triggered</code> (only for automations and scripts).</p>
+</span></p></dd><dt><a class='title-link' name='format' href='#format'></a> format</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>How the state should be formatted. Currently only used for timestamp sensors. Valid values are: <code>relative</code>, <code>total</code>, <code>date</code>, <code>time</code> and <code>datetime</code>.</p>
+</span></p></dd><dt><a class='title-link' name='header' href='#header'></a> header</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Header widget to render. See <a href="/lovelace/header-footer/">header documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='footer' href='#footer'></a> footer</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Footer widget to render. See <a href="/lovelace/header-footer/">footer documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='action_name' href='#action_name'></a> action_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Button label. (Only applies to <code>script</code> and <code>scene</code> rows)</p>
+</span></p></dd><dt><a class='title-link' name='state_color' href='#state_color'></a> state_color</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to <code>true</code> to have icons colored when entity is active</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Special Row Elements</h2>
+<h3>Call Service</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>call-service</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Main Label.</p>
+</span></p></dd><dt><a class='title-link' name='service' href='#service'></a> service</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Service like <code>media_player.media_play_pause</code></p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to display (e.g., <code>mdi:home</code>)</p>
+</span></p><p class='default'>
+Default value: <p><code>mdi:remote</code></p>
+</p></dd><dt><a class='title-link' name='action_name' href='#action_name'></a> action_name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Button label.</p>
+</span></p><p class='default'>
+Default value: <p><code>Run</code></p>
+</p></dd><dt><a class='title-link' name='service_data' href='#service_data'></a> service_data</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The service data to use.</p>
+</span></p></dd></dl>
+</div>
+<h3>Cast</h3>
+<p>Special row to start Open Peer Power Cast.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>cast</p>
+</span></p></dd><dt><a class='title-link' name='dashboard' href='#dashboard'></a> dashboard</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Path to the dashboard of the view that needs to be shown.</p>
+</span></p></dd><dt><a class='title-link' name='view' href='#view'></a> view</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Path to the view that needs to be shown.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Name to show in the row</p>
+</span></p><p class='default'>
+Default value: <p>Open Peer Power Cast</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to use</p>
+</span></p><p class='default'>
+Default value: <p><code>hass:television</code></p>
+</p></dd><dt><a class='title-link' name='hide_if_unavailable' href='#hide_if_unavailable'></a> hide_if_unavailable</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Hide this row if casting is not available in the browser.</p>
+</span></p><p class='default'>
+Default value: <p>false</p>
+</p></dd></dl>
+</div>
+<h3>Conditional</h3>
+<p>Special row that displays based on entity states.</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>conditional</p>
+</span></p></dd><dt><a class='title-link' name='conditions' href='#conditions'></a> conditions</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of entity IDs and matching states.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>HA entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='state' href='#state'></a> state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity state is equal to this value.*</p>
+</span></p></dd><dt><a class='title-link' name='state_not' href='#state_not'></a> state_not</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity state is unequal to this value.*</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='row' href='#row'></a> row</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Required)</span><span class='description'><p>Row to display if all conditions match.</p>
+</span></p></dd></dl>
+</div>
+<p>*one is required (<code>state</code> or <code>state_not</code>)</p>
+<p>Note: Conditions with more than one entity are treated as an ‘and’ condition. This means that for the card to show, <em>all</em> entities must meet the state requirements set.</p>
+<h3>Divider</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>divider</p>
+</span></p></dd><dt><a class='title-link' name='style' href='#style'></a> style</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Style the element using CSS.</p>
+</span></p><p class='default'>
+Default value: <p>height: 1px, background-color: var(–secondary-text-color)</p>
+</p></dd></dl>
+</div>
+<h3>Section</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>section</p>
+</span></p></dd><dt><a class='title-link' name='label' href='#label'></a> label</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Section label</p>
+</span></p></dd></dl>
+</div>
+<h3>Weblink</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>weblink</p>
+</span></p></dd><dt><a class='title-link' name='url' href='#url'></a> url</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Website URL (or internal URL e.g., <code>/hassio/dashboard</code> or <code>/panel_custom_name</code>)</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Link label</p>
+</span></p><p class='default'>
+Default value: <p>URL path</p>
+</p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Icon to display (e.g., <code>mdi:home</code>)</p>
+</span></p><p class='default'>
+Default value: <p><code>mdi:link</code></p>
+</p></dd></dl>
+</div>
+<h3>Buttons</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>buttons</p>
+</span></p></dd><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>A list of entities to show. Each entry is either an entity ID or a map.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The entity to render.</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the entity icon.</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Override the entity image.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Label for the button</p>
+</span></p></dd></dl></dd></dl>
+</div>
+<h3>Attribute</h3>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>attribute</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Open Peer Power entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='attribute' href='#attribute'></a> attribute</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Attribute to display from the entity.</p>
+</span></p></dd><dt><a class='title-link' name='prefix' href='#prefix'></a> prefix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Text before entity state.</p>
+</span></p></dd><dt><a class='title-link' name='suffix' href='#suffix'></a> suffix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Text after entity state.</p>
+</span></p></dd><dt><a class='title-link' name='name' href='#name'></a> name</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites friendly name.</p>
+</span></p></dd></dl>
+</div>
+<h2>Example</h2>
+<p>Entity rows:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: entities
+title: Entities card sample
+show_header_toggle: true
+header:
+  image: &#39;https://www.openpeerpower.io/images/lovelace/header-footer/balloons-header.png&#39;
+  type: picture
+entities:
+  - entity: alarm_control_panel.alarm
+    name: Alarm Panel
+  - device_tracker.demo_paulus
+  - switch.decorative_lights
+  - group.all_lights
+  - group.all_locks</code></pre></figure>
+<p>Special rows:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: entities
+title: Entities card sample
+show_header_toggle: true
+entities:
+  - type: call-service
+    icon: mdi:power
+    name: Bed light
+    action_name: Toggle light
+    service: light.toggle
+    service_data:
+      entity_id: light.bed_light
+  - type: divider
+  - type: weblink
+    name: Open Peer Power
+    url: https://www.openpeerpower.io/
+    icon: mdi:open-peer-power</code></pre></figure>
+<div class='note'>
+Please be aware that the entity types divider and weblink aren't yet supported by the UI editor and a warning about `Expected a value of type...` is shown. You can ignore the warning and save your edits to verify.
+</div>
+:ET

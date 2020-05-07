@@ -1,0 +1,84 @@
+I"U<p>Asterisk Voicemail integration allows Open Peer Power to view, listen to and delete voicemails from a Asterisk voicemail mailbox.</p>
+<p>There are two components to the integration:</p>
+<ul>
+<li>A server that runs on the Asterisk PBX host and communicates over an open port.</li>
+<li>A client which can request information from the server.</li>
+</ul>
+<p>Both parts are necessary for Asterisk voicemail integration.</p>
+<p>The server installation is documented below. The client is <a href="/integrations/asterisk_mbox">integrated inside Open Peer Power</a></p>
+<div class='note'>
+Currently this module can only monitor a single Asterisk PBX mailbox.
+</div>
+<h3>Prerequisites</h3>
+<p>Before beginning make sure that you have the following:</p>
+<ul>
+<li>A functional Asterisk PBX setup which is using the default <code>voicemail</code> application.</li>
+<li>Both Open Peer Power and Asterisk PBX running on the same LAN (or the same server).</li>
+<li>The Asterisk PBX server has Python 3.5 or newer installed.</li>
+<li>Administrator access on the Asterisk PBX (for Python module installation).</li>
+<li>Account access to the <code>asterisk</code> user that runs the Asterisk PBX software.</li>
+</ul>
+<h3>Installation</h3>
+<ol>
+<li>
+<p>Apply for a Google API key to enable speech-transcription services</p>
+</li>
+<li>
+<p>Install the <code>asterisk_mbox_server</code> Python module:</p>
+</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip3 install asterisk_mbox_server</code></pre></figure>
+<ol start="3">
+<li>
+<p>Create a configuration file for the server</p>
+<p>As the <code>asterisk</code> user create an <code>asterisk_mbox.ini</code> file. You can place this in any directory you choose, but the recommended location is <code>/etc/asterisk/asterisk_mbox.ini</code>.</p>
+</li>
+</ol>
+<figure class="highlight"><pre><code class="language-ini" data-lang="ini">[default]
+   host = IP_ADDRESS 
+   port = PORT
+   password = PASSWORD
+   mbox_path = PATH_TO_VOICEMAIL_FILES
+   cache_file = PATH_TO_CACHE_FILE
+   google_key = GOOGLE_API_KEY
+   cdr = mysql+pymysql://&lt;mysql-user&gt;:&lt;mysql-password&gt;@localhost/asterisk/cdr</code></pre></figure>
+<ul>
+<li><code>host</code> (<em>Optional</em>): The IP address to listen on for client requests. This defaults to all IP addresses on the server. To listen only locally, choose <code>127.0.0.1</code></li>
+<li><code>port</code> (<em>Optional</em>): The port to listen on for client requests. Defaults to 12345.</li>
+<li><code>password</code> (<em>Required</em>): A password shared between client and server.  Use only alpha-numeric characters and spaces</li>
+<li><code>mbox_path</code> (<em>Required</em>): The path to the storage location of mailbox files. This is typically <code>/var/spool/asterisk/voicemail/default/&lt;mailbox&gt;/</code></li>
+<li><code>cache_file</code> (<em>Required</em>): A fully-qualified path to a file that can be written by the server containing transcriptions of voicemails. Example: <code>/var/spool/asterisk/transcription.cache</code></li>
+<li><code>google_key</code> (<em>Required</em>): Your 40 characters Google API key.</li>
+<li><code>cdr</code> (<em>Optional</em>): Where to find CDR data. Supports various SQL databases as well as a file log.  Configuring the CDR will enable the <code>asterisk_cdr</code> platform.</li>
+</ul>
+<p>Once complete, ensure this file is only accessible by the Asterisk user:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo chown asterisk:asterisk /etc/asterisk/asterisk_mbox.ini
+   sudo chmod 600 /etc/asterisk/asterisk_mbox.ini</code></pre></figure>
+<ol start="4">
+<li>Interactively start the server to verify it is functioning</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo -u asterisk asterisk_mbox_server -v --cfg /etc/asterisk/asterisk_mbox.ini</code></pre></figure>
+<p>Now complete the <a href="/integrations/asterisk_mbox"> Open Peer Power configuration</a> and verify that Open Peer Power can communicate with the server</p>
+<p>You can use <code>Ctrl-c</code> to terminate the server when done testing</p>
+<ol start="5">
+<li>
+<p>Configure the server to start automatically</p>
+<p>Copy the following code into <code>/etc/systemd/system/asterisk_mbox.service</code>:</p>
+</li>
+</ol>
+<figure class="highlight"><pre><code class="language-ini" data-lang="ini">[Unit]
+   Description=Asterisk PBX voicemail server for Open Peer Power
+   Wants=network.target
+   After=network.target
+<p>[Service]
+Type=simple
+User=asterisk
+Group=asterisk
+ExecStart=/usr/local/bin/asterisk_mbox_server –cfg /etc/asterisk/asterisk_mbox.ini
+Restart=on-failure</p>
+<p>[Install]
+WantedBy=multi-user.target</code></pre></figure></p>
+<div class='note'>
+<p>This assumes that your Asterisk PBX server is using <code>systemd</code> for init handling. If not, you will need to create the appropriate configuration files yourself.</p>
+</div>
+:ET

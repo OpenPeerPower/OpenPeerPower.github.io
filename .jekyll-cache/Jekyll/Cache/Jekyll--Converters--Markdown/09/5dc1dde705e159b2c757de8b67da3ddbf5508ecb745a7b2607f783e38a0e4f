@@ -1,0 +1,16 @@
+I"�<p>It is possible to customize your Open Peer Power interface by writing in YAML instead of via the UI. To do so, you configure the Lovelace integration to be in YAML mode by adding the following to your <code>configuration.yaml</code>:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">lovelace:
+  mode: yaml</code></pre></figure>
+<p>Restart Open Peer Power for the mode to be changed. Create a new file <code>&lt;config&gt;/ui-lovelace.yaml</code> and add your Lovelace configuration. A good way to start this file is to copy and paste the “Raw configuration” from the UI so your manual configuration starts the same as your existing UI.</p>
+<ul>
+<li>Go into the <code>Overview</code> tab.</li>
+<li>Click the three dots menu (top-right) and click on <code>Configure UI</code>.</li>
+<li>Click the three dots menu again and click on <code>Raw config editor</code>.</li>
+<li>There you see the configuration for your current Lovelace UI. Copy that into the <code>&lt;config&gt;/ui-lovelace.yaml</code> file.</li>
+</ul>
+<p>Once you take control of your UI via YAML, the Open Peer Power interface for modifying it won’t be available anymore and new entities will not automatically be added to your UI.</p>
+<p>When you make changes to <code>ui-lovelace.yaml</code>, you don’t have to restart Open Peer Power or refresh the page. Just hit the refresh button in the menu at the top of the UI.</p>
+<p>To revert back to using the UI to edit your Lovelace interface, remove the <code>lovelace</code> section from your <code>configuration.yaml</code> and copy the contents of your <code>ui-lovelace.yaml</code> into the raw configuration section of Open Peer Power and restart.</p>
+<h3>Advanced configuration</h3>
+<p>You can define multiple dashboards that all have their own YAML file, and add custom resources that are shared by all dashboards. For more details refer to <a href="/lovelace/dashboards-and-views/">this</a> page.</p>
+:ET

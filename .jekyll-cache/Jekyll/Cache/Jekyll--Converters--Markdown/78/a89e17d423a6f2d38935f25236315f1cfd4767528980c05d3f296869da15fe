@@ -1,0 +1,593 @@
+I"|l<p><a href='/integrations/#version/0.108'><img src='/images/blog/2020-04-0.108/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p>Before we talk about anything that matches the title of this blog post:</p>
+<p>On behalf of everybody working on the Open Peer Power project, we hope you, your
+family and loved ones are safe and remain healthy during this pandemic.
+Our thoughts are with everyone that has been deeply affected by the current situation.</p>
+<p>Stay strong, keep distance from each other, wash your hands and stay safe.</p>
+<p>❤️</p>
+<p>We made it all up to 0.107.7 the previous release, 7! patch releases.</p>
+<p>Some have noticed and commented on the fact we do a lot more patch releases
+the past months, which is correct. This is not because everything was shipped
+in a broken state, but we are trying to ship <strong>any</strong> bug fix to you as soon as
+possible! Just so you don’t have to wait 3 weeks for something to get fixed.</p>
+<p>So let’s talk about the elephant in the room: Open Peer Power Core 0.108!</p>
+<h2>Martin Hjelmare &amp; Ashton Lafferty join Nabu Casa</h2>
+<p>We want to start by announcing <a href="https://github.com/MartinHjelmare">Martin Hjelmare</a>
+has joined <a href="https://www.nabucasa.com">Nabu Casa</a>!</p>
+<p>Martin is a core team member for a long time, and initially started out
+contributing to the project by his work on the
+<a href="https://www.openpeerpower.io/integrations/mysensors/">MySensors</a> integration
+back in <a href="https://www.openpeerpower.io/blog/2016/01/17/extended-support-for-diy-solutions/">Open Peer Power 0.11</a>
+(2016)! Most contributors to Open Peer Power, will know Martin for his endless
+patience on the incredible code reviews he does.</p>
+<p>Furthermore, Ashton Lafferty (cogneato) has been working some hours for
+Nabu Casa, to help out with things like support. Most of you probably know him
+from that already, as he is very active in helping out on our
+<a href="/join-chat">Discord server</a>.</p>
+<p>We are happy to announce that Ashton will now join Nabu Casa full-time as well!</p>
+<p>Congratulations Martin and Ashton! 🎉</p>
+<h2>Integration logos &amp; icons</h2>
+<p>We have created a <a href="https://github.com/OpenPeerPower/brands">new repository</a>
+on GitHub containing all the brand icons and logos Open Peer Power is able to
+integrate with. These images are, for example, used in our documentation.</p>
+<p>In 0.108, we made a start on using the content from this repository in the
+Open Peer Power frontend. The device information page got a layout update and
+the integrations page as well.</p>
+<p>These pages will now show the icons and logos matching the integration.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/device-info-page.png' alt='Screenshot of the device information page showing the Hue logo'></a>
+Device information page showing the Hue logo.
+</p>
+<p>Looking for a way to contribute to the Open Peer Power project?
+We still are missing a lot of images; So we are
+<a href="https://github.com/OpenPeerPower/brands/issues">calling out for help</a>!</p>
+<h2>Many integrations now available to set up from the UI</h2>
+<p>It is absolutely amazing to see all the upgraded integrations this release!
+Many contributors have gone out and added support to a lot of integrations
+to allow them to be configured via the Open Peer Power frontend.</p>
+<p>Not all of them were ready in time for this release; nevertheless, the list is
+amazing already:</p>
+<ul>
+<li><a href="/integrations/freebox/">Freebox</a>, done by <a href="https://github.com/Quentame">@Quentame</a></li>
+<li><a href="/integrations/monoprice/">Monoprice</a>, done by <a href="https://github.com/OnFreund">@OnFreund</a></li>
+<li><a href="/integrations/roku/">Roku</a>, done by <a href="https://github.com/ctalkington">@ctalkington</a></li>
+<li><a href="/integrations/doorbird/">Doorbird</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/elkm1/">Elk-M1 Control</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/harmony/">Logitech Harmony</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/myq/">MyQ</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/nut/">Network UPS Tools (NUT)</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/nuheat/">NuHeat</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+<li><a href="/integrations/rachio/">Rachio</a>, done by <a href="https://github.com/bdraco">@bdraco</a></li>
+</ul>
+<p>Yes, <a href="https://github.com/bdraco">@bdraco</a> has been on fire this release! Amazing job!</p>
+<h2>Lovelace Map history</h2>
+<p>Maybe not very useful during home quarantine, but a very cool feature for when
+we are allowed to get out of our homes again.
+<a href="https://github.com/Hoytron">@Hoytron</a> added the ability to show the history of
+persons or device trackers on the Lovelace map card. You can define how many hours of history
+you want to show and it will draw lines between all the points in that
+time frame.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/map-history.png' alt='Screenshot of the map card with history'></a>
+Screenshot of the map card with history.
+</p>
+<h2>New Lovelace card: Entity</h2>
+<p><a href="https://github.com/zsarnett">@zsarnett</a> added a new Lovelace card, the entity card. This card looks like the sensor card, but allows you to use any entity (not just sensors).</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/entity-card.png' alt='Screenshot of the entity card'></a>
+Screenshot of the entity card.
+</p>
+<h2>Area configuration page</h2>
+<p>We added an overview page for your areas. On this page you can see all the devices in the area, but also the automations, scenes and scripts that affect that area.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/area-config-page.png' alt='Screenshot of the area config page'></a>
+Screenshot of the area config page.
+</p>
+<h2>Horizontal stack now handles different heights better</h2>
+<p>When creating a Horizontal stack, the cards in the stack don’t always line up
+nicely. This has been adjusted. Horizontal stacks now deal better with the
+difference in heights of the cards on the stack.</p>
+<p class='img'>
+<img src='/images/blog/2020-04-0.108/horizontal-stack.png' alt='Before and after screenshot for the Horizontal Stack improvements.'></a>
+Before and after screenshot for the Horizontal Stack improvements.
+</p>
+<h2>Other noteworthy changes</h2>
+<ul>
+<li>
+<p><em><strong>“Alexa, show the front door camera.”</strong></em> 😲<br />
+<a href="/integrations/alexa/">Alexa</a> now has support for Cameras, thanks <a href="https://github.com/ochlocracy">@ochlocracy</a>!</p>
+</li>
+<li>
+<p>Selecting your default Lovelace dashboard has been moved to the user
+profile page.</p>
+</li>
+<li>
+<p>A lot of configuration pages are migrated to data tables, this means you can
+now search in your automations, scenes, scripts, users and areas.</p>
+</li>
+<li>
+<p>Lovelace cards in panel views can now also be edited with the UI editor.</p>
+</li>
+<li>
+<p>The graph from the sensor card is now also available as a footer for the
+entities and entity card.</p>
+</li>
+<li>
+<p>The Markdown card has a new <code>user</code> variable that can be used to display the
+currently logged in user.</p>
+</li>
+<li>
+<p>With the ZHA Zigbee integration, Zigbee groups now dynamically create
+entities for lights, switches and fans that are grouped together. This
+enables near-simultaneous control over a large group of lights allowing
+them to turn on or off at the exact same time. Thank you <a href="https://github.com/dmulcahey">@dmulcahey</a>!</p>
+</li>
+<li>
+<p>Cameras added using the <a href="/integrations/onvif/">ONVIF</a> integration now automatically
+use the still images provided by the camera, instead of Open Peer Power
+generating one. Nice work <a href="https://github.com/roleoroleo">@roleoroleo</a>!</p>
+</li>
+<li>
+<p><a href="/integrations/wled/">WLED</a> got quite a few internal upgrades, has added new Wi-Fi
+sensors and now has a service to control the effects of your WLED device.</p>
+</li>
+<li>
+<p>Docker images for Open Peer Power are now using Jemalloc, to reduce memory
+fragmentation and speed up memory allocation. So, less memory and generally
+a faster Open Peer Power.</p>
+</li>
+</ul>
+<h2>New Integrations</h2>
+<ul>
+<li>Add Powerwalls integration (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32851">#32851</a>) (<a href="/integrations/powerwall/">powerwall docs</a>) (new-integration)</li>
+<li>Add Nexia thermostat support (Trane / American Standard) (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32826">#32826</a>) (<a href="/integrations/nexia/">nexia docs</a>) (new-integration)</li>
+<li>Add pvpc electricity prices integration (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/32092">#32092</a>) (<a href="/integrations/pvpc_hourly_pricing/">pvpc_hourly_pricing docs</a>) (new-integration)</li>
+<li>Add support for Bosch BMP280 Sensor (<a href="https://github.com/belidzs">@belidzs</a> - <a href="https://github.com/OpenPeerPower/core/pull/30837">#30837</a>) (<a href="/integrations/bmp280/">bmp280 docs</a>) (new-integration)</li>
+<li>Add Nextcloud Integration (<a href="https://github.com/meichthys">@meichthys</a> - <a href="https://github.com/OpenPeerPower/core/pull/30871">#30871</a>) (<a href="/integrations/nextcloud/">nextcloud docs</a>) (new-integration)</li>
+<li>Add integration for Schluter (<a href="https://github.com/prairieapps">@prairieapps</a> - <a href="https://github.com/OpenPeerPower/core/pull/31088">#31088</a>) (<a href="/integrations/schluter/">schluter docs</a>) (new-integration)</li>
+<li>Add Internet Printing Protocol (IPP) integration (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/32859">#32859</a>) (<a href="/integrations/ipp/">ipp docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Add support for nexia automations (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33049">#33049</a>) (<a href="/integrations/nexia/">nexia docs</a>) (new-platform)</li>
+<li>Add support for occupancy/vacancy groups in Lutron Caseta component (<a href="https://github.com/swails">@swails</a> - <a href="https://github.com/OpenPeerPower/core/pull/33032">#33032</a>) (<a href="/integrations/lutron_caseta/">lutron_caseta docs</a>) (new-platform)</li>
+<li>Fire events for hue remote buttons pressed (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33277">#33277</a>) (<a href="/integrations/hue/">hue docs</a>) (new-platform)</li>
+<li>Add binary sensor for myq gateway connectivity (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33423">#33423</a>) (<a href="/integrations/myq/">myq docs</a>) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>. Make sure to fill in all fields of the issue template.</p>
+<!--more-->
+<h2>Breaking Changes</h2>
+<ul>
+<li>
+<p><strong>Lovelace themes</strong> - We discovered our theme logic was wrong, when you didn’t specify a theme for a Lovelace card or view. It would default to the backend selected theme, even when your local theme was different, or your view had a different theme. To fix this we removed the options <code>default</code> and <code>Backend selected</code> from the Lovelace theme selection, and when there is not theme selected it will not set a theme. This will make sure the element has the same theme as it’s parent.</p>
+</li>
+<li>
+<p><strong>Freebox</strong> - Freebox is now available as an integration from the Integrations UI! You will need to re-authorize Open Peer Power to access the Freebox router. - (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/core/pull/30334">#30334</a>) (<a href="/integrations/freebox/">freebox docs</a>)</p>
+</li>
+<li>
+<p><strong>UniFi</strong> - Manual configuration has been deprecated as the UI integration now supports all of the previous available options and more. Your existing YAML configuration has previously been imported so just remove it. - (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/core/pull/32699">#32699</a>) (<a href="/integrations/unifi/">unifi docs</a>)</p>
+</li>
+<li>
+<p><strong>Emulated Hue</strong> - The <code>emulated_hue</code> and <code>emulated_hue_hidden</code> attributes have been deprecated. Use the existing <code>entities</code> <code>hidden</code> configuration instead. - (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32718">#32718</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>)</p>
+<p>Example YAML configuration:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">emulated_hue:
+    host_ip: 192.168.1.186
+    listen_port: 8300
+    advertise_ip: 10.0.0.10
+    advertise_port: 8080
+    off_maps_to_on_domains:
+      - script
+      - scene
+    expose_by_default: true
+    exposed_domains:
+      - light
+    entities:
+      light.bedroom_light:
+        name: &quot;Bedside Lamp&quot;
+      light.ceiling_lights:
+        hidden: true</code></pre></figure>
+<ul>
+<li>
+<p><strong>Roku</strong> - Roku is now available as an integration from the integrations UI! The <code>roku_scan</code> service has been removed in favor of discovery via <code>ssdp</code>. -  (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/31988">#31988</a>) (<a href="/integrations/roku/">roku docs</a>)</p>
+</li>
+<li>
+<p><strong>MQTT</strong> - Deprecated features from MQTT platforms are now removed. - (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32909">#32909</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</p>
+<ul>
+<li>For MQTT lights setup through MQTT discovery, it’s no longer possible to specify schema with <code>platform</code> configuration variable. Instead, schema must be specified by the <code>schema</code> configuration variable.</li>
+<li>For MQTT <code>alarm_control_panel</code>, MQTT <code>binary_sensor</code> and MQTT <code>sensor</code> set up through MQTT discovery: The undocumented implicit setting of <code>state_topic</code> is no longer supported. Instead, <code>state_topic</code> must be explicitly set.</li>
+<li>Support for <code>json_attributes</code> is removed from MQTT sensor, <code>json_attributes_topic</code> should be used instead.</li>
+</ul>
+</li>
+<li>
+<p><strong>Harmony</strong> - Harmony is now available as an integration from the Integrations UI! The YAML configuration now requires a host/ip. - (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32919">#32919</a>) (<a href="/integrations/harmony/">harmony docs</a>)</p>
+<p>Example YAML configuration:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">remote:
+    - platform: harmony
+      name: Bedroom
+      host: 10.168.1.13</code></pre></figure>
+<ul>
+<li>
+<p><strong>Sonos</strong> - Sonos attributes have been cleaned up for radio streams. - (<a href="https://github.com/amelchio">@amelchio</a> - <a href="https://github.com/OpenPeerPower/core/pull/33063">#33063</a>) (<a href="/integrations/sonos/">sonos docs</a>)</p>
+<ul>
+<li>Sonos entities playing radio streams used to merge the radio name, the artist and the song name into two attributes. They now have <code>media_artist</code> and <code>media_title</code> attributes that match the playing music (when available).</li>
+<li>Radio station artwork is no longer available for Sonos entities in polling mode (i.e., on a network separate to the network Open Peer Power is on).</li>
+</ul>
+</li>
+<li>
+<p><strong>Monoprice</strong> - Monoprice is now available as an integration from the UI! Please remove the configuration from YAML and add the Monoprice integration from the Integrations page. - (<a href="https://github.com/OnFreund">@OnFreund</a> - <a href="https://github.com/OpenPeerPower/core/pull/30337">#30337</a>) (<a href="/integrations/monoprice/">monoprice docs</a>)</p>
+</li>
+<li>
+<p><strong>Lutron Caseta</strong> - As a result of some cleanup, the <code>Device ID</code> and <code>Zone ID</code> attributes of Lutron Caseta devices have been renamed to <code>device_id</code> and <code>zone_id</code> to match the convention of the rest of Open Peer Power. If you have any automations that reference these attributes, they will need to be updated. - (<a href="https://github.com/swails">@swails</a> - <a href="https://github.com/OpenPeerPower/core/pull/33144">#33144</a>) (<a href="/integrations/lutron_caseta/">lutron_caseta docs</a>)</p>
+</li>
+<li>
+<p><strong>NuHeat</strong> - NuHeat is now available as an integration from the UI! The previous service has been removed and is now handled by <code>set_hvac_mode</code> (climate 1.0). - (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32885">#32885</a>) (<a href="/integrations/nuheat/">nuheat docs</a>)</p>
+</li>
+<li>
+<p><strong>ElkM1</strong> - ElkM1 is now available as an integration from the UI! An auto configure mode has been introduced which avoids the need to setup the complex include and exclude filters. This functionality still exists when configuring from YAML for power users who want more control over which entities elkm1 generates. As entity IDs can now be changed, the <code>alarm_control_panel</code> attribute <code>changed_by_entity_id</code> is now <code>changed_by_keypad</code> and will show the name of the Elk keypad instead of the entity ID. - (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33297">#33297</a>) (<a href="/integrations/elkm1/">elkm1 docs</a>)</p>
+</li>
+<li>
+<p><strong>HmIP</strong> - After HmIP Cloud Maintanance (17.3.2020) it’s possible to define labels for each channel of a multi device. If the labels of a multi channel device have been changed in the native Homemamtic IP Cloud App, then the entity names will change accordingly. - (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/core/pull/32925">#32925</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</p>
+</li>
+<li>
+<p><strong>Slack</strong> - The Slack integration got an overhaul and added support for async and Slack’s Block Kit. As the YAML configuration schema for this integration has changed, please be sure to read the documentation. Additionally, because it represents an unacceptable security risk, remote files (i.e., those that do not exist in a whitelisted directory local to Open Peer Power) can no longer be sent to Slack via this integration. - (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33287">#33287</a>) (<a href="/integrations/slack/">slack docs</a>)</p>
+<p>Example YAML configuration:</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">notify:
+    - platform: slack
+      api_key: !secret slack_api_key
+      default_channel: &quot;#open-peer-power&quot;</code></pre></figure>
+<ul>
+<li>
+<p><strong>Network UPS Tools (NUT)</strong> - The NUT integration is now available as an integration from the UI! (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33457">#33457</a>) (<a href="/integrations/nut/">nut docs</a>) (breaking change)</p>
+<p>The following sensors are no longer supported:</p>
+<ul>
+<li><code>ups.time</code></li>
+<li><code>ups.date</code></li>
+<li><code>ups.model</code></li>
+<li><code>ups.mfr</code></li>
+<li><code>ups.mfr.date</code></li>
+<li><code>ups.serial</code></li>
+<li><code>ups.vendorid</code></li>
+<li><code>ups.productid</code></li>
+<li><code>ups.firmware</code></li>
+<li><code>ups.firmware.aux</code></li>
+</ul>
+</li>
+</ul>
+<h2>Farewell to the following</h2>
+<ul>
+<li><strong>Alarm.com</strong></li>
+<li><strong>Mopar</strong></li>
+</ul>
+<p>These integrations have been removed. The websites for both have changed, causing the integrations to break because they relied on web scraping, which is no longer allowed (ADR-0004). - (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33056">#33056</a> <a href="https://github.com/OpenPeerPower/core/pull/33066">#33066</a>)</p>
+<h2>All changes</h2>
+<details>
+  <summary>Click to see all changes!</summary>
+<ul>
+<li>Refactor Freebox : add config flow + temperature sensor + signal dispatch (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/core/pull/30334">#30334</a>) (<a href="/integrations/freebox/">freebox docs</a>) (breaking change)</li>
+<li>Upgrade slacker to 0.14.0 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/32698">#32698</a>) (<a href="/integrations/slack/">slack docs</a>)</li>
+<li>Upgrade pylast to 3.2.1 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/32700">#32700</a>) (<a href="/integrations/lastfm/">lastfm docs</a>)</li>
+<li>Add support for simultaneous runs of Script helper - Part 2 (<a href="https://github.com/pnbruckner">@pnbruckner</a> - <a href="https://github.com/OpenPeerPower/core/pull/32442">#32442</a>)</li>
+<li>Cleanup entity and device registry on MQTT discovery removal (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32693">#32693</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</li>
+<li>Upgrade mypy to 0.770, tighten config a bit (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/core/pull/32715">#32715</a>)</li>
+<li>Upgrade psutil to 5.7.0 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/32720">#32720</a>) (<a href="/integrations/systemmonitor/">systemmonitor docs</a>)</li>
+<li>Remove manual configuration support (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/core/pull/32699">#32699</a>) (<a href="/integrations/unifi/">unifi docs</a>) (breaking change)</li>
+<li>Upgrade sendgrid to 6.1.3 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/32721">#32721</a>) (<a href="/integrations/sendgrid/">sendgrid docs</a>)</li>
+<li>Bumped version to 0.108.0dev0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32697">#32697</a>)</li>
+<li>Fix delijn sensor stuck on last passage (<a href="https://github.com/Emilv2">@Emilv2</a> - <a href="https://github.com/OpenPeerPower/core/pull/32710">#32710</a>) (<a href="/integrations/delijn/">delijn docs</a>)</li>
+<li>Upgrade pre-commit to 2.2.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32737">#32737</a>)</li>
+<li>Add update class method to DataUpdateCoordinator (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32724">#32724</a>)</li>
+<li>Upgrade sqlalchemy to 1.3.15 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32747">#32747</a>) (<a href="/integrations/recorder/">recorder docs</a>) (<a href="/integrations/sql/">sql docs</a>)</li>
+<li>Use platform tag to register components on hue SensorManager (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/32732">#32732</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Add options flow for SimpliSafe (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32631">#32631</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>)</li>
+<li>Add memo text service (<a href="https://github.com/brefra">@brefra</a> - <a href="https://github.com/OpenPeerPower/core/pull/31222">#31222</a>) (<a href="/integrations/velbus/">velbus docs</a>)</li>
+<li>Move apps configuration to options flow for vizio integration (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/core/pull/32543">#32543</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Migrate WLED to use DataUpdateCoordinator (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32565">#32565</a>) (<a href="/integrations/wled/">wled docs</a>)</li>
+<li>Extend rtorrent sensor functionality (<a href="https://github.com/smega">@smega</a> - <a href="https://github.com/OpenPeerPower/core/pull/32353">#32353</a>) (<a href="/integrations/rtorrent/">rtorrent docs</a>)</li>
+<li>Bump pypck to 0.6.4 (<a href="https://github.com/alengwenus">@alengwenus</a> - <a href="https://github.com/OpenPeerPower/core/pull/32775">#32775</a>) (<a href="/integrations/lcn/">lcn docs</a>)</li>
+<li>Do not fail when a user has a controller with shared access on… (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32756">#32756</a>) (<a href="/integrations/rachio/">rachio docs</a>)</li>
+<li>Optimize is_entity_exposed in emulated_hue by removing deprec… (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32718">#32718</a>) (<a href="/integrations/emulated_hue/">emulated_hue docs</a>) (breaking change)</li>
+<li>Add config flow for rachio (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32757">#32757</a>) (<a href="/integrations/rachio/">rachio docs</a>)</li>
+<li>Type hint improvements (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/core/pull/32793">#32793</a>)</li>
+<li>Add Insteon Dual Band SwitchLinc model 2477S to ISY994 (<a href="https://github.com/UrbanDave">@UrbanDave</a> - <a href="https://github.com/OpenPeerPower/core/pull/32813">#32813</a>) (<a href="/integrations/isy994/">isy994 docs</a>)</li>
+<li>Add model to rachio device info (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32814">#32814</a>) (<a href="/integrations/rachio/">rachio docs</a>)</li>
+<li>Add Abode tests (<a href="https://github.com/shred86">@shred86</a> - <a href="https://github.com/OpenPeerPower/core/pull/32562">#32562</a>) (<a href="/integrations/abode/">abode docs</a>)</li>
+<li>Add config flow to roku (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/31988">#31988</a>) (<a href="/integrations/roku/">roku docs</a>) (breaking change)</li>
+<li>Add imperial units to met weather (<a href="https://github.com/MatthewFlamm">@MatthewFlamm</a> - <a href="https://github.com/OpenPeerPower/core/pull/32824">#32824</a>) (<a href="/integrations/met/">met docs</a>)</li>
+<li>Add additional information to SynologySRM device tracker (<a href="https://github.com/i00">@i00</a> - <a href="https://github.com/OpenPeerPower/core/pull/32669">#32669</a>) (<a href="/integrations/synology_srm/">synology_srm docs</a>)</li>
+<li>Bump brother to 0.1.9 (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/32861">#32861</a>) (<a href="/integrations/brother/">brother docs</a>)</li>
+<li>UniFi - Improve expected SSID filter behavior (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/core/pull/32785">#32785</a>) (<a href="/integrations/unifi/">unifi docs</a>)</li>
+<li>Enable AlarmDecoder arming without security code (<a href="https://github.com/ajschmidt8">@ajschmidt8</a> - <a href="https://github.com/OpenPeerPower/core/pull/32390">#32390</a>) (<a href="/integrations/alarmdecoder/">alarmdecoder docs</a>)</li>
+<li>Add ‘Yeelight LED Ceiling Light’ model (<a href="https://github.com/sbilly">@sbilly</a> - <a href="https://github.com/OpenPeerPower/core/pull/31615">#31615</a>) (<a href="/integrations/yeelight/">yeelight docs</a>)</li>
+<li>Add window class for Abode binary sensors (<a href="https://github.com/shred86">@shred86</a> - <a href="https://github.com/OpenPeerPower/core/pull/32854">#32854</a>) (<a href="/integrations/abode/">abode docs</a>)</li>
+<li>Update deconz/cover.py to adapt rest-api changes (<a href="https://github.com/Knapoc">@Knapoc</a> - <a href="https://github.com/OpenPeerPower/core/pull/32351">#32351</a>) (<a href="/integrations/deconz/">deconz docs</a>)</li>
+<li>Fix abode test (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/32871">#32871</a>)</li>
+<li>Add device condition for alarm_control_panel (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/core/pull/29063">#29063</a>) (<a href="/integrations/alarm_control_panel/">alarm_control_panel docs</a>)</li>
+<li>Add Here travel time arrival departure (<a href="https://github.com/eifinger">@eifinger</a> - <a href="https://github.com/OpenPeerPower/core/pull/29909">#29909</a>) (<a href="/integrations/here_travel_time/">here_travel_time docs</a>)</li>
+<li>Improve IQVIA data/API management based on enabled entities (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32291">#32291</a>) (<a href="/integrations/iqvia/">iqvia docs</a>)</li>
+<li>Deduplicate MQTT tests (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32874">#32874</a>)</li>
+<li>Remove unnecessary awaits in RainMachine (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32884">#32884</a>) (<a href="/integrations/rainmachine/">rainmachine docs</a>)</li>
+<li>Add cleanup to Notion (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32887">#32887</a>) (<a href="/integrations/notion/">notion docs</a>)</li>
+<li>Add cleanup to Ambient PWS (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32888">#32888</a>) (<a href="/integrations/ambient_station/">ambient_station docs</a>)</li>
+<li>Add cleanup to SimpliSafe (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32889">#32889</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>)</li>
+<li>Add Huawei LTE WiFi status binary sensors (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/core/pull/32553">#32553</a>) (<a href="/integrations/huawei_lte/">huawei_lte docs</a>)</li>
+<li>Bump wled 0.3.0, reduce calls stability improvements (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32903">#32903</a>) (<a href="/integrations/wled/">wled docs</a>)</li>
+<li>Run gen_requirements_all and hassfest in pre-commit (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/core/pull/32792">#32792</a>)</li>
+<li>Apply recommendations from roku code review (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/32883">#32883</a>)</li>
+<li>Fix device condition for alarm_control_panel (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/core/pull/32916">#32916</a>) (<a href="/integrations/alarm_control_panel/">alarm_control_panel docs</a>)</li>
+<li>Improve MQTT light test coverage (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32907">#32907</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</li>
+<li>Add attributes and availability to MQTT camera (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32908">#32908</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</li>
+<li>Remove mentioning YAML in Roku config flow (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/32920">#32920</a>) (<a href="/integrations/roku/">roku docs</a>)</li>
+<li>Clean up Abode unused automation events (<a href="https://github.com/shred86">@shred86</a> - <a href="https://github.com/OpenPeerPower/core/pull/32825">#32825</a>) (<a href="/integrations/abode/">abode docs</a>)</li>
+<li>Add cleanup to OpenUV (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/32886">#32886</a>) (<a href="/integrations/openuv/">openuv docs</a>)</li>
+<li>Migrate Brother to use DataUpdateCoordinator (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/32800">#32800</a>) (<a href="/integrations/brother/">brother docs</a>)</li>
+<li>Handle unique WLED device using zeroconf properties (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32897">#32897</a>) (<a href="/integrations/wled/">wled docs</a>)</li>
+<li>Upgrade shodan to 1.22.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/32928">#32928</a>) (<a href="/integrations/shodan/">shodan docs</a>)</li>
+<li>Refactor and simplify homekit_controller entity setup (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/core/pull/32927">#32927</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>)</li>
+<li>Type hint improvements (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/core/pull/32905">#32905</a>) (<a href="/integrations/directv/">directv docs</a>) (<a href="/integrations/directv/">directv docs</a>) (<a href="/integrations/gtfs/">gtfs docs</a>) (<a href="/integrations/here_travel_time/">here_travel_time docs</a>) (<a href="/integrations/remote/">remote docs</a>) (<a href="/integrations/switch/">switch docs</a>) (<a href="/integrations/switcher_kis/">switcher_kis docs</a>) (<a href="/integrations/vizio/">vizio docs</a>) (<a href="/integrations/zone/">zone docs</a>)</li>
+<li>Small tweaks (<a href="https://github.com/dshokouhi">@dshokouhi</a> - <a href="https://github.com/OpenPeerPower/core/pull/32946">#32946</a>) (<a href="/integrations/obihai/">obihai docs</a>)</li>
+<li>Resolve unexpected exception caused by sinch error_code being a string (<a href="https://github.com/bendikrb">@bendikrb</a> - <a href="https://github.com/OpenPeerPower/core/pull/32929">#32929</a>) (<a href="/integrations/sinch/">sinch docs</a>)</li>
+<li>Bump pyubee to 0.10 to support more Ubee routers (<a href="https://github.com/mzdrale">@mzdrale</a> - <a href="https://github.com/OpenPeerPower/core/pull/32934">#32934</a>) (<a href="/integrations/ubee/">ubee docs</a>)</li>
+<li>Add support for homekit valve accessories to homekit_controller (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/core/pull/32937">#32937</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>)</li>
+<li>Remove deprecated features from MQTT platforms (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32909">#32909</a>) (<a href="/integrations/mqtt/">mqtt docs</a>) (breaking change)</li>
+<li>Add pending to template alarm (<a href="https://github.com/MatthewFlamm">@MatthewFlamm</a> - <a href="https://github.com/OpenPeerPower/core/pull/31614">#31614</a>) (<a href="/integrations/template/">template docs</a>)</li>
+<li>Fix mypy in ci by removing unneeded ignore in zone init (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/32997">#32997</a>) (<a href="/integrations/zone/">zone docs</a>)</li>
+<li>Add Powerwalls integration (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32851">#32851</a>) (<a href="/integrations/powerwall/">powerwall docs</a>) (new-integration)</li>
+<li>Config flow for harmony (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32919">#32919</a>) (<a href="/integrations/harmony/">harmony docs</a>) (<a href="/integrations/remote/">remote docs</a>) (breaking change)</li>
+<li>Bump version of zigpy-cc to 0.2.3 (<a href="https://github.com/sanyatuning">@sanyatuning</a> - <a href="https://github.com/OpenPeerPower/core/pull/32951">#32951</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Bump aiohomekit to fix Insignia NS-CH1XGO8 and Lennox S30 (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/core/pull/33014">#33014</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>)</li>
+<li>deCONZ - Add support for Senic and Gira Friends of Hue remote… (<a href="https://github.com/Kane610">@Kane610</a> - <a href="https://github.com/OpenPeerPower/core/pull/33022">#33022</a>) (<a href="/integrations/deconz/">deconz docs</a>)</li>
+<li>Harmony config flow improvements (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33018">#33018</a>) (<a href="/integrations/harmony/">harmony docs</a>)</li>
+<li>Add Nexia thermostat support (Trane / American Standard) (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32826">#32826</a>) (<a href="/integrations/nexia/">nexia docs</a>) (new-integration)</li>
+<li>Poll Hue lights in ZHA (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/33017">#33017</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Make powerwall unique id stable (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33021">#33021</a>) (<a href="/integrations/powerwall/">powerwall docs</a>)</li>
+<li>Convert amcrest binary sensors from poll to stream (<a href="https://github.com/pnbruckner">@pnbruckner</a> - <a href="https://github.com/OpenPeerPower/core/pull/32818">#32818</a>) (<a href="/integrations/amcrest/">amcrest docs</a>)</li>
+<li>Tests improvements to the Brother integration (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/32982">#32982</a>) (<a href="/integrations/brother/">brother docs</a>)</li>
+<li>Break dependency on lutron component (<a href="https://github.com/swails">@swails</a> - <a href="https://github.com/OpenPeerPower/core/pull/33031">#33031</a>) (<a href="/integrations/lutron_caseta/">lutron_caseta docs</a>)</li>
+<li>Bump pyhaversion to 3.3.0 (<a href="https://github.com/gadgetchnnel">@gadgetchnnel</a> - <a href="https://github.com/OpenPeerPower/core/pull/33044">#33044</a>) (<a href="/integrations/version/">version docs</a>)</li>
+<li>Enable incremental Pan/Tilt/Zoom capability to Amcrest/Dahua cameras (<a href="https://github.com/GaryOkie">@GaryOkie</a> - <a href="https://github.com/OpenPeerPower/core/pull/32839">#32839</a>) (<a href="/integrations/amcrest/">amcrest docs</a>)</li>
+<li>Add IntesisHome support for air to water heat pumps (<a href="https://github.com/jnimmo">@jnimmo</a> - <a href="https://github.com/OpenPeerPower/core/pull/32250">#32250</a>) (<a href="/integrations/intesishome/">intesishome docs</a>)</li>
+<li>Modernize nuheat for new climate platform (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32714">#32714</a>) (<a href="/integrations/nuheat/">nuheat docs</a>)</li>
+<li>Remove alarmdotcom integration (ADR-0004) (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33056">#33056</a>) (breaking change)</li>
+<li>Add config flow for myq (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32890">#32890</a>) (<a href="/integrations/myq/">myq docs</a>)</li>
+<li>Add support for nexia automations (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33049">#33049</a>) (<a href="/integrations/nexia/">nexia docs</a>) (new-platform)</li>
+<li>Remove mopar integration (ADR-0004) (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33066">#33066</a>) (breaking change)</li>
+<li>Use PEP 526 syntax with NamedTuples (<a href="https://github.com/scop">@scop</a> - <a href="https://github.com/OpenPeerPower/core/pull/33081">#33081</a>) (<a href="/integrations/tplink/">tplink docs</a>)</li>
+<li>Don’t exempt project for PR’s for stalebot (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33086">#33086</a>)</li>
+<li>Validate UUID for tankerkoenig (<a href="https://github.com/guillempages">@guillempages</a> - <a href="https://github.com/OpenPeerPower/core/pull/32805">#32805</a>) (<a href="/integrations/tankerkoenig/">tankerkoenig docs</a>)</li>
+<li>bump version zigpy-cc (<a href="https://github.com/sanyatuning">@sanyatuning</a> - <a href="https://github.com/OpenPeerPower/core/pull/33097">#33097</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Add scan_interval support for NUT integration (<a href="https://github.com/cepresso">@cepresso</a> - <a href="https://github.com/OpenPeerPower/core/pull/31167">#31167</a>) (<a href="/integrations/nut/">nut docs</a>)</li>
+<li>Add DEVICE_CLASS_GATE (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33074">#33074</a>) (<a href="/integrations/cover/">cover docs</a>)</li>
+<li>Upgrade spotipy to 2.10.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33083">#33083</a>) (<a href="/integrations/spotify/">spotify docs</a>)</li>
+<li>Clean up Sonos attributes for radio streams (<a href="https://github.com/amelchio">@amelchio</a> - <a href="https://github.com/OpenPeerPower/core/pull/33063">#33063</a>) (<a href="/integrations/sonos/">sonos docs</a>) (breaking change)</li>
+<li>Handle query and anchors in Spotify URI’s (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33084">#33084</a>) (<a href="/integrations/spotify/">spotify docs</a>)</li>
+<li>Bump simplisafe-python to 9.0.5 (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33116">#33116</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>)</li>
+<li>Add Wi-Fi sensors to WLED integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33055">#33055</a>) (<a href="/integrations/wled/">wled docs</a>)</li>
+<li>Fix scheduled update time-drift in data update coordinator (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/32974">#32974</a>)</li>
+<li>Refactor ZHA EventChannels (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/32709">#32709</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Revert “Validate UUID for tankerkoenig (#32805)” (<a href="https://github.com/guillempages">@guillempages</a> - <a href="https://github.com/OpenPeerPower/core/pull/33123">#33123</a>) (<a href="/integrations/tankerkoenig/">tankerkoenig docs</a>)</li>
+<li>Config Flow and Entity registry support for Monoprice (<a href="https://github.com/OnFreund">@OnFreund</a> - <a href="https://github.com/OpenPeerPower/core/pull/30337">#30337</a>) (<a href="/integrations/monoprice/">monoprice docs</a>) (breaking change)</li>
+<li>Bump pyecobee to 0.2.3 (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33130">#33130</a>) (<a href="/integrations/ecobee/">ecobee docs</a>)</li>
+<li>Monoprice PR followups (<a href="https://github.com/OnFreund">@OnFreund</a> - <a href="https://github.com/OpenPeerPower/core/pull/33133">#33133</a>) (<a href="/integrations/monoprice/">monoprice docs</a>)</li>
+<li>Bump gios to 0.0.4 (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33141">#33141</a>) (<a href="/integrations/gios/">gios docs</a>)</li>
+<li>Add Miflora go_unavailable_timeout (<a href="https://github.com/ferbar">@ferbar</a> - <a href="https://github.com/OpenPeerPower/core/pull/31156">#31156</a>) (<a href="/integrations/miflora/">miflora docs</a>)</li>
+<li>Handle generic_thermostat state unavailable (<a href="https://github.com/austinmroczek">@austinmroczek</a> - <a href="https://github.com/OpenPeerPower/core/pull/32852">#32852</a>) (<a href="/integrations/generic_thermostat/">generic_thermostat docs</a>)</li>
+<li>Filter out duplicate app names from vizio’s source list (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/core/pull/33051">#33051</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>General code cleanups for lutron_caseta component (<a href="https://github.com/swails">@swails</a> - <a href="https://github.com/OpenPeerPower/core/pull/33144">#33144</a>) (<a href="/integrations/lutron_caseta/">lutron_caseta docs</a>) (breaking change)</li>
+<li>Add pvpc electricity prices integration (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/32092">#32092</a>) (<a href="/integrations/pvpc_hourly_pricing/">pvpc_hourly_pricing docs</a>) (new-integration)</li>
+<li>Bump iCloud to 0.9.6.1 (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/core/pull/33161">#33161</a>) (<a href="/integrations/icloud/">icloud docs</a>)</li>
+<li>Fix QVR Pro connection error and add port option (<a href="https://github.com/oblogic7">@oblogic7</a> - <a href="https://github.com/OpenPeerPower/core/pull/33070">#33070</a>)</li>
+<li>Add fahrenheit support in miflora sensor (<a href="https://github.com/idyedov">@idyedov</a> - <a href="https://github.com/OpenPeerPower/core/pull/33136">#33136</a>) (<a href="/integrations/miflora/">miflora docs</a>)</li>
+<li>Add gate support to myq, fix bouncy updates (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33124">#33124</a>) (<a href="/integrations/myq/">myq docs</a>)</li>
+<li>Integrate dockerbuild (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/core/pull/33168">#33168</a>)</li>
+<li>Add enable_wake_on_start option to Tesla (<a href="https://github.com/alandtse">@alandtse</a> - <a href="https://github.com/OpenPeerPower/core/pull/33035">#33035</a>) (<a href="/integrations/tesla/">tesla docs</a>)</li>
+<li>Make harmony handle IP address changes (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33173">#33173</a>) (<a href="/integrations/harmony/">harmony docs</a>)</li>
+<li>Improve sense timeout exception handling (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33127">#33127</a>) (<a href="/integrations/sense/">sense docs</a>)</li>
+<li>Add config flow for Nuheat (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32885">#32885</a>) (<a href="/integrations/nuheat/">nuheat docs</a>) (breaking change)</li>
+<li>Add support for occupancy/vacancy groups in Lutron Caseta component (<a href="https://github.com/swails">@swails</a> - <a href="https://github.com/OpenPeerPower/core/pull/33032">#33032</a>) (<a href="/integrations/lutron_caseta/">lutron_caseta docs</a>) (new-platform)</li>
+<li>Config flow for doorbird (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33165">#33165</a>) (<a href="/integrations/doorbird/">doorbird docs</a>)</li>
+<li>Add Tesla sentry mode switch (<a href="https://github.com/hobbe">@hobbe</a> - <a href="https://github.com/OpenPeerPower/core/pull/32938">#32938</a>) (<a href="/integrations/tesla/">tesla docs</a>)</li>
+<li>Support for COLOR_TEMP in Homematic dimmers (<a href="https://github.com/angelnu">@angelnu</a> - <a href="https://github.com/OpenPeerPower/core/pull/31207">#31207</a>) (<a href="/integrations/homematic/">homematic docs</a>)</li>
+<li>Add support for Bosch BMP280 Sensor (<a href="https://github.com/belidzs">@belidzs</a> - <a href="https://github.com/OpenPeerPower/core/pull/30837">#30837</a>) (<a href="/integrations/bmp280/">bmp280 docs</a>) (new-integration)</li>
+<li>Add Tado set presence (<a href="https://github.com/jasperro">@jasperro</a> - <a href="https://github.com/OpenPeerPower/core/pull/32765">#32765</a>) (<a href="/integrations/tado/">tado docs</a>)</li>
+<li>Add aircleaner and humidify service to nexia climate (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33078">#33078</a>) (<a href="/integrations/nexia/">nexia docs</a>)</li>
+<li>Update sw_version in device registry for ZHA devices (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/33184">#33184</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Switch legacy calls to init_recorder_component using async_add… (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33185">#33185</a>)</li>
+<li>Make sure entity platform services work for all platforms of d… (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33176">#33176</a>)</li>
+<li>Add effect service to WLED integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33026">#33026</a>) (<a href="/integrations/wled/">wled docs</a>)</li>
+<li>Add unique ID propery to braviatv entity (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33037">#33037</a>) (<a href="/integrations/braviatv/">braviatv docs</a>)</li>
+<li>Minor changes for new pvpc_hourly_pricing integration (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33177">#33177</a>) (<a href="/integrations/pvpc_hourly_pricing/">pvpc_hourly_pricing docs</a>)</li>
+<li>Fix state_automation_listener when new state is None (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/32985">#32985</a>) (<a href="/integrations/automation/">automation docs</a>)</li>
+<li>Add support for Minecraft SRV records (<a href="https://github.com/elmurato">@elmurato</a> - <a href="https://github.com/OpenPeerPower/core/pull/32372">#32372</a>) (<a href="/integrations/minecraft_server/">minecraft_server docs</a>)</li>
+<li>Fix Google Assistant temperature control for entity without mo… (<a href="https://github.com/oxan">@oxan</a> - <a href="https://github.com/OpenPeerPower/core/pull/33107">#33107</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>)</li>
+<li>Options flow for Monoprice sources (<a href="https://github.com/OnFreund">@OnFreund</a> - <a href="https://github.com/OpenPeerPower/core/pull/33156">#33156</a>) (<a href="/integrations/monoprice/">monoprice docs</a>)</li>
+<li>Add Nextcloud Integration (<a href="https://github.com/meichthys">@meichthys</a> - <a href="https://github.com/OpenPeerPower/core/pull/30871">#30871</a>) (<a href="/integrations/nextcloud/">nextcloud docs</a>) (new-integration)</li>
+<li>Bump to version 0.8.1 of denonavr (<a href="https://github.com/scarface-4711">@scarface-4711</a> - <a href="https://github.com/OpenPeerPower/core/pull/33169">#33169</a>) (<a href="/integrations/denonavr/">denonavr docs</a>)</li>
+<li>Upgrade youtube_dl to version 2020.03.24 (<a href="https://github.com/BKPepe">@BKPepe</a> - <a href="https://github.com/OpenPeerPower/core/pull/33202">#33202</a>) (<a href="/integrations/media_extractor/">media_extractor docs</a>)</li>
+<li>Add onvif snapshot uri (<a href="https://github.com/roleoroleo">@roleoroleo</a> - <a href="https://github.com/OpenPeerPower/core/pull/33149">#33149</a>)</li>
+<li>Add Context support for async_entity removal (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33209">#33209</a>) (<a href="/integrations/configurator/">configurator docs</a>) (<a href="/integrations/microsoft_face/">microsoft_face docs</a>) (<a href="/integrations/persistent_notification/">persistent_notification docs</a>)</li>
+<li>Add Body Composition data to Garmin Connect (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/core/pull/32841">#32841</a>) (<a href="/integrations/garmin_connect/">garmin_connect docs</a>)</li>
+<li>Allow more than one AirVisual config entry with the same API k… (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33072">#33072</a>) (<a href="/integrations/airvisual/">airvisual docs</a>)</li>
+<li>Add leak sensor support to Homekit integration (<a href="https://github.com/C6H6">@C6H6</a> - <a href="https://github.com/OpenPeerPower/core/pull/33171">#33171</a>) (<a href="/integrations/binary_sensor/">binary_sensor docs</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>)</li>
+<li>Fix minor bmp280 issues mentioned in late review (<a href="https://github.com/belidzs">@belidzs</a> - <a href="https://github.com/OpenPeerPower/core/pull/33211">#33211</a>) (<a href="/integrations/bmp280/">bmp280 docs</a>)</li>
+<li>Abort myq homekit config when one is already setup. (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33218">#33218</a>) (<a href="/integrations/myq/">myq docs</a>)</li>
+<li>Fix pre-commit hooks env for gen_requirements_all &amp; hassfest (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33187">#33187</a>)</li>
+<li>Enable Jemalloc for docker Core (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/core/pull/33237">#33237</a>)</li>
+<li>Add group entity support to ZHA (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33196">#33196</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix ONVIF camera snapshot with auth (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33241">#33241</a>) (<a href="/integrations/onvif/">onvif docs</a>)</li>
+<li>Bump aiohue version to 2.1.0 (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33234">#33234</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Fix issue with smhi-pkg (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/core/pull/33248">#33248</a>)</li>
+<li>Upgrade hole to 0.5.1 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/33249">#33249</a>) (<a href="/integrations/pi_hole/">pi_hole docs</a>)</li>
+<li>Update vizio app_id state attribute to show app config dict in… (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/core/pull/32727">#32727</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Add group entities for ZHA switches (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33207">#33207</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Dynamic update interval for Airly integration (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/31459">#31459</a>) (<a href="/integrations/airly/">airly docs</a>)</li>
+<li>Activate asyncio debug when HA run in debug mode (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33251">#33251</a>)</li>
+<li>Refactor API documentation (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/33217">#33217</a>)</li>
+<li>Revert “Fix issue with smhi-pkg” (<a href="https://github.com/pvizeli">@pvizeli</a> - <a href="https://github.com/OpenPeerPower/core/pull/33259">#33259</a>)</li>
+<li>Bump gios library to version 0.0.5 (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33266">#33266</a>) (<a href="/integrations/gios/">gios docs</a>)</li>
+<li>Upgrade discord.py to 1.3.2 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/33280">#33280</a>) (<a href="/integrations/discord/">discord docs</a>)</li>
+<li>Upgrade jinja2 to &gt;=2.11.1 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/33244">#33244</a>)</li>
+<li>Upgrade pyyaml to 5.3.1 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/33246">#33246</a>)</li>
+<li>Fix GDACS integration to remove stale entities from entity registry (<a href="https://github.com/exxamalte">@exxamalte</a> - <a href="https://github.com/OpenPeerPower/core/pull/33283">#33283</a>) (<a href="/integrations/gdacs/">gdacs docs</a>)</li>
+<li>Add Android TV cover art (screen content) (<a href="https://github.com/i00">@i00</a> - <a href="https://github.com/OpenPeerPower/core/pull/33232">#33232</a>) (<a href="/integrations/androidtv/">androidtv docs</a>)</li>
+<li>Update PySwitchbot to 0.8.0 and add password configuration option (<a href="https://github.com/jarylc">@jarylc</a> - <a href="https://github.com/OpenPeerPower/core/pull/33252">#33252</a>) (<a href="/integrations/switchbot/">switchbot docs</a>)</li>
+<li>Handle empty Plex client username (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33271">#33271</a>) (<a href="/integrations/plex/">plex docs</a>)</li>
+<li>Upgrade tibber to 0.13.6 (<a href="https://github.com/Danielhiversen">@Danielhiversen</a> - <a href="https://github.com/OpenPeerPower/core/pull/33293">#33293</a>) (<a href="/integrations/tibber/">tibber docs</a>)</li>
+<li>Bump nexia to 0.7.2 (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33292">#33292</a>) (<a href="/integrations/nexia/">nexia docs</a>)</li>
+<li>Abort rachio homekit config when one is already setup (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33285">#33285</a>) (<a href="/integrations/rachio/">rachio docs</a>)</li>
+<li>Support homekit matches that have a dash after the model (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33274">#33274</a>) (<a href="/integrations/zeroconf/">zeroconf docs</a>)</li>
+<li>Add support for dashboards to lovelace cast service (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/32913">#32913</a>) (<a href="/integrations/cast/">cast docs</a>)</li>
+<li>Remove state when entity is removed from registry (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/32184">#32184</a>)</li>
+<li>Add entities for ZHA fan groups (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33291">#33291</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix ZHA light crashing on color loop effect (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33298">#33298</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix dispatcher logging (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33299">#33299</a>)</li>
+<li>Add integration for Schluter (<a href="https://github.com/prairieapps">@prairieapps</a> - <a href="https://github.com/OpenPeerPower/core/pull/31088">#31088</a>) (<a href="/integrations/schluter/">schluter docs</a>) (new-integration)</li>
+<li>Config flow for elkm1 (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33297">#33297</a>) (<a href="/integrations/elkm1/">elkm1 docs</a>) (breaking change)</li>
+<li>Bump nexia to 0.7.3 (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33311">#33311</a>) (<a href="/integrations/nexia/">nexia docs</a>)</li>
+<li>Fix setting HomeKit temperatures with imperial units (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33315">#33315</a>) (<a href="/integrations/homekit/">homekit docs</a>)</li>
+<li>Implement Alexa.CameraStreamController in Alexa (<a href="https://github.com/ochlocracy">@ochlocracy</a> - <a href="https://github.com/OpenPeerPower/core/pull/32772">#32772</a>) (<a href="/integrations/alexa/">alexa docs</a>)</li>
+<li>Fail tests with uncaught exceptions (<a href="https://github.com/ziv1234">@ziv1234</a> - <a href="https://github.com/OpenPeerPower/core/pull/33312">#33312</a>)</li>
+<li>Fix ZHA light group on state (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33308">#33308</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix nuheat unexpectedly switching to a permanent hold (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33316">#33316</a>) (<a href="/integrations/nuheat/">nuheat docs</a>)</li>
+<li>:vicare: Improve scan_interval (<a href="https://github.com/oischinger">@oischinger</a> - <a href="https://github.com/OpenPeerPower/core/pull/33294">#33294</a>) (<a href="/integrations/vicare/">vicare docs</a>)</li>
+<li>Fix Lovelace resources health info (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33309">#33309</a>) (<a href="/integrations/lovelace/">lovelace docs</a>)</li>
+<li>Add inline comments to elkm1 about how config is updated from… (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33361">#33361</a>) (<a href="/integrations/elkm1/">elkm1 docs</a>)</li>
+<li>Fix Abode tests uncaught exceptions (<a href="https://github.com/shred86">@shred86</a> - <a href="https://github.com/OpenPeerPower/core/pull/33365">#33365</a>)</li>
+<li>Fix GDACS tests (<a href="https://github.com/exxamalte">@exxamalte</a> - <a href="https://github.com/OpenPeerPower/core/pull/33357">#33357</a>) (<a href="/integrations/gdacs/">gdacs docs</a>)</li>
+<li>Fix broken supported_features in Plum Lightpad (<a href="https://github.com/ColinHarrington">@ColinHarrington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33319">#33319</a>) (<a href="/integrations/plum_lightpad/">plum_lightpad docs</a>)</li>
+<li>Fix uncaught exceptions in dynalite (<a href="https://github.com/ziv1234">@ziv1234</a> - <a href="https://github.com/OpenPeerPower/core/pull/33374">#33374</a>) (<a href="/integrations/dynalite/">dynalite docs</a>)</li>
+<li>Fixes for Sonos media position (<a href="https://github.com/amelchio">@amelchio</a> - <a href="https://github.com/OpenPeerPower/core/pull/33379">#33379</a>) (<a href="/integrations/sonos/">sonos docs</a>)</li>
+<li>Update ZHA group entity when Zigbee group membership changes (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33378">#33378</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Migrate GIOS to use DataUpdateCoordinator (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33306">#33306</a>) (<a href="/integrations/gios/">gios docs</a>)</li>
+<li>Fix media_player supported features default value (<a href="https://github.com/rigrig">@rigrig</a> - <a href="https://github.com/OpenPeerPower/core/pull/33366">#33366</a>) (<a href="/integrations/bluesound/">bluesound docs</a>) (<a href="/integrations/emby/">emby docs</a>) (<a href="/integrations/mpd/">mpd docs</a>)</li>
+<li>Fix openweathermap sensor.py so no KeyError if raining is miss… (<a href="https://github.com/austinmroczek">@austinmroczek</a> - <a href="https://github.com/OpenPeerPower/core/pull/33372">#33372</a>) (<a href="/integrations/openweathermap/">openweathermap docs</a>)</li>
+<li>Calculate Plum Lightpad brightness and glowIntensity correctly (<a href="https://github.com/ColinHarrington">@ColinHarrington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33352">#33352</a>) (<a href="/integrations/plum_lightpad/">plum_lightpad docs</a>)</li>
+<li>Fix homematicip_cloud tests that have uncaught exceptions (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/core/pull/33371">#33371</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>)</li>
+<li>Handle Plex certificate updates (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33230">#33230</a>) (<a href="/integrations/plex/">plex docs</a>)</li>
+<li>Fix wrong SI unit_prefix in Integration component (#33227) (<a href="https://github.com/bangom">@bangom</a> - <a href="https://github.com/OpenPeerPower/core/pull/33228">#33228</a>) (<a href="/integrations/integration/">integration docs</a>)</li>
+<li>Upgrade broadlink to 0.13.0 (<a href="https://github.com/tiagofreire-pt">@tiagofreire-pt</a> - <a href="https://github.com/OpenPeerPower/core/pull/33240">#33240</a>) (<a href="/integrations/broadlink/">broadlink docs</a>)</li>
+<li>plexwebsocket bump 0.0.7 to fix ignored tests (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33398">#33398</a>) (<a href="/integrations/plex/">plex docs</a>)</li>
+<li>Miscellaneous ZHA code cleanup (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33395">#33395</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Modbus patch, to allow communication with “slow” equipment using tcp (<a href="https://github.com/janiversen">@janiversen</a> - <a href="https://github.com/OpenPeerPower/core/pull/32557">#32557</a>) (<a href="/integrations/modbus/">modbus docs</a>)</li>
+<li>Bump opencv to 4.2.0.32 (<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/core/pull/33391">#33391</a>) (<a href="/integrations/opencv/">opencv docs</a>)</li>
+<li>Use new HMIP labels for HomematicIP Cloud multi devices (<a href="https://github.com/SukramJ">@SukramJ</a> - <a href="https://github.com/OpenPeerPower/core/pull/32925">#32925</a>) (<a href="/integrations/homematicip_cloud/">homematicip_cloud docs</a>) (breaking change)</li>
+<li>Handle Ecobee service timeouts (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33381">#33381</a>) (<a href="/integrations/ecobee/">ecobee docs</a>)</li>
+<li>Bluesound volume stepper bugfix (<a href="https://github.com/thrawnarn">@thrawnarn</a> - <a href="https://github.com/OpenPeerPower/core/pull/33404">#33404</a>) (<a href="/integrations/bluesound/">bluesound docs</a>)</li>
+<li>Bump aiohomekit version to fix Ecobee Switch (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/core/pull/33396">#33396</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>)</li>
+<li>Fix GeoNet NZ Quakes tests (<a href="https://github.com/exxamalte">@exxamalte</a> - <a href="https://github.com/OpenPeerPower/core/pull/33383">#33383</a>) (<a href="/integrations/geonetnz_quakes/">geonetnz_quakes docs</a>)</li>
+<li>fix ZHA IASWD commands (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33402">#33402</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Bump aioambient to 1.1.0 (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33414">#33414</a>) (<a href="/integrations/ambient_station/">ambient_station docs</a>)</li>
+<li>Remove Modbus legacy code (<a href="https://github.com/janiversen">@janiversen</a> - <a href="https://github.com/OpenPeerPower/core/pull/33407">#33407</a>) (<a href="/integrations/modbus/">modbus docs</a>)</li>
+<li>Prevent nut from doing I/O in the event loop (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33420">#33420</a>) (<a href="/integrations/nut/">nut docs</a>)</li>
+<li>Add konnected multi output (<a href="https://github.com/kit-klein">@kit-klein</a> - <a href="https://github.com/OpenPeerPower/core/pull/33412">#33412</a>) (<a href="/integrations/konnected/">konnected docs</a>)</li>
+<li>Fix for nissan_leaf component getting stuck (<a href="https://github.com/vwir">@vwir</a> - <a href="https://github.com/OpenPeerPower/core/pull/33425">#33425</a>) (<a href="/integrations/nissan_leaf/">nissan_leaf docs</a>)</li>
+<li>Move Tado zone state handling into upstream python-tado library (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33195">#33195</a>) (<a href="/integrations/tado/">tado docs</a>)</li>
+<li>Filter the history of device_tracker by location attributes (<a href="https://github.com/Santobert">@Santobert</a> - <a href="https://github.com/OpenPeerPower/core/pull/33356">#33356</a>) (<a href="/integrations/history/">history docs</a>)</li>
+<li>Fix detection of zone master in soundtouch media_player (<a href="https://github.com/da-anda">@da-anda</a> - <a href="https://github.com/OpenPeerPower/core/pull/33157">#33157</a>) (<a href="/integrations/soundtouch/">soundtouch docs</a>)</li>
+<li>RFC - Add a 3rd state to the HA shutdown sequence for writing… (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33358">#33358</a>)</li>
+<li>Add KEF services for DSP (<a href="https://github.com/basnijholt">@basnijholt</a> - <a href="https://github.com/OpenPeerPower/core/pull/31967">#31967</a>) (<a href="/integrations/kef/">kef docs</a>)</li>
+<li>Add ability to specify group when creating user (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33373">#33373</a>) (<a href="/integrations/config/">config docs</a>)</li>
+<li>Updated frontend to 20200330.0 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33449">#33449</a>) (<a href="/integrations/frontend/">frontend docs</a>)</li>
+<li>Fix change of entity_id for discovered MQTT entities (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/33444">#33444</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</li>
+<li>Add new mapped weather condition classes to Météo France (<a href="https://github.com/evoblicec">@evoblicec</a> - <a href="https://github.com/OpenPeerPower/core/pull/33450">#33450</a>) (<a href="/integrations/meteo_france/">meteo_france docs</a>)</li>
+<li>Add Internet Printing Protocol (IPP) integration (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/32859">#32859</a>) (<a href="/integrations/ipp/">ipp docs</a>) (new-integration)</li>
+<li>Correct FortiOS integration name in manifest (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33454">#33454</a>) (<a href="/integrations/fortios/">fortios docs</a>)</li>
+<li>bump version zigpy-cc (<a href="https://github.com/sanyatuning">@sanyatuning</a> - <a href="https://github.com/OpenPeerPower/core/pull/33448">#33448</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Fix uncaught exceptions in ZHA tests (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33442">#33442</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Add HomeKit support for slat tilting (<a href="https://github.com/mst">@mst</a> - <a href="https://github.com/OpenPeerPower/core/pull/33388">#33388</a>) (<a href="/integrations/homekit/">homekit docs</a>)</li>
+<li>Overhaul the Slack integration (async and Block Kit support) (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33287">#33287</a>) (<a href="/integrations/slack/">slack docs</a>) (breaking change)</li>
+<li>Update issue templates (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33434">#33434</a>)</li>
+<li>Require admin to manage lovelace (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33435">#33435</a>) (<a href="/integrations/lovelace/">lovelace docs</a>)</li>
+<li>Fix hue tests that have uncaught exceptions (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33443">#33443</a>)</li>
+<li>Fix deconz tests that have uncaught exceptions (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33462">#33462</a>) (<a href="/integrations/deconz/">deconz docs</a>)</li>
+<li>Best effort state initialization of bayesian binary sensor (<a href="https://github.com/jlmcgehee21">@jlmcgehee21</a> - <a href="https://github.com/OpenPeerPower/core/pull/30962">#30962</a>) (<a href="/integrations/bayesian/">bayesian docs</a>)</li>
+<li>Fire events for hue remote buttons pressed (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33277">#33277</a>) (<a href="/integrations/hue/">hue docs</a>) (new-platform)</li>
+<li>Add humidity support to homekit thermostats (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33367">#33367</a>) (<a href="/integrations/homekit/">homekit docs</a>)</li>
+<li>Improve handling of nuheat switching states (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33410">#33410</a>) (<a href="/integrations/nuheat/">nuheat docs</a>)</li>
+<li>Add binary sensor for myq gateway connectivity (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33423">#33423</a>) (<a href="/integrations/myq/">myq docs</a>) (new-platform)</li>
+<li>Retry sense setup later if listing devices times out. (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33455">#33455</a>) (<a href="/integrations/sense/">sense docs</a>)</li>
+<li>Google Assistant: parallize as many requests as possible (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33472">#33472</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>)</li>
+<li>Add version and device type to powerwall device_info (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33453">#33453</a>) (<a href="/integrations/powerwall/">powerwall docs</a>)</li>
+<li>update VIZIO name to match brand guidelines (<a href="https://github.com/raman325">@raman325</a> - <a href="https://github.com/OpenPeerPower/core/pull/33465">#33465</a>) (<a href="/integrations/vizio/">vizio docs</a>)</li>
+<li>Bumped Apprise version to v0.8.5 (<a href="https://github.com/caronc">@caronc</a> - <a href="https://github.com/OpenPeerPower/core/pull/33473">#33473</a>) (<a href="/integrations/apprise/">apprise docs</a>)</li>
+<li>Ignore link local addresses during doorbird ssdp config flow (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33401">#33401</a>) (<a href="/integrations/doorbird/">doorbird docs</a>)</li>
+<li>Prepare rachio for cloudhooks conversion (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33422">#33422</a>) (<a href="/integrations/rachio/">rachio docs</a>)</li>
+<li>Enable KNX tunnel auto_reconnect by default (<a href="https://github.com/cyberjunky">@cyberjunky</a> - <a href="https://github.com/OpenPeerPower/core/pull/33387">#33387</a>) (<a href="/integrations/knx/">knx docs</a>)</li>
+<li>Fix setting zone overlays for tados that support swing (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33439">#33439</a>) (<a href="/integrations/tado/">tado docs</a>)</li>
+<li>Refactor DirecTV Integration to Async (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33114">#33114</a>) (<a href="/integrations/directv/">directv docs</a>) (<a href="/integrations/directv/">directv docs</a>)</li>
+<li>allow overriding host api url in config flow (<a href="https://github.com/kit-klein">@kit-klein</a> - <a href="https://github.com/OpenPeerPower/core/pull/33481">#33481</a>) (<a href="/integrations/konnected/">konnected docs</a>)</li>
+<li>Apply recommendations from IPP review (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33477">#33477</a>)</li>
+<li>Add config flow for nut (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33457">#33457</a>) (<a href="/integrations/nut/">nut docs</a>) (breaking change)</li>
+<li>Bump up zha dependencies. (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/33488">#33488</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Correct issue on new device joins in ZHA (<a href="https://github.com/dmulcahey">@dmulcahey</a> - <a href="https://github.com/OpenPeerPower/core/pull/33470">#33470</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Replace asyncio.wait with asyncio.gather since wait ignores exceptions (<a href="https://github.com/ziv1234">@ziv1234</a> - <a href="https://github.com/OpenPeerPower/core/pull/33380">#33380</a>)</li>
+<li>Clean up ZHA channel reporting configuration (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/33497">#33497</a>) (<a href="/integrations/zha/">zha docs</a>)</li>
+<li>Add MQTT debug info (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/33461">#33461</a>) (<a href="/integrations/mqtt/">mqtt docs</a>)</li>
+<li>Fix invalid directory for dnsmasq files in asuswrt (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/core/pull/33503">#33503</a>) (<a href="/integrations/asuswrt/">asuswrt docs</a>)</li>
+<li>Expand network util to check for link local addresses (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33499">#33499</a>) (<a href="/integrations/axis/">axis docs</a>) (<a href="/integrations/doorbird/">doorbird docs</a>)</li>
+<li>Updated frontend to 20200401.0 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33505">#33505</a>) (<a href="/integrations/frontend/">frontend docs</a>)</li>
+<li>Add device triggers for Hue remotes (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33476">#33476</a>) (<a href="/integrations/hue/">hue docs</a>)</li>
+<li>Enable sisyphus to recover from bad DNS without restart (<a href="https://github.com/jkeljo">@jkeljo</a> - <a href="https://github.com/OpenPeerPower/core/pull/32846">#32846</a>) (<a href="/integrations/sisyphus/">sisyphus docs</a>) (beta fix)</li>
+<li>Fix netatmo device unavailable and services (<a href="https://github.com/cgtobi">@cgtobi</a> - <a href="https://github.com/OpenPeerPower/core/pull/33509">#33509</a>) (<a href="/integrations/netatmo/">netatmo docs</a>) (beta fix)</li>
+<li>Remove extraneous parameter from AlarmDecoder services (<a href="https://github.com/ajschmidt8">@ajschmidt8</a> - <a href="https://github.com/OpenPeerPower/core/pull/33516">#33516</a>) (beta fix)</li>
+<li>Update to roku==4.1.0 (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33520">#33520</a>) (<a href="/integrations/roku/">roku docs</a>) (beta fix)</li>
+<li>Bump brother to 0.1.11 (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33526">#33526</a>) (<a href="/integrations/brother/">brother docs</a>) (beta fix)</li>
+<li>Clarify light reproduce state deprecation warning (<a href="https://github.com/MartinHjelmare">@MartinHjelmare</a> - <a href="https://github.com/OpenPeerPower/core/pull/33531">#33531</a>) (<a href="/integrations/light/">light docs</a>) (beta fix)</li>
+<li>Fix MQTT cleanup regression from #32184. (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/33532">#33532</a>) (<a href="/integrations/mqtt/">mqtt docs</a>) (beta fix)</li>
+<li>Ensure harmony hub is ready before importing (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33537">#33537</a>) (<a href="/integrations/harmony/">harmony docs</a>) (beta fix)</li>
+<li>Bump HAP-python to 2.8.0 (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33539">#33539</a>) (<a href="/integrations/homekit/">homekit docs</a>) (beta fix)</li>
+<li>Mark new gate device class as 2FA (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33541">#33541</a>) (<a href="/integrations/google_assistant/">google_assistant docs</a>) (beta fix)</li>
+<li>Temporary Plex play_media workaround (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33542">#33542</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Bump pyipp to 0.8.2 (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33544">#33544</a>) (<a href="/integrations/ipp/">ipp docs</a>) (beta fix)</li>
+<li>Update to pyipp==0.8.3 (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33554">#33554</a>) (<a href="/integrations/ipp/">ipp docs</a>) (beta fix)</li>
+<li>Use homekit service callbacks for lights to resolve out of sync states (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/32348">#32348</a>) (<a href="/integrations/homekit/">homekit docs</a>) (beta fix)</li>
+<li>Fix asuswrt network failure startup (<a href="https://github.com/ollo69">@ollo69</a> - <a href="https://github.com/OpenPeerPower/core/pull/33485">#33485</a>) (<a href="/integrations/asuswrt/">asuswrt docs</a>) (beta fix)</li>
+<li>Convert TTS tests to async (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33517">#33517</a>) (<a href="/integrations/tts/">tts docs</a>) (beta fix)</li>
+<li>Add missing flow_title to doorbird (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33557">#33557</a>) (<a href="/integrations/doorbird/">doorbird docs</a>) (beta fix)</li>
+<li>Plex followup to #33542 (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33558">#33558</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Identify cameras in error logs for generic and mjpeg cameras (<a href="https://github.com/azogue">@azogue</a> - <a href="https://github.com/OpenPeerPower/core/pull/33561">#33561</a>) (<a href="/integrations/mjpeg/">mjpeg docs</a>) (beta fix)</li>
+<li>Upgrade luftdaten to 0.6.4 (<a href="https://github.com/fabaff">@fabaff</a> - <a href="https://github.com/OpenPeerPower/core/pull/33564">#33564</a>) (<a href="/integrations/luftdaten/">luftdaten docs</a>) (beta fix)</li>
+<li>Fix source name (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33565">#33565</a>) (<a href="/integrations/braviatv/">braviatv docs</a>) (beta fix)</li>
+<li>Bump gios library to version 0.1.1 (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/core/pull/33569">#33569</a>) (<a href="/integrations/gios/">gios docs</a>) (beta fix)</li>
+<li>Fix browsing regression (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/core/pull/33572">#33572</a>) (<a href="/integrations/zeroconf/">zeroconf docs</a>) (beta fix)</li>
+<li>Bump adguardhome to 0.4.2 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33575">#33575</a>) (<a href="/integrations/adguard/">adguard docs</a>) (beta fix)</li>
+<li>Add default delay to Harmony config entries (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33576">#33576</a>) (<a href="/integrations/harmony/">harmony docs</a>) (beta fix)</li>
+<li>Updated frontend to 20200403.0 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33586">#33586</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Debounce calls to Plex server (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33560">#33560</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Hass.io integration do not warn safe mode (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33600">#33600</a>) (<a href="/integrations/hassio/">hassio docs</a>) (beta fix)</li>
+<li>Use IP addresses instead of mDNS names when wled discovered (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/core/pull/33608">#33608</a>) (<a href="/integrations/wled/">wled docs</a>) (beta fix)</li>
+<li>Identify more Sonos radio stations with poor titles (<a href="https://github.com/amelchio">@amelchio</a> - <a href="https://github.com/OpenPeerPower/core/pull/33609">#33609</a>) (<a href="/integrations/sonos/">sonos docs</a>) (beta fix)</li>
+<li>Use IP addresses instead of mDNS names when IPP discovered (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33610">#33610</a>) (<a href="/integrations/ipp/">ipp docs</a>) (beta fix)</li>
+<li>Handle race condition in harmony setup (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33611">#33611</a>) (<a href="/integrations/harmony/">harmony docs</a>) (beta fix)</li>
+<li>Bump twentemilieu to 0.3.0 (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/core/pull/33622">#33622</a>) (<a href="/integrations/twentemilieu/">twentemilieu docs</a>) (beta fix)</li>
+<li>Update zha dependencies (<a href="https://github.com/Adminiuga">@Adminiuga</a> - <a href="https://github.com/OpenPeerPower/core/pull/33639">#33639</a>) (<a href="/integrations/zha/">zha docs</a>) (beta fix)</li>
+<li>Plex logging additions &amp; cleanup (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33681">#33681</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Handle float values for homekit lightning (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33683">#33683</a>) (<a href="/integrations/homekit/">homekit docs</a>) (beta fix)</li>
+<li>Skip parsing Plex session if incomplete (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33534">#33534</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Fix nuheat response error checking (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33712">#33712</a>) (<a href="/integrations/nuheat/">nuheat docs</a>) (beta fix)</li>
+<li>Fix rachio import of run time from yaml (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33723">#33723</a>) (<a href="/integrations/rachio/">rachio docs</a>) (beta fix)</li>
+<li>Fix Plex debounce wrapper (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33730">#33730</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Fix MQTT debug info for subscriptions with wildcard. (<a href="https://github.com/emontnemery">@emontnemery</a> - <a href="https://github.com/OpenPeerPower/core/pull/33744">#33744</a>) (<a href="/integrations/mqtt/">mqtt docs</a>) (beta fix)</li>
+<li>Abort rachio config flow if the api key is already configured… (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33747">#33747</a>) (<a href="/integrations/rachio/">rachio docs</a>) (beta fix)</li>
+<li>Bump frontend (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33751">#33751</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Defer Plex sensor retry instead of aborting (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33753">#33753</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Bump HAP-python to 2.8.1 (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33756">#33756</a>) (<a href="/integrations/homekit/">homekit docs</a>) (beta fix)</li>
+<li>Bump aioambient to 1.1.1 (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33761">#33761</a>) (<a href="/integrations/ambient_station/">ambient_station docs</a>) (beta fix)</li>
+<li>Bump simplisafe-python to 9.0.6 (<a href="https://github.com/bachya">@bachya</a> - <a href="https://github.com/OpenPeerPower/core/pull/33762">#33762</a>) (<a href="/integrations/simplisafe/">simplisafe docs</a>) (beta fix)</li>
+<li>Catch IPPParseError during config flow (<a href="https://github.com/ctalkington">@ctalkington</a> - <a href="https://github.com/OpenPeerPower/core/pull/33769">#33769</a>) (<a href="/integrations/ipp/">ipp docs</a>) (beta fix)</li>
+<li>Update nexia for thermostats without zoning (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33770">#33770</a>) (<a href="/integrations/nexia/">nexia docs</a>) (beta fix)</li>
+<li>Fix nuheat reverting to auto mode after setting temp hold (<a href="https://github.com/bdraco">@bdraco</a> - <a href="https://github.com/OpenPeerPower/core/pull/33772">#33772</a>) (<a href="/integrations/nuheat/">nuheat docs</a>) (beta fix)</li>
+<li>Fix minor async issues in Plex (<a href="https://github.com/jjlawren">@jjlawren</a> - <a href="https://github.com/OpenPeerPower/core/pull/33785">#33785</a>) (<a href="/integrations/plex/">plex docs</a>) (beta fix)</li>
+<li>Fix unhandled exceptions for config, default_config, harmony (<a href="https://github.com/ziv1234">@ziv1234</a> - <a href="https://github.com/OpenPeerPower/core/pull/33731">#33731</a>) (<a href="/integrations/config/">config docs</a>) (<a href="/integrations/default_config/">default_config docs</a>) (<a href="/integrations/harmony/">harmony docs</a>) (beta fix)</li>
+<li>Updated frontend to 20200407.1 (<a href="https://github.com/bramkragten">@bramkragten</a> - <a href="https://github.com/OpenPeerPower/core/pull/33799">#33799</a>) (<a href="/integrations/frontend/">frontend docs</a>) (beta fix)</li>
+<li>Bump pyW215 to 0.7.0 (<a href="https://github.com/springstan">@springstan</a> - <a href="https://github.com/OpenPeerPower/core/pull/33786">#33786</a>) ([dlink docs]) (beta fix)</li>
+</ul>
+</details>
+:ET

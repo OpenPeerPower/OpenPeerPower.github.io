@@ -1,0 +1,36 @@
+I":<p>The Picture card allows you to set an image to use for navigation to various paths in your interface or to call a service.</p>
+<p class='img'>
+<img src='/images/lovelace/lovelace_picture.png' alt='Screenshot of the picture card'>
+Screenshot of the picture card.
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>picture</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>The URL of an image.</p>
+</span></p></dd><dt><a class='title-link' name='theme' href='#theme'></a> theme</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to any theme within <code>themes.yaml</code></p>
+</span></p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Options For Exemptions</h2>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='user' href='#user'></a> user</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>User id that can see the view tab.</p>
+</span></p></dd></dl>
+</div>
+<h2>Examples</h2>
+<p>Navigate to another view:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture
+image: /local/home.jpg
+tap_action:
+  action: navigate
+  navigation_path: /lovelace/home</code></pre></figure>
+<p>Check the <a href="/lovelace/views/">views</a> setup on how to setup custom IDs.</p>
+<p>Toggle entity using a service:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture
+image: /local/light.png
+service: light.toggle
+service_data:
+  entity_id: light.ceiling_lights</code></pre></figure>
+:ET

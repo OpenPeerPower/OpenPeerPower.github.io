@@ -1,0 +1,261 @@
+I"�:<h3>What are triggers</h3>
+<p>Triggers are what starts the processing of an automation rule. When <em>any</em> of the automation’s triggers becomes true (trigger <em>fires</em>), Open Peer Power will validate the <a href="/docs/automation/condition/">conditions</a>, if any, and call the <a href="/docs/automation/action/">action</a>.</p>
+<h3>Event trigger</h3>
+<p>Fires when an event is being received. Events are the raw building blocks of Open Peer Power. You can match events on just the event name or also require specific event data to be present.</p>
+<p>Events can be fired by integrations or via the API. There is no limitation to the types. A list of built-in events can be found <a href="/docs/configuration/events/">here</a>.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: event
+    event_type: MY_CUSTOM_EVENT
+    # optional
+    event_data:
+      mood: happy</code></pre></figure>
+<h3>Open Peer Power trigger</h3>
+<p>Fires when Open Peer Power starts up or shuts down.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: openpeerpower
+    # Event can also be &#39;shutdown&#39;
+    event: start</code></pre></figure>
+<h3>MQTT trigger</h3>
+<p>Fires when a specific message is received on given MQTT topic. Optionally can match on the payload being sent over the topic. The default payload encoding is ‘utf-8’. For images and other byte payloads use <code>encoding: ''</code> to disable payload decoding completely.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: mqtt
+    topic: living_room/switch/ac
+    # Optional
+    payload: &quot;on&quot;
+    encoding: &quot;utf-8&quot;</code></pre></figure>
+<h3>Numeric state trigger</h3>
+<p>Fires when numeric value of an entity’s state crosses a given threshold. On state change of a specified entity, attempts to parse the state as a number and fires if value is changing from above to below or from below to above the given threshold.</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: numeric_state
+entity_id: sensor.temperature
+# Optional
+value_template: “{{ state.attributes.battery }}”
+# At least one of the following required
+above: 17
+below: 25</p>
+<pre><code># If given, will trigger when condition has been for X time, can also use days and milliseconds.
+for:
+  hours: 1
+  minutes: 10
+  seconds: 5
+</code></pre>
+<p>{% endhighlight %}</p>
+<div class='note'>
+Listing above and below together means the numeric_state has to be between the two values.
+In the example above, the trigger would fire if a numeric_state goes to 17.1-24.9 (from 17 or below, or 25 or above).
+</div>
+<p>The <code>for:</code> can also be specified as <code>HH:MM:SS</code> like this:</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: numeric_state
+entity_id: sensor.temperature
+# Optional
+value_template: “{{ state.attributes.battery }}”
+# At least one of the following required
+above: 17
+below: 25</p>
+<pre><code># If given, will trigger when condition has been for X time.
+for: &quot;01:10:05&quot;
+</code></pre>
+<p>{% endhighlight %}</p>
+<p>You can also use templates in the <code>for</code> option.</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: numeric_state
+entity_id:
+- sensor.temperature_1
+- sensor.temperature_2
+above: 80
+for:
+minutes: “{{ states(‘input_number.high_temp_min’)|int }}”
+seconds: “{{ states(‘input_number.high_temp_sec’)|int }}”
+action:
+service: persistent_notification.create
+data_template:
+message: &gt;
+{{ trigger.to_state.name }} too high for {{ trigger.for }}!
+{% endhighlight %}</p>
+<p>The <code>for</code> template(s) will be evaluated when an entity changes as specified.</p>
+<h3>State trigger</h3>
+<p>Fires when the state of any of given entities changes. If only <code>entity_id</code> is given trigger will fire for all state changes, even if only state attributes change.</p>
+<div class='note'>
+<p>The values you see in your overview will often not be the same as the actual state of the entity. For instance, the overview may show <code>Connected</code> when the underlying entity is actually <code>on</code>. You should check the state of the entity by looking in the <em>States</em> menu under <em>Developer tools</em>.</p>
+</div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: state
+    entity_id: device_tracker.paulus, device_tracker.anne_therese
+    # Optional
+    from: &quot;not_home&quot;
+    # Optional
+    to: &quot;home&quot;
+<pre><code># If given, will trigger when state has been the to state for X time.
+for: &amp;quot;01:10:05&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+</code></pre>
+<p>You can also use templates in the <code>for</code> option.</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: state
+entity_id: device_tracker.paulus, device_tracker.anne_therese
+to: “home”
+for:
+minutes: “{{ states(‘input_number.lock_min’)|int }}”
+seconds: “{{ states(‘input_number.lock_sec’)|int }}”
+action:
+service: lock.lock
+entity_id: lock.my_place
+{% endhighlight %}</p>
+<p>The <code>for</code> template(s) will be evaluated when an entity changes as specified.</p>
+<div class='note warning'>
+<p>Use quotes around your values for <code>from</code> and <code>to</code> to avoid the YAML parser interpreting values as booleans.</p>
+</div>
+<h3>Sun trigger</h3>
+<h4>Sunset / Sunrise trigger</h4>
+<p>Fires when the sun is setting or rising, i.e., when the sun elevation reaches 0°.</p>
+<p>An optional time offset can be given to have it fire a set time before or after the sun event (e.g.,  45 minutes before sunset).</p>
+<div class='note'>
+<p>Since the duration of twilight is different throughout the year, it is recommended to use <a href="/docs/automation/trigger/#sun-elevation-trigger">sun elevation triggers</a> instead of <code>sunset</code> or <code>sunrise</code> with a time offset to trigger automations during dusk or dawn.</p>
+</div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: sun
+    # Possible values: sunset, sunrise
+    event: sunset
+    # Optional time offset. This example will trigger 45 minutes before sunset.
+    offset: &quot;-00:45:00&quot;</code></pre></figure>
+<h4>Sun elevation trigger</h4>
+<p>Sometimes you may want more granular control over an automation than simply sunset or sunrise and specify an exact elevation of the sun. This can be used to layer automations to occur as the sun lowers on the horizon or even after it is below the horizon. This is also useful when the “sunset” event is not dark enough outside and you would like the automation to run later at a precise solar angle instead of the time offset such as turning on exterior lighting. For most automations intended to run during dusk or dawn, a number between 0° and -6° is suitable; -4° is used in this example:</p>
+<p>{% highlight yaml %}
+automation:
+alias: “Exterior Lighting on when dark outside”
+trigger:
+platform: numeric_state
+entity_id: sun.sun
+value_template: “{{ state_attr(‘sun.sun’, ‘elevation’) }}”
+# Can be a positive or negative number
+below: -4.0
+action:
+service: switch.turn_on
+entity_id: switch.exterior_lighting
+{% endhighlight %}</p>
+<p>If you want to get more precise, start with the US Naval Observatory <a href="https://aa.usno.navy.mil/data/docs/AltAz.php">tool</a> which will help you estimate what the solar elevation will be at any specific time. Then from this, you can select from the defined twilight numbers.</p>
+<p>Although the actual amount of light depends on weather, topography and land cover, they are defined as:</p>
+<ul>
+<li>
+<p>Civil twilight: 0° &gt; Solar angle &gt; -6°</p>
+<p>This is what is meant by twilight for the average person: Under clear weather conditions, civil twilight approximates the limit at which solar illumination suffices for the human eye to clearly distinguish terrestrial objects. Enough illumination renders artificial sources unnecessary for most outdoor activities.</p>
+</li>
+<li>
+<p>Nautical twilight: -6° &gt; Solar angle &gt; -12°</p>
+</li>
+<li>
+<p>Astronomical twilight: -12° &gt; Solar angle &gt; -18°</p>
+</li>
+</ul>
+<p>A very thorough explanation of this is available in the Wikipedia article about the <a href="https://en.wikipedia.org/wiki/Twilight">Twilight</a>.</p>
+<h3>Template trigger</h3>
+<p>Template triggers work by evaluating a <a href="/docs/configuration/templating/">template</a> on every state change for all of the recognized entities. The trigger will fire if the state change caused the template to render ‘true’. This is achieved by having the template result in a true boolean expression (<code>{{ is_state('device_tracker.paulus', 'home') }}</code>) or by having the template render ‘true’ (example below). Being a boolean expression the template must evaluate to false (or anything other than true) before the trigger will fire again.
+With template triggers you can also evaluate attribute changes by using is_state_attr (<code>{{ is_state_attr('climate.living_room', 'away_mode', 'off') }}</code>)</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: template
+value_template: “{% if is_state(‘device_tracker.paulus’, ‘home’) %}true{% endif %}”</p>
+<pre><code># If given, will trigger when template remains true for X time.
+for: &quot;00:01:00&quot;
+</code></pre>
+<p>{% endhighlight %}</p>
+<p>You can also use templates in the <code>for</code> option.</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: template
+value_template: “{{ is_state(‘device_tracker.paulus’, ‘home’) }}”
+for:
+minutes: “{{ states(‘input_number.minutes’)|int(0) }}”
+{% endhighlight %}</p>
+<p>The <code>for</code> template(s) will be evaluated when the <code>value_template</code> becomes <code>true</code>.</p>
+<div class='note warning'>
+Rendering templates with time (`now()`) is dangerous as trigger templates are only updated based on entity state changes.
+</div>
+<p>As an alternative, providing you include the sensor <a href="/integrations/time_date/">time</a> in your configuration, you can use the following template:</p>
+<p>{% highlight yaml %}
+automation:
+trigger:
+platform: template
+value_template: “{{ (states.sensor.time.last_changed - states.YOUR.ENTITY.last_changed).total_seconds() &gt; 300 }}”
+{% endhighlight %}</p>
+<p>which will evaluate to <code>True</code> if <code>YOUR.ENTITY</code> changed more than 300 seconds ago.</p>
+<h3>Time trigger</h3>
+<p>The time trigger is configured to fire once at a specific point in time each day.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: time
+    # Military time format. This trigger will fire at 3:32 PM
+    at: &quot;15:32:00&quot;</code></pre></figure>
+<h3>Time pattern trigger</h3>
+<p>With the time pattern trigger, you can match if the hour, minute or second of the current time matches a specific value. You can prefix the value with a <code>/</code> to match whenever the value is divisible by that number. You can specify <code>*</code> to match any value (when using the web interface this is required, the fields cannot be left empty).</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: time_pattern
+    # Matches every hour at 5 minutes past whole
+    minutes: 5
+<p>automation 2:
+trigger:
+platform: time_pattern
+# Trigger once per minute during the hour of 3
+hours: &quot;3&quot;
+minutes: &quot;*&quot;</p>
+<p>automation 3:
+trigger:
+platform: time_pattern
+# You can also match on interval. This will match every 5 minutes
+minutes: &quot;/5&quot;</code></pre></figure></p>
+<div class='note warning'>
+<p>Do not prefix numbers with a zero - using <code>'00'</code> instead of ‘0’ for example will result in errors.</p>
+</div>
+<h3>Webhook trigger</h3>
+<p>Webhook trigger fires when a web request is made to the webhook endpoint: <code>/api/webhook/&lt;webhook_id&gt;</code>. This endpoint does not require authentication besides knowing the webhook id. You can either send encoded form or JSON data, available in the template as either <code>trigger.json</code> or <code>trigger.data</code>. URL query parameters are available in the template as <code>trigger.query</code>.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: webhook
+    webhook_id: some_hook_id</code></pre></figure>
+<p>You could run the above automation by sending a POST HTTP request to <code>http://your-open-peer-power:8123/api/webhook/some_hook_id</code>. An example with no data sent to a SSL/TLS secured installation and using the command-line curl program is <code>curl -d &quot;&quot; https://your-open-peer-power:8123/api/webhook/some_hook_id</code>.</p>
+<h3>Zone trigger</h3>
+<p>Zone trigger fires when an entity is entering or leaving the zone. For zone automation to work, you need to have setup a device tracker platform that supports reporting GPS coordinates. This includes <a href="/integrations/gpslogger/">GPS Logger</a>, the <a href="/integrations/owntracks/">OwnTracks platform</a> and the <a href="/integrations/icloud/">iCloud platform</a>.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: zone
+    entity_id: device_tracker.paulus
+    zone: zone.home
+    # Event is either enter or leave
+    event: enter # or &quot;leave&quot;</code></pre></figure>
+<h3>Geolocation trigger</h3>
+<p>Geolocation trigger fires when an entity is appearing in or disappearing from a zone. Entities that are created by a <a href="/integrations/geo_location/">Geolocation</a> platform support reporting GPS coordinates.
+Because entities are generated and removed by these platforms automatically, the entity id normally cannot be predicted. Instead, this trigger requires the definition of a <code>source</code>, which is directly linked to one of the Geolocation platforms.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    platform: geo_location
+    source: nsw_rural_fire_service_feed
+    zone: zone.bushfire_alert_zone
+    # Event is either enter or leave
+    event: enter # or &quot;leave&quot;</code></pre></figure>
+<h3>Multiple triggers</h3>
+<p>It is possible to specify multiple triggers for the same rule. To do so just prefix the first line of each trigger with a dash (-) and indent the next lines accordingly. Whenever one of the triggers fires, <a href="#what-are-triggers">processing</a> of your automation rule begins.</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  trigger:
+    # first trigger
+    - platform: time_pattern
+      minutes: 5
+      # our second trigger is the sunset
+    - platform: sun
+      event: sunset</code></pre></figure>
+:ET

@@ -1,0 +1,150 @@
+I"k5<p><a href='/integrations/#version/0.104'><img src='/images/blog/2020-01-0.104/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p>The first release of the new decade! Happy New Year!</p>
+<p>We are starting this new year with a packed release! So let us dive in!</p>
+<ul>
+<li><a href="/blog/2020/01/15/release-104/#improved-entity-handling-on-startup">Improved entity handling on startup</a></li>
+<li><a href="/blog/2020/01/15/release-104/#ignore-discovered-devices--services">Ignore discovered devices &amp; services</a></li>
+<li><a href="/blog/2020/01/15/release-104/#reload-all-the-input-things--bye-generated-groups">Reload all the input things &amp; bye generated groups</a></li>
+<li><a href="/blog/2020/01/15/release-104/#add-a-device-to-lovelace">Add a device to Lovelace</a></li>
+<li><a href="/blog/2020/01/15/release-104/#multi-select-entity-management">Multi-select entity management</a></li>
+<li><a href="/blog/2020/01/15/release-104/#zha-configuration-panel-improvements">ZHA configuration panel improvements</a></li>
+<li><a href="/blog/2020/01/15/release-104/#removing-your-lovelace-configuration">Removing your Lovelace configuration</a></li>
+<li><a href="/blog/2020/01/15/release-104/#in-other-news">In other news</a></li>
+<li><a href="/blog/2020/01/15/release-104/#new-integrations">New Integrations</a></li>
+<li><a href="/blog/2020/01/15/release-104/#new-platforms">New Platforms</a></li>
+<li><a href="/blog/2020/01/15/release-104/#breaking-changes">Breaking Changes</a></li>
+<li><a href="/blog/2020/01/15/release-104/#beta-fixes">Beta Fixes</a></li>
+<li><a href="/blog/2020/01/15/release-104/#all-changes">All changes</a></li>
+</ul>
+<h2>Improved entity handling on startup</h2>
+<p>We are now restoring all entities, stored in the registry,
+on Open Peer Power startup.</p>
+<p>During the startup of Open Peer Power, all your configured integrations are
+loaded. Each of those integrations results in one or more devices
+and entities. However, there was a catch!</p>
+<p>The loading of some integrations could take a while, which caused some entities
+not to be available immediately. Sometimes, this affected multiple things, like
+missing devices in HomeKit/Google/Alexa or those big red boxes in our Lovelace
+UI. We are sure, at some point, we’ve all experienced that.</p>
+<p>As of this release, all these entities, if registered in our entity registry,
+will be restored as “unavailable”. That allows other parts of our system to use
+them immediately, solving a lot of common issues during startup.</p>
+<p>These restored entities can be differentiated from normal “unavailable” entities
+by an additional state attribute added to those entities: “restored”.</p>
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/remove-entity.png' alt='Screenshot of a removing an unavailable entity'></a>
+Screenshot of a removing an unavailable entity.
+</p>
+<p>As a result, entities will no longer “disappear”, so restored and unavailable
+entities are removable, as shown in the screenshot above. Please note that,
+if an integration provides an unavailable entity, the providing integration
+needs to be removed first, or else, those entities can not be deleted.</p>
+<h2>Ignore discovered devices &amp; services</h2>
+<p>Got that one device that gets discovered over and over again?</p>
+<p>It is now possible to ignore a specific discovered device with a single click!</p>
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/ignore-discovery.png' alt='Screenshot of a discovered Hue bridge'></a>
+Screenshot of a discovered Hue bridge.
+</p>
+<p>It requires the integration to be updated to support this. For this release,
+the Hue, Axis, deCONZ, WLED and HomeKit integrations are updated to support
+this new feature.</p>
+<h2>Reload all the input things &amp; bye generated groups</h2>
+<p>All <a href="/integrations/#search/input"><code>input_*</code> integrations</a> now have a <code>reload</code>
+service to reload your YAML configuration for these integrations, without
+the need to restart Open Peer Power.</p>
+<p>Furthermore, time to say bye-bye, to all generated entity groups
+(<code>group.all_*</code>). Chances are, you have never heard of those because they were
+hidden. However, if you rely on those groups for your automations, you
+need to adjust those automations.
+Check out the <a href="#breaking-changes">breaking changes section</a> for more information.</p>
+<h2>Add a device to Lovelace</h2>
+<p>We added a button to the device page to add all entities of a device to Lovelace
+in a blip! Open Peer Power suggests cards based on the type of entities the
+device provides so that you can add them to a view of your choice instantly.</p>
+<p>If you are using Lovelace in YAML mode, you still can use this new feature. The
+generated YAML can be copied and pasted into your configuration file.</p>
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/add-device-lovelace.png' alt='Screenshot of a card suggestion for a light device'></a>
+Screenshot of a card suggestion for a light device.
+</p>
+<p>This same functionality is also added to the unused entities page of Lovelace.</p>
+<h2>Multi-select entity management</h2>
+<p>Entity management has never been easier; It now allows for changing multiple
+entities at once. Select multiple entities and remove, enable or disable them
+with one click.</p>
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/entities-multi-select.png' alt='Screenshot of the entities configuration page with multi selection'></a>
+Screenshot of the entities configuration page with multi selection.
+</p>
+<h2>ZHA configuration panel improvements</h2>
+<p><a href="https://github.com/dmulcahey">@dmulcahey</a> did a lot of work on the ZHA config panel this release.</p>
+<p>The navigation for the ZHA configuration panel has been redesigned to provide
+a better user experience on mobile and desktop.</p>
+<p>As part of the redesign, full Zigbee group management has been added, allowing
+you to create and manage Zigbee groups right from the UI.</p>
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/zha-config-panel.png' alt='Screenshot of the ZHA configuration panel'></a>
+Screenshot of the ZHA configuration panel.
+</p>
+<p>In a future releases, the ability to bind devices directly to groups,
+will be added as well.</p>
+<h2>Removing your Lovelace configuration</h2>
+<p>Want to start your Lovelace configuration from scratch? Or go back to the
+automatically generated Lovelace interface?</p>
+<p>Now you can by clearing the Lovelace configuration in the raw configuration
+editor and saving it.</p>
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/remove-lovelace-config.png' alt='Screenshot of the remove Lovelace confirmation dialog'></a>
+Screenshot of the remove Lovelace confirmation dialog.
+</p>
+<h2>In other news</h2>
+<h3>Meanwhile, HassOS 3.8 got released!</h3>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">HassOS Release-3 build 8 (Stable) released today. Changelog: <a href="https://t.co/kXOXNPldJF">https://t.co/kXOXNPldJF</a> - Next we start the first 4.0 Beta builds include the N2 support and Linux LT 5.4</p>&mdash; Pascal Vizeli (@pvizeli) <a href="https://twitter.com/pvizeli/status/1216668319396368384?ref_src=twsrc%5Etfw">January 13, 2020</a>
+</blockquote>
+<p>Besides the release of HassOS 3.8, the first beta version of HassOS 4.0 is
+now available as well. This beta release adds support for
+<a href="https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram/">Hardkernel’s ODROID-N2</a>!</p>
+<p>The <a href="https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram/">ODROID-N2</a>
+is a great and powerful alternative for the Raspberry Pi.</p>
+<h3>Custom now playing poster Lovelace card</h3>
+<p>Brad Crc made this <a href="https://www.reddit.com/r/openpeerpower/comments/e7wo0j/floor_plan_how_to_show_currently_playing_media/">impressive demo</a>
+of setting up a custom now playing poster card in Lovelace floor plans.
+This allows you to show currently playing media in your floor plan!</p>
+<div class='videoWrapper'>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/1ZU4WMgwU6s" frameborder="0" allowfullscreen></iframe>
+</div>
+<h3>Bas showing his Lovelace theme on his setup</h3>
+<p>Bas Nijholt kept seeing his own theme popping up on Reddit, so he decided it was
+time for him to show off his Lovelace dashboard, featuring this lovely theme.</p>
+<blockquote class="reddit-card"><a href="https://www.reddit.com/r/openpeerpower/comments/enpeik/i_keep_seeing_my_own_theme_on_reddit_so_now_its/">I keep seeing my own theme on Reddit, so now it's my turn! [OC]</a> from <a href="http://www.reddit.com/r/openpeerpower">r/openpeerpower</a></blockquote>
+<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+<p>His theme is <a href="https://github.com/basnijholt/lovelace-ios-dark-mode-theme/">publicly available on GitHub</a> and so is <a href="https://github.com/basnijholt/open-peer-power-config">his config</a>.</p>
+<h2>New Integrations</h2>
+<ul>
+<li>Add Elgato Key Light integration (<a href="https://github.com/frenck">@frenck</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29592">#29592</a>) (<a href="/integrations/elgato/">elgato docs</a>) (new-integration)</li>
+<li>Add IntesisHome Climate Platform (<a href="https://github.com/jnimmo">@jnimmo</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/25364">#25364</a>) (<a href="/integrations/intesishome/">intesishome docs</a>) (new-integration)</li>
+<li>Add Signal Messenger integration (<a href="https://github.com/bbernhard">@bbernhard</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28537">#28537</a>) (<a href="/integrations/signal_messenger/">signalmessenger docs</a>) (new-integration)</li>
+<li>Revert Tahoma removal (<a href="https://github.com/balloob">@balloob</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29840">#29840</a>) (<a href="/integrations/tahoma/">tahoma docs</a>) (new-integration)</li>
+<li>Add GIOS integration (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28719">#28719</a>) (<a href="/integrations/gios/">gios docs</a>) (new-integration)</li>
+<li>Add local_ip component (<a href="https://github.com/issacg">@issacg</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29973">#29973</a>) (<a href="/integrations/local_ip/">localip docs</a>) (new-integration)</li>
+<li>Add KEF speakers integration (<a href="https://github.com/basnijholt">@basnijholt</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28959">#28959</a>) (<a href="/integrations/kef/">kef docs</a>) (new-integration)</li>
+<li>Add Sentry component (<a href="https://github.com/dcramer">@dcramer</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30422">#30422</a>) (<a href="/integrations/sentry/">sentry docs</a>) (new-integration)</li>
+<li>Add surepetcare component (<a href="https://github.com/benleb">@benleb</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/24426">#24426</a>) (<a href="/integrations/surepetcare/">surepetcare docs</a>) (new-integration)</li>
+<li>Add Brother Printer integration (<a href="https://github.com/bieniu">@bieniu</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30359">#30359</a>) (<a href="/integrations/brother/">brother docs</a>) (new-integration)</li>
+<li>Add TMB sensor (<a href="https://github.com/alemuro">@alemuro</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27964">#27964</a>) (<a href="/integrations/tmb/">tmb docs</a>) (new-integration)</li>
+<li>Add Stookalert integration (<a href="https://github.com/fwestenberg">@fwestenberg</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30306">#30306</a>) (<a href="/integrations/stookalert/">stookalert docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Add battery sensor to iCloud (<a href="https://github.com/Quentame">@Quentame</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/29818">#29818</a>) (<a href="/integrations/icloud/">icloud docs</a>) (new-platform)</li>
+<li>Add light support to Velbus integration (<a href="https://github.com/brefra">@brefra</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30323">#30323</a>) (<a href="/integrations/velbus/">velbus docs</a>) (new-platform)</li>
+<li>Add support for v1 and v2 HomeKit fans. (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30503">#30503</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>) (new-platform)</li>
+<li>Add support for homekit air quality sensors (<a href="https://github.com/Jc2k">@Jc2k</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30510">#30510</a>) (<a href="/integrations/homekit_controller/">homekit_controller docs</a>) (new-platform)</li>
+<li>Add pilight dimmer as light component (<a href="https://github.com/Trekky12">@Trekky12</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30107">#30107</a>) (<a href="/integrations/pilight/">pilight docs</a>) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>.
+Make sure to fill in all fields of the issue template, that is helping us a lot!</p>
+:ET

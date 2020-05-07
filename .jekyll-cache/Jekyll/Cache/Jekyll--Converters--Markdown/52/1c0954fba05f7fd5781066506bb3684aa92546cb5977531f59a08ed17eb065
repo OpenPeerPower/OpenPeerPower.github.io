@@ -1,0 +1,97 @@
+I"0&<p><a href='/integrations/#version/0.106'><img src='/images/blog/2020-02-0.106/components.png' style='border: 0;box-shadow: none;'></a></p>
+<p>Well, hello!, Open Peer Power Core 0.106! We are happy to see you 😃</p>
+<p>A great release that improves stability, reliability and a lot of helpful additions to make everything much more friendly and easier to use. So let’s dive in!</p>
+<h2>Safe Mode improvements</h2>
+<p>In Open Peer Power <a href="/blog/2020/02/05/release-105/#safe-mode">0.105</a>, we introduced Safe Mode. Our goal is to make sure Open Peer Power always starts and provide you an interface to work with. No matter what.</p>
+<p><a href="https://github.com/balloob">@balloob</a> has been busy this release to improve on this feature even more, and Open Peer Power is now able to overcome issues when things in the core system get into trouble and even when the Lovelace configuration isn’t readable. Besides that, the way Safe Mode is presented has changed, so you instantly know you are in Safe Mode:</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.106/safe-mode-activated.png' alt='Screenshot of Open Peer Power running in Safe Mode'></a>
+Screenshot of Open Peer Power running in Safe Mode.
+</p>
+<h2>Stepping up and down the brightness of lights</h2>
+<p>Ever tried to make an automation to brighten or dim your lights? Or tried to hook up a remote to control the brightness of a light?
+If you have, you probably know that doing that was pretty painful and involved some additional templating to get that going.</p>
+<p>This release just made that a lot easier. An example device automation:</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.106/brightness-step-device-automation.png' alt='Screenshot of a device automation with dimming lights'></a>
+Screenshot of a device automation with dimming lights.
+</p>
+<p>We have also added this functionality to the <code>light.turn_on</code> service. You can now change the brightness, based on the current brightness,
+using the <code>brightness_step</code> (-255, 255) and <code>brightness_step_pct</code> (-100, 100) parameters.</p>
+<p>Good to know, when the brightness hits 0, it will turn off the light. If the light is already off, and you step the brightness up, it will turn on.
+This is awesome, because if you have a rotating dimmer button (for example, an IKEA SYMFONISK), you can rotate it to change the brightness, but also turn the light on/off by just rotating it.</p>
+<h2>Person more info dialogs improvements</h2>
+<p>Persons have a new more info dialog. They now show the location of the person on the map and if the person is not in a zone, you can create a zone with the current location of that person with one click.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.106/more-info-person.png' alt='Screenshot of the new more info for a person'></a>
+Screenshot of the new more info for a person.
+</p>
+<h2>Entities configuration panel now shows all entities</h2>
+<p>The entities configuration panel previously only contained entities that were uniquely identifiable by Open Peer Power (they have a so-called: unique ID). However, those are not provided by all integrations of Open Peer Power, confusing since the entities panel did not show all of your entities.</p>
+<p>In this version, we now include all entities in the panel, giving you a nice complete overview of all available entities in your system. You can’t edit all entities, since that requires an entity to be uniquely identifiable. If an entity doesn’t have a unique ID, the pencil icon will be striked through.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.106/entities.png' alt='Screenshot of uneditable entities in the configuration panel'></a>
+Screenshot of uneditable entities in the configuration panel.
+</p>
+<p>Since all entities are now available in this panel, it does not only provide you a clear overview of all the available entities; you can also make use of the “related items” feature introduced in release <a href="/blog/2020/02/05/release-105/">0.105</a> to see where they are being used!</p>
+<h2>Updates to the developer tools panels</h2>
+<p>The developer tools panel also got some nice little touches. In the “Info” tab you can now find a list of all integrations you are using and the logs are now aware of the integrations as well.</p>
+<p>Both now include links to the documentation and our GitHub issue tracker. This allows you to dive in quickly when you run into troubles with an integration.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.106/integrations-list.png' alt='Screenshot of the integrations list and an example log message'></a>
+Screenshot of the integrations list and an example log message.
+</p>
+<h2>Sensor card</h2>
+<p>Our sensor card has had a style update. We initially got the design from the <a href="https://github.com/kalkih/mini-graph-card">Lovelace Mini Graph Card</a> and now updated to match the improved new look of that card.</p>
+<p class='img'>
+<img src='/images/blog/2020-02-0.106/sensor-card.png' alt='Screenshot of the updated sensor card'></a>
+Screenshot of the updated sensor card.
+</p>
+<h2>Other noteworthy changes</h2>
+<p>But wait…  there is more! Some other smaller noteworthy changes in this release:</p>
+<ul>
+<li>
+<p>In the zone editor that was introduced in the previous release, you can now change the location of your home zone. The radius of the home zone cannot be changed yet (we will work on that!), but you can drag the home zone on the map.</p>
+</li>
+<li>
+<p>Also an improvement on a feature introduced in the previous release, the <code>state_color</code> option is now also available for other cards, so you can override the defaults of the cards.</p>
+</li>
+<li>
+<p>New automations now default to device automations instead of state triggers and service calls. Device automations are so much easier and clearer to create from the UI. You can, of course, still use the old triggers and actions like you are used to.</p>
+</li>
+<li>
+<p>In the generated Lovelace we no longer include automations and battery entities. You can find these in the automation configuration panel and the battery in the device configuration page.
+If you want to have your automations and/or battery in your Lovelace UI, you can always take control and add them.</p>
+</li>
+<li>
+<p>Scripts and scenes now have the ability to set a custom icon. Previously, you would have to create a customization to do this, now, you can just set them in your configuration.</p>
+</li>
+</ul>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">scene:
+    - name: Movies
+      icon: mdi:movie-open
+      entities:
+        light.tv_back_light:
+          state: on
+          brightness: 125
+        light.ceiling: off</code></pre></figure>
+<h2>New Integrations</h2>
+<ul>
+<li>Add Salt Fiber Box device tracker (<a href="https://github.com/bjornorri">@bjornorri</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30986">#30986</a>) (<a href="/integrations/salt/">salt docs</a>) (new-integration)</li>
+<li>Add GDACS feed integration (<a href="https://github.com/exxamalte">@exxamalte</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31235">#31235</a>) (<a href="/integrations/gdacs/">gdacs docs</a>) (new-integration)</li>
+<li>Add Minecraft Server Integration (<a href="https://github.com/elmurato">@elmurato</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30992">#30992</a>) (<a href="/integrations/minecraft_server/">minecraft_server docs</a>) (new-integration)</li>
+<li>Add MELCloud integration (<a href="https://github.com/vilppuvuorinen">@vilppuvuorinen</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30712">#30712</a>) (<a href="/integrations/melcloud/">melcloud docs</a>) (new-integration)</li>
+<li>Dynalite Integration (<a href="https://github.com/ziv1234">@ziv1234</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/27841">#27841</a>) (<a href="/integrations/dynalite/">dynalite docs</a>) (new-integration)</li>
+<li>Add initial version of Vilfo Router integration (<a href="https://github.com/ManneW">@ManneW</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31177">#31177</a>) (<a href="/integrations/vilfo/">vilfo docs</a>) (new-integration)</li>
+</ul>
+<h2>New Platforms</h2>
+<ul>
+<li>Add totalconnect zones as binary sensors (<a href="https://github.com/austinmroczek">@austinmroczek</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/28712">#28712</a>) (<a href="/integrations/totalconnect/">totalconnect docs</a>) (new-platform)</li>
+<li>Add Tahoma lock support (<a href="https://github.com/vlebourl">@vlebourl</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31311">#31311</a>) (<a href="/integrations/tahoma/">tahoma docs</a>) (new-platform)</li>
+<li>Clean up Tahoma smartlock (<a href="https://github.com/vlebourl">@vlebourl</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/31430">#31430</a>) (<a href="/integrations/tahoma/">tahoma docs</a>) (new-platform)</li>
+<li>Add Tado water_heater (<a href="https://github.com/michaelarnauts">@michaelarnauts</a> - <a href="https://github.com/OpenPeerPower/Open-Peer-Power/pull/30095">#30095</a>) (<a href="/integrations/tado/">tado docs</a>) (breaking change) (new-platform)</li>
+</ul>
+<h2>If you need help…</h2>
+<p>…don’t hesitate to use our very active <a href="https://community.openpeerpower.io/">forums</a> or join us for a little <a href="https://discord.gg/c5DvZ4e">chat</a>.</p>
+<p>Experiencing issues introduced by this release? Please report them in our <a href="https://github.com/OpenPeerPower/Open-Peer-Power/issues">issue tracker</a>. Make sure to fill in all fields of the issue template.</p>
+:ET

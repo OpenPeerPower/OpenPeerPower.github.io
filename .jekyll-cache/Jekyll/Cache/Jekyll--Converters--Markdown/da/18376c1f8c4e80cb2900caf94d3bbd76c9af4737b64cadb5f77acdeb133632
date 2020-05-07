@@ -1,0 +1,316 @@
+I"�=<p>So you’ve been using Open Peer Power for a while now and your <code>configuration.yaml</code> file brings people to tears or you simply want to start off with the distributed approach, here’s how to split the <code>configuration.yaml</code> into more manageable (read: humanly readable) pieces.</p>
+<p>First off, several community members have sanitized (read: without API keys/passwords etc) versions of their configurations available for viewing, you can see a list of them <a href="/cookbook/#example-configurationyaml">here</a>.</p>
+<p>As commenting code doesn’t always happen, please read on for the details.</p>
+<p>Now despite the logical assumption that the <code>configuration.yaml</code> will be replaced by this process it will in fact remain, albeit in a much less cluttered form.</p>
+<p>In this lighter version we will still need what could be called the core snippet:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">openpeerpower:
+  # Name of the location where Open Peer Power is running
+  name: My Open Peer Power Instance
+  # Location required to calculate the time the sun rises and sets
+  latitude: 37
+  longitude: -121
+  # &#39;metric&#39; for Metric, &#39;imperial&#39; for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  customize: !include customize.yaml</code></pre></figure>
+<p>Note that each line after <code>openpeerpower:</code> is indented two (2) spaces. Since the configuration files in Open Peer Power are based on the YAML language, indentation and spacing are important. Also note that seemingly strange entry under <code>customize:</code>.</p>
+<p><code>!include filename.yaml</code> is the statement that tells Open Peer Power to insert the contents of <code>filename.yaml</code> at that point. This is how we are going to break a monolithic and hard to read file (when it gets big) into more manageable chunks.</p>
+<p>Now before we start splitting out the different components, let’s look at the other integrations (in our example) that will stay in the base file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">history:
+frontend:
+logbook:
+http:
+  api_password: ImNotTelling!
+<p>ifttt:
+key: [nope]</p>
+<p>wink:
+access_token: [wouldn't you]
+refresh_token: [like to know]</p>
+<p>zwave:
+usb_path: /dev/ttyUSB0
+config_path: /usr/local/share/python-openzwave/config
+polling_interval: 10000</p>
+<p>mqtt:
+broker: 127.0.0.1</code></pre></figure></p>
+<p>As with the core snippet, indentation makes a difference. The integration headers (<code>mqtt:</code>) should be fully left aligned (aka no indent), and the parameters (<code>broker:</code>) should be indented two (2) spaces.</p>
+<p>While some of these integrations can technically be moved to a separate file they are so small or “one off’s” where splitting them off is superfluous. Also, you’ll notice the # symbol (hash/pound). This represents a “comment” as far as the commands are interpreted. Put another way, any line prefixed with a <code>#</code> will be ignored. This makes breaking up files for human readability really convenient, not to mention turning off features while leaving the entry intact.</p>
+<p>Now, lets assume that a blank file has been created in the Open Peer Power configuration directory for each of the following:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">automation.yaml
+zone.yaml
+sensor.yaml
+switch.yaml
+device_tracker.yaml
+customize.yaml</code></pre></figure>
+<p><code>automation.yaml</code> will hold all the automation integration details. <code>zones.yaml</code> will hold the zone integration details and so forth. These files can be called anything but giving them names that match their function will make things easier to keep track of.</p>
+<p>Inside the base configuration file add the following entries:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation: !include automation.yaml
+zone: !include zone.yaml
+sensor: !include sensor.yaml
+switch: !include switch.yaml
+device_tracker: !include device_tracker.yaml</code></pre></figure>
+<p>Note that there can only be one <code>!include:</code> for each integration so chaining them isn’t going to work. If that sounds like Greek, don’t worry about it.</p>
+<p>Alright, so we’ve got the single integrations and the include statements in the base file, what goes in those extra files?</p>
+<p>Let’s look at the <code>device_tracker.yaml</code> file from our example:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">- platform: owntracks
+- platform: nmap_tracker
+  hosts: 192.168.2.0/24
+  home_interval: 3
+<p>track_new_devices: true
+interval_seconds: 40
+consider_home: 120</code></pre></figure></p>
+<p>This small example illustrates how the “split” files work. In this case, we start with two (2) device tracker entries (<code>owntracks</code> and <code>nmap</code>). These files follow <a href="/getting-started/devices/#style-2-list-each-device-separately">“style 1”</a> that is to say a fully left aligned leading entry (<code>- platform: owntracks</code>) followed by the parameter entries indented two (2) spaces.</p>
+<p>This (large) sensor configuration gives us another example:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">### sensor.yaml
+### METEOBRIDGE #############################################
+- platform: tcp
+  name: &#39;Outdoor Temp (Meteobridge)&#39;
+  host: 192.168.2.82
+  timeout: 6
+  payload: &quot;Content-type: text/xml; charset=UTF-8\n\n&quot;
+  value_template: &quot;{{value.split (&#39; &#39;)[2]}}&quot;
+  unit: C
+- platform: tcp
+  name: &#39;Outdoor Humidity (Meteobridge)&#39;
+  host: 192.168.2.82
+  port: 5556
+  timeout: 6
+  payload: &quot;Content-type: text/xml; charset=UTF-8\n\n&quot;
+  value_template: &quot;{{value.split (&#39; &#39;)[3]}}&quot;
+  unit: Percent
+<h4>STEAM FRIENDS</h4>
+<ul>
+<li>platform: steam_online
+api_key: [not telling]
+accounts:
+- 76561198012067051</li>
+</ul>
+<h4>TIME/DATE</h4>
+<ul>
+<li>platform: time_date
+display_options:
+- 'time'
+- 'date'</li>
+<li>platform: worldclock
+time_zone: Etc/UTC
+name: 'UTC'</li>
+<li>platform: worldclock
+time_zone: America/New_York
+name: 'Ann Arbor'</code></pre></figure></li>
+</ul>
+<p>You’ll notice that this example includes a secondary parameter section (under the steam section) as well as a better example of the way comments can be used to break down files into sections.</p>
+<p>That about wraps it up.</p>
+<p>If you have issues checkout <code>open-peer-power.log</code> in the configuration directory as well as your indentations. If all else fails, head over to our <a href="https://discord.gg/c5DvZ4e">Discord chat server</a> and ask away.</p>
+<h2>Debugging multiple configuration files</h2>
+<p>If you have many configuration files, the <code>check_config</code> script allows you to see how Open Peer Power interprets them:</p>
+<ul>
+<li>Listing all loaded files: <code>hass --script check_config --files</code></li>
+<li>Viewing a component’s configuration: <code>hass --script check_config --info light</code></li>
+<li>Or all components’ configuration:  <code>hass --script check_config --info all</code></li>
+</ul>
+<p>You can get help from the command line using: <code>hass --script check_config --help</code></p>
+<h2>Advanced Usage</h2>
+<p>We offer four advanced options to include whole directories at once. Please note that your files must have the <code>.yaml</code> file extension; <code>.yml</code> is not supported.</p>
+<ul>
+<li><code>!include_dir_list</code> will return the content of a directory as a list with each file content being an entry in the list. The list entries are ordered based on the alphanumeric ordering of the names of the files.</li>
+<li><code>!include_dir_named</code> will return the content of a directory as a dictionary which maps filename =&gt; content of file.</li>
+<li><code>!include_dir_merge_list</code> will return the content of a directory as a list by merging all files (which should contain a list) into 1 big list.</li>
+<li><code>!include_dir_merge_named</code> will return the content of a directory as a dictionary by loading each file and merging it into 1 big dictionary.</li>
+</ul>
+<p>These work recursively. As an example using <code>!include_dir_* automation</code>, will include all 6 files shown below:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">.
+└── .openpeerpower
+    ├── automation
+    │   ├── lights
+    │   │   ├── turn_light_off_bedroom.yaml
+    │   │   ├── turn_light_off_lounge.yaml
+    │   │   ├── turn_light_on_bedroom.yaml
+    │   │   └── turn_light_on_lounge.yaml
+    │   ├── say_hello.yaml
+    │   └── sensors
+    │       └── react.yaml
+    └── configuration.yaml (not included)</code></pre></figure>
+<h3>Example: <code>!include_dir_list</code></h3>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  - alias: Automation 1
+    trigger:
+      platform: state
+      entity_id: device_tracker.iphone
+      to: &#39;home&#39;
+    action:
+      service: light.turn_on
+      entity_id: light.entryway
+  - alias: Automation 2
+    trigger:
+      platform: state
+      entity_id: device_tracker.iphone
+      from: &#39;home&#39;
+    action:
+      service: light.turn_off
+      entity_id: light.entryway</code></pre></figure>
+<p>can be turned into:</p>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation: !include_dir_list automation/presence/</code></pre></figure>
+<p><code>automation/presence/automation1.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">alias: Automation 1
+trigger:
+  platform: state
+  entity_id: device_tracker.iphone
+  to: &#39;home&#39;
+action:
+  service: light.turn_on
+  entity_id: light.entryway</code></pre></figure>
+<p><code>automation/presence/automation2.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">alias: Automation 2
+trigger:
+  platform: state
+  entity_id: device_tracker.iphone
+  from: &#39;home&#39;
+action:
+  service: light.turn_off
+  entity_id: light.entryway</code></pre></figure>
+<p>It is important to note that each file must contain only <strong>one</strong> entry when using <code>!include_dir_list</code>.
+It is also important to note that if you are splitting a file after adding -id: to support the automation UI,
+the -id: line must be removed from each of the split files.</p>
+<h3>Example: <code>!include_dir_named</code></h3>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">alexa:
+  intents:
+    LocateIntent:
+      action:
+        service: notify.pushover
+        data:
+          message: Your location has been queried via Alexa.
+      speech:
+        type: plaintext
+        text: &gt;
+          {%- for state in states.device_tracker -%}
+            {%- if state.name.lower() == User.lower() -%}
+              {{ state.name }} is at {{ state.state }}
+            {%- endif -%}
+          {%- else -%}
+            I am sorry. Pootie! I do not know where {{User}} is.
+          {%- endfor -%}
+    WhereAreWeIntent:
+      speech:
+        type: plaintext
+        text: &gt;
+          {%- if is_state(&#39;device_tracker.iphone&#39;, &#39;home&#39;) -%}
+            iPhone is home.
+          {%- else -%}
+            iPhone is not home.
+          {% endif %}</code></pre></figure>
+<p>can be turned into:</p>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">alexa:
+  intents: !include_dir_named alexa/</code></pre></figure>
+<p><code>alexa/LocateIntent.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">action:
+  service: notify.pushover
+  data:
+    message: Your location has been queried via Alexa.
+speech:
+  type: plaintext
+  text: &gt;
+    {%- for state in states.device_tracker -%}
+      {%- if state.name.lower() == User.lower() -%}
+        {{ state.name }} is at {{ state.state }}
+      {%- endif -%}
+    {%- else -%}
+      I am sorry. Pootie! I do not know where {{User}} is.
+    {%- endfor -%}</code></pre></figure>
+<p><code>alexa/WhereAreWeIntent.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">speech:
+  type: plaintext
+  text: &gt;
+    {%- if is_state(&#39;device_tracker.iphone&#39;, &#39;home&#39;) -%}
+      iPhone is home.
+    {%- else -%}
+      iPhone is not home.
+    {% endif %}</code></pre></figure>
+<h3>Example: <code>!include_dir_merge_list</code></h3>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation:
+  - alias: Automation 1
+    trigger:
+      platform: state
+      entity_id: device_tracker.iphone
+      to: &#39;home&#39;
+    action:
+      service: light.turn_on
+      entity_id: light.entryway
+  - alias: Automation 2
+    trigger:
+      platform: state
+      entity_id: device_tracker.iphone
+      from: &#39;home&#39;
+    action:
+      service: light.turn_off
+      entity_id: light.entryway</code></pre></figure>
+<p>can be turned into:</p>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">automation: !include_dir_merge_list automation/</code></pre></figure>
+<p><code>automation/presence.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">- alias: Automation 1
+  trigger:
+    platform: state
+    entity_id: device_tracker.iphone
+    to: &#39;home&#39;
+  action:
+    service: light.turn_on
+    entity_id: light.entryway
+- alias: Automation 2
+  trigger:
+    platform: state
+    entity_id: device_tracker.iphone
+    from: &#39;home&#39;
+  action:
+    service: light.turn_off
+    entity_id: light.entryway</code></pre></figure>
+<p>It is important to note that when using <code>!include_dir_merge_list</code>, you must include a list in each file (each list item is denoted with a hyphen [-]). Each file may contain one or more entries.</p>
+<h3>Example: <code>!include_dir_merge_named</code></h3>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">group:
+  bedroom:
+    name: Bedroom
+    entities:
+      - light.bedroom_lamp
+      - light.bedroom_overhead
+  hallway:
+    name: Hallway
+    entities:
+      - light.hallway
+      - thermostat.home
+  front_yard:
+    name: Front Yard
+    entities:
+      - light.front_porch
+      - light.security
+      - light.pathway
+      - sensor.mailbox
+      - camera.front_porch</code></pre></figure>
+<p>can be turned into:</p>
+<p><code>configuration.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">group: !include_dir_merge_named group/</code></pre></figure>
+<p><code>group/interior.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">bedroom:
+  name: Bedroom
+  entities:
+    - light.bedroom_lamp
+    - light.bedroom_overhead
+hallway:
+  name: Hallway
+  entities:
+    - light.hallway
+    - thermostat.home</code></pre></figure>
+<p><code>group/exterior.yaml</code></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">front_yard:
+  name: Front Yard
+  entities:
+    - light.front_porch
+    - light.security
+    - light.pathway
+    - sensor.mailbox
+    - camera.front_porch</code></pre></figure>
+:ET

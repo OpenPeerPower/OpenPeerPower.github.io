@@ -1,0 +1,133 @@
+I"�<p>The <code>system_log</code> integration stores information about all logged errors and warnings in Open Peer Power. All collected information is accessible directly in the frontend, just navigate to the <code>Info</code> section under <code>Developer Tools</code>. In order to not overload Open Peer Power with log data, only the 50 last errors and warnings will be stored. Older entries are automatically discarded from the log. It is possible to change the number of stored log entries using the parameter <code>max_entries</code>.</p>
+<h2>Configuration</h2>
+<p>This integration is automatically loaded by the <code>frontend</code> (so no need to do anything if you are using the frontend). If you are not doing so, or if you wish to change a parameter, add the following section to your <code>configuration.yaml</code> file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">system_log:
+  max_entries: MAX_ENTRIES</code></pre></figure>
+<h2>Services</h2>
+<h3>Service <code>clear</code></h3>
+<p>To manually clear the system log, call this service.</p>
+<h3>Service <code>write</code></h3>
+<p>Write a log entry</p>
+<table>
+<thead>
+<tr>
+<th>Service data attribute</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td>no</td>
+<td>Message to log</td>
+</tr>
+<tr>
+<td><code>level</code></td>
+<td>yes</td>
+<td>Log level: debug, info, warning, error, critical. Defaults to ‘error’.</td>
+</tr>
+<tr>
+<td><code>logger</code></td>
+<td>yes</td>
+<td>Logger name under which to log the message. Defaults to ‘system_log.external’.</td>
+</tr>
+</tbody>
+</table>
+<h2>Events</h2>
+<p>Errors and warnings are posted as the event <code>system_log_event</code>, so it is possible to write automations that trigger whenever a warning or error occurs. The following information is included in each event:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>level</code></td>
+<td>Either <code>WARNING</code> or <code>ERROR</code> depending on severity.</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>File that triggered the error, e.g., <code>core.py</code> or <code>media_player/yamaha.py</code>.</td>
+</tr>
+<tr>
+<td><code>exception</code></td>
+<td>Full stack trace if available, an empty string otherwise.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Descriptive message of the error, e.g., “Error handling request”.</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td>Unix timestamp with as a double, e.g., 1517241010.237416.</td>
+</tr>
+</tbody>
+</table>
+<p>Live examples of these events can be found in the Open Peer Power log file (<code>open-peer-power.log</code>) or by just looking in the system log. An example could, for instance, look like this:</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">2019-02-14 16:20:35 ERROR (MainThread) [openpeerpower.loader] Unable to find integration system_healt
+2019-02-14 16:20:36 ERROR (MainThread) [openpeerpower.components.device_tracker] Error setting up platform google_maps
+Traceback (most recent call last):
+  File &quot;/home/fab/Documents/repos/ha/open-peer-power/openpeerpower/integrations/device_tracker/__init__.py&quot;, line 184, in
+[...]</code></pre></figure>
+<p>The message (“Unable to find integration system_healt”), source (<code>openpeerpower.loader</code>) and level (<code>ERROR</code>) can easily be extracted from the log. The exact timestamp and if there is a stack trace that’s shown as well. Here is another error caused by the <code>google_map</code> integration with additional output present.</p>
+<h2>Examples</h2>
+<p>Here are some examples using the events posted by <code>system_log</code>. <code>fire_event</code> must be set to <code>true</code> for these to work.</p>
+<h3>Counting Number of Warnings</h3>
+<p>This will create a <code>counter</code> that increases every time a warning is logged:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">counter:
+  warning_counter:
+    name: Warnings
+    icon: mdi:alert
+<p>automation:</p>
+<ul>
+<li>alias: Count warnings
+trigger:
+platform: event
+event_type: system_log_event
+event_data:
+level: WARNING
+action:
+service: counter.increment
+entity_id: counter.warning_counter</code></pre></figure></li>
+</ul>
+<h3>Conditional Messages</h3>
+<p>This automation will create a persistent notification whenever an error or warning is logged that has the word “service” in the message:</p>
+<p>{% highlight yaml %}
+automation:</p>
+<ul>
+<li>alias: Create notifications for “service” errors
+trigger:
+platform: event
+event_type: system_log_event
+condition:
+condition: template
+value_template: ‘{{ “service” in trigger.event.data.message }}’
+action:
+service: persistent_notification.create
+data_template:
+title: Something bad happened
+message: ‘{{ trigger.event.data.message }}’
+{% endhighlight %}</li>
+</ul>
+<h3>Writing to log</h3>
+<p>This automation will create a new log entry when the door is opened:</p>
+<p>{% highlight yaml %}
+automation:</p>
+<ul>
+<li>alias: Log door opened
+trigger:
+platform: state
+entity_id: binary_sensor.door
+from: ‘off’
+to: ‘on’
+action:
+service: system_log.write
+data_template:
+message: ‘Door opened!’
+level: info
+{% endhighlight %}</li>
+</ul>
+:ET

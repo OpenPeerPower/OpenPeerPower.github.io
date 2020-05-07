@@ -1,0 +1,79 @@
+I"�<p>If you already have Python 3.7 or later installed, you can easily give Open Peer Power a spin.</p>
+<p>It’s recommended when installing Python packages that you use a <a href="https://docs.python.org/3.7/library/venv.html#module-venv">virtual environment</a>. This will make sure that your Python installation and Open Peer Power installation won’t impact one another. The following steps will work on most UNIX like systems.</p>
+<div class='note'>
+<p>This is a generic guide for running Open Peer Power under Python. We recommend to use <a href="/docs/installation/#recommended">our recommended installation guides</a>. The steps below may be shorter but some users find difficulty when applying updates and may run into issues.</p>
+<p>Before you begin the guide below, ensure that you have a <em>so-called standard</em> build environment that includes things like <code>make</code>, <code>gcc</code>, <code>python3</code>, including Python 3 <code>setuptools</code> and <code>pip</code> modules. Less obvious is the need to install <code>openssl-dev</code> (for opensslv.h) and <code>libffi-dev</code> (for cffi.h) for things to build later on.</p>
+</div>
+<h3>Install</h3>
+<ol>
+<li>Create a virtual environment in your current directory:</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python3 -m venv openpeerpower</code></pre></figure>
+<ol start="2">
+<li>Open the virtual environment:</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cd openpeerpower</code></pre></figure>
+<ol start="3">
+<li>Activate the virtual environment:</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">source bin/activate</code></pre></figure>
+<ol start="4">
+<li>Install Open Peer Power:</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python3 -m pip install openpeerpower</code></pre></figure>
+<ol start="5">
+<li>Run Open Peer Power:</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">hass --open-ui</code></pre></figure>
+<ol start="6">
+<li>You can now reach the web interface on <code>http://ipaddress:8123/</code> - the first start may take a couple of minutes before the web interface is available. This can take longer if you’re using lower-end hardware like a Raspberry Pi Zero.</li>
+</ol>
+<h3>Upgrade</h3>
+<ol>
+<li>
+<p>Stop Open Peer Power</p>
+</li>
+<li>
+<p>Open the directory where the virtual environment is located, activate the virtual environment, then upgrade Open Peer Power:</p>
+</li>
+</ol>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cd openpeerpower
+    source bin/activate
+    python3 -m pip install --upgrade openpeerpower</code></pre></figure>
+<ol start="3">
+<li>Start Open Peer Power</li>
+<li>You can now reach the web interface on <code>http://ipaddress:8123/</code> - the first start may take some time before the web interface is available, depending on how many integrations need to be upgraded.</li>
+</ol>
+<h3>Run a specific version</h3>
+<p>In the event that a Open Peer Power version doesn’t play well with your hardware setup, you can downgrade to a previous release. For example:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cd openpeerpower
+source bin/activate
+pip3 install openpeerpower==0.XX.X</code></pre></figure>
+<h4>Run the beta version</h4>
+<p>If you would like to test next release before anyone else, you can install the beta version, for example:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cd openpeerpower
+source bin/activate
+pip3 install --pre --upgrade openpeerpower</code></pre></figure>
+<h4>Run the development version</h4>
+<p>If you want to stay on the bleeding-edge Open Peer Power development branch, you can upgrade to <code>dev</code>.</p>
+<div class='note warning'>
+  The "dev" branch is likely to be unstable. Potential consequences include loss of data and instance corruption.
+</div>
+<p>For example:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">cd openpeerpower
+source bin/activate
+pip3 install --upgrade git+git://github.com/OpenPeerPower/Open-Peer-Power.git@dev</code></pre></figure>
+<h3>Notes</h3>
+<ul>
+<li>In the future, if you want to start Open Peer Power manually again, follow step 2, 3 and 5.</li>
+<li>It’s recommended to run Open Peer Power as a dedicated user.</li>
+<li>If you want Open Peer Power to automatically start at boot, check the <a href="/docs/autostart/">autostart documentation</a></li>
+</ul>
+<div class='info'>
+<p>Looking for more advanced guides? Check our <a href="/docs/installation/raspberry-pi/">Raspbian guide</a> or the <a href="/docs/installation/">other installation guides</a>.</p>
+</div>
+<h3>After upgrading Python</h3>
+<p>If you’ve upgraded Python (for example, you were running 3.7.1 and now you’ve installed 3.7.3) then you’ll need to build a new virtual environment. Simply rename your existing virtual environment directory:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mv openpeerpower openpeerpower.old</code></pre></figure>
+<p>Then follow the <a href="#install">Install</a> steps again, being sure to use the newly installed version of Python.</p>
+:ET

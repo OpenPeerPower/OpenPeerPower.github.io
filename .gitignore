@@ -3,7 +3,7 @@
 .sass-cache
 .gist-cache
 .pygments-cache
-public
+_site
 source/_stash
 source/stylesheets/screen.css
 source/.jekyll-cache/

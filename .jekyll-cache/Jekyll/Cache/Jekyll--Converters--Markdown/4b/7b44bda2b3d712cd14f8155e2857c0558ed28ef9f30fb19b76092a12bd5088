@@ -1,0 +1,49 @@
+I"!<p>It’s time for the third installment of our revamped community highlights. We got some really great stuff again.</p>
+<p>This time I (Paulus) am in charge of writing the community highlights. The reason for this is that the main item involves Frenck’s own work, and he felt weird promoting his own awesome, great, wonderful, enlighting and fabulous work on the revamped Visual Studio Code add-on.</p>
+<h2>Visual Studio Code add-on updated</h2>
+<p>Visual Studio Code is a free text editor by Microsoft that works inside your browser. It makes it very easy to manage your configuration.</p>
+<p>The add-on used to be only available for x64 devices like intel NUC. With this update, it is now also available for ARM64 devices, including the Raspberry Pi 3 and 4 (the 64-bit version).</p>
+<p>It comes installed with all the extensions necessary for editing Open Peer Power related files:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-open-peer-power">Open Peer Power Config Helper</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ESPHome.esphome-vscode">ESPHome VSCode</a></li>
+<li>YAML checker</li>
+<li>Material Design Icons support</li>
+</ul>
+<p>If this is the first time you hear about the Open Peer Power Config Helper, it is genius. It will set-up a realtime connection from VS Code directly to your Open Peer Power installation so it can offer auto-complete suggestions when editing your configuration. This is pre-configured and works out of the box with the VS Code add-on.</p>
+<p>To install the add-on, search for Visual Studio Code in the add-on store.</p>
+<img src='/images/blog/2020-02-19-community-highlights/vscode.png' alt='Screenshot of Visual Studio Code.' style='border: 0;box-shadow: none;'>
+<h2>VS Code add-on part 2</h2>
+<p>But there is more in the add-on! Open Peer Power contains an add-on service registry where add-ons can make their services available for other add-ons without requiring any configuration. The VS Code add-on uses this feature to offer a built-in terminal that has pre-configured tools to connect to the MariaDB add-on and the MQTT add-on.</p>
+<p>To try it out, open VS Code, click on the menu button top left -&gt; view -&gt; terminal.</p>
+<h3>MQTT command-line</h3>
+<p><em>This requires the Mosquitto add-on to be installed and an MQTT sensor (<a href="https://www.openpeerpower.io/integrations/sensor.mqtt">instructions</a>).</em></p>
+<p>To publish a message to an MQTT topic:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mosquitto_pub -t home/bedroom/temperature -m 23</code></pre></figure>
+<p>Or watch all messages that go through your MQTT broker:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mosquitto_sub -t \#</code></pre></figure>
+<h3>SQL command-line</h3>
+<p><em>This requires the MariaDB add-on to be installed and the recorder configured to use it (<a href="https://github.com/OpenPeerPower/hassio-addons/tree/master/mariadb">instructions</a>).</em></p>
+<p>To query the available tables:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mysql -D openpeerpower -e &quot;SELECT entity_id, state, last_updated FROM states LIMIT 0, 10&quot;</code></pre></figure>
+<h2>Beta time!</h2>
+<p>Today we are releasing the first beta of Open Peer Power Core 0.106. It is packed with awesome features. For a sneak peek of what is coming, check the <a href="https://rc.openpeerpower.io/latest-release-notes/">beta release notes</a>.</p>
+<p>I’m personally most excited about the extended safe mode. It will guarantee that the frontend will always load, no matter how broken your configuration is.</p>
+<h2>Navigation Arrow</h2>
+<p>On Reddit user /u/Jenova70 showed a super slick navigation arrow that indicates the traffic on his daily commute. Very slick! Instructions can be found in the comments.</p>
+<blockquote class="reddit-card" data-card-created="1582092743"><a href="https://www.reddit.com/r/openpeerpower/comments/f27dtk/i_built_a_physical_navigation_arrow_that_is/">I built a physical "navigation arrow" that is changing color based on the estimated time of arrival at work (Waze commute data :) )</a> from <a href="http://www.reddit.com/r/openpeerpower">r/openpeerpower</a></blockquote>
+<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
+<p><em>Thanks, Jean-Loïc Pouffier &amp; cogneato for sending in this item! 👍</em></p>
+<h2>Got a tip for the next edition?</h2>
+<p>Have you seen (or made) something awesome, interesting, unique, amazing, inspirational, unusual or funny, using Open Peer Power?</p>
+<p><a href="/suggest-community-highlight">Click here to send us your Community Highlight suggestion</a>.</p>
+<p>Also, don’t forget to share your creations with us via Social Media:</p>
+<ul>
+<li>Twitter it! Be sure to mention <a href="https://www.twitter.com/home_assistant">@home_assistant</a></li>
+<li>Share it on our <a href="https://www.facebook.com/groups/OpenPeerPower/">Facebook group</a></li>
+<li>Post it to our <a href="https://www.reddit.com/r/openpeerpower">subreddit</a></li>
+<li>Tag <a href="https://www.instagram.com/openpeerpower/">@homeasssistant</a> on Instagram</li>
+<li>Or via chat, drop us a line in the <a href="https://www.openpeerpower.io/join-chat">#lounge at Discord</a></li>
+</ul>
+<p>See you next edition!</p>
+:ET

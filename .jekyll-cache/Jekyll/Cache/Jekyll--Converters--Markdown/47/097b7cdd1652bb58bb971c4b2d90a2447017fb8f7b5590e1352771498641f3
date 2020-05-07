@@ -1,0 +1,91 @@
+I"o*<p>The Picture Glance card shows an image and corresponding entity states as an icon. The entities on the right side allow toggle actions, others show the more information dialog.</p>
+<p class='img'>
+  <img src='/images/lovelace/lovelace_picture_glance.gif' alt='Picture glance card for a living room'>
+  Picture glance card for a living room.
+</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='type' href='#type'></a> type</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>picture-glance</p>
+</span></p></dd><dt><a class='title-link' name='entities' href='#entities'></a> entities</dt><dd><p class='desc'><span class='type'>(<span class='list'>list</span>)</span><span class='required'>(Required)</span><span class='description'><p>List of entities or entity objects.</p>
+</span></p></dd><dt><a class='title-link' name='title' href='#title'></a> title</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>The card title.</p>
+</span></p></dd><dt><a class='title-link' name='image' href='#image'></a> image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Background image URL.</p>
+</span></p></dd><dt><a class='title-link' name='camera_image' href='#camera_image'></a> camera_image</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Camera entity as Background image.</p>
+</span></p></dd><dt><a class='title-link' name='camera_view' href='#camera_view'></a> camera_view</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>“live” will show the live view if <code>stream</code> is enabled.</p>
+</span></p><p class='default'>
+Default value: <p>auto</p>
+</p></dd><dt><a class='title-link' name='state_image' href='#state_image'></a> state_image</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Background image based on entity state.</p>
+</span></p></dd><dd><dl class='nested'><dt><a class='title-link' name='state' href='#state'></a> state</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p><code>state: image-url</code>, check the example below.</p>
+</span></p></dd></dl></dd><dt><a class='title-link' name='state_filter' href='#state_filter'></a> state_filter</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p><a href="#how-to-use-state_filter">State-based CSS filters</a></p>
+</span></p></dd><dt><a class='title-link' name='aspect_ratio' href='#aspect_ratio'></a> aspect_ratio</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Forces the height of the image to be a ratio of the width. You may enter a value such as: <code>16x9</code>, <code>16:9</code>, <code>1.78</code>.</p>
+</span></p></dd><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Entity to use for <code>state_image</code> and <code>state_filter</code>.</p>
+</span></p></dd><dt><a class='title-link' name='show_state' href='#show_state'></a> show_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Show entity state-text.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='theme' href='#theme'></a> theme</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Set to any theme within <code>themes.yaml</code></p>
+</span></p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/">action documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Options For Entities</h2>
+<p>If you define entities as objects instead of strings, you can add more customization and configuration:</p>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='entity' href='#entity'></a> entity</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>Open Peer Power entity ID.</p>
+</span></p></dd><dt><a class='title-link' name='attribute' href='#attribute'></a> attribute</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Attribute of the entity to display instead of the state</p>
+</span></p></dd><dt><a class='title-link' name='prefix' href='#prefix'></a> prefix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Prefix to display before the attribute’s value</p>
+</span></p></dd><dt><a class='title-link' name='suffix' href='#suffix'></a> suffix</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Suffix to display after the attribute’s value</p>
+</span></p></dd><dt><a class='title-link' name='icon' href='#icon'></a> icon</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Overwrites default icon.</p>
+</span></p></dd><dt><a class='title-link' name='show_state' href='#show_state'></a> show_state</dt><dd><p class='desc'><span class='type'>(<span class='boolean'>boolean</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Show entity state-text.</p>
+</span></p><p class='default'>
+Default value: <p>true</p>
+</p></dd><dt><a class='title-link' name='tap_action' href='#tap_action'></a> tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap. See <a href="/lovelace/actions/#tap-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='hold_action' href='#hold_action'></a> hold_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card tap and hold. See <a href="/lovelace/actions/#hold-action">action documentation</a>.</p>
+</span></p></dd><dt><a class='title-link' name='double_tap_action' href='#double_tap_action'></a> double_tap_action</dt><dd><p class='desc'><span class='type'>(<span class='map'>map</span>)</span><span class='required'>(Optional)</span><span class='description'><p>Action taken on card double tap. See <a href="/lovelace/actions/#double-tap-action">action documentation</a>.</p>
+</span></p></dd></dl>
+</div>
+<h2>Options For Exemptions</h2>
+<div class="config-vars">
+  <h3><a class="title-link" name="configuration-variables" href="#configuration-variables"></a> Configuration Variables</h3>
+  <dl class=''><dt><a class='title-link' name='user' href='#user'></a> user</dt><dd><p class='desc'><span class='type'>(<span class='string'>string</span>)</span><span class='required'>(Required)</span><span class='description'><p>User id that can see the view tab.</p>
+</span></p></dd></dl>
+</div>
+<h2>How to use state_filter</h2>
+<p>Specify different <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">CSS filters</a></p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">state_filter:
+  &quot;on&quot;: brightness(110%) saturate(1.2)
+  &quot;off&quot;: brightness(50%) hue-rotate(45deg)
+entity: switch.decorative_lights</code></pre></figure>
+<h2>Examples</h2>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-glance
+title: Living room
+entities:
+  - switch.decorative_lights
+  - light.ceiling_lights
+  - lock.front_door
+  - binary_sensor.movement_backyard
+  - binary_sensor.basement_floor_wet
+image: /local/living_room.png</code></pre></figure>
+<p>Display a camera image as background:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-glance
+title: Living room
+entities:
+  - switch.decorative_lights
+  - light.ceiling_lights
+camera_image: camera.demo_camera</code></pre></figure>
+<p>Display a camera image without additional entities:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-glance
+title: Front garden
+entities: []
+camera_image: camera.front_garden_camera</code></pre></figure>
+<p>Use different images based on entity state:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">type: picture-glance
+title: Living room
+entities:
+  - switch.decorative_lights
+  - light.ceiling_lights
+state_image:
+  &quot;on&quot;: /local/living_room_on.png
+  &quot;off&quot;: /local/living_room_off.png
+entity: group.living.room</code></pre></figure>
+:ET

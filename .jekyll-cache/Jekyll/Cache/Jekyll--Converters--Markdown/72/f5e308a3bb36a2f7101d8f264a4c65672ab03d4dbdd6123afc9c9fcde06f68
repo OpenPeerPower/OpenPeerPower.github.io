@@ -1,0 +1,66 @@
+I"Å<p>The <code>bmw_connected_drive</code> integration lets you retrieve data of your BMW vehicle from the BMW Connected Drive portal. You need to have a working BMW Connected Drive account, and a Connected Drive enabled vehicle for this to work.</p>
+<p>The <code>bmw_connected_drive</code> integration also works with (recent) Mini vehicles. You need to have a working Mini Connected account, and a Mini Connected enabled vehicle for this to work.</p>
+<p>For compatibility with your BMW vehicle check the <a href="https://github.com/bimmerconnected/bimmer_connected">bimmer_connected page</a> on GitHub.</p>
+<p>This integration provides the following platforms:</p>
+<ul>
+<li>Binary Sensors: Doors, windows, condition based services, check control messages, parking lights, door lock state, charging status (electric cars) and connections status (electric cars).</li>
+<li>Device tracker: The location of your car.</li>
+<li>Lock: Control the lock of your car.</li>
+<li>Sensors: Mileage, remaining range, remaining fuel, charging time remaining (electric cars), charging status (electric cars), remaining range electric (electric cars).</li>
+<li>Notifications: Send messages or Points of Interest (POI) to your car.</li>
+<li>Services: Turn on air condition, sound the horn, flash the lights and update the state. More details can be found <a href="/integrations/bmw_connected_drive/#services">here</a>.</li>
+</ul>
+<h2>Configuration</h2>
+<p>To enable this integration in your installation, add the following to your
+<code>configuration.yaml</code> file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+bmw_connected_drive:
+  name:
+    username: USERNAME_BMW_CONNECTED_DRIVE
+    password: PASSWORD_BMW_CONNECTED_DRIVE
+    region: one of &quot;north_america&quot;, &quot;china&quot;, &quot;rest_of_world&quot;</code></pre></figure>
+<h2>Notifications</h2>
+<p>The <code>bmw_connected_drive</code> integration offers a notification service. Using this service you can send messages or Points of Interest (POI) to your vehicle. In your vehicle you can select this POI and the navigation will automatically start using the POI as a destination.
+The name of the service is <code>notify.bmw_connected_drive_&lt;your_vehicle&gt;</code>.</p>
+<h3>Examples</h3>
+<p>A few examples on how to use the notification service.</p>
+<h4>Send a text message to your vehicle</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">...
+action:
+  service: notify.bmw_connected_drive_&lt;your_vehicle&gt;
+  data:
+    title: Message from Open Peer Power # optional, will default to &quot;Open Peer Power&quot; when left empty
+    message: The text of the message you want to send to your vehicle</code></pre></figure>
+<h4>Send a Point of Interest to your vehicle</h4>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml">...
+action:
+  service: notify.bmw_connected_drive_&lt;your_vehicle&gt;
+  data:
+    message: The name of the POI # this is shown on the iDrive dashboard
+    data:
+      location:
+        latitude: 48.177024
+        longitude: 11.559107
+        street: Street name  # Optional
+        city: City name  # Optional
+        postal_code: Postal Code  # Optional
+        country: Country  # Optional</code></pre></figure>
+<h2>Services</h2>
+<p>The <code>bmw_connected_drive</code> integration offers several services. In case you need to provide the vehicle identification number (VIN) as a parameter, you can see the VIN in the attributes of the device tracker for the vehicle. The VIN is a 17 digit alphanumeric string, e.g., <code>WBANXXXXXX1234567</code>.</p>
+<p>Using these services will impact the state of your vehicle. So use these services with care!</p>
+<h3>Locking and unlocking</h3>
+<p>The vehicle can be locked and unlocked via the lock integration that is created automatically for each vehicle. Before invoking these services, make sure itâ€™s safe to lock/unlock the vehicle in the current situation.</p>
+<h3>Air condition</h3>
+<p>The air condition of the vehicle can be activated with the service <code>bmw_connected_drive.activate_air_conditioning</code>.</p>
+<p>What exactly is started here depends on the type of vehicle. It might range from just ventilation over auxiliary heating to real air conditioning. If your vehicle is equipped with auxiliary heating, only trigger this service if the vehicle is parked in a location where it is safe to use it (e.g., not in an underground parking or closed garage).</p>
+<p>The vehicle is identified via the parameter <code>vin</code>.</p>
+<h3>Sound the horn</h3>
+<p>The service <code>bmw_connected_drive.sound_horn</code> sounds the horn of the vehicle. This option is not available in some countries (among which  the UK). Use this feature responsibly, as it might annoy your neighbors. The vehicle is identified via the parameter <code>vin</code>.</p>
+<h3>Flash the lights</h3>
+<p>The service <code>bmw_connected_drive.light_flash</code> flashes the lights of the vehicle. The vehicle is identified via the parameter <code>vin</code>.</p>
+<h3>Update the state</h3>
+<p>The service <code>bmw_connected_drive.update_state</code> fetches the last state of the vehicles of all your accounts from the BMW server. This does <em>not</em> trigger an update from the vehicle; it gets the data from the BMW servers. So this service does <em>not</em> interact with your vehicles.</p>
+<p>This service does not require any attributes.</p>
+<h2>Disclaimer</h2>
+<p>This software is not affiliated with or endorsed by BMW Group.</p>
+:ET

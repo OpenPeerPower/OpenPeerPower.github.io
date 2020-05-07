@@ -1,0 +1,47 @@
+I"<p>The sections below deal with recovering from a situation where you are not able to sign in,
+or need to recover your data.</p>
+<h2>Forgot Password</h2>
+<h3>Open Peer Power (including Supervised)</h3>
+<p>If you are still logged in to the web interface with your user, then you are in luck. Add a new user as an administrator and give the new user a password you can remember. Then log out, and log in with this new user. You may then delete the old user account. But this way, your configuration will remain, and you don’t have to do a new onboarding process.</p>
+<p>If you’ve forgotten your user, then deleting the files mentioned above will be necessary to start a new onboarding process.</p>
+<p>If you know the user, but not the password and you can access the <a href="https://www.openpeerpower.io/hassio/commandline/"> Open Peer Power console</a> and use the command below:</p>
+<p>Connect a keyboard and monitor to your device.</p>
+<p><code>auth reset --username existing_user --password new_password</code></p>
+<h3>Open Peer Power Core</h3>
+<p>While you should hopefully be storing your passwords in a password manager, if you lose the password associated with the owner account the only way to resolve this is to delete <em>all</em> the authentication data. You do this by shutting down Open Peer Power and deleting the following files from the <code>.storage/</code> folder in your <a href="/docs/configuration/">configuration folder</a>:</p>
+<ul>
+<li><code>auth</code></li>
+<li><code>auth_provider.openpeerpower</code></li>
+<li><code>onboarding</code></li>
+<li><code>hassio</code></li>
+<li><code>cloud</code></li>
+</ul>
+<h2>Recovering Data for Open Peer Power (including Supervised)</h2>
+<p>Unless your SD card/data is corrupted, you can still get to your files or troubleshoot further.
+There are a few routes:</p>
+<ul>
+<li>Connect a USB keyboard and HDMI monitor directly to the Raspberry Pi.</li>
+<li>Remove the SD and access the files from another machine (preferably one running Linux).</li>
+</ul>
+<h2>Connect directly</h2>
+<p>If you’re using a Raspberry Pi, you’re likely going to have to pull the power in order to get your monitor recognized at boot. Pulling power has a risk of corrupting the SD, but you may not have another option. Most standard USB keyboards should be recognized easily.</p>
+<p>Once you’re connected, you’ll see a running dmesg log. Hit the enter key to interrupt the log.
+Sign in as “root”. There is no password.</p>
+<p>You will then be at the Open Peer Power CLI, where you can run the custom commands. These are the same as you would run using the SSH add-on but without using <code>ha</code> in front of it. For example:</p>
+<ul>
+<li><code>core logs</code> for Open Peer Power Core log</li>
+<li><code>supervisor logs</code> for supervisor logs</li>
+<li><code>host reboot</code> to reboot the host</li>
+<li><code>dns logs</code> for checking DNS</li>
+<li>etc (typing <code>help</code> will show more)</li>
+</ul>
+<h2>Accessing Files from the SD/HDD</h2>
+<h3>Remove the SD and access the files from another computer</h3>
+<p>The files are on an EXT4 partition (<code>hassos-data</code>) and the path is <code>/mnt/data/supervisor</code>.
+These are easily accessed using another Linux machine with EXT support.</p>
+<p>For Windows or macOS you will need third party software. Below are some options.</p>
+<ul>
+<li>Windows: <a href="https://www.diskinternals.com/linux-reader/">https://www.diskinternals.com/linux-reader/</a> (read-only access to the SD)</li>
+<li>Mac: <a href="https://osxfuse.github.io/">https://osxfuse.github.io/</a></li>
+</ul>
+:ET

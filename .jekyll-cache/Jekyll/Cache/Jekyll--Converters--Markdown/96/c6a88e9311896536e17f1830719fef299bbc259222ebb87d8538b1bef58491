@@ -1,0 +1,33 @@
+I"	<p>The <code>demo</code> platform allows you to use integrations which are providing a demo of their implementation. The demo entities are dummies but show you how the actual platform looks like. This way you can run own demonstration instance like the online <a href="/demo/">Open Peer Power demo</a>but combined with your own real/functional platforms.</p>
+<p>Available demo platforms:</p>
+<ul>
+<li><a href="/integrations/air_quality/">Air Quality</a> (<code>air_quality</code>)</li>
+<li><a href="/integrations/alarm_control_panel/">Alarm control panel</a> (<code>alarm_control_panel</code>)</li>
+<li><a href="/integrations/binary_sensor/">Binary sensor</a> (<code>binary_sensor</code>)</li>
+<li><a href="/integrations/camera/">Camera</a> (<code>camera</code>)</li>
+<li><a href="/integrations/climate/">Climate</a> (<code>climate</code>)</li>
+<li><a href="/integrations/cover/">Cover</a> (<code>cover</code>)</li>
+<li><a href="/integrations/fan/">Fan</a> (<code>fan</code>)</li>
+<li><a href="/integrations/geo_location/">Geolocation</a> (<code>geo_location</code>)</li>
+<li><a href="/integrations/image_processing/">Image Processing</a> (<code>image_processing</code>)</li>
+<li><a href="/integrations/light/">Light</a> (<code>light</code>)</li>
+<li><a href="/integrations/lock/">Lock</a> (<code>lock</code>)</li>
+<li><a href="/integrations/mailbox/">Mailbox</a> (<code>mailbox</code>)</li>
+<li><a href="/integrations/media_player/">Media Player</a> (<code>media_player</code>)</li>
+<li><a href="/integrations/notify/">Notification</a> (<code>notify</code>)</li>
+<li><a href="/integrations/remote/">Remote</a> (<code>remote</code>)</li>
+<li><a href="/integrations/sensor/">Sensor</a> (<code>sensor</code>)</li>
+<li><a href="/integrations/switch/">Switch</a> (<code>switch</code>)</li>
+<li><a href="/integrations/tts/">Text-to-speech</a> (<code>tts</code>)</li>
+<li><a href="/integrations/weather/">Weather</a> (<code>weather</code>)</li>
+</ul>
+<p>To integrate a demo platform in Open Peer Power, add the following section to your <code>configuration.yaml</code> file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+<h1>To load all:</h1>
+<p>demo:</p>
+<h1>To load for a specific integration:</h1>
+<p>light:</p>
+<ul>
+<li>platform: demo</code></pre></figure></li>
+</ul>
+:ET

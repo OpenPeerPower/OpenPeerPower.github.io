@@ -1,0 +1,82 @@
+I"H<p>The <code>serial</code> sensor platform is using the data provided by a device connected to the serial port of the system where Open Peer Power is running. With <a href="http://ser2net.sourceforge.net/"><code>ser2net</code></a> and <a href="http://www.dest-unreach.org/socat/"><code>socat</code></a> would it also work for sensors connected to a remote system.</p>
+<p>To check what kind of data is arriving at your serial port, use a command-line tool like <code>minicom</code> or <code>picocom</code> on Linux, on a macOS you can use <code>screen</code> or on Windows <code>putty</code>.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo minicom -D /dev/ttyACM0</code></pre></figure>
+<h2>Configuration</h2>
+<p>To setup a serial sensor to your installation, add the following to your <code>configuration.yaml</code> file:</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
+sensor:
+  - platform: serial
+    serial_port: /dev/ttyACM0</code></pre></figure>
+<h2><code>value_template</code> for Template sensor</h2>
+<h3>TMP36</h3>
+<p>{% highlight yaml %}
+“{{ (((states(‘sensor.serial_sensor’) | float * 5 / 1024 ) - 0.5) * 100) | round(1) }}”</p>
+<pre><code>
+
+## Examples
+
+### Arduino
+
+For controllers of the Arduino family, a possible sketch to read the temperature and the humidity could look like the sample below.The returned data is in JSON format and can be split into the individual sensor values using a [template](/docs/configuration/templating/#processing-incoming-data).
+
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;#include &amp;lt;ArduinoJson.h&amp;gt;
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  StaticJsonDocument&amp;lt;100&amp;gt; jsonBuffer;
+
+  jsonBuffer[&amp;quot;temperature&amp;quot;] = analogRead(A0);
+  jsonBuffer[&amp;quot;humidity&amp;quot;] = analogRead(A1);
+
+  serializeJson(jsonBuffer, Serial);
+  Serial.println();
+  
+  delay(1000);
+}&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+### Devices returning multiple sensors as a text string
+
+For devices that return multiple sensors as a concatenated string of values with a delimiter, (i.e., the returned string is not JSON formatted) you can make several template sensors, all using the same serial response. For example, a stream from the [Sparkfun USB Weather Board](https://www.sparkfun.com/products/retired/9800) includes temperature, humidity and barometric pressure within it returned text string. Sample returned data:
+
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;$,24.1,50,12.9,1029.83,0.0,0.00,*
+$,24.3,51,12.8,1029.76,0.0,0.00,*&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+To parse this into individual sensors, split using the comma delimiter and then create a template sensor for each item of interest.
+
+
+{% highlight yaml %}
+# Example configuration.yaml entry
+sensor:
+  - platform: serial
+    serial_port: /dev/ttyUSB0
+    baudrate: 9600
+
+  - platform: template
+    sensors:
+      my_temperature_sensor:
+        friendly_name: Temperature
+        unit_of_measurement: &quot;°C&quot;
+        value_template: &quot;{{ states('sensor.serial_sensor').split(',')[1] | float }}&quot;
+      my_humidity_sensor:
+        friendly_name: Humidity
+        unit_of_measurement: &quot;%&quot;
+        value_template: &quot;{{ states('sensor.serial_sensor').split(',')[2] | float }}&quot;
+      my_barometer:
+        friendly_name: Barometer
+        unit_of_measurement: &quot;mbar&quot;
+        value_template: &quot;{{ states('sensor.serial_sensor').split(',')[4] | float }}&quot;
+{% endhighlight %}
+
+
+### Digispark USB Development Board
+
+This [blog post](/blog/2017/10/23/simple-analog-sensor/) describes the setup with a Digispark USB Development Board.
+</code></pre>
+:ET
