@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "0.108: Logos, Area Pages, Lovelace Entity Card, Lovelace Map History"
+title: "0.108: Logos, Area Pages,  Entity Card,  Map History"
 description: "0.108: Adds Logos and Icons, new Area Configuration Pages, new Entity Card and Map History"
 date: 2020-04-08 00:00:00
 date_formatted: "April 8, 2020"
@@ -96,12 +96,12 @@ amazing already:
 
 Yes, [@bdraco] has been on fire this release! Amazing job!
 
-## Lovelace Map history
+##  Map history
 
 Maybe not very useful during home quarantine, but a very cool feature for when
 we are allowed to get out of our homes again.
 [@Hoytron](https://github.com/Hoytron) added the ability to show the history of
-persons or device trackers on the Lovelace map card. You can define how many hours of history
+persons or device trackers on the  map card. You can define how many hours of history
 you want to show and it will draw lines between all the points in that
 time frame.
 
@@ -110,9 +110,9 @@ time frame.
 Screenshot of the map card with history.
 </p>
 
-## New Lovelace card: Entity
+## New  card: Entity
 
-[@zsarnett](https://github.com/zsarnett) added a new Lovelace card, the entity card. This card looks like the sensor card, but allows you to use any entity (not just sensors).
+[@zsarnett](https://github.com/zsarnett) added a new  card, the entity card. This card looks like the sensor card, but allows you to use any entity (not just sensors).
 
 <p class='img'>
 <img src='/images/blog/2020-04-0.108/entity-card.png' alt='Screenshot of the entity card'></a>
@@ -144,13 +144,13 @@ Before and after screenshot for the Horizontal Stack improvements.
 - _**"Alexa, show the front door camera."**_ 😲  
   [Alexa][alexa docs] now has support for Cameras, thanks [@ochlocracy]!
 
-- Selecting your default Lovelace dashboard has been moved to the user
+- Selecting your default  dashboard has been moved to the user
   profile page.
 
 - A lot of configuration pages are migrated to data tables, this means you can
   now search in your automations, scenes, scripts, users and areas.
 
-- Lovelace cards in panel views can now also be edited with the UI editor.
+-  cards in panel views can now also be edited with the UI editor.
 
 - The graph from the sensor card is now also available as a footer for the
   entities and entity card.
@@ -201,7 +201,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 
 ## Breaking Changes
 
-- **Lovelace themes** - We discovered our theme logic was wrong, when you didn't specify a theme for a Lovelace card or view. It would default to the backend selected theme, even when your local theme was different, or your view had a different theme. To fix this we removed the options `default` and `Backend selected` from the Lovelace theme selection, and when there is not theme selected it will not set a theme. This will make sure the element has the same theme as it's parent.
+- ** themes** - We discovered our theme logic was wrong, when you didn't specify a theme for a  card or view. It would default to the backend selected theme, even when your local theme was different, or your view had a different theme. To fix this we removed the options `default` and `Backend selected` from the  theme selection, and when there is not theme selected it will not set a theme. This will make sure the element has the same theme as it's parent.
 
 - **Freebox** - Freebox is now available as an integration from the Integrations UI! You will need to re-authorize Open Peer Power to access the Freebox router. - ([@Quentame] - [#30334]) ([freebox docs])
 
@@ -472,7 +472,7 @@ These integrations have been removed. The websites for both have changed, causin
 - Bump nexia to 0.7.2 ([@bdraco] - [#33292]) ([nexia docs])
 - Abort rachio homekit config when one is already setup ([@bdraco] - [#33285]) ([rachio docs])
 - Support homekit matches that have a dash after the model ([@bdraco] - [#33274]) ([zeroconf docs])
-- Add support for dashboards to lovelace cast service ([@bramkragten] - [#32913]) ([cast docs])
+- Add support for dashboards to  cast service ([@bramkragten] - [#32913]) ([cast docs])
 - Remove state when entity is removed from registry ([@emontnemery] - [#32184])
 - Add entities for ZHA fan groups ([@dmulcahey] - [#33291]) ([zha docs])
 - Fix ZHA light crashing on color loop effect ([@balloob] - [#33298]) ([zha docs])
@@ -486,7 +486,7 @@ These integrations have been removed. The websites for both have changed, causin
 - Fix ZHA light group on state ([@dmulcahey] - [#33308]) ([zha docs])
 - Fix nuheat unexpectedly switching to a permanent hold ([@bdraco] - [#33316]) ([nuheat docs])
 - :vicare: Improve scan_interval ([@oischinger] - [#33294]) ([vicare docs])
-- Fix Lovelace resources health info ([@bramkragten] - [#33309]) ([lovelace docs])
+- Fix  resources health info ([@bramkragten] - [#33309]) ([ docs])
 - Add inline comments to elkm1 about how config is updated from… ([@bdraco] - [#33361]) ([elkm1 docs])
 - Fix Abode tests uncaught exceptions ([@shred86] - [#33365])
 - Fix GDACS tests ([@exxamalte] - [#33357]) ([gdacs docs])
@@ -533,7 +533,7 @@ These integrations have been removed. The websites for both have changed, causin
 - Add HomeKit support for slat tilting ([@mst] - [#33388]) ([homekit docs])
 - Overhaul the Slack integration (async and Block Kit support) ([@bachya] - [#33287]) ([slack docs]) (breaking change)
 - Update issue templates ([@frenck] - [#33434])
-- Require admin to manage lovelace ([@bramkragten] - [#33435]) ([lovelace docs])
+- Require admin to manage  ([@bramkragten] - [#33435]) ([ docs])
 - Fix hue tests that have uncaught exceptions ([@azogue] - [#33443])
 - Fix deconz tests that have uncaught exceptions ([@azogue] - [#33462]) ([deconz docs])
 - Best effort state initialization of bayesian binary sensor ([@jlmcgehee21] - [#30962]) ([bayesian docs])
@@ -1098,7 +1098,7 @@ These integrations have been removed. The websites for both have changed, causin
 [lastfm docs]: /integrations/lastfm/
 [lcn docs]: /integrations/lcn/
 [light docs]: /integrations/light/
-[lovelace docs]: /integrations/lovelace/
+[ docs]: /integrations//
 [luftdaten docs]: /integrations/luftdaten/
 [lutron_caseta docs]: /integrations/lutron_caseta/
 [media_extractor docs]: /integrations/media_extractor/

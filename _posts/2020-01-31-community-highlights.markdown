@@ -23,17 +23,6 @@ Or join us for a little chat in our [#lounge at Discord][chat]
 
 ../Frenck
 
-## A different take on designing your frontend
-
-Mattias Persson showed an interesting alternative approach to the design of his Lovelace UI.
-It looks fabulous; we don't even know where to start explaining, check the video below for an impression:
-
-<div class='videoWrapper'>
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/727tFhqpFAE" frameborder="0" allowfullscreen></iframe>
-</div>
-
-Mattias created [a post in the Community Forum][different-take] with all the details, including more screenshots, the things he used and links to his GitHub repository. Everything you'd need if you wanted to replicate this for your own use. Thanks Mattias!
-
 ## Got a tip for the next edition?
 
 Have you seen (or made) something awesome, interesting, unique, amazing, inspirational, unusual or funny, using Open Peer Power?
@@ -53,7 +42,6 @@ See you next edition!
 [chat]: https://www.openpeerpower.io/join-chat
 [community-highlights-2015]: https://www.openpeerpower.io/blog/2015/12/05/community-highlights/
 [community-highlights-2016]: https://www.openpeerpower.io/blog/2016/02/20/community-highlights/
-[different-take]: https://community.openpeerpower.io/t/a-different-take-on-designing-a-lovelace-ui/162594
 [esphome]: https://www.esphome.io
 [facebook-group]: https://www.facebook.com/groups/OpenPeerPower/
 [instagram]: https://www.instagram.com/openpeerpower/

@@ -6,7 +6,7 @@ redirect_from:
  - /getting-started/automation-2/
 ---
 
-Once your devices are set up, it's time to put the cherry on the pie: automation. In this guide we're going to create a simple automation rule to **turn on the lights when the sun sets**.
+Once your devices are set up, you can start to automate. In this guide we're going to create a simple automation rule to **turn on the lights when the sun sets**.
 
 In the user interface, click Configuration in the sidebar, then click Automation. You will now see the automation screen from which you can manage all the automations in Open Peer Power.
 

@@ -2012,7 +2012,3 @@
 /addons/snips https://github.com/OpenPeerPower/hassio-addons/blob/master/snips/README.md
 /addons/ssh https://github.com/OpenPeerPower/hassio-addons/blob/master/ssh/README.md
 /addons/tellstick https://github.com/OpenPeerPower/hassio-addons/blob/master/tellstick/README.md
-
-# Lovelace documentation
-/lovelace/entity-button /lovelace/button
-/lovelace/views /lovelace/dashboards-and-views

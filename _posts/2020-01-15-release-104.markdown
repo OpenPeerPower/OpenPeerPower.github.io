@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "0.104: Sentry, Signal Messenger, IntesisHome, Sure Petcare, KEF"
-description: "Starting this new year with a packed release! Improved entity loading on startup and multi-select entities in Lovelace, ability to ignore a discovered device."
+description: "Starting this new year with a packed release! Improved entity loading on startup and multi-select entities, ability to ignore a discovered device."
 date: 2020-01-15 00:00:00
 date_formatted: "January 15, 2020"
 author: Franck Nijhof
@@ -20,10 +20,8 @@ We are starting this new year with a packed release! So let us dive in!
 - [Improved entity handling on startup](/blog/2020/01/15/release-104/#improved-entity-handling-on-startup)
 - [Ignore discovered devices & services](/blog/2020/01/15/release-104/#ignore-discovered-devices--services)
 - [Reload all the input things & bye generated groups](/blog/2020/01/15/release-104/#reload-all-the-input-things--bye-generated-groups)
-- [Add a device to Lovelace](/blog/2020/01/15/release-104/#add-a-device-to-lovelace)
 - [Multi-select entity management](/blog/2020/01/15/release-104/#multi-select-entity-management)
 - [ZHA configuration panel improvements](/blog/2020/01/15/release-104/#zha-configuration-panel-improvements)
-- [Removing your Lovelace configuration](/blog/2020/01/15/release-104/#removing-your-lovelace-configuration)
 - [In other news](/blog/2020/01/15/release-104/#in-other-news)
 - [New Integrations](/blog/2020/01/15/release-104/#new-integrations)
 - [New Platforms](/blog/2020/01/15/release-104/#new-platforms)
@@ -42,8 +40,7 @@ and entities. However, there was a catch!
 
 The loading of some integrations could take a while, which caused some entities
 not to be available immediately. Sometimes, this affected multiple things, like
-missing devices in HomeKit/Google/Alexa or those big red boxes in our Lovelace
-UI. We are sure, at some point, we've all experienced that.
+missing devices in HomeKit/Google/Alexa or those big red boxes in our UI. We are sure, at some point, we've all experienced that.
 
 As of this release, all these entities, if registered in our entity registry,
 will be restored as "unavailable". That allows other parts of our system to use
@@ -89,22 +86,6 @@ hidden. However, if you rely on those groups for your automations, you
 need to adjust those automations.
 Check out the [breaking changes section](#breaking-changes) for more information.
 
-## Add a device to Lovelace
-
-We added a button to the device page to add all entities of a device to Lovelace
-in a blip! Open Peer Power suggests cards based on the type of entities the
-device provides so that you can add them to a view of your choice instantly.
-
-If you are using Lovelace in YAML mode, you still can use this new feature. The
-generated YAML can be copied and pasted into your configuration file.
-
-<p class='img'>
-<img src='/images/blog/2020-01-0.104/add-device-lovelace.png' alt='Screenshot of a card suggestion for a light device'></a>
-Screenshot of a card suggestion for a light device.
-</p>
-
-This same functionality is also added to the unused entities page of Lovelace.
-
 ## Multi-select entity management
 
 Entity management has never been easier; It now allows for changing multiple
@@ -134,19 +115,6 @@ Screenshot of the ZHA configuration panel.
 In a future releases, the ability to bind devices directly to groups,
 will be added as well.
 
-## Removing your Lovelace configuration
-
-Want to start your Lovelace configuration from scratch? Or go back to the
-automatically generated Lovelace interface?
-
-Now you can by clearing the Lovelace configuration in the raw configuration
-editor and saving it.
-
-<p class='img'>
-<img src='/images/blog/2020-01-0.104/remove-lovelace-config.png' alt='Screenshot of the remove Lovelace confirmation dialog'></a>
-Screenshot of the remove Lovelace confirmation dialog.
-</p>
-
 ## In other news
 
 ### Meanwhile, HassOS 3.8 got released!
@@ -160,26 +128,6 @@ now available as well. This beta release adds support for
 
 The [ODROID-N2](https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram/)
 is a great and powerful alternative for the Raspberry Pi.
-
-### Custom now playing poster Lovelace card
-
-Brad Crc made this [impressive demo](https://www.reddit.com/r/openpeerpower/comments/e7wo0j/floor_plan_how_to_show_currently_playing_media/)
-of setting up a custom now playing poster card in Lovelace floor plans.
-This allows you to show currently playing media in your floor plan!
-
-<div class='videoWrapper'>
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/1ZU4WMgwU6s" frameborder="0" allowfullscreen></iframe>
-</div>
-
-### Bas showing his Lovelace theme on his setup
-
-Bas Nijholt kept seeing his own theme popping up on Reddit, so he decided it was
-time for him to show off his Lovelace dashboard, featuring this lovely theme.
-
-<blockquote class="reddit-card"><a href="https://www.reddit.com/r/openpeerpower/comments/enpeik/i_keep_seeing_my_own_theme_on_reddit_so_now_its/">I keep seeing my own theme on Reddit, so now it's my turn! [OC]</a> from <a href="http://www.reddit.com/r/openpeerpower">r/openpeerpower</a></blockquote>
-<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
-
-His theme is [publicly available on GitHub](https://github.com/basnijholt/lovelace-ios-dark-mode-theme/) and so is [his config](https://github.com/basnijholt/open-peer-power-config).
 
 ## New Integrations
 
@@ -231,7 +179,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
   - `group.calendar`
   - `group.remember_the_milk_accounts`
 
-  The automation and script configuration panels are updated to show and manage all automations/scripts. If you want to show cards in your Lovelace UI with all entities for a single domain, use the auto-entities card. If you want to target all entities in a service call, use `all` as value for `entity_id`.
+  The automation and script configuration panels are updated to show and manage all automations/scripts. If you want to show cards in your UI with all entities for a single domain, use the auto-entities card. If you want to target all entities in a service call, use `all` as value for `entity_id`.
 
   ([@balloob] - [#23789]) ([automation docs]) ([calendar docs]) ([cover docs]) ([device_tracker docs]) ([fan docs]) ([light docs]) ([lock docs]) ([plant  docs]) ([remember_the_milk docs]) ([remote docs]) ([script docs]) ([switch docs]) ([vacuum docs]).
 
@@ -369,7 +317,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 
 - __Binary Sensor (Locks)__ - Updated ON/OFF condition and triggers to match the documentation and UI. This change inverts the logic of automations relating to binary sensor with the `lock` device class, but only for automations triggering on the lock state (rather than triggering a lock/unlock action).
 
-  If you already created automations, you will need to check those, as they probably need to be inverted. The text displayed in the trigger or condition dropdowns in Lovelace will now be correct.
+  If you already created automations, you will need to check those, as they probably need to be inverted. The text displayed in the trigger or condition dropdowns will now be correct.
 
   One possible scenario is if you have set an automation using the state of one lock to trigger an action on other lock(s). This change would cause the action to trigger on `locking` if it was previously triggering on `unlocking`. - ([@davet2001] - [#30663]) ([binary_sensor docs])
 
@@ -1059,7 +1007,6 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 - Fix hue flashing innr lights ([@InuSasha] - [#29828]) ([hue docs])
 - Migrate Integration Quality Scale from docs to manifest: internal ([@frenck] - [#30551])
 - Updated frontend to 20200107.0 ([@bramkragten] - [#30561]) ([frontend docs])
-- Add command to delete lovelace config ([@bramkragten] - [#30558]) ([lovelace docs])
 - Add android repo to issue template ([@dshokouhi] - [#30571])
 - Bump pyRFXtrx to 0.25 ([@Ernst79] - [#30566]) ([rfxtrx docs]) (breaking change)
 - deCONZ - Make sensors sorted on creation for deterministic order ([@Kane610] - [#30569]) ([deconz docs])
@@ -1940,7 +1887,6 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 [localip docs]: /integrations/local_ip/
 [locative docs]: /integrations/locative/
 [lock docs]: /integrations/lock/
-[lovelace docs]: /integrations/lovelace/
 [luftdaten docs]: /integrations/luftdaten/
 [matrix docs]: /integrations/matrix/
 [media_extractor docs]: /integrations/media_extractor/

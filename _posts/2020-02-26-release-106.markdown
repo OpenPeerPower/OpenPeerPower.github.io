@@ -21,7 +21,7 @@ A great release that improves stability, reliability and a lot of helpful additi
 
 In Open Peer Power [0.105](/blog/2020/02/05/release-105/#safe-mode), we introduced Safe Mode. Our goal is to make sure Open Peer Power always starts and provide you an interface to work with. No matter what.
 
-[@balloob] has been busy this release to improve on this feature even more, and Open Peer Power is now able to overcome issues when things in the core system get into trouble and even when the Lovelace configuration isn't readable. Besides that, the way Safe Mode is presented has changed, so you instantly know you are in Safe Mode:
+[@balloob] has been busy this release to improve on this feature even more, and Open Peer Power is now able to overcome issues when things in the core system get into trouble and even when the configuration isn't readable. Besides that, the way Safe Mode is presented has changed, so you instantly know you are in Safe Mode:
 
 <p class='img'>
 <img src='/images/blog/2020-02-0.106/safe-mode-activated.png' alt='Screenshot of Open Peer Power running in Safe Mode'></a>
@@ -80,7 +80,7 @@ Screenshot of the integrations list and an example log message.
 
 ## Sensor card
 
-Our sensor card has had a style update. We initially got the design from the [Lovelace Mini Graph Card](https://github.com/kalkih/mini-graph-card) and now updated to match the improved new look of that card.
+Our sensor card has had a style update. We initially got the design from the [Mini Graph Card](https://github.com/kalkih/mini-graph-card) and now updated to match the improved new look of that card.
 
 <p class='img'>
 <img src='/images/blog/2020-02-0.106/sensor-card.png' alt='Screenshot of the updated sensor card'></a>
@@ -97,8 +97,8 @@ But wait...  there is more! Some other smaller noteworthy changes in this releas
 
 - New automations now default to device automations instead of state triggers and service calls. Device automations are so much easier and clearer to create from the UI. You can, of course, still use the old triggers and actions like you are used to.
 
-- In the generated Lovelace we no longer include automations and battery entities. You can find these in the automation configuration panel and the battery in the device configuration page.
-If you want to have your automations and/or battery in your Lovelace UI, you can always take control and add them.
+- In the generated we no longer include automations and battery entities. You can find these in the automation configuration panel and the battery in the device configuration page.
+If you want to have your automations and/or battery in your UI, you can always take control and add them.
 
 - Scripts and scenes now have the ability to set a custom icon. Previously, you would have to create a customization to do this, now, you can just set them in your configuration.
 
@@ -362,7 +362,6 @@ Experiencing issues introduced by this release? Please report them in our [issue
 ## Release 0.106.2 - February 28
 
 - Updated frontend to 20200220.5 ([@bramkragten] - [#32312]) ([frontend docs])
-- revent saving/deleting Lovelace config in safe mode ([@balloob] - [#32319]) ([lovelace docs])
 - UniFi - Temporary workaround to get device tracker to mark cli… ([@Kane610] - [#32321]) ([unifi docs])
 - Ensure rest sensors are marked unavailable when http requests… ([@bdraco] - [#32309]) ([rest docs])
 
@@ -375,7 +374,6 @@ Experiencing issues introduced by this release? Please report them in our [issue
 [@bdraco]: https://github.com/bdraco
 [@bramkragten]: https://github.com/bramkragten
 [frontend docs]: /integrations/frontend/
-[lovelace docs]: /integrations/lovelace/
 [rest docs]: /integrations/rest/
 [unifi docs]: /integrations/unifi/
 

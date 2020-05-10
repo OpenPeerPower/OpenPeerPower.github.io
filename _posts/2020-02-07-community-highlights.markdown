@@ -1,6 +1,6 @@
 ---
 title: "Community Highlights: 2nd edition"
-description: "DIY smart candles, automating a van, a self generating Lovelace theme and visualizing with Grafana"
+description: "DIY smart candles, automating a van, a self generating theme and visualizing with Grafana"
 date: 2020-02-07 00:00:00
 date_formatted: "February 7, 2020"
 author: Franck Nijhof
@@ -44,9 +44,9 @@ He also made his Open Peer Power configuration [publicly available on GitHub](ht
 
 _Thanks, [Robbie Trencheny](https://twitter.com/robbie) & [cgtobi](https://twitter.com/cgtobi) for sending in this item in! 👍_
 
-## An auto-generating Lovelace UI theme
+## An auto-generating UI theme
 
-Dwain Scheeren shared a preview of his Lovelace theme on the [Open Peer Power Community Forum]((https://community.openpeerpower.io/t/dwains-theme-an-auto-generating-lovelace-ui-theme/168593)). The cool think about this theme, is that it automatically generates itself!
+Dwain Scheeren shared a preview of his theme on the [Open Peer Power Community Forum]((https://community.openpeerpower.io/t/dwains-theme-an-auto-generating-ui-theme/168593)). The cool think about this theme, is that it automatically generates itself!
 
 <div class='videoWrapper'>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Wdh0q8K3JSk" frameborder="0" allowfullscreen></iframe>
@@ -54,7 +54,7 @@ Dwain Scheeren shared a preview of his Lovelace theme on the [Open Peer Power Co
 
 Unfortunately, the source code for this isn't available yet, however, Dwain wrote on the forums that he is planning on releasing it soon. We are looking forward to that, Dwain!
 
-You can follow the development of this theme on the [dedicated topic for it on our Community Forum](https://community.openpeerpower.io/t/dwains-theme-an-auto-generating-lovelace-ui-theme/168593).
+You can follow the development of this theme on the [dedicated topic for it on our Community Forum](https://community.openpeerpower.io/t/dwains-theme-an-auto-generating-ui-theme/168593).
 
 ## Visualizing everything in Grafana
 

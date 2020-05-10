@@ -31,9 +31,9 @@ setup has a total of 5 Open Peer Power instances, controlling 7x marine aquarium
   Kevin's impressive setup for his 7 aquariums.
 </p>
 
-Those are some big views Kevin! I bet you will be happy with the new Lovelace
+Those are some big views Kevin! I bet you will be happy with the new
 features that are coming in Open Peer Power Core 0.107. It will help
-you to trim down that a bit, into multiple Lovelace Dashboards (now in
+you to trim down that a bit, into multiple Dashboards (now in
 [beta, sneak peak?](https://rc.openpeerpower.io/latest-release-notes/)).
 
 [Click here to check out Kevin's post on our Facebook group.](https://www.facebook.com/groups/OpenPeerPower/permalink/2597624533842234/)

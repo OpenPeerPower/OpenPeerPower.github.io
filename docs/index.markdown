@@ -30,12 +30,6 @@ The documentation covers beginner to advanced topics around the installation, se
     </div>
     <div class='title'>MQTT</div>
   </a>
-  <a class='option-card' href='/lovelace/'>
-    <div class='img-container'>
-      <img src='/images/supported_brands/view-dashboard.png' />
-    </div>
-    <div class='title'>Lovelace user interface</div>
-  </a>
   <a class='option-card' href='/docs/ecosystem/ios/'>
     <div class='img-container'>
       <img src='https://brands.openpeerpower.io/ios/icon.png' />

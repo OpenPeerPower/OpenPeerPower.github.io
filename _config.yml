@@ -71,8 +71,6 @@ collections:
     output: true
   faq:
     output: true
-  lovelace:
-    output: true
 
 # ----------------------- #
 #   3rd Party Settings    #

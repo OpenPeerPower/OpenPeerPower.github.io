@@ -3,8 +3,6 @@ title: "Onboarding Open Peer Power"
 description: "Instructions to get Open Peer Power configured."
 ---
 
-Alright, you made it here. The tough part is done.
-
 With Open Peer Power installed, it's time to configure it. Here you will create the owner account of Open Peer Power. This account will be an administrator and will always be able to change everything. Enter a name, username, password and click on "create account".
 
 <p class='img'>
@@ -26,14 +24,9 @@ Once you are done, click Next. In this screen, Open Peer Power will show any dev
 Discovery of devices on your network.
 </p>
 
-Finally, click Finish. Now you're brought to the Open Peer Power web interface. This screen will show all of your devices. So let's get that screen filled up!
+Finally, click Finish. Now you're brought to the Open Peer Power web interface. This screen will show all of your devices.
 
-<p class='img'>
-<img src='/images/getting-started/lovelace.png' />
-The Open Peer Power user interface.
-</p>
-
-Click on Configuration in the sidebar on the left. On the next screen, click on Integrations. At this screen you will be able to set up integrations with Open Peer Power. You might notice a "discovered" section. This section contains integrations that were found on your network and can easily be added with a few clicks. If your integrations are not discovered, click the + button in the lower right and search for your integration in that list.
+Click on Configuration in the sidebar on the left. On the next screen, click on Integrations. At this screen you will be able to set up integrations with Open Peer Power. The "discovered" section contains integrations that were found on your network and can easily be added with a few clicks. If your integrations are not discovered, click the + button in the lower right and search for your integration in that list.
 
 <p class='img'>
 <img src='/images/getting-started/integrations.png' />

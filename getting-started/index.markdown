@@ -27,9 +27,7 @@ So here are guidelines:
 
 This guide will help you get Open Peer Power running on a Raspberry Pi, to create an efficient power management hub.
 
-Follow this guide if you want to get started with Open Peer Power easily or if you have little to no Linux experience. For advanced users (or if you don't have a [device that is supported by this guide][supported]), check out our [alternative installation methods](/docs/installation/). Once you finish your alternative installation, you can continue at the [next step][next-step].
-
-[supported]: /hassio/installation/
+Once you finish your alternative installation, you can continue at the [next step][next-step].
 
 ### Suggested hardware
 
@@ -42,7 +40,7 @@ The Raspberry Pi 4 Model B is a good, affordable option for the power management
 
 ### Software requirements
 
-- Download and extract the Open Peer Power image for [your device](/hassio/installation/)
+- Download and extract the Open Peer Power image.
 - Download [balenaEtcher] to write the image to an SD card
 
 [balenaEtcher]: https://www.balena.io/etcher

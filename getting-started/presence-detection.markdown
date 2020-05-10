@@ -46,5 +46,3 @@ The map view will hide all devices that are home.
 [condition]: /getting-started/automation-condition/#zone-condition
 [ha-map]: /integrations/map/
 [companion]: https://companion.openpeerpower.io/
-
-### [Next step: Join the Community &raquo;](/getting-started/join-the-community/)

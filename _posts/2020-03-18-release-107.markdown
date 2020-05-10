@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "0.107: Multiple Lovelace Dashboards, adds helpers, new media player card"
+title: "0.107: Multiple Dashboards, adds helpers, new media player card"
 description: "7 new integrations! Tons of beautiful improvements and amazing new features for the frontend."
 date: 2020-03-18 00:00:00
 date_formatted: "March 18, 2020"
@@ -26,8 +26,8 @@ improvements to the frontend.
 
 As announced with [0.105](/blog/2020/02/05/release-105), the old States UI is
 now removed from Open Peer Power. If you are using Open Peer Power for a year or
-less, you might not have an idea what it is, since the "new" Lovelace UI has
-been the default. It is the UI we used before Lovelace.
+less, you might not have an idea what it is, since the "new"  UI has
+been the default. It is the UI we used before .
 
 If you are up for a flashback, maybe it is worth reading
 [the release notes for Open Peer Power 0.7](/blog/2015/08/31/version-7-revamped-ui-and-improved-distribution/)
@@ -39,26 +39,26 @@ As we announced the deprecation of the old States UI in
 [0.105](/blog/2020/02/05/release-105), not everybody seemed to be that happy
 about it. So we surveyed to see what one would miss from States UI and
 learned that it is mostly used as an overview of all entities (besides having
-a nice layout that can be made in Lovelace).
+a nice layout that can be made in ).
 
-In this release, we bring you a Lovelace solution for that and added a bit more...
+In this release, we bring you a  solution for that and added a bit more...
 
-## Hello multiple Lovelace dashboards
+## Hello multiple  dashboards
 
-You are now able to create multiple Lovelace configurations, called:
-Lovelace Dashboards!
+You are now able to create multiple  configurations, called:
+ Dashboards!
 
 You can have a dashboard with your main layout, one that is auto-generated
 (like the old State UI), one for experimenting, one for admins,
 one for your wall-mounted tablet, etc.
 
 And, yes, you can even mix and match multiple YAML mode managed
-Lovelace Dashboard, UI managed Lovelace Dashboards and auto-generated
-Lovelace Dashboards at the same time.
+ Dashboard, UI managed  Dashboards and auto-generated
+ Dashboards at the same time.
 
 <p class='img'>
-<img src='/images/blog/2020-03-0.107/lovelace-config-panel.png' alt='Screenshot of the new Lovelace configuration panel'></a>
-Screenshot of the new Lovelace configuration panel.
+<img src='/images/blog/2020-03-0.107/-config-panel.png' alt='Screenshot of the new  configuration panel'></a>
+Screenshot of the new  configuration panel.
 </p>
 
 Each dashboard can be added to the menu sidebar as well, with a configurable
@@ -66,25 +66,25 @@ title and icon. Furthermore, it is possible to limit access to a dashboard to
 admin users only.
 
 An unlimited amount of dashboards can be created right from the UI in the new
-Lovelace configuration panel, and YAML dashboards can be set up in
-`configuration.yaml`, see [the documentation](/lovelace/yaml-mode/).
+ configuration panel, and YAML dashboards can be set up in
+`configuration.yaml`, see [the documentation](//yaml-mode/).
 
-This awesome new feature comes with a deprecation if you use Lovelace in
+This awesome new feature comes with a deprecation if you use  in
 manual YAML mode: You need to move the `resources` section from
-your `ui-lovelace.yaml` to the `lovelace:` section in `configuration.yaml`.
+your `ui-.yaml` to the `:` section in `configuration.yaml`.
 It is not a breaking change yet; we still load them from the previous location
-if we didn't find anything in the `lovelace:` section, however, this fallback
+if we didn't find anything in the `:` section, however, this fallback
 is being removed in a future version.
 
-If you manage your Lovelace via the frontend, we automatically migrate your
-resources. Please note that resources are not in the raw Lovelace
-configuration editor anymore, but in the Lovelace configuration panel.
+If you manage your  via the frontend, we automatically migrate your
+resources. Please note that resources are not in the raw 
+configuration editor anymore, but in the  configuration panel.
 
 ## New media player card
 
 [@zsarnett](https://github.com/zsarnett) is back on the frontend team and is
 not planning on letting that happen unnoticed. He did a ton of work on the
-frontend and created a beautiful new media control card for Lovelace.
+frontend and created a beautiful new media control card for .
 
 It is inspired by the media control widget in Android and changes color based
 on the artwork of the played media. We think it looks absolutely gorgeous!
@@ -114,7 +114,7 @@ frontend change possible! Not only that, if you prefer YAML, these changes
 made by [@Adminiuga] also made it possible to reload the `input_*` YAML
 configuration without restarting Open Peer Power.
 
-## Improvements to Lovelace editing experience
+## Improvements to  editing experience
 
 [@zsarnett](https://github.com/zsarnett) changed the looks of our card picker, instead of a simple button to
 pick a card, you now get a live preview with your own entities.
@@ -122,7 +122,7 @@ pick a card, you now get a live preview with your own entities.
 horizontal and vertical stack cards and the conditional card.
 
 <p class='img'>
-<img src='/images/blog/2020-03-0.107/lovelace-edit-improvements.gif' alt='Screen recording of the new card picker and stack editor'></a>
+<img src='/images/blog/2020-03-0.107/-edit-improvements.gif' alt='Screen recording of the new card picker and stack editor'></a>
 Screen recording of the new card picker and stack editor.
 </p>
 
@@ -174,14 +174,14 @@ Experiencing issues introduced by this release? Please report them in our [issue
 
 - **Input Number** - Adds an entity ID to input_number warning. Passing an out of range value to `input_number.set_value` will now raise a validation error. Incrementing/decrementing an `input_number` will no longer cause warnings. - ([@balloob] - [#32012]) ([input_number docs])
 
-- **History Graph** - The `history_graph` integration has been deprecated in Open Peer Power 0.105 and is now removed. This integration was used for the old states UI, which is no longer available. A Lovelace an equivalent is available: [The Lovelace History Graph](/lovelace/history-graph/). ([@frenck] - [#32028])
+- **History Graph** - The `history_graph` integration has been deprecated in Open Peer Power 0.105 and is now removed. This integration was used for the old states UI, which is no longer available. A  an equivalent is available: [The  History Graph](//history-graph/). ([@frenck] - [#32028])
 
 - **Weblink** - The `weblink` integration is was deprecated in 0.105.0 and now removed. This integration only works with the old states UI, which is no longer available. ([@frenck] - [#32024])
 
-  With Lovelace, the same can be achieved using:
+  With , the same can be achieved using:
 
-  - [The Lovelace Markdown card](/lovelace/markdown/)
-  - [The Lovelace Entities card](/lovelace/entities/#weblink)
+  - [The  Markdown card](//markdown/)
+  - [The  Entities card](//entities/#weblink)
 
 - **Environment Canada** - This integration was previously using web scraping for weather alert details. The details attribute has been removed to make it compliant. (ADR-0004) - ([@michaeldavie] - [#32077]) ([environment_canada docs])
 
@@ -334,7 +334,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Set self._current_app to None when vizio device is off ([@raman325] - [#32725]) ([vizio docs]) (beta fix)
 - Updated frontend to 20200312.0 ([@bramkragten] - [#32741]) ([frontend docs]) (beta fix)
 - Bump py-august to 0.25.0 ([@bdraco] - [#32769]) ([august docs]) (beta fix)
-- Check if panel url used and delay dashboard reg till start ([@bramkragten] - [#32771]) ([frontend docs]) ([lovelace docs]) (beta fix)
+- Check if panel url used and delay dashboard reg till start ([@bramkragten] - [#32771]) ([frontend docs]) ([ docs]) (beta fix)
 - Updated frontend to 20200313.0 ([@bramkragten] - [#32777]) ([frontend docs]) (beta fix)
 - Fix homekit_controller beta connectivity issues ([@Jc2k] - [#32810]) ([homekit_controller docs]) (beta fix)
 - Add brightness state to emulated hue when devices support only color temp and brightness ([@vaceslav] - [#31834]) ([emulated_hue docs]) (beta fix)
@@ -346,7 +346,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Bump eagle_reader API version to v0.2.4 ([@gtdiehl] - [#32789]) ([rainforest_eagle docs]) (beta fix)
 - Fix directv location of unknown error string ([@ctalkington] - [#32807]) ([directv docs]) ([directv docs]) (beta fix)
 - Remove extra logging from directv init. ([@ctalkington] - [#32809]) ([directv docs]) ([directv docs]) (beta fix)
-- Require a hyphen in lovelace dashboard url ([@bramkragten] - [#32816]) ([lovelace docs]) (beta fix)
+- Require a hyphen in  dashboard url ([@bramkragten] - [#32816]) ([ docs]) (beta fix)
 - Add Netatmo Home Coach as model ([@Danielhiversen] - [#32829]) ([netatmo docs]) (beta fix)
 - Add SF transition to HmIP-BSL and remove obsolete code in HMIPC ([@SukramJ] - [#32833]) ([homematicip_cloud docs]) (beta fix)
 - Make sure panel_custom won't crash on invalid data ([@balloob] - [#32835]) ([hassio docs]) ([panel_custom docs]) (beta fix)
@@ -356,10 +356,10 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Bump insteonplm to 0.16.8 ([@teharris1] - [#32847]) ([insteon docs]) (beta fix)
 - Update pyozw 0.1.9 ([@pvizeli] - [#32864]) ([zwave docs]) (beta fix)
 - Updated frontend to 20200316.0 ([@bramkragten] - [#32866]) ([frontend docs]) (beta fix)
-- Add lovelace reload service for yaml resources ([@bramkragten] - [#32865]) ([lovelace docs]) (beta fix)
+- Add  reload service for yaml resources ([@bramkragten] - [#32865]) ([ docs]) (beta fix)
 - Bump ZHA quirks to 0.0.37 ([@dmulcahey] - [#32867]) ([zha docs]) (beta fix)
 - Remove group as a dependency from entity integrations ([@balloob] - [#32870]) (beta fix)
-- Lovelace: storage key based on id instead of url_path ([@bramkragten] - [#32873]) ([lovelace docs]) (beta fix)
+- : storage key based on id instead of url_path ([@bramkragten] - [#32873]) ([ docs]) (beta fix)
 - Updated frontend to 20200316.1 ([@bramkragten] - [#32878]) ([frontend docs]) (beta fix)
 - Fix iCloud init while pending ([@Quentame] - [#32750]) ([icloud docs]) (beta fix)
 - Add default port to samsung tv ([@tulindo] - [#32820]) ([samsungtv docs]) (beta fix)
@@ -607,7 +607,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Fix description of fan service set_direction ([@springstan] - [#32181])
 - Use orjson to parse json faster ([@KapJI] - [#32153]) ([recorder docs])
 - Improve error handling ([@emontnemery] - [#32182]) ([mqtt docs])
-- Support multiple Lovelace dashboards ([@balloob] - [#32134]) ([frontend docs]) ([lovelace docs])
+- Support multiple  dashboards ([@balloob] - [#32134]) ([frontend docs]) ([ docs])
 - Remove hide_entity property from automation integration ([@frenck] - [#32038]) ([automation docs]) (breaking change)
 - Revert "Use orjson to parse json faster (#32153)" ([@balloob] - [#32185]) ([recorder docs])
 - Refactor away deprecated homekit_controller test helpers ([@Jc2k] - [#32177]) ([homekit_controller docs])
@@ -621,7 +621,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - homekit_controller test cleanups ([@Jc2k] - [#32212]) ([homekit_controller docs])
 - Make homekit_controller a local push integration ([@Jc2k] - [#32213]) ([homekit_controller docs])
 - Improve debounce cooldown ([@balloob] - [#32161])
-- Lovelace resource mgmt ([@balloob] - [#32224]) ([lovelace docs])
+-  resource mgmt ([@balloob] - [#32224]) ([ docs])
 - Address homekit_controller feedback on #32212 and #32213 ([@Jc2k] - [#32228]) ([homekit_controller docs])
 - Centralize august activity updates ([@bdraco] - [#32197]) ([august docs])
 - Make heos and transmission config flow tests more robust ([@Ikuyadeu] - [#31783])
@@ -642,7 +642,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Use f-strings in integrations starting with "H" - "L" ([@springstan] - [#32265])
 - change log level ([@exxamalte] - [#32244]) ([feedreader docs])
 - Add and use percentage constant ([@springstan] - [#32094])
-- Allow managing Lovelace storage dashboards ([@balloob] - [#32241]) ([frontend docs]) ([lovelace docs]) ([zone docs])
+- Allow managing  storage dashboards ([@balloob] - [#32241]) ([frontend docs]) ([ docs]) ([zone docs])
 - Use collection helpers for counter integration ([@Adminiuga] - [#32295]) ([counter docs])
 - Bump up ZHA depdendency ([@Adminiuga] - [#32336]) ([zha docs])
 - Updated frontend to 20200228.0 ([@bramkragten] - [#32334]) ([frontend docs])
@@ -718,7 +718,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Add Huawei LTE operator and network related sensors ([@ilarrain] - [#32485]) ([huawei_lte docs])
 - Improve script validation ([@balloob] - [#32461])
 - Make it possible to fetch proxy media player album art ([@balloob] - [#32471]) ([media_player docs])
-- Require title, separate show sidebar option ([@balloob] - [#32479]) ([lovelace docs])
+- Require title, separate show sidebar option ([@balloob] - [#32479]) ([ docs])
 - Allow teaching logbook about events ([@balloob] - [#32444]) ([logbook docs])
 - Remove discovery and legacy config file loading for Plex ([@jjlawren] - [#32510]) ([discovery docs]) ([plex docs]) (breaking change)
 - Bugfix evohome converting non-UTC timezones ([@zxdavb] - [#32120]) ([evohome docs])
@@ -826,7 +826,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Set self._current_app to None when vizio device is off ([@raman325] - [#32725]) ([vizio docs]) (beta fix)
 - Updated frontend to 20200312.0 ([@bramkragten] - [#32741]) ([frontend docs]) (beta fix)
 - Bump py-august to 0.25.0 ([@bdraco] - [#32769]) ([august docs]) (beta fix)
-- Check if panel url used and delay dashboard reg till start ([@bramkragten] - [#32771]) ([frontend docs]) ([lovelace docs]) (beta fix)
+- Check if panel url used and delay dashboard reg till start ([@bramkragten] - [#32771]) ([frontend docs]) ([ docs]) (beta fix)
 - Updated frontend to 20200313.0 ([@bramkragten] - [#32777]) ([frontend docs]) (beta fix)
 - Fix homekit_controller beta connectivity issues ([@Jc2k] - [#32810]) ([homekit_controller docs]) (beta fix)
 - Add brightness state to emulated hue when devices support only color temp and brightness ([@vaceslav] - [#31834]) ([emulated_hue docs]) (beta fix)
@@ -838,7 +838,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Bump eagle_reader API version to v0.2.4 ([@gtdiehl] - [#32789]) ([rainforest_eagle docs]) (beta fix)
 - Fix directv location of unknown error string ([@ctalkington] - [#32807]) ([directv docs]) ([directv docs]) (beta fix)
 - Remove extra logging from directv init. ([@ctalkington] - [#32809]) ([directv docs]) ([directv docs]) (beta fix)
-- Require a hyphen in lovelace dashboard url ([@bramkragten] - [#32816]) ([lovelace docs]) (beta fix)
+- Require a hyphen in  dashboard url ([@bramkragten] - [#32816]) ([ docs]) (beta fix)
 - Add Netatmo Home Coach as model ([@Danielhiversen] - [#32829]) ([netatmo docs]) (beta fix)
 - Add SF transition to HmIP-BSL and remove obsolete code in HMIPC ([@SukramJ] - [#32833]) ([homematicip_cloud docs]) (beta fix)
 - Make sure panel_custom won't crash on invalid data ([@balloob] - [#32835]) ([hassio docs]) ([panel_custom docs]) (beta fix)
@@ -848,10 +848,10 @@ Experiencing issues introduced by this release? Please report them in our [issue
 - Bump insteonplm to 0.16.8 ([@teharris1] - [#32847]) ([insteon docs]) (beta fix)
 - Update pyozw 0.1.9 ([@pvizeli] - [#32864]) ([zwave docs]) (beta fix)
 - Updated frontend to 20200316.0 ([@bramkragten] - [#32866]) ([frontend docs]) (beta fix)
-- Add lovelace reload service for yaml resources ([@bramkragten] - [#32865]) ([lovelace docs]) (beta fix)
+- Add  reload service for yaml resources ([@bramkragten] - [#32865]) ([ docs]) (beta fix)
 - Bump ZHA quirks to 0.0.37 ([@dmulcahey] - [#32867]) ([zha docs]) (beta fix)
 - Remove group as a dependency from entity integrations ([@balloob] - [#32870]) (beta fix)
-- Lovelace: storage key based on id instead of url_path ([@bramkragten] - [#32873]) ([lovelace docs]) (beta fix)
+- : storage key based on id instead of url_path ([@bramkragten] - [#32873]) ([ docs]) (beta fix)
 - Updated frontend to 20200316.1 ([@bramkragten] - [#32878]) ([frontend docs]) (beta fix)
 - Fix iCloud init while pending ([@Quentame] - [#32750]) ([icloud docs]) (beta fix)
 - Add default port to samsung tv ([@tulindo] - [#32820]) ([samsungtv docs]) (beta fix)
@@ -1382,7 +1382,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 [light docs]: /integrations/light/
 [locative docs]: /integrations/locative/
 [logbook docs]: /integrations/logbook/
-[lovelace docs]: /integrations/lovelace/
+[ docs]: /integrations//
 [media_extractor docs]: /integrations/media_extractor/
 [media_player docs]: /integrations/media_player/
 [melcloud docs]: /integrations/melcloud/

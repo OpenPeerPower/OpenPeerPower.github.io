@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "0.105: Safe mode, Headers & Footers, New Zones Editor, Garmin, Sighthound"
-description: "5 new integrations, tons of Lovelace updates, a new zones editor and safe mode that saves your day!"
+description: "5 new integrations, tons of updates, a new zones editor and safe mode that saves your day!"
 date: 2020-02-05 00:00:00
 date_formatted: "February 5, 2020"
 author: Franck Nijhof
@@ -16,16 +16,6 @@ og_image: /images/blog/2020-02-0.105/components.png
 In case you have missed it, we decided to change the names we use here at Open Peer Power, you can read all about it in [this blog post](/blog/2020/01/29/changing-the-open-peer-power-brand/).
 
 Therefore, this is release 0.105 of the Open Peer Power Core!
-
-## The old "States UI" is now deprecated
-
-In June 2018, we released [Open Peer Power 0.72](/blog/2018/06/22/release-72/), which introduced Lovelace. It became our official default user interface in January 2019, with the release of [Open Peer Power 0.86](/blog/2019/01/23/lovelace-released/).
-
-This means, it is now over a year ago that Lovelace was officially introduced as a replacement for the states UI, so it is time to say goodbye to the old states UI. This release deprecates it and in version 0.107, the states UI will be removed from Open Peer Power completely.
-
-If you are not using Lovelace yet, we advise you to switch to it today. Lovelace is, by default, almost the same as old states UI with the bonus of a lot of flexibility, if you want it.
-
-In addition to this, all configuration options for the States UI are deprecated as well. Please be sure to read the [breaking changes](#breaking-changes) to see if you have options that need to be removed from your configuration.
 
 ## Safe mode
 
@@ -127,29 +117,6 @@ Using this option, you can decide if you want to old behavior back, add it to mo
 
 Other cards will now display icons from more domains with an active color.
 
-## Other Lovelace and frontend improvements
-
-There is a lot more done on Lovelace, more than we can mention, some other highlights:
-
-- In generated mode, entities that start with the name of the area or group they are in will be shown without the name of the area or group.
-So if you have a light named "Living room lights" that is in the area "Living room" they will be shown as "lights" in a card with the header "Living room".
-
-- We no longer show `device_tracker` entities in generated mode. We advise you to bind one or more device trackers to a person that will be shown in the UI.
-
-- We added many accessibility features to Lovelace; you can navigate almost everything with the tab key.
-We will continue to work on this so that people with disabilities can also enjoy Open Peer Power.
-
-For a full list of changes, see the [Lovelace changelog](/lovelace/changelog/).
-
-Even more frontend improvements:
-
-- Logbook panel is a lot quicker
-- Maps no longer fit zones, but only entities
-- ZHA panel now supports binding devices to groups
-- Ability to add new areas on the device page
-- Material Design Icons are updated to v4.8.95
-- A lot, like a really large amount, of bug fixes!
-
 ## In other news
 
 This section is now empty, but don't be sad! The in "In other news" section now has its own dedicated blog post,
@@ -208,7 +175,7 @@ Experiencing issues introduced by this release? Please report them in our [issue
 
   ([@frenck] - [#30717]) ([spotify docs])
 
-- __Automation__ *Deprecated* - The `hide_entity` configuration option on an automation is now deprecated and will be removed in Open Peer Power 0.107. With Lovelace now being the standard, this option has become obsolete. Please ensure your automations are not using this option. An example of an *invalid* configuration is below. - ([@frenck] - [#30799]) ([automation docs])
+- __Automation__ *Deprecated* - The `hide_entity` configuration option on an automation is now deprecated and will be removed in Open Peer Power 0.107. With now being the standard, this option has become obsolete. Please ensure your automations are not using this option. An example of an *invalid* configuration is below. - ([@frenck] - [#30799]) ([automation docs])
 
   Bad configuration example YAML:
 
