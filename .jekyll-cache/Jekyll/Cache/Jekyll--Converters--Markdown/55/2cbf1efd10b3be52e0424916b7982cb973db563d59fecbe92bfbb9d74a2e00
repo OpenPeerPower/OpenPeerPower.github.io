@@ -1,4 +1,0 @@
-I"H<p>To update AppDaemon after I have released new code, just run the following command to update your copy:</p>
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pip3 install --upgrade appdaemon</code></pre></figure>
-<p>If you are using Docker, rerun the steps to grab the latest Docker image.</p>
-:ET

@@ -4,10 +4,14 @@
   <div class='section'>
     <h1 class="title delta">Getting Started</h1>
     <ul class='divided sidebar-menu'>
-      <li>{% active_link /getting-started/ Installation %}
-        <li>{% active_link /getting-started/onboarding/ Onboarding %}</li>
-        <li>{% active_link /getting-started/automation/ Automation %}</li>
-        <li>{% active_link /getting-started/presence-detection/ Presence detection %}</li>
+    {% for item in site.data.getting_started_navigation.toc %}
+      <b><a href="{{ item.url }}">{{ item.title }}</a></b>
+        <ul>
+          {% for entry in item.subfolderitems %}
+            <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
+          {% endfor %}
+        </ul>
+    {% endfor %}
     </ul>
   </div>
 </section>

@@ -1,0 +1,11 @@
+
+toc:
+  - title: Installation
+    url: /getting-started
+    subfolderitems:
+      - page: Onboarding
+        url: /getting-started/onboarding
+      - page: Automation
+        url: /getting-started/automation
+      - page: Presence detection
+        url: /getting-started/presence-detection

@@ -1,4 +1,0 @@
-I"1<p>For testing the performance of Open Peer Power the Benchmark script runs until you exit using Control+C.</p>
-<p>Firing and handling of a million events.</p>
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ hass --script benchmark async_million_events</code></pre></figure>
-:ET

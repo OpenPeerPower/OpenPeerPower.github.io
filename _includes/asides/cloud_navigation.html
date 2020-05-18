@@ -4,17 +4,10 @@
     <li>
       The Open Peer Power Cloud is a cloud-based service provided to supporters of the Open Peer Power project.
     </li>
-    <li>
-      {% active_link /cloud/ Introduction %}
-    </li>
-    <li>
-      {% active_link /cloud/alexa/ Amazon Alexa %}
-    </li>
-    <li>
-      {% active_link /cloud/google_assistant/ Google Assistant %}
-    </li>
-    <li>
-      {% active_link /cloud/troubleshooting/ Troubleshooting %}
-    </li>
+     {% for item in site.data.cloud_navigation.docs %}
+        <li class="{% if item.url == page.url %}active{% endif %}">
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </li>
+     {% endfor %}
   </ul>
 </div>

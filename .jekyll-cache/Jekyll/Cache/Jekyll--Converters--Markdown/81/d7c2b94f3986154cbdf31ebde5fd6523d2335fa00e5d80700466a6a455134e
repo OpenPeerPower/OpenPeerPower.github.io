@@ -1,4 +1,0 @@
-I"~<p>The <code>api</code> integration exposes a RESTful API and allows one to interact with a Open Peer Power instance that is running headless. This integration depends on the <a href="/integrations/http/"><code>http</code> integration</a>.</p>
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"># Example configuration.yaml entry
-api:</code></pre></figure>
-:ET

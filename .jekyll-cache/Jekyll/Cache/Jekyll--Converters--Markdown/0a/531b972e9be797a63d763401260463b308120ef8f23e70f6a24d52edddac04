@@ -1,8 +1,0 @@
-I"B<p><a href="http://www.apple.com/macos/">macOS</a> is available by default on Apple computer. If you run a different operating system, please refer to the other section of the documentation.</p>
-<p>To run Open Peer Power on macOS, you need to install Python first. Download Python 3.7 or later from <a href="https://www.python.org/downloads/mac-osx/">https://www.python.org/downloads/mac-osx/</a> and follow the instructions of the installer.</p>
-<p>Open a terminal and install Open Peer Power in a virtual environment:</p>
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python3 -m venv openpeerpower
-source openpeerpower/bin/activate
-pip3 install openpeerpower</code></pre></figure>
-<p>You can then configure Open Peer Power to autostart by following <a href="/docs/autostart/macos/">this guide</a>.</p>
-:ET

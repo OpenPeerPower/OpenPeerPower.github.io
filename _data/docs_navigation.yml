@@ -1,0 +1,239 @@
+toc:
+  - title: Installation
+    url: /docs/installation
+    subfolderitems:
+      - page: Updating
+        url: /docs/installation/updating
+      - page: Troubleshooting
+        url: /docs/installation/troubleshooting
+
+  - title: Configuration
+    url: /docs/configuration
+    subfolderitems:
+      - page: YAML
+        url: /docs/configuration/yaml
+      - page: Basic information 
+        url: /docs/configuration/basic
+      - page: Setting up devices
+        url: /docs/configuration/devices
+      - page: Customizing
+        url: /docs/configuration/customizing-devices
+      - page: Troubleshooting
+        url: /docs/configuration/troubleshooting
+      - page: Security Check Points
+        url: /docs/configuration/securing
+
+  - title: Authentication
+    url: /docs/authentication
+    subfolderitems:
+      - page: Auth Providers
+        url: /docs/authentication/providers
+      - page: Multi Factor
+        url: /docs/authentication/multi-factor-auth
+
+  - title: Core objects
+    subfolderitems:
+      - page: Events 
+        url: /docs/configuration/events
+      - page: State Objects
+        url: /docs/configuration/state_object
+     
+  - title: Automation
+    url: /docs/automation
+    subfolderitems:
+      - page: Examples
+        url: /docs/automation/examples
+      - page: Editor
+        url: /docs/automation/editor
+      - page: Triggers
+        url: /docs/automation/trigger
+      - page: Conditions
+        url: /docs/automation/condition
+      - page:  Actions
+        url: /docs/automation/action
+      - page:  Templates
+        url: /docs/automation/templating/
+      - page:  Troubleshooting
+        url: /docs/automation/troubleshooting
+     
+  - title: Frontend
+    url: /docs/frontend
+    subfolderitems:
+      - page: Browser Compatibility List
+        url: /docs/frontend/browsers 
+     
+  - title: Backend
+    url: /docs/backend
+    subfolderitems:
+      - page: Database
+        url: /docs/backend/database
+      - page: Updater
+        url: /docs/backend/updater
+     
+  - title: Scripts 
+    url: /docs/scripts
+    subfolderitems:
+      - page:  Service Calls 
+        url: /docs/scripts/service-calls
+      - page:  Conditions
+        url: /docs/scripts/conditions
+      - page:  Editor
+        url: /docs/scripts/editor
+     
+  - title: Scenes
+    url: /docs/scene
+    subfolderitems:
+      - page:  Editor
+        url: /docs/scene/editor
+     
+  - title: Configuration
+    url: /docs/tools/ Tools and Helpers
+    subfolderitems:
+      - page: Developer Tools
+        url: /docs/tools/dev-tools
+      - page: benchmark 
+        url: /docs/tools/benchmark/ %}</li>
+      - page: check_config
+        url: /docs/tools/check_config
+      - page: credstash
+        url: /docs/tools/credstash
+      - page: ensure_config
+        url: /docs/tools/ensure_config
+      - page: keyring
+        url: /docs/tools/keyring
+     
+  - title: Security
+    url: /docs/security
+    subfolderitems:
+      - page: Web server fingerprint
+        url: /docs/security/webserver
+     
+  - title: Z-Wave
+    url: /docs/z-wave
+    subfolderitems:
+      - page: Configuring the Z-Wave
+        url: /docs/z-wave/installation/component
+      - page: Adding devices
+        url: /docs/z-wave/adding
+      - page: The Z-Wave control panel
+        url: /docs/z-wave/control-panel
+      - page: Controllers
+        url: /docs/z-wave/controllers
+      - page: Devices
+        url: /docs/z-wave/devices
+      - page: Entities
+        url: /docs//docs/z-wave/entities
+      - page: Query Stages for devices
+        url: /docs/z-wave/query-stage
+      - page: Device Specific
+        url: /docs/z-wave/device-specific configuration
+      - page: Events
+        url: /docs/z-wave/events
+      - page: Services
+        url: /docs/z-wave/services
+     
+  - title: MQTT
+    url: /docs/mqtt
+    subfolderitems:
+      - page: Broker
+        url: /docs/mqtt/broker
+      - page: Certificate 
+        url: /docs/mqtt/certificate/ %}</li>
+      - page: Discovery
+        url: /docs/mqtt/discovery
+      - page: Publish service
+        url: /docs/mqtt/service
+      - page: Birth and last will messages
+        url: /docs/mqtt/birth_will
+      - page: Testing your setup
+        url: /docs/mqtt/testing
+      - page: Logging
+        url: /docs/mqtt/logging
+      - page: Processing JSON
+        url: /docs/mqtt/processing_json
+               
+  - title: iOS
+    url: /docs/ecosystem/ios/ 
+    subfolderitems:
+      - page:  Basic notifications
+        url: /docs/ecosystem/ios/notifications/basic
+      - page:  Sounds
+        url: /docs/ecosystem/ios/notifications/sounds
+      - page:  Architecture 
+        url: /docs/ecosystem/ios/notifications/architecture
+      - page:  Privacy, rate limiting and security
+        url: /docs/ecosystem/ios/notifications/privacy_security_rate_limits
+     
+  - title: Advanced notifications
+    subfolderitems:
+      - page: Attachments
+        url: /docs/ecosystem/ios/notifications/attachments
+      - page: Dynamic content
+        url: /docs/ecosystem/ios/notifications/content_extensions
+      - page: Actionable notifications
+        url: /docs/ecosystem/ios/notifications/actions
+      - page: Requesting location updates
+        url: /docs/ecosystem/ios/notifications/requesting_location_updates
+      - page: Location Tracking 
+        url: /docs/ecosystem/ios/location
+      - page: Integration with other apps
+        url: /docs/ecosystem/ios/integration
+     
+  - title: Ecosystem
+    url: /docs/ecosystem
+    subfolderitems:
+      - page:  Autostart
+        url: /docs/autostart
+      - page:  systemd (Linux)
+        url: /docs/autostart/systemd
+      - page:  Upstart (Linux) 
+        url: /docs/autostart/upstart
+      - page:  init.d (Linux)
+        url: /docs/autostart/init.d
+      - page:  macOS
+        url: /docs/autostart/macos
+      - page:  Synology NAS 
+        url: /docs/autostart/synology
+      - page:  AppDaemon
+        url: /docs/ecosystem/appdaemon
+      - page:  HADashboard
+        url: /docs/ecosystem/hadashboard
+     
+  - title: Remote access
+    subfolderitems:
+      - page:  Apache
+        url: /docs/ecosystem/apache  
+      - page:  Caddy Server
+        url: /docs/ecosystem/caddy
+      - page:  HAProxy
+        url: /docs/ecosystem/haproxy
+      - page:  NGINX
+        url: /docs/ecosystem/nginx
+      - page:  NGINX with subdomain
+        url: /docs/ecosystem/nginx_subdomain
+      - page:  Tor Onion Service
+        url: /docs/ecosystem/tor
+     
+  - title: Certificates
+    url: /docs/ecosystem/certificates
+    subfolderitems:
+      - page: Self-signed certificate
+        url: /docs/ecosystem/certificates/tls_self_signed_certificate
+      - page: Certificate domain owners
+        url: /docs/ecosystem/certificates/tls_domain_certificate
+      - page: Let's Encrypt (detailed)
+        url: /docs/ecosystem/certificates/lets_encrypt
+     
+  - title: Backup
+    subfolderitems:
+      - page: Backup to GitHub
+        url: /docs/ecosystem/backup/backup_github
+      - page: Backup to Dropbox
+        url: /docs/ecosystem/backup/backup_dropbox
+      - page: Backup to USB device
+        url: /docs/ecosystem/backup/backup_usb
+     
+  - title: Synology
+    url: /docs/ecosystem/synology
+     
+     

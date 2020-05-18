@@ -1,3 +1,0 @@
-I"ü<p>This script checks if the <code>configuration.yaml</code> file exists. If the file is not available, one is created.</p>
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">$ hass --script ensure_config</code></pre></figure>
-:ET
