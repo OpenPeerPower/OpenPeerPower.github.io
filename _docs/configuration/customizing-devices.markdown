@@ -31,45 +31,6 @@ openpeerpower:
 
 #### Possible values
 
-{% configuration customize %}
-friendly_name:
-  description: Name of the entity as displayed in the UI.
-  required: false
-  type: string
-hidden:
-  description: Set to `true` to hide the entity.
-  required: false
-  type: boolean
-  default: false
-entity_picture:
-  description: URL to use as picture for entity.
-  required: false
-  type: string
-icon:
-  description: "Any icon from [MaterialDesignIcons.com](http://MaterialDesignIcons.com) ([Cheatsheet](https://cdn.materialdesignicons.com/4.5.95/)). Prefix name with `mdi:`, ie `mdi:home`. Note: Newer icons may not yet be available in the current Open Peer Power release. You can check when an icon was added to MaterialDesignIcons.com at [MDI History](https://materialdesignicons.com/history)."
-  required: false
-  type: string
-assumed_state:
-  description: For switches with an assumed state two buttons are shown (turn off, turn on) instead of a switch. By setting `assumed_state` to `false` you will get the default switch icon.
-  required: false
-  type: boolean
-  default: true
-device_class:
-  description: Sets the class of the device, changing the device state and icon that is displayed on the UI (see below). It does not set the `unit_of_measurement`.
-  required: false
-  type: device_class
-  default: None
-unit_of_measurement:
-  description: Defines the units of measurement, if any. This will also influence the graphical presentation in the history visualisation as continuous value. Sensors with missing `unit_of_measurement` are showing as discrete values.
-  required: false
-  type: string
-  default: None
-initial_state:
-  description: Sets the initial state for automations, `on` or `off`.
-  required: false
-  type: string
-{% endconfiguration %}
-
 #### Device Class
 
 Device class is currently supported by the following components:
