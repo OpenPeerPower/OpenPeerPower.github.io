@@ -68,14 +68,6 @@ The Notify MFA module uses the [notify component](/integrations/notify/) to send
 
 Add Notify MFA to your `configuration.yaml` file like this:
 
-```yaml
-openpeerpower:
-  auth_mfa_modules:
-    - type: notify
-      include:
-        - notify_entity
-```
-
 {% configuration %}
 exclude:
   description: The list of notifying service entities you want to exclude.
