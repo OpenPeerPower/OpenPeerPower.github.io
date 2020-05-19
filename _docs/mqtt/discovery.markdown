@@ -31,19 +31,6 @@ mqtt:
   discovery_prefix: openpeerpower
 ```
 
-{% configuration %}
-discovery:
-  description: If the MQTT discovery should be enabled or not.
-  required: false
-  default: false
-  type: boolean
-discovery_prefix:
-  description: The prefix for the discovery topic.
-  required: false
-  default: openpeerpower
-  type: string
-{% endconfiguration %}
-
 <div class='note'>
 
 The [embedded MQTT broker](/docs/mqtt/broker#embedded-broker) does not save any messages between restarts. If you use the embedded MQTT broker you have to send the MQTT discovery messages after every Open Peer Power restart for the devices to show up.

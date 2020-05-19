@@ -27,18 +27,6 @@ scene:
         source: HDMI 1
         state: on
 ```
-
-{% configuration %}
-name:
-  description: Friendly name of scene.
-  required: true
-  type: string
-entities:
-  description: Entities to control and their desired state.
-  required: true
-  type: list
-{% endconfiguration %}
-
 As you can see, there are two ways to define the states of each `entity_id`:
 
 - Define the `state` directly with the entity. Be aware, that `state` needs to be defined.

@@ -21,50 +21,6 @@ mqtt:
   broker: 192.168.1.100
 ```
 
-{% configuration %}
-broker:
-  required: false
-  description: The IP address or hostname of your MQTT broker, e.g., 192.168.1.32.
-  type: string
-port:
-  required: false
-  description: The network port to connect to. Default is 1883.
-  type: integer
-client_id:
-  required: false
-  description: The client ID that Open Peer Power will use. Has to be unique on the server. Default is a randomly generated one.
-  type: string
-keepalive:
-  required: false
-  description: The time in seconds between sending keep alive messages for this client. Default is 60.
-  type: integer
-username:
-  required: false
-  description: The username to use with your MQTT broker.
-  type: string
-password:
-  required: false
-  description: The corresponding password for the username to use with your MQTT broker.
-  type: string
-protocol:
-  required: false
-  description: "Protocol to use: 3.1 or 3.1.1. By default it connects with 3.1.1 and falls back to 3.1 if server does not support 3.1.1."
-  type: string
-certificate:
-  required: false
-  description: Path to the certificate file, e.g., `/ssl/server.crt`.
-  type: string
-tls_insecure:
-  required: false
-  description: Set the verification of the server hostname in the server certificate.
-  type: boolean
-  default: false
-tls_version:
-  required: false
-  description: "TLS/SSL protocol version to use. Available options are: `'auto'`, `'1.0'`, `'1.1'`, `'1.2'`. Make sure to put quotes around the value. Defaults to `'auto'`."
-  type: string
-{% endconfiguration %}
-
 <div class='note'>
 
 If you are running a Mosquitto instance on a different server with proper SSL encryption using a service like Let's Encrypt you may have to set the certificate to the operating systems own `.crt` certificates file. In the instance of Ubuntu this would be `certificate: /etc/ssl/certs/ca-certificates.crt`
