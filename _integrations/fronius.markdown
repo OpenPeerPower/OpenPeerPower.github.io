@@ -18,13 +18,13 @@ The `fronius` sensor polls a [Fronius](https://www.fronius.com/) solar inverter,
 
 To enable this sensor, add the following lines to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 sensor:
   - platform: fronius
     resource: FRONIUS_URL
     monitored_conditions:
     - sensor_type: inverter
-{% endhighlight %}
+```
 
 ## Monitored data
 
@@ -69,7 +69,7 @@ when the Fronius devices begins providing the needed data.
 When including more of the components that one Fronius device offers, 
 a list of sensors that are to be integrated can be given like below.
 
-{% highlight yaml %}
+```yaml
 sensor:
   - platform: fronius
     resource: FRONIUS_IP_ADDRESS
@@ -83,4 +83,4 @@ sensor:
     - sensor_type: storage
       device: 0
     - sensor_type: power_flow
-{% endhighlight %}
+```

@@ -16,13 +16,13 @@ The `mqtt_statestream` integration publishes state changes in Open Peer Power to
 
 To enable MQTT Statestream in Open Peer Power, add the following section to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 mqtt_statestream:
   base_topic: openpeerpower
   publish_attributes: true
   publish_timestamps: true
-{% endhighlight %}
+```
 
 ## Operation
 
@@ -47,7 +47,7 @@ The **exclude** and **include** configuration variables can be used to filter th
 
 2\. If only **exclude** is specified, then all entities except the ones listed are published.
 
-{% highlight yaml %}
+```yaml
 # Example of excluding entities
 mqtt_statestream:
   base_topic: openpeerpower
@@ -56,12 +56,12 @@ mqtt_statestream:
       - switch
     entities:
       - sensor.nopublish
-{% endhighlight %}
+```
 In the above example, all entities except for *switch.x* and *sensor.nopublish* will be published to MQTT.
 
 3\. If only **include** is specified, then only the specified entries are published.
 
-{% highlight yaml %}
+```yaml
 # Example of excluding entities
 mqtt_statestream:
   base_topic: openpeerpower
@@ -70,13 +70,13 @@ mqtt_statestream:
       - sensor
     entities:
       - lock.important
-{% endhighlight %}
+```
 In this example, only *sensor.x* and *lock.important* will be published.
 
 4\. If both **include** and **exclude** are specified then all entities specified by **include** are published except for the ones
 specified by **exclude**.
 
-{% highlight yaml %}
+```yaml
 # Example of excluding entities
 mqtt_statestream:
   base_topic: openpeerpower
@@ -86,5 +86,5 @@ mqtt_statestream:
   exclude:
     entities:
       - sensor.noshow
-{% endhighlight %}
+```
 In this example, all sensors except for *sensor.noshow* will be published.

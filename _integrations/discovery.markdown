@@ -47,7 +47,7 @@ Zeroconf discoverable integrations [Axis](/integrations/axis/)/[ESPHome](/integr
 
 To load this integration, add the following lines to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 discovery:
   ignore:
@@ -55,7 +55,7 @@ discovery:
     - samsung_printer
   enable:
     - homekit
-{% endhighlight %}
+```
 
 Valid values for ignore are:
 

@@ -13,7 +13,7 @@ excerpt: none
 
 The `input_text` integration allows the user to define values that can be controlled via the frontend and can be used within conditions of automation. Changes to the value stored in the text box generate state events. These state events can be utilized as `automation` triggers as well. It can also be configured in password mode (obscured text).
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entries
 input_text:
   text1:
@@ -29,7 +29,7 @@ input_text:
   text4:
     name: Text 4
     mode: password
-{% endhighlight %}
+```
 
 ### Services
 
@@ -48,20 +48,20 @@ If you set a valid value for `initial` this integration will start with state se
 
 To set the state of the input_text in a [Scene](/integrations/scene/):
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 scene:
   - name: Example1
     entities:
       input_text.example: Hello!
-{% endhighlight %}
+```
 
 ## Automation Examples
 
 Here's an example using `input_text` in an action in an automation.
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry using 'input_text' in an action in an automation
 input_select:
   scene_bedroom:
@@ -89,5 +89,5 @@ automation:
         data_template:
           entity_id: input_text.bedroom
           value: "{{ states('input_select.scene_bedroom') }}"
-{% endhighlight %}
+```
 {% endraw %}

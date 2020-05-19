@@ -6,11 +6,11 @@ logo: mqtt.png
 
 The [logger](/integrations/logger/) integration allows the logging of received MQTT messages.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 logger:
   default: warning
   logs:
     openpeerpower.components.mqtt: debug
-{% endhighlight %}
+```
 

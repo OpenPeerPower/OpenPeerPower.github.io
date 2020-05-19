@@ -22,7 +22,7 @@ This integration provides the following platforms:
 
 To enable those notifications in your installation, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sms:
   device: /dev/ttyUSB2
@@ -34,7 +34,7 @@ notify:
   - platform: sms
     name: sms_person2
     recipient: PHONE_NUMBER
-{% endhighlight %}
+```
 
 To use notifications, please see the [getting started with automation page](/getting-started/automation/).
 
@@ -42,15 +42,15 @@ If the integration is used with the Open Peer Power Operating System, then versi
 
 For installations not running on Open Peer Power or Open Peer Power Core using Docker, you must install `gammu-dev` package:
 
-{% highlight bash %}
+```bash
 sudo apt-get install libgammu-dev
-{% endhighlight %}
+```
 
 Before running for the first time, check that the system recognizes the modem by running:
 
-{% highlight bash %}
+```bash
 ls -l /dev/*USB*
-{% endhighlight %}
+```
 
 Note: When running Open Peer Power, you need to install the SSH add-on.
 
@@ -72,33 +72,33 @@ For some unknown reason, the rule that converts these modems from storage device
 
 1. Run `lsusb`, its output looks like this:
 
-{% highlight bash %}
+```bash
 bus 000 device 001: ID 1FFF:342a
 bus 001 device 005: ID 12d1:15ca   <-------- Huawei is usually 12d1
 bus 000 device 002: ID 2354:5352
 bus 000 device 002: ID 1232:15ca
-{% endhighlight %}
+```
 
 Identify the brand for your GSM modem, copy the `brand_Id` and `product_id` (In this case `brand_id = 12d1` and `product_Id = 15ca`)
 
 Set this content in file `udev\10-gsm-modem.rules` in the configuration USB:
 (Replace `brand_Id` and `product_id` for the numbers reported by `lsusb`)
 
-{% highlight bash %}
+```bash
 ACTION=="add" \
 , ATTRS{idVendor}=="brand_Id" \
 , ATTRS{idProduct}=="product_Id" \
 , RUN+="/sbin/usb_modeswitch -X -v brand_Id -p product_Id"
-{% endhighlight %}
+```
 
 Here is a sample configuration file:
 
-{% highlight bash %}
+```bash
 ACTION=="add" \
 , ATTRS{idVendor}=="12d1" \
 , ATTRS{idProduct}=="15ca" \
 , RUN+="/sbin/usb_modeswitch -X -v 12d1 -p 15ca"
-{% endhighlight %}
+```
 
 Plug the USB stick, reboot the device, run `lsusb` again.
 The resulting product id now should be different and the brand id should be the same.

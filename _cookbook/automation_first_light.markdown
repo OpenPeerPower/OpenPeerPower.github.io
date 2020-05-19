@@ -7,16 +7,16 @@ excerpt: none
 
 #### Create an input_boolean
 
-{% highlight yaml %}
+```yaml
 input_boolean:
   trigger_first_morning:
     name: Waiting for first morning motion
     icon: mdi:kettle
-{% endhighlight %}
+```
 
 #### The Main Automation
 
-{% highlight yaml %}
+```yaml
 ## These first two control t input_boolean that allows the "first morning action" to occur
 ## If the action is triggered, it will also disable this boolean. This assumes you have the sun platform enabled.
 
@@ -86,13 +86,13 @@ automation:
         entity_id: scene.morning_first_motion
 
 
-{% endhighlight %}
+```
 
 #### The Scene
 
 Here is the Scene that is called via the Automations above.
 
-{% highlight yaml %}
+```yaml
 # here's the scene that gets called. Lights in
 # my living room and kitchen turn on.
 scene:
@@ -113,4 +113,4 @@ scene:
       light.livingroom_track:
         state: on
         brightness: 153
-{% endhighlight %}
+```

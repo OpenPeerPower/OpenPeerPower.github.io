@@ -6,7 +6,7 @@ excerpt: none
 
 You can create scenes that capture the states you want certain entities to be. For example, a scene can specify that light A should be turned on and light B should be bright red.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 scene:
   - name: Romantic
@@ -26,7 +26,7 @@ scene:
         state: on
         source: HDMI 1
         state: on
-{% endhighlight %}
+```
 
 {% configuration %}
 name:
@@ -46,7 +46,7 @@ As you can see, there are two ways to define the states of each `entity_id`:
 
 Scenes can be activated using the service `scene.turn_on` (there is no 'scene.turn_off' service).
 
-{% highlight yaml %}
+```yaml
 # Example automation
 automation:
   trigger:
@@ -57,13 +57,13 @@ automation:
   action:
     service: scene.turn_on
     entity_id: scene.romantic
-{% endhighlight %}
+```
 
 ## Applying a scene without defining it
 
 With the `scene.apply` service you are able to apply a scene without first defining it via configuration. Instead, you pass the states as part of the service data. The format of the data is the same as the `entities` field in a configuration.
 
-{% highlight yaml %}
+```yaml
 # Example automation
 automation:
   trigger:
@@ -82,7 +82,7 @@ automation:
         media_player.sony_bravia_tv:
           state: on
           source: HDMI 1
-{% endhighlight %}
+```
 
 ## Reloading scenes
 

@@ -6,10 +6,10 @@ redirect_from: /details/updater/
 
 Starting with 0.31 the [updater component](/integrations/updater/) sends an optional report about Open Peer Power instance.
 
-{% highlight yaml %}
+```yaml
 updater:
   include_used_components: true
-{% endhighlight %}
+```
 
 We are only collecting this information to better understand our user base to provide better long term support and feature development.
 

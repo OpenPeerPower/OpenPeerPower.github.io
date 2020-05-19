@@ -20,21 +20,21 @@ To avoid permission errors, the upgrade must be run as the same user as was used
 
 The default way to update Open Peer Power to the latest release, when available, is:
 
-{% highlight bash %}
+```bash
 pip3 install --upgrade openpeerpower
-{% endhighlight %}
+```
 
 For a Docker container, simply pull the latest one:
 
-{% highlight bash %}
+```bash
 sudo docker pull openpeerpower/open-peer-power:latest
-{% endhighlight %}
+```
 
 For a Raspberry Pi Docker container, simply pull the latest one:
 
-{% highlight bash %}
+```bash
 sudo docker pull openpeerpower/raspberrypi3-openpeerpower:latest
-{% endhighlight %}
+```
 
 After updating, you must start/restart Open Peer Power for the changes to take effect. This means that you will have to restart `hass` itself or the [autostarting](/docs/autostart/) daemon (if applicable). Startup can take a considerable amount of time (i.e., minutes) depending on your device. This is because all requirements are updated as well.
 
@@ -44,17 +44,17 @@ After updating, you must start/restart Open Peer Power for the changes to take e
 
 In the event that a Open Peer Power version doesn't play well with your hardware setup, you can downgrade to a previous release:
 
-{% highlight bash %}
+```bash
 pip3 install openpeerpower==0.XX.X
-{% endhighlight %}
+```
 
 #### Run the beta version
 
 If you would like to test the next release before anyone else, you can install the beta version released every two weeks:
 
-{% highlight bash %}
+```bash
 pip3 install --pre --upgrade openpeerpower
-{% endhighlight %}
+```
 
 #### Run the development version
 
@@ -64,9 +64,9 @@ If you want to stay on the bleeding-edge Open Peer Power development branch, you
   The "dev" branch is likely to be unstable. Potential consequences include loss of data and instance corruption.
 </div>
 
-{% highlight bash %}
+```bash
 $ pip3 install --upgrade git+git://github.com/OpenPeerPower/Open-Peer-Power.git@dev
-{% endhighlight %}
+```
 
 ### Update Open Peer Power installation
 

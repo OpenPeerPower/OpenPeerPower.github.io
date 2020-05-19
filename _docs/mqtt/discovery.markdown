@@ -24,12 +24,12 @@ Supported by MQTT discovery:
 
 To enable MQTT discovery, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 mqtt:
   discovery: true
   discovery_prefix: openpeerpower
-{% endhighlight %}
+```
 
 {% configuration %}
 discovery:
@@ -52,9 +52,9 @@ The [embedded MQTT broker](/docs/mqtt/broker#embedded-broker) does not save any 
 
 The discovery topic need to follow a specific format:
 
-{% highlight text %}
+```text
 <discovery_prefix>/<component>/[<node_id>/]<object_id>/config
-{% endhighlight %}
+```
 
 - `<component>`: One of the supported MQTT components, eg. `binary_sensor`.
 - `<node_id>` (*Optional*):  ID of the node providing the topic, this is not used by Open Peer Power but may be used to structure the MQTT topic. The ID of the node must only consist of characters from the character class `[a-zA-Z0-9_-]` (alphanumerics, underscore and hyphen).
@@ -72,7 +72,7 @@ In the value of configuration variables ending with `_topic`, `~` will be replac
 Configuration variable names in the discovery payload may be abbreviated to conserve memory when sending a discovery message from memory constrained devices.
 
 Supported abbreviations:
-{% highlight txt %}
+```txt
     'act_t':               'action_topic',
     'act_tpl':             'action_template',
     'atype':               'automation_type',
@@ -251,17 +251,17 @@ Supported abbreviations:
     'xy_cmd_t':            'xy_command_topic',
     'xy_stat_t':           'xy_state_topic',
     'xy_val_tpl':          'xy_value_template',
-{% endhighlight %}
+```
 
 Supported abbreviations for device registry configuration:
-{% highlight txt %}
+```txt
     'cns':                 'connections',
     'ids':                 'identifiers',
     'name':                'name',
     'mf':                  'manufacturer',
     'mdl':                 'model',
     'sw':                  'sw_version',
-{% endhighlight %}
+```
 
 ### Support by third-party tools
 
@@ -288,20 +288,20 @@ A motion detection device which can be represented by a [binary sensor](/integra
 
 To create a new sensor manually. For more details please refer to the [MQTT testing section](/docs/mqtt/testing/).
 
-{% highlight bash %}
+```bash
 $ mosquitto_pub -h 127.0.0.1 -p 1883 -t "openpeerpower/binary_sensor/garden/config" -m '{"name": "garden", "device_class": "motion", "state_topic": "openpeerpower/binary_sensor/garden/state"}'
-{% endhighlight %}
+```
 Update the state.
 
-{% highlight bash %}
+```bash
 $ mosquitto_pub -h 127.0.0.1 -p 1883 -t "openpeerpower/binary_sensor/garden/state" -m ON
-{% endhighlight %}
+```
 
 Delete the sensor by sending an empty message.
 
- {% highlight bash %}
+ ```bash
 $ mosquitto_pub -h 127.0.0.1 -p 1883 -t "openpeerpower/binary_sensor/garden/config" -m ''
-{% endhighlight %}
+```
 
 #### Sensors with multiple values
 
@@ -322,15 +322,15 @@ Setting up a switch is similar but requires a `command_topic` as mentioned in th
 - Command topic: `openpeerpower/switch/irrigation/set`
 - Payload:  `{"name": "garden", "command_topic": "openpeerpower/switch/irrigation/set", "state_topic": "openpeerpower/switch/irrigation/state"}`
 
-{% highlight bash %}
+```bash
 $ mosquitto_pub -h 127.0.0.1 -p 1883 -t "openpeerpower/switch/irrigation/config" \
   -m '{"name": "garden", "command_topic": "openpeerpower/switch/irrigation/set", "state_topic": "openpeerpower/switch/irrigation/state"}'
-{% endhighlight %}
+```
 Set the state.
 
-{% highlight bash %}
+```bash
 $ mosquitto_pub -h 127.0.0.1 -p 1883 -t "openpeerpower/switch/irrigation/set" -m ON
-{% endhighlight %}
+```
 
 #### Abbreviating topic names
 
@@ -351,7 +351,7 @@ Setting up a [light that takes JSON payloads](/integrations/light.mqtt/#json-sch
 - Example state payload: `{"state": "ON", "brightness": 255}`
 - Configuration payload:
 
-  {% highlight json %}
+  ```json
   {
     "~": "openpeerpower/light/kitchen",
     "name": "Kitchen",
@@ -361,7 +361,7 @@ Setting up a [light that takes JSON payloads](/integrations/light.mqtt/#json-sch
     "schema": "json",
     "brightness": true
   }
-  {% endhighlight %}
+  ```
 
 #### Climate control
 
@@ -370,7 +370,7 @@ Setting up a climate integration (heat only):
 - Configuration topic: `openpeerpower/climate/livingroom/config`
 - Configuration payload:
 
-{% highlight json %}
+```json
 {
   "name":"Livingroom",
   "mode_cmd_t":"openpeerpower/climate/livingroom/thermostatModeCmd",
@@ -389,15 +389,15 @@ Setting up a climate integration (heat only):
   "temp_step":"0.5",
   "modes":["off", "heat"]
 }
-{% endhighlight %}
+```
 
 - State topic: `openpeerpower/climate/livingroom/state`
 - State payload:
 
-{% highlight json %}
+```json
 {
   "mode":"off",
   "target_temp":"21.50",
   "current_temp":"23.60",
 }
-{% endhighlight %}
+```

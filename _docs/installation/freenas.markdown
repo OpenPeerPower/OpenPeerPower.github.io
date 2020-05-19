@@ -9,76 +9,76 @@ This has been tested on FreeNAS 11.2 and should also work on FreeBSD 11.x as wel
 
 Enter the Open Peer Power jail. If you don't know which name you have given the jail, you can use the `iocage list` command to check.
 
-{% highlight bash %}
+```bash
 # If the jail is called 'OpenPeerPower'
 iocage exec OpenPeerPower
-{% endhighlight %}
+```
 
 Install the suggested packages:
 
-{% highlight bash %}
+```bash
 pkg update
 pkg upgrade
 pkg install -y autoconf bash ca_root_nss gmake pkgconf python37 py37-sqlite3
-{% endhighlight %}
+```
 
 Create the user and group that Open Peer Power will run as. The user/group ID of `8123` can be replaced if this is already in use in your environment.
 
-{% highlight bash %}
+```bash
 pw groupadd -n openpeerpower -g 8123
 echo 'openpeerpower:8123:8123::::::/usr/local/bin/bash:' | adduser -f -
-{% endhighlight %}
+```
 
 Create the installation directory:
 
-{% highlight bash %}
+```bash
 mkdir -p /usr/local/share/openpeerpower
 chown -R openpeerpower:openpeerpower /usr/local/share/openpeerpower
-{% endhighlight %}
+```
 
 Create the virtualenv and install Open Peer Power itself:
 
-{% highlight bash %}
+```bash
 su openpeerpower
 cd /usr/local/share/openpeerpower
 python3.7 -m venv .
 source ./bin/activate
 pip3 install --upgrade pip
 pip3 install openpeerpower
-{% endhighlight %}
+```
 
 While still in the `venv`, start Open Peer Power to populate the configuration directory.
 
-{% highlight bash %}
+```bash
 hass --open-ui
-{% endhighlight %}
+```
 
 Wait until you see:
 
-{% highlight bash %}
+```bash
 (MainThread) [openpeerpower.core] Starting Open Peer Power
-{% endhighlight %}
+```
 
 Then escape and exit the `venv`.
 
-{% highlight bash %}
+```bash
 deactivate
 exit
-{% endhighlight %}
+```
 
 Create the directory and the `rc.d` script for the system-level service that enables Open Peer Power to start when the jail starts.
 
-{% highlight bash %}
+```bash
 mkdir /usr/local/etc/rc.d/
-{% endhighlight %}
+```
 
 Then create a file at `/usr/local/etc/rc.d/openpeerpower` and insert the content below:
 
-{% highlight bash %}
+```bash
 vi /usr/local/etc/rc.d/openpeerpower
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```bash
 #!/bin/sh
 #
 # Based upon work by tprelog at https://github.com/tprelog/iocage-openpeerpower/blob/11.3-RELEASE/overlay/usr/local/etc/rc.d/openpeerpower
@@ -199,20 +199,20 @@ openpeerpower_test() {
 
 load_rc_config ${name}
 run_rc_command "$1"
-{% endhighlight %}
+```
 
 Make the `rc.d` script executable:
 
-{% highlight bash %}
+```bash
 chmod +x /usr/local/etc/rc.d/openpeerpower
-{% endhighlight %}
+```
 
 Configure the service to start on boot and start the Open Peer Power service:
 
-{% highlight bash %}
+```bash
 sysrc openpeerpower_enable="YES"
 service openpeerpower start
-{% endhighlight %}
+```
 
 You can also restart the jail to ensure that Open Peer Power starts on boot.
 
@@ -226,113 +226,113 @@ USB Z-Wave sticks may give `dmesg` warnings similar to "data interface 1, has no
 
 The following two packages need to be installed in the jail
 
-{% highlight bash %}
+```bash
 pkg install gmake
 pkg install libudev-devd
-{% endhighlight %}
+```
 
 Then you can install the Z-Wave package
 
-{% highlight bash %}
+```bash
 su openpeerpower
 cd /usr/local/share/openpeerpower
 source ./bin/activate.csh
 pip3 install openpeerpower-pyozw==0.1.7
 deactivate
 exit
-{% endhighlight %}
+```
 
 Stop the Open Peer Power Jail
 
-{% highlight bash %}
+```bash
 sudo iocage stop OpenPeerPower
-{% endhighlight %}
+```
 
 Edit the devfs rules on the FreenNAS Host
 
-{% highlight bash %}
+```bash
 vi /etc/devfs.rules
-{% endhighlight %}
+```
 
 Add the following lines
 
-{% highlight bash %}
+```bash
 [devfsrules_jail_allow_usb=7]
 add path 'cu\*' mode 0660 group 8123 unhide
-{% endhighlight %}
+```
 
 Reload devfs
 
-{% highlight bash %}
+```bash
 sudo service devfs restart
-{% endhighlight %}
+```
 
 Edit the ruleset used by the jail in the FreeNAS GUI by going to Jails -> `hass` -> Edit ->  Jail Properties ->  devfs_ruleset
 Set it to 7
 
 Start the Open Peer Power jail
 
-{% highlight bash %}
+```bash
 sudo iocage start OpenPeerPower
-{% endhighlight %}
+```
 
 Connect to the Open Peer Power jail and verify that you see the modem devices
 
-{% highlight bash %}
+```bash
 sudo iocage console OpenPeerPower
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```bash
 ls /dev/cu*
-{% endhighlight %}
+```
 
 This should output the following
 
-{% highlight bash %}
+```bash
 /dev/cuau0      /dev/cuaU0
-{% endhighlight %}
+```
 
 Add the Z-Wave configuration to your `configuration.yaml` and restart Open Peer Power
 
-{% highlight bash %}
+```bash
 vi /home/openpeerpower/.openpeerpower/configuration.yaml
-{% endhighlight %}
+```
 
-{% highlight yaml %}
+```yaml
 zwave:
   usb_path: /dev/cuaU0
   polling_interval: 10000
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```bash
 service openpeerpower restart
-{% endhighlight %}
+```
 
 ## Updating
 
 Before updating, read the changelog to see what has changed and how it affects your Open Peer Power instance. Enter the jail using `iocage exec <jailname>`. Stop the Open Peer Power service:
 
-{% highlight bash %}
+```bash
 service openpeerpower stop
-{% endhighlight %}
+```
 
 Then, enter the `venv`:
 
-{% highlight bash %}
+```bash
 su openpeerpower
 cd /usr/local/share/openpeerpower
 source ./bin/activate
-{% endhighlight %}
+```
 
 Upgrade Open Peer Power:
 
-{% highlight bash %}
+```bash
 pip3 install openpeerpower --upgrade
-{% endhighlight %}
+```
 
 Log out of the `openpeerpower` user and start Open Peer Power:
 
-{% highlight bash %}
+```bash
 exit
 service openpeerpower start
-{% endhighlight %}
+```

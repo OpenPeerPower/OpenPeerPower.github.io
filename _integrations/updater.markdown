@@ -19,15 +19,15 @@ The updater integration will also collect basic information about the running Op
 
 This integration is by default enabled, unless you've disabled or removed the [`default_config:`](https://www.openpeerpower.io/integrations/default_config/) line from your configuration. If that is the case, the following example shows you how to enable this integration manually:
 
-{% highlight yaml %}
+```yaml
 updater:
-{% endhighlight %}
+```
 
 For further information about the Updater's data, please check the [detailed overview](/docs/backend/updater/). If you choose not to share any information when checking for updates, you can set `reporting: false`.
 
 It is possible to report the integrations that you are using to the Open Peer Power developers. This will help them focus on improving the popular ones. To enable this option, you have to add `include_used_components: true`.
 
-{% highlight json %}
+```json
 "components": [
     "apcupsd",
     "api",
@@ -40,7 +40,7 @@ It is possible to report the integrations that you are using to the Open Peer Po
     "config.core",
     ...
 ]
-{% endhighlight %}
+```
 
 ## Notification
 
@@ -48,7 +48,7 @@ For an added bonus, an automation integration can be created to send a message w
 
 {% raw %}
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 automation:
   alias: Update Available Notification
@@ -61,6 +61,6 @@ automation:
     - service: notify.notify
       data_template:
         message: "Open Peer Power {{ state_attr('binary_sensor.updater', 'newest_version') }} is available."
-{% endhighlight %}
+```
 
 {% endraw %}

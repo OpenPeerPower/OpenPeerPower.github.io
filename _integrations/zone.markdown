@@ -15,7 +15,7 @@ Zones allow you to specify certain regions on earth (for now). When a device tra
 
 The `zone` integration uses YAML sequences to configure multiple zones:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 zone:
   - name: School
@@ -34,7 +34,7 @@ zone:
     longitude: -117.2474053
     radius: 100
     icon: mdi:account-multiple
-{% endhighlight %}
+```
 
 To find the latitude/longitude of a certain place you can use [Google Maps](https://www.google.com/maps/) or [Bing Maps](https://www.bing.com/maps). Just right click and copy the coordinates from there (Bing) or click on the "What is here?" (Google)
 

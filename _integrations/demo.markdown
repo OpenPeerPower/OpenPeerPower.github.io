@@ -38,7 +38,7 @@ Available demo platforms:
 
 To integrate a demo platform in Open Peer Power, add the following section to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 
 # To load all:
@@ -47,4 +47,4 @@ demo:
 # To load for a specific integration:
 light:
   - platform: demo
-{% endhighlight %}
+```

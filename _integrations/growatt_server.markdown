@@ -20,17 +20,17 @@ This will log into your Growatt account and grab the first "Plant", after which 
 
 Add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sensor:
   - platform: growatt_server
     username: GROWATT_SERVER_USERNAME
     password: GROWATT_SERVER_PASSWORD
-{% endhighlight %}
+```
 
 ## Example with multiple plants
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sensor:
   - platform: growatt_server
@@ -43,4 +43,4 @@ sensor:
     plant_id: 87654321
     username: username
     password: password
-{% endhighlight %}
+```

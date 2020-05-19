@@ -24,7 +24,7 @@ Open Peer Power can also take advantage of `scope:current_location` if available
 
 Once your developer account is created, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 device_tracker:
   - platform: automatic
@@ -33,7 +33,7 @@ device_tracker:
     devices:
       - 2007 Honda Element
       - 2004 Subaru Impreza
-{% endhighlight %}
+```
 
 <div class='note'>
   
@@ -43,7 +43,7 @@ The device name must be the name given by Automatic automatically. This is typic
 
 Open Peer Power will also fire events when an update is received from Automatic. These can be used to trigger automations, as shown in the example below. A list of available event types can be found in the [Automatic Real-Time Events documentation](https://developer.automatic.com/api-reference/#real-time-events).
 
-{% highlight yaml %}
+```yaml
 # Example automatic event automation
 automation:
   - trigger:
@@ -55,7 +55,7 @@ automation:
             id: "C_1234567890abcdefc"
     action:
       - service: light.turn_off
-{% endhighlight %}
+```
 
 <div class='note'>
 You can obtain the correct ID for your vehicle from your known_devices.yaml file. Be sure to lower-case any letters contained in your vehicle's ID when using it in an automation trigger.

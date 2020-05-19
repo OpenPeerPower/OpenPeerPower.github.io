@@ -24,7 +24,7 @@ The `alert` integration makes use of any of the `notifications` integrations. To
 setup the `alert` integration, first, you must setup a `notification` integration.
 Then, add the following to your configuration file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 alert:
   garage_door:
@@ -38,7 +38,7 @@ alert:
     notifiers:
       - ryans_phone
       - kristens_phone
-{% endhighlight %}
+```
 
 
 In this example, the garage door status (`input_boolean.garage_door`) is watched
@@ -56,16 +56,16 @@ Simply create a `group` notification type with a single notification member
 (such as `twilio_sms`) specifying the required parameters other than `message`
 provided by the `alert` component:
 
-{% highlight yaml %}
+```yaml
 - platform: group
   name: john_phone_sms
   services:
     - service: twilio_sms
       data:
         target: !secret john_phone
-{% endhighlight %}
+```
 
-{% highlight yaml %}
+```yaml
 alert:
   freshwater_temp_alert:
     name: "Warning: I have detected a problem with the freshwater tank temperature"
@@ -76,7 +76,7 @@ alert:
     skip_first: false
     notifiers:
       - john_phone_sms
-{% endhighlight %}
+```
 
 ### Complex Alert Criteria
 
@@ -89,7 +89,7 @@ than one input. For all of these situations, it is best to use the alert in
 conjunction with a `Template Binary Sensor`. The following example does that.
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 binary_sensor:
   - platform: template
     sensors:
@@ -105,7 +105,7 @@ alert:
     notifiers:
       - ryans_phone
       - kristens_phone
-{% endhighlight %}
+```
 {% endraw %}
 
 This example will begin firing as soon as the entity `sensor.motion`'s `battery`
@@ -119,7 +119,7 @@ change as the alert continues to fire. This can be done by setting the `repeat`
 configuration key to a list of numbers rather than a single number.
 Altering the first example would look like the following.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 alert:
   garage_door:
@@ -135,7 +135,7 @@ alert:
     notifiers:
       - ryans_phone
       - kristens_phone
-{% endhighlight %}
+```
 
 Now the first message will be sent after a 15 minute delay, the second will be
 sent 30 minutes after that, and a 60 minute delay will fall between every
@@ -152,7 +152,7 @@ The following will show for a plant how to include the problem `attribute`
 of the entity.
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 alert:
   office_plant:
@@ -167,7 +167,7 @@ alert:
     notifiers:
       - ryans_phone
       - kristens_phone
-{% endhighlight %}
+```
 {% endraw %}
 
 The resulting message could be `Plant Officeplant needs help (moisture low)`.
@@ -177,7 +177,7 @@ The resulting message could be `Plant Officeplant needs help (moisture low)`.
 Some notifiers support more parameters (e.g., to set text color or action
   buttons). These can be supplied via the `data` parameter:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 alert:
   garage_door:
@@ -195,7 +195,7 @@ alert:
         - 'Close garage:/close_garage, Acknowledge:/garage_acknowledge'
     notifiers:
       - frank_telegram
-{% endhighlight %}
+```
 This particular example relies on the `inline_keyboard` functionality of
 Telegram, where the user is presented with buttons to execute certain actions.
 

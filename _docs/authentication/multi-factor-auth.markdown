@@ -28,11 +28,11 @@ You can turn MFA on and off in the [profile page](/docs/authentication/#your-acc
 
 Enable TOTP in your `configuration.yaml` like this:
 
-{% highlight yaml %}
+```yaml
 openpeerpower:
   auth_mfa_modules:
     - type: totp
-{% endhighlight %}
+```
 
 If no `auth_mfa_modules` configuration section is defined in `configuration.yaml` a TOTP module named "Authenticator app" will be autoloaded.
 
@@ -91,7 +91,7 @@ message:
   type: template
 {% endconfiguration %}
 
-{% highlight yaml %}
+```yaml
 # Example configuration, with a message template.
 openpeerpower:
   auth_mfa_modules:
@@ -99,7 +99,7 @@ openpeerpower:
       name: Authenticator app
     - type: notify
       message: 'I almost forget, to get into my clubhouse, you need to say {}'
-{% endhighlight %}
+```
 
 After restarting Open Peer Power, go to your [profile page](/docs/authentication/#your-account-profile) and there should be a "Multi-factor Authentication Modules" section. Click _Enable_ on the _Notify One-Time Password_ option.
 

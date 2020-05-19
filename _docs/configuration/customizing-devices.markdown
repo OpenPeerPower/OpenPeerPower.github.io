@@ -24,10 +24,10 @@ By default, all of your devices will be visible and have a default icon determin
 
 Under the *Configuration* menu you'll find the *Customization* menu. If this menu item is not visible, enable advanced mode on your [profile page](/docs/authentication/#your-account-profile) first. When you select an entity to customize, you'll see all the existing attributes listed and you can customize those or select an additional supported attribute ([see below](/docs/configuration/customizing-devices/#possible-values)). You may also need to add the following to your `configuration.yaml` file, depending when you started using Open Peer Power:
 
-{% highlight yaml %}
+```yaml
 openpeerpower:
   customize: !include customize.yaml
-{% endhighlight %}
+```
 
 #### Possible values
 
@@ -87,7 +87,7 @@ If you implement `customize`, `customize_domain`, or `customize_glob` you must m
 
 </div>
 
-{% highlight yaml %}
+```yaml
 openpeerpower:
   name: Home
   unit_system: metric
@@ -121,7 +121,7 @@ openpeerpower:
     "scene.month_*_colors":
       hidden: true
       emulated_hue_hidden: false
-{% endhighlight %}
+```
 
 ### Reloading customize
 

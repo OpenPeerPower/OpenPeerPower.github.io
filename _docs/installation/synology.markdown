@@ -40,42 +40,42 @@ SSH onto your Synology & login as admin or root
 - Log in with your own administrator account
 - Switch to root using:
 
-{% highlight bash %}
+```bash
 $ sudo -i
-{% endhighlight %}
+```
 
 Check the path to python3 (assumed to be /volume1/@appstore/py3k/usr/local/bin)
 
-{% highlight bash %}
+```bash
 # cd /volume1/@appstore/py3k/usr/local/bin
-{% endhighlight %}
+```
 
 Install PIP (Python's package management system)
 
-{% highlight bash %}
+```bash
 # ./python3 -m ensurepip
-{% endhighlight %}
+```
 
 Use PIP to install the Open Peer Power package 0.64.3
 
-{% highlight bash %}
+```bash
 # ./python3 -m pip install openpeerpower==0.64.3
-{% endhighlight %}
+```
 
 Create a Open Peer Power configuration directory & switch to it
 
-{% highlight bash %}
+```bash
 # mkdir /volume1/openpeerpower
 # chown openpeerpower /volume1/openpeerpower 
 # chmod 755 /volume1/openpeerpower
 # cd /volume1/openpeerpower
-{% endhighlight %}
+```
 
 Hint: alternatively you can also create a "Shared Folder" via Synology WebUI (e.g., via "File Station") - this has the advantage that the folder is visible via "File Station".
 
 Create hass-daemon file using the following code (edit the variables in uppercase if necessary)
 
-{% highlight bash %}
+```bash
 #!/bin/sh
 
 # Package
@@ -178,27 +178,27 @@ case $1 in
         ;;
 esac
 
-{% endhighlight %}
+```
 
 Create links to Python folders to make things easier in the future:
 
-{% highlight bash %}
+```bash
 # ln -s /volume1/@appstore/py3k/usr/local/bin/python3 python3
 # ln -s /volume1/@appstore/py3k/usr/local/lib/python3.5/site-packages/openpeerpower openpeerpower
-{% endhighlight %}
+```
 
 Set the owner and permissions on your configuration folder
 
-{% highlight bash %}
+```bash
 # chown -R openpeerpower:users /volume1/openpeerpower
 # chmod -R 664 /volume1/openpeerpower
-{% endhighlight %}
+```
 
 Make the daemon file executable:
 
-{% highlight bash %}
+```bash
 # chmod 755 /volume1/openpeerpower/hass-daemon
-{% endhighlight %}
+```
 
 Update your firewall (if it is turned on the Synology device):
 
@@ -220,24 +220,24 @@ Here are some useful commands:
 
 - Start Open Peer Power:
 
-{% highlight bash %}
+```bash
 $ sudo /volume1/openpeerpower/hass-daemon start
-{% endhighlight %}
+```
 
 - Stop Open Peer Power:
 
-{% highlight bash %}
+```bash
 $ sudo /volume1/openpeerpower/hass-daemon stop
-{% endhighlight %}
+```
 
 - Restart Open Peer Power:
 
-{% highlight bash %}
+```bash
 $ sudo /volume1/openpeerpower/hass-daemon restart
-{% endhighlight %}
+```
 
 - Upgrade Open Peer Power::
 
-{% highlight bash %}
+```bash
 $  /volume1/@appstore/py3k/usr/local/bin/python3 -m pip install --upgrade openpeerpower
-{% endhighlight %}
+```

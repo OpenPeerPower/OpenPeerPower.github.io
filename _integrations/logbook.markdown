@@ -20,15 +20,15 @@ SQLite database to store data.
 
 This integration is by default enabled, unless you've disabled or removed the [`default_config:`](https://www.openpeerpower.io/integrations/default_config/) line from your configuration. If that is the case, the following example shows you how to enable this integration manually:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 logbook:
-{% endhighlight %}
+```
 
 If you want to exclude messages of some entities or domains from the logbook
 just add the `exclude` parameter like:
 
-{% highlight yaml %}
+```yaml
 # Example of excluding domains and entities from the logbook
 logbook:
   exclude:
@@ -37,12 +37,12 @@ logbook:
       - sensor.date
     domains:
       - sun
-{% endhighlight %}
+```
 
 In case you just want to see messages from some specific entities or domains use
 the `include` configuration:
 
-{% highlight yaml %}
+```yaml
 # Example to show how to include only the listed domains and entities in the logbook
 logbook:
   include:
@@ -50,13 +50,13 @@ logbook:
       - sensor
       - switch
       - media_player
-{% endhighlight %}
+```
 
 You can also use the `include` list and filter out some entities or domains with
 an `exclude` list. Usually this makes sense if you define domains on the include
 side and filter out some specific entities.
 
-{% highlight yaml %}
+```yaml
 # Example of combining include and exclude configurations
 logbook:
   include:
@@ -68,7 +68,7 @@ logbook:
     entities:
       - sensor.last_boot
       - sensor.date
-{% endhighlight %}
+```
 
 ### Exclude Events
 
@@ -89,7 +89,7 @@ for sun rise and sun set.
 It is possible to add custom entries to the logbook by using the script
 component to fire an event.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 script:
   add_logbook_entry:
@@ -102,4 +102,4 @@ script:
           # Optional
           entity_id: light.kitchen
           domain: light
-{% endhighlight %}
+```

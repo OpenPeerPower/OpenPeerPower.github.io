@@ -18,13 +18,13 @@ The `counter` integration allows one to count occurrences fired by automations.
 
 To add a counter to your installation, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 counter:
   my_custom_counter:
     initial: 30
     step: 1
-{% endhighlight %}
+```
 
 Pick an icon that you can find on [materialdesignicons.com](https://materialdesignicons.com/) to use for your input and prefix the name with `mdi:`. For example `mdi:car`, `mdi:ambulance` or `mdi:motorbike`.
 
@@ -81,11 +81,11 @@ With this service the properties of the counter can be changed while running.
 
 Select the **Services** tab from within **Developer Tools**. Choose **counter** from the list of **Domains**, select the **Service**, enter something like the sample below into the **Service Data** field, and hit **CALL SERVICE**.
 
-{% highlight json %}
+```json
 {
   "entity_id": "counter.my_custom_counter"
 }
-{% endhighlight %}
+```
 
 ## Examples
 
@@ -93,15 +93,15 @@ Select the **Services** tab from within **Developer Tools**. Choose **counter** 
 
 To use a counter to count errors as caught by Open Peer Power, you need to add `fire_event: true` to your `configuration.yaml`, like so:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 system_log:
   fire_event: true
-{% endhighlight %}
+```
 
 ### Error counting - example configuration
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 automation:
 - id: 'errorcounterautomation'
@@ -119,4 +119,4 @@ counter:
   error_counter:
     name: Errors
     icon: mdi:alert  
-{% endhighlight %}
+```

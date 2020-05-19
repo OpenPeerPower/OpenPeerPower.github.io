@@ -13,7 +13,7 @@ excerpt: none
 
 To enable customized panels in your installation, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 panel_custom:
   - name: my-panel
@@ -23,7 +23,7 @@ panel_custom:
     js_url: /local/my-panel.js
     config:
       who: world
-{% endhighlight %}
+```
 
 <div class='note'>
 

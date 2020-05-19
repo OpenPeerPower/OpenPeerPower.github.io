@@ -14,8 +14,8 @@ Open the **Add a Log** page and choose **Manual**. Enter a name for your log in 
 
 To use the `logentries` integration in your installation, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 logentries:
   token: TOKEN
-{% endhighlight %}
+```

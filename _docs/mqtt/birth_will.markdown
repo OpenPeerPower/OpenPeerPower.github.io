@@ -9,7 +9,7 @@ MQTT supports so-called Birth and Last Will and Testament (LWT) messages. The fo
 
 To integrate MQTT Birth and Last Will messages into Open Peer Power, add the following section to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 mqtt:
   birth_message:
@@ -18,7 +18,7 @@ mqtt:
   will_message:
     topic: 'hass/status'
     payload: 'offline'
-{% endhighlight %}
+```
 
 {% configuration %}
 birth_message:

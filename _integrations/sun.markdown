@@ -22,10 +22,10 @@ below the horizon. The sun can be used within automation as
 
 This integration is by default enabled, unless you've disabled or removed the [`default_config:`](https://www.openpeerpower.io/integrations/default_config/) line from your configuration. If that is the case, the following example shows you how to enable this integration manually:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sun:
-{% endhighlight %}
+```
 
 <p class='img'>
 <img src='/images/screenshots/more-info-dialog-sun.png' />
@@ -39,14 +39,14 @@ an offset.
 The sun event need to have the type 'sun', which service to call,
 which event (sunset or sunrise) and the offset.
 
-{% highlight json %}
+```json
 {
     "type": "sun",
     "service": "switch.turn_on",
     "event": "sunset",
     "offset": "-01:00:00"
 }
-{% endhighlight %}
+```
 
 ### Maintains entity `sun.sun`
 

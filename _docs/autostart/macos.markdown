@@ -9,11 +9,11 @@ Setting up Open Peer Power to run as a background service is simple; macOS will 
 To get Open Peer Power installed as a background service, run:
 
 
-{% highlight bash %}
+```bash
 $ hass --script macos install
 
  Open Peer Power has been installed.         Open it here: http://localhost:8123
-{% endhighlight %}
+```
 
  Open Peer Power will log to `~/Library/Logs/openpeerpower.log`
 
@@ -21,8 +21,8 @@ Configuration is kept in `~/.openpeerpower`
 
 To uninstall the service, run:
 
-{% highlight bash %}
+```bash
 $ hass --script macos uninstall
 
  Open Peer Power has been uninstalled.
-{% endhighlight %}
+```

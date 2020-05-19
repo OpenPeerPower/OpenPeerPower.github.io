@@ -29,7 +29,7 @@ Info on how to get API access is described in the [smappy wiki](https://github.c
 
 To use the `smappee` integration in your installation, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 smappee:
   host: 10.0.0.5
@@ -37,19 +37,19 @@ smappee:
   client_secret: YOUR_CLIENT_SECRET
   username: YOUR_MYSMAPPEE_USERNAME
   password: YOUR_MYSMAPPEE_PASSWORD
-{% endhighlight %}
+```
 
-{% highlight yaml %}
+```yaml
 # Minimal example configuration.yaml entry
 smappee:
   host: 10.0.0.5
-{% endhighlight %}
+```
 
-{% highlight yaml %}
+```yaml
 # Cloud only example configuration.yaml entry
 smappee:
   client_id: YOUR_CLIENT_ID
   client_secret: YOUR_CLIENT_SECRET
   username: YOUR_MYSMAPPEE_USERNAME
   password: YOUR_MYSMAPPEE_PASSWORD
-{% endhighlight %}
+```

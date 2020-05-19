@@ -28,16 +28,16 @@ The local Zigbee device (assuming XBee) must have an up to date Router or Coordi
 
 A `zigbee` section must be present in the `configuration.yaml` file and contain the following options as required:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 zigbee:
-{% endhighlight %}
+```
 
 To find the possible serial port names of your device, run:
 
-{% highlight bash %}
+```bash
 ls /dev/ttyUSB*
-{% endhighlight %}
+```
 
 <div class='note'>
 The port may also appear as /dev/ttyACM* if you're communicating with the Zigbee device through an Arduino.
@@ -45,12 +45,12 @@ The port may also appear as /dev/ttyACM* if you're communicating with the Zigbee
 
 ### Example
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 zigbee:
   device: /dev/ttyACM1
   baud: 115200
-{% endhighlight %}
+```
 
 ## Binary Sensor
 
@@ -60,13 +60,13 @@ A `zigbee` binary sensor in this context is a device connected to one of the dig
 
 To enable a digital input pin as binary sensor in your installation, add the following lines to your `configuration.yaml`:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 binary_sensor:
   - platform: zigbee
     name: Hallway PIR Sensor
     pin: 0
-{% endhighlight %}
+```
 
 ## Light
 
@@ -74,12 +74,12 @@ A Zigbee light in this context is a light connected to one of the digital output
 
 To configure a digital output pin as light, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 light:
   - name: Desk Lamp
     platform: zigbee
     pin: 0
-{% endhighlight %}
+```
 
 ## Sensor
 
@@ -90,7 +90,7 @@ There are two types of [Zigbee](https://zigbee.org/) sensor available to Open Pe
 
 To configure an analog input pin sensor, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sensor:
   - platform: zigbee
@@ -98,7 +98,7 @@ sensor:
     type: analog
     pin: 0
     address: 0013A2004233D138
-{% endhighlight %}
+```
 
 ### Examples
 
@@ -108,7 +108,7 @@ The analog input pins on an XBee (non-Pro) will read 0V to 1.2 V. This is transl
 
 To configure an analog input pin sensor, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 ## Example configuration.yaml entry
 sensor:
   - platform: zigbee
@@ -116,7 +116,7 @@ sensor:
     type: analog
     pin: 0
     address: 0013A2004233D138
-{% endhighlight %}
+```
 
 See the [Digi knowledge base](http://knowledge.digi.com/articles/Knowledge_Base_Article/Digital-and-analog-sampling-using-XBee-radios) for more XBee sampling details.
 
@@ -126,14 +126,14 @@ The XBee Pro (and perhaps other third party modules) contains a thermometer devi
 
 To configure a temperature sensor device, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sensor:
   - platform: zigbee
     name: Living Room Temperature Zigbee
     type: temperature
     address: 0013A20050E752C5
-{% endhighlight %}
+```
 
 ## Switch
 
@@ -141,11 +141,11 @@ A Zigbee switch in this context is a device connected to one of the digital outp
 
 To configure a digital output pin as switch, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 switch:
   - name: Pond Fountain
     platform: zigbee
     pin: 0
     address: 0013A20040791FA2
     on_state: low
-{% endhighlight %}
+```

@@ -69,7 +69,7 @@ When activated, the [`alexa` integration](/integrations/alexa/) will have Open P
 Download [this zip](https://github.com/OpenPeerPower/openpeerpower.io/blob/next/assets/OpenPeerPower_APIAI.zip) and load it in your Dialogflow agent (**Settings** -> **Export and Import**) for examples intents to use with this configuration:
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 dialogflow:
 
@@ -114,5 +114,5 @@ intent_script:
           {%- endif -%}
         data_template:
           entity_id: "switch.light_{{ Room | replace(' ', '_') }}"
-{% endhighlight %}
+```
 {% endraw %}

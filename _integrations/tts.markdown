@@ -14,11 +14,11 @@ Text-to-Speech (TTS) enables Open Peer Power to speak to you.
 
 To get started, add the following lines to your `configuration.yaml` (example for Google):
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry for Google TTS service
 tts:
   - platform: google_translate
-{% endhighlight %}
+```
 
 <div class='note'>
 
@@ -30,7 +30,7 @@ The following optional parameters can be used with any platform. However, the TT
 
 The extended example from above would look like the following sample:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry for Google Translate TTS service
 tts:
   - platform: google_translate
@@ -39,7 +39,7 @@ tts:
     time_memory: 300
     base_url: http://192.168.0.10:8123
     service_name: google_say
-{% endhighlight %}
+```
 
 <div class='note'>
 
@@ -75,41 +75,41 @@ The `say` service support `language` and on some platforms also `options` for se
 
 Say to all `media_player` device entities:
 
-{% highlight yaml %}
+```yaml
 # Replace google_translate_say with <platform>_say when you use a different platform.
 service: tts.google_translate_say
 entity_id: "all"
 data:
   message: 'May the Force be with you.'
-{% endhighlight %}
+```
 
 Say to the `media_player.floor` device entity:
 
-{% highlight yaml %}
+```yaml
 service: tts.google_translate_say
 entity_id: media_player.floor
 data:
   message: 'May the Force be with you.'
-{% endhighlight %}
+```
 
 Say to the `media_player.floor` device entity in French:
 
-{% highlight yaml %}
+```yaml
 service: tts.google_translate_say
 entity_id: media_player.floor
 data:
   message: 'Que la force soit avec toi.'
   language: 'fr'
-{% endhighlight %}
+```
 
 With a template:
 
-{% highlight yaml %}
+```yaml
 service: tts.google_translate_say
 data_template:
   message: "Temperature is {% raw %}{{states('sensor.temperature')}}{% endraw %}."
   cache: false
-{% endhighlight %}
+```
 
 ## Cache
 
@@ -121,26 +121,26 @@ The integration has two caches. Both caches can be controlled with the `cache` o
 
 Returns a URL to the generated TTS file. Platform and message are required.
 
-{% highlight json %}
+```json
 {
     "platform": "amazon_polly",
     "message": "I am speaking now"
 }
-{% endhighlight %}
+```
 
 The return code is 200 if the file is generated. The message body will contain a JSON object with the URL.
 
-{% highlight json %}
+```json
 {
     "url": "http://127.0.0.1:8123/api/tts_proxy/265944c108cbb00b2a621be5930513e03a0bb2cd_en_-_demo.mp3"
 }
-{% endhighlight %}
+```
 
 Sample `curl` command:
 
-{% highlight bash %}
+```bash
 $ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" \
        -d '{"message": "I am speaking now", "platform": "amazon_polly"}' \
        http://localhost:8123/api/tts_get_url
-{% endhighlight %}
+```

@@ -98,12 +98,12 @@ To configure the component, select ZHA on the Integrations page and provide the 
 
 Or, you can manually configure `zha` section in `configuration.yaml`. The path to the database which will persist your network data is required.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 zha:
   usb_path: /dev/ttyUSB2
   database_path: /home/openpeerpower/.openpeerpower/zigbee.db
-{% endhighlight %}
+```
 
 If you are use ZiGate, you have to use some special usb_path configuration:
 
@@ -146,9 +146,9 @@ On Linux hosts ZHA can fail to start during HA startup or restarts because the Z
 
 To remove modemmanager from an Debian/Ubuntu host run this command:
 
-{% highlight bash %}
+```bash
 sudo apt-get purge modemmanager
-{% endhighlight %}
+```
 
 ### Can't connect to USB device and using Docker
 
@@ -160,7 +160,7 @@ Install Docker-Compose for your platform (Linux - `sudo apt-get install docker-c
 
 Create a `docker-compose.yml` with the following data:
 
-{% highlight yaml %}
+```yaml
 version: '2'
 services:
   openpeerpower:
@@ -177,4 +177,4 @@ services:
       - /dev/ttyUSB0:/dev/ttyUSB0
     restart: always
     network_mode: host
-{% endhighlight %}
+```

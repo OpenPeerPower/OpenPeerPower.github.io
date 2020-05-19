@@ -23,7 +23,7 @@ The `homekit` integration allows you to forward entities from Open Peer Power to
 
 </div>
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry configuring HomeKit
 homekit:
   filter:
@@ -51,16 +51,16 @@ homekit:
         - feature: toggle_mute
     switch.bedroom_outlet:
       type: outlet
-{% endhighlight %}
+```
 
 ## Setup
 
 To enable the HomeKit integration in Open Peer Power, add the following to your configuration file:
 
-{% highlight yaml %}
+```yaml
 # Example for HomeKit setup
 homekit:
-{% endhighlight %}
+```
 
 After Open Peer Power has started, the entities specified by the filter are exposed to HomeKit if they are [supported](#supported-components). To add them:
 
@@ -109,7 +109,7 @@ Please remember that you can only have a single `automation` entry. Add the auto
 </div>
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example for Z-Wave
 homekit:
   auto_start: false
@@ -125,13 +125,13 @@ automation:
         event_type: zwave.network_complete_some_dead
     action:
       - service: homekit.start
-{% endhighlight %}
+```
 {% endraw %}
 
 For a general delay where your integration doesn't generate an event, you can also do:
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example using a delay after the start of Open Peer Power
 homekit:
   auto_start: false
@@ -144,13 +144,13 @@ automation:
     action:
       - delay: 00:05  # Waits 5 minutes
       - service: homekit.start
-{% endhighlight %}
+```
 {% endraw %}
 
 In some cases it might be desirable to check that all entities are available before starting `HomeKit`. This can be accomplished by adding an additional `binary_sensor` as follows:
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example checking specific entities to be available before start
 homekit:
   auto_start: false
@@ -173,7 +173,7 @@ automation:
         timeout: 00:15  # Waits 15 minutes
         continue_on_timeout: false
       - service: homekit.start
-{% endhighlight %}
+```
 {% endraw %}
 
 ## Configure Filter
@@ -181,7 +181,7 @@ automation:
 By default, no entity will be excluded. To limit which entities are being exposed to `HomeKit`, you can use the `filter` parameter. Keep in mind only [supported components](#supported-components) can be added.
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example filter to include specified domains and exclude specified entities
 homekit:
   filter:
@@ -190,7 +190,7 @@ homekit:
       - light
     exclude_entities:
       - light.kitchen_light
-{% endhighlight %}
+```
 {% endraw %}
 
 Filters are applied as follows:
@@ -216,10 +216,10 @@ The `safe_mode` option should only be used (and only works) if you encounter iss
 
 To use `safe_mode`, add the option to your `homekit` configuration:
 
-{% highlight yaml %}
+```yaml
 homekit:
   safe_mode: true
-{% endhighlight %}
+```
 
 Restart your Open Peer Power instance. If you don't see a `pincode`, follow the [guide](#deleting-the-homekitstate-file) here. Now you should be able to pair normally.
 
@@ -237,11 +237,11 @@ You may also need to set `zeroconf_default_interface` to `true`.
 
 To use `advertise_ip`, add the option to your `homekit` configuration:
 
-{% highlight yaml %}
+```yaml
 homekit:
   advertise_ip: "STATIC_IP_OF_YOUR_DOCKER_HOST"
   zeroconf_default_interface: true
-{% endhighlight %}
+```
 
 Restart your Open Peer Power instance. This feature requires running an mDNS forwarder on your Docker host, e.g., `avahi-daemon` in reflector mode. This kind of setup most likely requires `safe_mode` during the bridge setup.
 
@@ -294,7 +294,7 @@ If you encounter any issues during pairing, make sure to:
  3. Edit your configuration (see below)
  4. **Start** Open Peer Power
 
-{% highlight yaml %}
+```yaml
 logger:
   default: warning
   logs:
@@ -305,7 +305,7 @@ homekit:
   filter:
     include_entities:
       - demo.demo
-{% endhighlight %}
+```
 
 #### PIN doesn't appear as persistent status
 

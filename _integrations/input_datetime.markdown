@@ -19,7 +19,7 @@ To add three datetime inputs to your installation,
 one with both date and time, and one with date or time each,
 add the following lines to your `configuration.yaml`:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 input_datetime:
   both_date_and_time:
@@ -34,7 +34,7 @@ input_datetime:
     name: Input with only time
     has_date: false
     has_time: true
-{% endhighlight %}
+```
 
 ### Attributes
 
@@ -73,7 +73,7 @@ automation (note that you will need a
 [time sensor](/integrations/time_date) elsewhere in your configuration):
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 # Turns on bedroom light at the time specified.
 automation:
@@ -83,7 +83,7 @@ automation:
   action:
     service: light.turn_on
     entity_id: light.bedroom
-{% endhighlight %}
+```
 {% endraw %}
 
 To dynamically set the `input_datetime` you can call
@@ -92,7 +92,7 @@ If you have a `datetime` object you can use its `strftime` method. Of if you hav
 The following example shows the different methods in an automation rule:
 
 {% raw %}
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 # Shows different ways to set input_datetime when an input_boolean is turned on
 automation:
@@ -129,5 +129,5 @@ automation:
         {{ now().timestamp() | timestamp_custom("%Y-%m-%d", true) }}
       time: >
         {{ now().timestamp() | timestamp_custom("%H:%M:%S", true) }}
-{% endhighlight %}
+```
 {% endraw %}

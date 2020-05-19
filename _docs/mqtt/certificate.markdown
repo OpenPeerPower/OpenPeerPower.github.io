@@ -9,11 +9,11 @@ Using certificates will give you an additional layer of security for your MQTT c
 
 To integrate MQTT with certificate into Open Peer Power, add the following section to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 mqtt:
   certificate: /home/paulus/dev/addtrustexternalcaroot.crt
-{% endhighlight %}
+```
 
 {% configuration %}
 certificate:

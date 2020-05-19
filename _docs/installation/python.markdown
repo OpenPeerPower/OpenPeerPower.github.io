@@ -12,10 +12,10 @@ If you're running a Linux-based platform, we strongly recommend you follow the i
 
 Once Python is installed, execute the following code in a console:
 
-{% highlight bash %}
+```bash
 pip3 install openpeerpower
 hass --open-ui
-{% endhighlight %}
+```
 
 Running these commands will:
 

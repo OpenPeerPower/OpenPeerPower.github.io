@@ -7,10 +7,10 @@ description: "Installation of Open Peer Power on your Arch Linux computer."
 
 Install the needed Python packages.
 
-{% highlight bash %}
+```bash
 sudo pacman -S python
 sudo pacman -S python-pip
-{% endhighlight %}
+```
 
 From here on, we recommend you to follow the
 [virtualenv](https://www.openpeerpower.io/docs/installation/virtualenv/) guide.

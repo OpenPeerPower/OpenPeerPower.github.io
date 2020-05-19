@@ -30,36 +30,36 @@ The notify integration supports specifying [templates](/topics/templating/) with
 
 In an [action](/getting-started/automation-action/) of your [automation setup](/getting-started/automation/) it could look like this with a customized subject.
 
-{% highlight yaml %}
+```yaml
 action:
   service: notify.notify
   data:
     message: "Your message goes here"
     title: "Custom subject"
-{% endhighlight %}
+```
 
 ### Test if it works
 
 After you setup a [notifier](/integrations/#notifications) a simple way to test if you have set up your notify platform correctly, is to open **Developer Tools** from the sidebar and then select the  **Services** tab. Choose your service from the **Service** dropdown menu, enter the sample below into the **Service Data** field, and press the **CALL SERVICE** button.
 
-{% highlight json %}
+```json
 {
   "message": "The sun is {% raw %}{% if is_state('sun.sun', 'above_horizon') %}up{% else %}down{% endif %}{% endraw %}!"
 }
-{% endhighlight %}
+```
 
 The automation equivalent would be:
 
-{% highlight yaml %}
+```yaml
 action:
   service: notify.notify
   data_template:
     message: "The sun is {% raw %}{% if is_state('sun.sun', 'above_horizon') %}up{% else %}down{% endif %}{% endraw %}!"
-{% endhighlight %}
+```
 
 For services which have support for sending images.
 
-{% highlight json %}
+```json
 { "message": "Test plugin",
   "data": {
     "photo": {
@@ -67,11 +67,11 @@ For services which have support for sending images.
     }
   }
 }
-{% endhighlight %}
+```
 
 The automation equivalent would be:
 
-{% highlight yaml %}
+```yaml
 action:
   service: notify.notify
   data:
@@ -79,12 +79,12 @@ action:
     data:
       photo:
         url: "http://www.gbsun.de/gbpics/berge/berge106.jpg"
-{% endhighlight %}
+```
 
 
 If the service support sending the location, the data from this sample can be used.
 
-{% highlight json %}
+```json
 { "message": "Test plugin",
   "data": {
     "location": {
@@ -93,11 +93,11 @@ If the service support sending the location, the data from this sample can be us
     }
   }
 }
-{% endhighlight %}
+```
 
 The automation equivalent would be:
 
-{% highlight yaml %}
+```yaml
 action:
   service: notify.notify
   data:
@@ -106,4 +106,4 @@ action:
       location:
         latitude: 7.3284
         longitude: 46.38234
-{% endhighlight %}
+```

@@ -16,29 +16,29 @@ The `otp` sensor generates One-Time Passwords according to [RFC6238](https://too
 
 To enable the OTP sensor, add the following lines to your `configuration.yaml`:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sensor:
   - platform: otp
     token: SHARED_SECRET_TOKEN
-{% endhighlight %}
+```
 
 ## Generating a token
 
 A simple way to generate a `token` for a new sensor is to run this snippet of Python code in your Open Peer Power virtual environment:
 
-{% highlight shell %}
+```shell
 $ pip3 install pyotp
 $ python3 -c 'import pyotp; print("Token:", pyotp.random_base32())'
 Token: IHEDPEBEVA2WVHB7
-{% endhighlight %}
+```
 
 To run in a Docker container:
 
-{% highlight shell %}
+```shell
 $ docker exec -it open-peer-power python -c 'import pyotp; print("Token:", pyotp.random_base32())'
 Token: IHEDPEBEVA2WVHB7
-{% endhighlight %}
+```
 
 Copy and paste the token into your Open Peer Power configuration and add it to your OTP generator. Verify that they generate the same code.
 

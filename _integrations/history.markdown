@@ -19,10 +19,10 @@ no history will be available for these entities.
 
 This integration is by default enabled, unless you've disabled or removed the [`default_config:`](https://www.openpeerpower.io/integrations/default_config/) line from your configuration. If that is the case, the following example shows you how to enable this integration manually:
 
-{% highlight yaml %}
+```yaml
 # Basic configuration.yaml entry
 history:
-{% endhighlight %}
+```
 
 <p class='img'>
   <a href='{{site_root}}/images/screenshots/component_history_24h.png'>
@@ -45,7 +45,7 @@ when you are basically happy with the information displayed, but just want to
 remove some entities or domains. Usually these are entities/domains which do not
 change or rarely change (like `updater` or `automation`).
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry with exclude
 history:
   exclude:
@@ -55,14 +55,14 @@ history:
     entities:
       - sensor.last_boot
       - sensor.date
-{% endhighlight %}
+```
 
 Define domains and entities to display by using the `include` configuration
 (aka. whitelist). If you have a lot of entities in your system and your
 `exclude` list is getting too large, it might be better just to define the
 entities or domains to `include`.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry with include
 history:
   include:
@@ -70,7 +70,7 @@ history:
       - sensor
       - switch
       - media_player
-{% endhighlight %}
+```
 
 Use the `include` list to define the domains/entities to display, and exclude
 some of them within the `exclude` list. This makes sense if you, for instance,
@@ -80,7 +80,7 @@ of adding every sensor entity to the `include` `entities` list just include the
 Note that the order of any `include` `entities` will be displayed as listed in
 the configuration, otherwise, the display order is arbitrary.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry with include and exclude
 history:
   include:
@@ -92,13 +92,13 @@ history:
     entities:
      - sensor.last_boot
      - sensor.date
-{% endhighlight %}
+```
 
 If you'd like the order of display of the sensors to follow the way they are
 listed in the included entity list,
 you can set the flag `use_include_order` to true.
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry using specified entity display order
 history:
   use_include_order: true
@@ -106,7 +106,7 @@ history:
     entities:
       - sun.sun
       - light.front_porch
-{% endhighlight %}
+```
 
 #### Implementation details
 
@@ -132,8 +132,8 @@ SQLite databases do not support native dates. That's why all the dates are saved
 in seconds since the UNIX epoch. Convert them manually using
 [this site](https://www.epochconverter.com/) or in Python:
 
-{% highlight python %}
+```python
 from datetime import datetime
 
 datetime.fromtimestamp(1422830502)
-{% endhighlight %}
+```

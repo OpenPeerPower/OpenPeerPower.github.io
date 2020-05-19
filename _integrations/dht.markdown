@@ -16,7 +16,7 @@ The `dht` sensor platform allows you to get the current temperature and humidity
 
 To use your DHTxx sensor in your installation, add the following to your `configuration.yaml` file:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 sensor:
   platform: dht
@@ -25,7 +25,7 @@ sensor:
   monitored_conditions:
     - temperature
     - humidity
-{% endhighlight %}
+```
 
 The name of the pin to which the sensor is connected has different names on different platforms. 'P8_11' for Beaglebone, '23' for Raspberry Pi.
 
@@ -33,7 +33,7 @@ The name of the pin to which the sensor is connected has different names on diff
 
 An example for a Raspberry Pi 3 with a DHT22 sensor connected to GPIO4 (pin 7):
 
-{% highlight yaml %}
+```yaml
 sensor:
   - platform: dht
     sensor: DHT22
@@ -43,4 +43,4 @@ sensor:
     monitored_conditions:
       - temperature
       - humidity
-{% endhighlight %}
+```

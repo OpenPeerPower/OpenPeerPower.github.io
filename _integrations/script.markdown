@@ -17,7 +17,7 @@ The `script` integration allows users to specify a sequence of actions to be exe
 
 The sequence of actions is specified using the [Open Peer Power Script Syntax](/getting-started/scripts/).
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 script:
   message_temperature:
@@ -26,7 +26,7 @@ script:
       - service: notify.notify
         data_template:
           message: Current temperature is {% raw %}{{ states('sensor.temperature') }}{% endraw %}
-{% endhighlight %}
+```
 
 <div class='note'>
 
@@ -38,7 +38,7 @@ Script names (e.g., `message_temperature` in the example above) are not allowed 
 
 {% raw %}
 
-{% highlight yaml %}
+```yaml
 script: 
   wakeup:
     alias: Wake Up
@@ -68,7 +68,7 @@ script: 
         service: light.turn_on
         data:
           entity_id: group.living_room
-{% endhighlight %}
+```
 
 {% endraw %}
 
@@ -78,7 +78,7 @@ As part of the service, variables can be passed along to a script so they become
 
 There are two ways to achieve this. One way is using the generic `script.turn_on` service. To pass variables to the script with this service, call it with the desired variables:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 automation:
   trigger:
@@ -93,11 +93,11 @@ automation:
       variables:
         title: 'State change'
         message: 'The light is on!'
-{% endhighlight %}
+```
 
 The other way is calling the script as a service directly. In this case, all service data will be made available as variables. If we apply this approach on the script above, it would look like this:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 automation:
   trigger:
@@ -110,11 +110,11 @@ automation:
     data:
       title: 'State change'
       message: 'The light is on!'
-{% endhighlight %}
+```
 
 Using the variables in the script requires the use of `data_template`:
 
-{% highlight yaml %}
+```yaml
 # Example configuration.yaml entry
 script:
   notify_pushover:
@@ -134,7 +134,7 @@ script:
         data_template:
           title: "{% raw %}{{ title }}{% endraw %}"
           message: "{% raw %}{{ message }}{% endraw %}"
-{% endhighlight %}
+```
 
 ### In the Overview
 
