@@ -46,7 +46,9 @@ highlighter: none
 
 plugins:
   - jekyll-redirect-from
+  - jekyll-remote-theme
   - jekyll-time-to-read
+  
 
 paginate: 10 # Posts per page on the blog index
 paginate_path: "blog/posts/:num" # Directory base for pagination URLs eg. /posts/2/
