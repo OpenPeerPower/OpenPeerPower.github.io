@@ -33,7 +33,7 @@ code_dir: downloads/code
 category_dir: blog/categories
 
 markdown: CommonMark
-remote_theme: benbalter/retlab
+remote_theme: coogie/oscailte
 timezone: UTC
 liquid:
   error_mode: strict

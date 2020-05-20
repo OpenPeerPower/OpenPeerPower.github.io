@@ -5,7 +5,7 @@ require "stringex"
 ## -- Misc Configs -- ##
 public_dir      = "_site/"   # compiled site directory
 source_dir      = "."    # source file directory
-blog_index_dir  = 'source/blog'    # directory for your blog's index page (if you put your index in source/blog/index.html, set this to 'source/blog')
+blog_index_dir  = 'blog'    # directory for your blog's index page (if you put your index in source/blog/index.html, set this to 'source/blog')
 stash_dir       = "_stash"    # directory to stash posts for speedy generation
 components_dir  = "_components"    #  directory for component files
 posts_dir       = "_posts"    # directory for blog files
