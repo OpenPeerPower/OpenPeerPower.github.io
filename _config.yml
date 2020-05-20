@@ -16,7 +16,6 @@ safe: false
 # http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
 # Additionally, %o will give you the ordinal representation of the day
 date_format: "ordinal"
-remote_theme: matthiaslischka/jekyll-uno
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /atom.xml
@@ -34,6 +33,7 @@ code_dir: downloads/code
 category_dir: blog/categories
 
 markdown: CommonMark
+remote_theme: benbalter/retlab
 timezone: UTC
 liquid:
   error_mode: strict
@@ -90,11 +90,7 @@ facebook_like: true
 
 social:
   visible: false
-  facebook:
-    app_id: 338291289691179
 
-  twitter:
-    account: home_assistant
 
 # Open Peer Power release details
 current_major_version: 0
