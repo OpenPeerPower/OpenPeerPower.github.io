@@ -5,7 +5,6 @@
 .pygments-cache
 _site
 _stash
-stylesheets/screen.css
 .jekyll-cache/
 vendor
 node_modules
