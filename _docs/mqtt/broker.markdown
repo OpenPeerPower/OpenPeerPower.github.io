@@ -31,18 +31,6 @@ If you are running a Mosquitto instance on a different server with proper SSL en
 
 The Mosquitto project runs a [public broker](http://test.mosquitto.org). This is the easiest to set up, but there is no privacy as all messages are public. Use this only for testing purposes and not for real tracking of your devices or controlling your home.
 
-```yaml
-mqtt:
-  broker: test.mosquitto.org
-  port: 1883 or 8883
-
-  # Optional, replace port 1883 with following if you want encryption
-  # (doesn't really matter because broker is public)
-  port: 8883
-  # Download certificate from http://test.mosquitto.org/ssl/mosquitto.org.crt
-  certificate: /home/paulus/downloads/mosquitto.org.crt
-```
-
 ### CloudMQTT
 
 [CloudMQTT](https://www.cloudmqtt.com) is a hosted private MQTT instance that is free for up to 10 connected devices. This is enough to get started with for example [OwnTracks](/integrations/owntracks/) and give you a taste of what is possible.

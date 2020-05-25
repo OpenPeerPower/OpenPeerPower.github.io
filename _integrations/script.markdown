@@ -50,12 +50,6 @@ script: 
         example: 1
     sequence:
       # This is Open Peer Power Script Syntax
-      - event: LOGBOOK_ENTRY
-        event_data:
-          name: Paulus
-          message: is waking up
-          entity_id: device_tracker.paulus
-          domain: light
       - alias: Bedroom lights on
         service: light.turn_on
         data:

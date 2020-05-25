@@ -10,18 +10,6 @@ The trigger data made is available during [template](/docs/configuration/templat
 
 {% raw %}
 ```yaml
-# Example configuration.yaml entries
-automation:
-  trigger:
-    platform: state
-    entity_id: device_tracker.paulus
-  action:
-    service: notify.notify
-    data_template:
-      message: >
-        Paulus just changed from {{ trigger.from_state.state }}
-        to {{ trigger.to_state.state }}
-
 automation 2:
   trigger:
     platform: mqtt

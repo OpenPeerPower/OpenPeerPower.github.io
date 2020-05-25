@@ -16,15 +16,6 @@ The `mqtt_json` device tracker platform allows you to detect presence by monitor
 
 To use this device tracker in your installation, add the following to your `configuration.yaml` file:
 
-```yaml
-# Example configuration.yaml entry
-device_tracker:
-  - platform: mqtt_json
-    devices:
-      paulus_oneplus: location/paulus
-      annetherese_n4: location/annetherese
-```
-
 ## Usage
 
 This platform receives JSON formatted payloads containing GPS information, for example:

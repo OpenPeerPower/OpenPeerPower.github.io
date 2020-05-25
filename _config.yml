@@ -32,16 +32,11 @@ plugins_dir: plugins
 code_dir: downloads/code
 category_dir: blog/categories
 
-markdown: CommonMark
 timezone: UTC
 liquid:
   error_mode: strict
 
-commonmark:
-  options: ["SMART", "FOOTNOTES"]
-  extensions: ["strikethrough", "autolink", "table"]
-
-highlighter: none
+highlighter: rouge
 
 plugins:
   - jekyll-redirect-from

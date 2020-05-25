@@ -2,15 +2,6 @@ toc:
   - title: Help
     url: /help
 
-  - title: Website/Documentation
-    url: /developers/documentation
-
-  - title: Standards
-    url: /developers/documentation/standards
-
-  - title: Create a new page
-    url: /developers/documentation/create_page
-
   - title: Governance
     subfolderitems:
       - page: Contributor License Agreement

@@ -12,31 +12,9 @@ Unlike a trigger, which is always `or`, conditions are `and` by default - all co
 
 Test multiple conditions in one condition statement. Passes if all embedded conditions are valid.
 
-```yaml
-condition:
-  condition: and
-  conditions:
-    - condition: state
-      entity_id: 'device_tracker.paulus'
-      state: 'home'
-    - condition: numeric_state
-      entity_id: 'sensor.temperature'
-      below: 20
-```
-
 If you do not want to combine AND and OR conditions, you can list them sequentially.
 
 The following configuration works the same as the one listed above:
-
-```yaml
-condition:
-  - condition: state
-    entity_id: 'device_tracker.paulus'
-    state: 'home'
-  - condition: numeric_state
-    entity_id: 'sensor.temperature'
-    below: 20
-```
 
 Currently you need to format your conditions like this to be able to edit them using the [automations editor](/docs/automation/editor/).
 
@@ -44,39 +22,10 @@ Currently you need to format your conditions like this to be able to edit them u
 
 Test multiple conditions in one condition statement. Passes if any embedded condition is valid.
 
-```yaml
-condition:
-  condition: or
-  conditions:
-    - condition: state
-      entity_id: 'device_tracker.paulus'
-      state: 'home'
-    - condition: numeric_state
-      entity_id: 'sensor.temperature'
-      below: 20
-```
-
 ### MIXED AND and OR conditions
 
 Test multiple AND and OR conditions in one condition statement. Passes if any embedded condition is valid.
 This allows you to mix several AND and OR conditions together.
-
-```yaml
-condition:
-  condition: and
-  conditions:
-    - condition: state
-      entity_id: 'device_tracker.paulus'
-      state: 'home'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.weather_precip
-          state: 'rain'
-        - condition: numeric_state
-          entity_id: 'sensor.temperature'
-          below: 20
-```
 
 ### Numeric state condition
 
@@ -99,18 +48,6 @@ condition:
 ### State condition
 
 Tests if an entity is a specified state.
-
-```yaml
-condition:
-  condition: state
-  entity_id: device_tracker.paulus
-  state: 'not_home'
-  # optional: trigger only if state was this for last X time.
-  for:
-    hours: 1
-    minutes: 10
-    seconds: 5
-```
 
 ### Sun condition
 
@@ -248,13 +185,6 @@ A better weekday condition could be by using the [Workday Binary Sensor](/integr
 ### Zone condition
 
 Zone conditions test if an entity is in a certain zone. For zone automation to work, you need to have set up a device tracker platform that supports reporting GPS coordinates.
-
-```yaml
-condition:
-  condition: zone
-  entity_id: device_tracker.paulus
-  zone: zone.home
-```
 
 ### Examples
 

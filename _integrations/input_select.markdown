@@ -15,23 +15,6 @@ The `input_select` integration allows the user to define a list of values that c
 
 To enable this platform in your installation, add the following lines to your `configuration.yaml`:
 
-```yaml
-# Example configuration.yaml entry
-input_select:
-  who_cooks:
-    name: Who cooks today
-    options:
-      - Paulus
-      - Anne Therese
-    initial: Anne Therese
-    icon: mdi:panda
-  living_room_preset:
-    options:
-      - Visitors
-      - Visitors with kids
-      - Home Alone
-```
-
 <div class='note'>
 
 Because YAML defines [booleans](https://yaml.org/type/bool.html) as equivalent, any variations of 'On', 'Yes', 'Y', 'Off', 'No', or 'N'  (regardless of case) used as option names will be replaced by True and False unless they are defined in quotation marks.
@@ -58,47 +41,11 @@ This integration provides three services to modify the state of the `input_selec
 
 Specifying a target option in a [Scene](/integrations/scene/) is simple:
 
-```yaml
-# Example configuration.yaml entry
-scene:
-  - name: Example1
-    entities:
-      input_select.who_cooks: Paulus
-```
-
 The list of options can also be set in a [Scene](/integrations/scene). In that case, you also need to specify what the new state will be.
-
-```yaml
-# Example configuration.yaml entry
-scene:
-  - name: Example2
-    entities:
-      input_select.who_cooks:
-        options:
-          - Alice
-          - Bob
-          - Paulus
-        state: Bob
-```
-
 
 ## Automation Examples
 
 The following example shows the usage of the `input_select.select_option` service in an automation:
-
-```yaml
-# Example configuration.yaml entry
-automation:
-  - alias: example automation
-    trigger:
-      platform: event
-      event_type: MY_CUSTOM_EVENT
-    action:
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.who_cooks
-          option: Paulus
-```
 
 To dynamically set the `input_select` options you can call `input_select.set_options`. The following example can be used in an automation rule:
 

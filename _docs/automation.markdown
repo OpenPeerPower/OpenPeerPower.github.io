@@ -5,19 +5,9 @@ description: "Steps to help you get automation setup in Open Peer Power."
 
  Open Peer Power offers a wide range of automation configurations. In this section, we'll try to guide you through all the different possibilities and options. Besides this documentation, there are also a couple of people who have made their automations [publicly available](/cookbook/#example-configurationyaml).
 
-### Automation basics
-
-Before you can go ahead and create your own automations, it's important to learn the basics. To explore these, let's have a look at the following example power management rule:
-
-```text
-(trigger)    When Paulus arrives home
-(condition)  and it is after sunset:
-(action)     Turn the lights in the living room on
-```
-
 The example consists of three different parts: a [trigger](/docs/automation/trigger/), a [condition](/docs/automation/condition/) and an [action](/docs/automation/action/).
 
-The first line is the **trigger** of the automation rule. Triggers describe events that should trigger the automation rule. In this case, it is a person arriving home, which can be observed in Open Peer Power by observing the state of Paulus changing from 'not_home' to 'home'.
+The first line is the **trigger** of the automation rule. Triggers describe events that should trigger the automation rule. In this case, it is a person arriving home, which can be observed in Open Peer Power by observing the state of changing from 'not_home' to 'home'.
 
 The second line is the **condition**. Conditions are optional tests that can limit an automation rule to only work in your specific use cases. A condition will test against the current state of the system. This includes the current time, devices, people and other things like the sun. In this case, we only want to act when the sun has set.
 

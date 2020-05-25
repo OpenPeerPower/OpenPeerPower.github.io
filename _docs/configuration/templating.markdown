@@ -29,35 +29,11 @@ The frontend has a template editor tool to help develop and debug templates. Cli
 
 Templates can get big pretty fast. To keep a clear overview, consider using YAML multiline strings to define your templates:
 
-{% raw %}
-```yaml
-script:
-  msg_who_is_home:
-    sequence:
-      - service: notify.notify
-        data_template:
-          message: >
-            {% if is_state('device_tracker.paulus', 'home') %}
-              Ha, Paulus is home!
-            {% else %}
-              Paulus is at {{ states('device_tracker.paulus') }}.
-            {% endif %}
-```
-{% endraw %}
-
 ## Open Peer Power template extensions
 
 Extensions allow templates to access all of the Open Peer Power specific states and adds other convenience functions and filters.
 
 ### States
-
-- Iterating `states` will yield each state sorted alphabetically by entity ID.
-- Iterating `states.domain` will yield each state of that domain sorted alphabetically by entity ID.
-- `states.sensor.temperature` returns the state object for `sensor.temperature` (avoid when possible, see note below).
-- `states('device_tracker.paulus')` will return the state string (not the object) of the given entity or `unknown` if it doesn't exist.
-- `is_state('device_tracker.paulus', 'home')` will test if the given entity is the specified state.
-- `state_attr('device_tracker.paulus', 'battery')` will return the value of the attribute or None if it doesn't exist.
-- `is_state_attr('device_tracker.paulus', 'battery', 40)` will test if the given entity attribute is the specified state (in this case, a numeric value). Note that the attribute can be `None` and you want to check if it is `None`, you need to use `state_attr('sensor.my_sensor', 'attr') == None`. 
 
 <div class='note warning'>
 
@@ -70,13 +46,6 @@ Besides the normal [state object methods and properties](/topics/state_object/),
 #### States examples
 
 The next two statements result in the same value if the state exists. The second one will result in an error if the state does not exist.
-
-{% raw %}
-```text
-{{ states('device_tracker.paulus') }}
-{{ states.device_tracker.paulus.state }}
-```
-{% endraw %}
 
 Print out a list of all the sensor states:
 
@@ -92,12 +61,6 @@ Other state examples:
 {% raw %}
 
 ```text
-{% if is_state('device_tracker.paulus', 'home') %}
-  Ha, Paulus is home!
-{% else %}
-  Paulus is at {{ states('device_tracker.paulus') }}.
-{% endif %}
-
 {{ states('sensor.temperature') | float + 1 }}
 
 {{ (states('sensor.temperature') | float * 10) | round(2) }}
@@ -116,56 +79,13 @@ Other state examples:
 
 You can print an attribute with `state_attr` if state is defined.
 
-#### Attributes examples
-
-{% raw %}
-```text
-{% if states.device_tracker.paulus %}
-  {{ state_attr('device_tracker.paulus', 'battery') }}
-{% else %}
-  ??
-{% endif %}
-```
-{% endraw %}
-
-With strings:
-
-{% raw %}
-```text
-{% set tracker_name = "paulus"%}
-
-{% if states("device_tracker." + tracker_name) != "unknown" %}
-  {{ state_attr("device_tracker." + tracker_name, "battery")}}
-{% else %}
-  ??
-{% endif %}
-```
-{% endraw %}
-
 ### Working with Groups
 
 The `expand` function and filter can be used to sort entities and expand groups. It outputs a sorted array of entities with no duplicates.
 
 #### Expand examples
 
-{% raw %}
-```text
-{% for tracker in expand('device_tracker.paulus', 'group.child_trackers') %}
-  {{ state_attr(tracker, 'battery') }}
-  {%- if not loop.last %}, {% endif -%}
-{% endfor %}
-```
-{% endraw %}
-
 The same thing can also be expressed as a filter:
-
-{% raw %}
-```text
-{{ ['device_tracker.paulus', 'group.child_trackers'] | expand 
-  | selectattr("attributes.battery", 'defined')
-  | join(', ', attribute="attributes.battery") }}
-```
-{% endraw %}
 
 ### Time
 
@@ -244,18 +164,6 @@ The temperature is 25°C
 #### Distance examples
 
 If only one location is passed in, Open Peer Power will measure the distance from home.
-
-{% raw %}
-```text
-Using Lat Lng coordinates: {{ distance(123.45, 123.45) }}
-
-Using State: {{ distance(states.device_tracker.paulus) }}
-
-These can also be combined in any combination:
-{{ distance(123.45, 123.45, 'device_tracker.paulus') }}
-{{ distance('device_tracker.anne_therese', 'device_tracker.paulus') }}
-```
-{% endraw %}
 
 #### Closest examples
 

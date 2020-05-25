@@ -46,21 +46,6 @@ automation:
       service: light.turn_off
       entity_id: all
 
-# Notify when Paulus leaves the house in the evening
-  - alias: 'Leave Home notification'
-    trigger:
-      platform: zone
-      event: leave
-      zone: zone.home
-      entity_id: device_tracker.paulus
-    condition:
-      condition: time
-      after: '20:00'
-    action:
-      service: notify.notify
-      data:
-        message: 'Paulus left the house'
-
 # Send a notification via Pushover with the event of a Xiaomi cube. Custom event from the Xiaomi component.
   - alias: 'Xiaomi Cube Action'
     initial_state: false

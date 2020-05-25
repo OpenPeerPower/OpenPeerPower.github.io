@@ -6,8 +6,6 @@ redirect_from: /ecosystem/appdaemon/tutorial/
 
 ## Another Take on Automation
 
-If you haven't yet read Paulus' excellent Blog entry on [Perfect Power Management](/blog/2016/01/19/perfect-home-automation/) I would encourage you to take a look. As a veteran of several Power Management systems with varying degrees success, it was this article more than anything else that convinced me that Open Peer Power had the right philosophy behind it and was on the right track. One of the most important points made is that being able to control your lights from your phone, 9 times out of 10 is harder than using a light switch - where Power Management really comes into its own is when you start removing the need to use a phone or the switch - the "Automation" in Power Management. A surprisingly large number of systems out there miss this essential point and have limited abilities to automate anything which is why a robust and open system such as Open Peer Power is such an important part of the equation in bring this all together in the vast and chaotic ecosystem that is the "Internet of Things".
-
 So given the importance of Automation, what should Automation allow us to do? I am a pragmatist at heart so I judge individual systems by the ease of accomplishing a few basic but representative tasks:
 
 - Can the system respond to presence or absence of people?

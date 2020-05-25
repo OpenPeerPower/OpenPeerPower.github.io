@@ -25,13 +25,6 @@ topic: open-peer-power/light/1/command
 payload: on
 ```
 
-{% raw %}
-```yaml
-topic: open-peer-power/light/1/state
-payload_template: {{ states('device_tracker.paulus') }}
-```
-{% endraw %}
-
 `payload` must be a string. If you want to send JSON then you need to format/escape it properly. Like:
 
 ```yaml

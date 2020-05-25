@@ -42,17 +42,6 @@ Scripts may also use a shortcut syntax for activating scenes instead of calling 
 - scene: scene.morning_living_room
 ```
 
-### Test a Condition
-
-While executing a script you can add a condition to stop further execution. When a condition does not return `true`, the script will stop executing. There are many different conditions which are documented at the [conditions page].
-
-```yaml
-# If paulus is home, continue to execute the script below these lines
-- condition: state
-  entity_id: device_tracker.paulus
-  state: 'home'
-```
-
 ### Delay
 
 Delays are useful for temporarily suspending your script and start it at a later moment. We support different syntaxes for a delay as shown below.
@@ -148,15 +137,6 @@ Without `continue_on_timeout` the script will always continue.
 ### Fire an Event
 
 This action allows you to fire an event. Events can be used for many things. It could trigger an automation or indicate to another integration that something is happening. For instance, in the below example it is used to create an entry in the logbook.
-
-```yaml
-- event: LOGBOOK_ENTRY
-  event_data:
-    name: Paulus
-    message: is waking up
-    entity_id: device_tracker.paulus
-    domain: light
-```
 
 You can also use event_data_template to fire an event with custom data. This could be used to pass data to another script awaiting
 an event trigger.

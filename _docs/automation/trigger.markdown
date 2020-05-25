@@ -137,37 +137,9 @@ The values you see in your overview will often not be the same as the actual sta
 
 </div>
 
-```yaml
-automation:
-  trigger:
-    platform: state
-    entity_id: device_tracker.paulus, device_tracker.anne_therese
-    # Optional
-    from: "not_home"
-    # Optional
-    to: "home"
-
-    # If given, will trigger when state has been the to state for X time.
-    for: "01:10:05"
-```
-
 You can also use templates in the `for` option.
 
 {% raw %}
-
-```yaml
-automation:
-  trigger:
-    platform: state
-    entity_id: device_tracker.paulus, device_tracker.anne_therese
-    to: "home"
-    for:
-      minutes: "{{ states('input_number.lock_min')|int }}"
-      seconds: "{{ states('input_number.lock_sec')|int }}"
-  action:
-    service: lock.lock
-    entity_id: lock.my_place
-```
 
 {% endraw %}
 
@@ -240,39 +212,8 @@ Although the actual amount of light depends on weather, topography and land cove
 
 A very thorough explanation of this is available in the Wikipedia article about the [Twilight](https://en.wikipedia.org/wiki/Twilight).
 
-### Template trigger
-
-Template triggers work by evaluating a [template](/docs/configuration/templating/) on every state change for all of the recognized entities. The trigger will fire if the state change caused the template to render 'true'. This is achieved by having the template result in a true boolean expression (`{% raw %}{{ is_state('device_tracker.paulus', 'home') }}{% endraw %}`) or by having the template render 'true' (example below). Being a boolean expression the template must evaluate to false (or anything other than true) before the trigger will fire again.
-With template triggers you can also evaluate attribute changes by using is_state_attr (`{% raw %}{{ is_state_attr('climate.living_room', 'away_mode', 'off') }}{% endraw %}`)
-
-{% raw %}
-
-```yaml
-automation:
-  trigger:
-    platform: template
-    value_template: "{% if is_state('device_tracker.paulus', 'home') %}true{% endif %}"
-
-    # If given, will trigger when template remains true for X time.
-    for: "00:01:00"
-```
-
-{% endraw %}
 
 You can also use templates in the `for` option.
-
-{% raw %}
-
-```yaml
-automation:
-  trigger:
-    platform: template
-    value_template: "{{ is_state('device_tracker.paulus', 'home') }}"
-    for:
-      minutes: "{{ states('input_number.minutes')|int(0) }}"
-```
-
-{% endraw %}
 
 The `for` template(s) will be evaluated when the `value_template` becomes `true`.
 
@@ -355,16 +296,6 @@ You could run the above automation by sending a POST HTTP request to `http://you
 ### Zone trigger
 
 Zone trigger fires when an entity is entering or leaving the zone. For zone automation to work, you need to have setup a device tracker platform that supports reporting GPS coordinates. This includes [GPS Logger](/integrations/gpslogger/), the [OwnTracks platform](/integrations/owntracks/) and the [iCloud platform](/integrations/icloud/).
-
-```yaml
-automation:
-  trigger:
-    platform: zone
-    entity_id: device_tracker.paulus
-    zone: zone.home
-    # Event is either enter or leave
-    event: enter # or "leave"
-```
 
 ### Geolocation trigger
 
