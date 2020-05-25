@@ -17,8 +17,6 @@ There are 3 alternatives, when using Open Peer Power on Synology NAS:
 
 Option 1 is described on the [Docker installation page](/docs/installation/docker/).
 
-Option 3 uses the Synology Based Virtual Machine Manager. You can import the VDI image to be found at the [Open Peer Power installation page](/hassio/installation/). Download the image and add it to the image store. The go to "Virtual Machine" in the interface and create a new VM with the image you just added.
-
 The main benefit from this method is that you can assign Open Peer Power its own IP number, so there is no risk regarding TCP/UDP port conflicts. USB dongles an be connected to the VM without the need to install a driver in DSM.
 
 Option 2 is described below.

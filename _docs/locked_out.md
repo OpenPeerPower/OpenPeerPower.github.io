@@ -6,19 +6,6 @@ description: "Options for regaining access"
 The sections below deal with recovering from a situation where you are not able to sign in,
 or need to recover your data.
 
-## Forgot Password
-
-### Open Peer Power (including Supervised)
-
-If you are still logged in to the web interface with your user, then you are in luck. Add a new user as an administrator and give the new user a password you can remember. Then log out, and log in with this new user. You may then delete the old user account. But this way, your configuration will remain, and you don't have to do a new onboarding process.
-
-If you’ve forgotten your user, then deleting the files mentioned above will be necessary to start a new onboarding process.
-
-If you know the user, but not the password and you can access the [ Open Peer Power console](https://www.openpeerpower.io/hassio/commandline/) and use the command below:
-
-Connect a keyboard and monitor to your device.
-
-`auth reset --username existing_user --password new_password`
 
 ### Open Peer Power Core
 
@@ -27,7 +14,6 @@ While you should hopefully be storing your passwords in a password manager, if y
 - `auth`
 - `auth_provider.openpeerpower`
 - `onboarding`
-- `hassio`
 - `cloud`
 
 ## Recovering Data for Open Peer Power (including Supervised)

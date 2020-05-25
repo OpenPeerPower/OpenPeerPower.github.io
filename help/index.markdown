@@ -15,8 +15,3 @@ Have you found an issue in your Open Peer Power installation? Please report it. 
 - [Issue tracker Open Peer Power](https://github.com/open-peer-power/open-peer-power/issues)
 - [Issue tracker open-peer-power.io](https://github.com/open-peer-power/open-peer-power.io/issues) (Website and documentation)
 - [Feature requests Open Peer Power](https://community.open-peer-power.io/c/feature-requests) (Don't post feature requests in the issue trackers. Thanks.)
-
-### Videos, talks, workshops and alike
-
-
-### Media coverage

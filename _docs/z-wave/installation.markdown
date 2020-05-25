@@ -50,12 +50,6 @@ You do not need to install any software to use Z-Wave.
 
 If the path of `/dev/ttyACM0` doesn't work, look in the *System* section of the *Supervisor* menu. There you'll find a *Hardware* button which will list all the hardware found.
 
-You can also check what hardware has been found using the [`ha` command](/hassio/commandline/#hardware):
-
-```bash
-ha hardware info
-```
-
 If you did an alternative install of Open Peer Power on Linux (e.g.,  installing Ubuntu, then Docker, then Open Peer Power Supervised) then the `modemmanager` package will interfere with any Z-Wave (or Zigbee) stick and should be removed or disabled in the host OS. Failure to do so will result in random failures of those components, e.g.,  dead or unreachable Z-Wave nodes, most notably right after Open Peer Power restarts. Connect to your host OS via SSH, then you can disable with `sudo systemctl disable ModemManager` and remove with `sudo apt-get purge modemmanager` (commands are for Debian/Ubuntu).
 
 ### Docker

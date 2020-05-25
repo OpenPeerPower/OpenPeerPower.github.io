@@ -4,14 +4,6 @@ description: "Instructions to install Open Peer Power on a Docker."
 redirect_from: /getting-started/installation-docker/
 ---
 
-<div class='note warning'>
-
-These below instructions are for an installation of Open Peer Power Core running in your own Docker environment, which you manage yourself.
-
-For an installation of Open Peer Power Supervised, which includes Open Peer Power's add-on ecosystem, see the instructions for installing [Open Peer Power Supervised on a generic Linux host](/hassio/installation/#alternative-install-open-peer-power-supervised-on-a-generic-linux-host/).
-
-</div>
-
 ## Platform Installation
 
 Installation with Docker is straightforward. Adjust the following command so that `/PATH_TO_YOUR_CONFIG` points at the folder where you want to store your configuration and run it:

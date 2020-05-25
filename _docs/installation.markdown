@@ -45,17 +45,6 @@ NUC i7/i9 | Pure power, you should not have *any* performance issues
 
 These install options are fully supported by Open Peer Power's documentation. For example, if an integration requires that you install something to make it work on one of these methods then the integration page will document the steps required.
 
-<div class='note'>
-
-The only installation methods that allow you to use Open Peer Power Add-ons is using the Open Peer Power image and [manual Supervised installer](/hassio/installation/#alternative-install-open-peer-power-supervised-on-a-generic-linux-host). All other methods only install the base Open Peer Power packages, however the software from the add-ons may still usually be installed manually like any other program.
-
-</div>
-
-**Method**|**You have**|**Recommended for**
-:-----|:-----|:-----
-[ Open Peer Power](/hassio/installation/)|Raspberry Pi<br>VM|Anybody
-[Docker](/docs/installation/docker/)|Docker|Anybody already running Docker
-
 ## Alternative installs
 
 If you use these install methods, we assume that you know how to manage and administer the operating system you're using. Due to the range of platforms on which these install methods can be used, integration documentation may only tell you what you have to install, not how to install it.
@@ -111,11 +100,5 @@ These guides are provided as-is. Some of these install methods are more limited 
       <img src='/images/supported_brands/freenas.png' />
     </div>
     <div class='title'>FreeNAS</div>
-  </a>
-  <a class='option-card' href='/hassio/installation/#alternative-install-open-peer-power-supervised-on-a-generic-linux-host'>
-    <div class='img-container'>
-      <img src='https://brands.openpeerpower.io/openpeerpower/icon.png' />
-    </div>
-    <div class='title'> Open Peer Power Supervised <br> on generic Linux server</div>
   </a>
 </div>

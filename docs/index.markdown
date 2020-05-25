@@ -6,12 +6,6 @@ description: "Documentation for Open Peer Power"
 The documentation covers beginner to advanced topics around the installation, setup, configuration, and usage of Open Peer Power.
 
 <div class="text-center hass-option-cards" markdown="0">
-  <a class='option-card' href='/hassio/'>
-    <div class='img-container'>
-      <img src='https://brands.openpeerpower.io/openpeerpower/icon.png' />
-    </div>
-    <div class='title'>Installation</div>
-  </a>
   <a class='option-card' href='/docs/configuration/'>
     <div class='img-container'>
       <img src='/images/supported_brands/pencil.png' />

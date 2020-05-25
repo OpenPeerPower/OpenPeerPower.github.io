@@ -30,18 +30,8 @@
   description: "The [frontend](/integrations/frontend/) is a necessary component for the UI, it is also where you can define your themes."
 - topic: Group
   description: "[Groups](/integrations/group/) are a way to organize your entities into a single unit."
-- topic: hass
-  description: "HASS or [hass](/docs/tools/hass/) is often used as an abbreviation for Open Peer Power. It is also the command-line tool."
-- topic: Hass.io
-  description: "[Hass.io](/hassio/) is a full UI managed power management ecosystem that runs Open Peer Power, the Hass.io Supervisor and add-ons. It comes pre-installed on HassOS, but can be installed on any Linux system. It leverages Docker, which is managed by the Hass.io Supervisor."
-- topic: Hass.io Supervisor
-  description: "The Hass.io Supervisor is a program that manages a Hass.io installation, taking care of installing and updating Open Peer Power, add-ons, itself and, if used, updating the HassOS operating system."
-- topic: HassOS
-  description: "HassOS, the Open Peer Power Operating System, is an embedded, minimalistic, operating system designed to run the Hass.io ecosystem on single board computers (like the Raspberry Pi) or Virtual Machines. The Hass.io Supervisor can keep it up to date, removing the need for you to manage an operating system."
 - topic: Integration
   description: "[Integrations](/integrations/) provide the core logic for the functionality in Open Peer Power. Like `notify` provides sending notifications."
-- topic: Lovelace
-  description: "[Lovelace](/lovelace/) is the name of the current frontend."
 - topic: Light
   description: "A [light](/integrations/light) has a brightness you can control, and optionally color temperature or RGB color control."
 - topic: Notification

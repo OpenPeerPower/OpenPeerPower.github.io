@@ -4,19 +4,7 @@ description: "Step to update Open Peer Power."
 redirect_from: /getting-started/updating/
 ---
 
-<div class='note warning'>
-
-The upgrade process differs depending on the installation you have, so please review the documentation that is specific to your install: [Open Peer Power](/hassio/) or [Open Peer Power Core](/docs/installation/virtualenv/#upgrading-open-peer-power).
-
-</div>
-
 Check what's new in the latest version and potentially impacts your system in the [Open Peer Power release notes](https://github.com/OpenPeerPower/Open-Peer-Power/releases). It is good practice to review these release notes and pay close attention to the **Breaking Changes** that are listed there. If you haven't done an update for a while, you should also check previous release notes as they can also contain relevant **Breaking Changes**. These **Breaking Changes** may require configuration updates for your components. If you missed this and Open Peer Power refuses to start, check the log file in the [configuration](/docs/configuration/) directory, e.g., `.openpeerpower/open-peer-power.log`, for details about broken components.
-
-<div class='note'>
-
-To avoid permission errors, the upgrade must be run as the same user as was used during the initial installation, again review the documentation specific to your install [Open Peer Power](/hassio/) or [Open Peer Power Core](/docs/installation/virtualenv).
-
-</div>
 
 The default way to update Open Peer Power to the latest release, when available, is:
 
