@@ -1,5 +1,5 @@
 ---
-title: "Onboarding Open Peer Power"
+title: "Provisioning Open Peer Power"
 description: "Instructions to get Open Peer Power configured."
 ---
 

@@ -170,7 +170,6 @@ services:
     # must be image for your platform, this is the rpi3 variant
     image: openpeerpower/raspberrypi3-openpeerpower
     volumes:
-      - <DIRECTORY HOLDING HOME ASSISTANT CONFIG FILES>:/config
       - /etc/localtime:/etc/localtime:ro
     devices:
       # your usb device forwarding to the docker image

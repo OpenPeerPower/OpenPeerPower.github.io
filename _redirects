@@ -1567,7 +1567,7 @@
 /components/octoprint /integrations/octoprint
 /components/oem /integrations/oem
 /components/ohmconnect /integrations/ohmconnect
-/components/onboarding /integrations/onboarding
+/components/provisioning /integrations/provisioning
 /components/onewire /integrations/onewire
 /components/onkyo /integrations/onkyo
 /components/onvif /integrations/onvif

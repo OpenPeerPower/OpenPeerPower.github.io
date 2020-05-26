@@ -123,7 +123,7 @@ openpeerpower:
     - type: openpeerpower
 ```
 
-Assuming you have only the owner created though onboarding process, no other users ever created. The above example configuration will allow you directly access Open Peer Power main page if you access from your internal network (192.168.0.0/24) or from localhost (127.0.0.1). If you get a login abort error, then you can change to use Open Peer Power Authentication Provider to login, if you access your Open Peer Power instance from outside network.
+Assuming you have only the owner created though provisioning process, no other users ever created. The above example configuration will allow you directly access Open Peer Power main page if you access from your internal network (192.168.0.0/24) or from localhost (127.0.0.1). If you get a login abort error, then you can change to use Open Peer Power Authentication Provider to login, if you access your Open Peer Power instance from outside network.
 
 ### Command Line
 

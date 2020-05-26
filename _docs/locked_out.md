@@ -13,7 +13,7 @@ While you should hopefully be storing your passwords in a password manager, if y
 
 - `auth`
 - `auth_provider.openpeerpower`
-- `onboarding`
+- `provisioning`
 - `cloud`
 
 ## Recovering Data for Open Peer Power (including Supervised)

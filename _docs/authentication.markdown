@@ -81,7 +81,7 @@ While you should hopefully be storing your passwords in a password manager, if y
 
 - `auth`
 - `auth_provider.openpeerpower`
-- `onboarding`
+- `provisioning`
 - `cloud`
 
 When you start Open Peer Power next, you'll be required to set up authentication again.

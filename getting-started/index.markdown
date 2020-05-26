@@ -65,6 +65,6 @@ The Raspberry Pi 4 Model B is a good, affordable option for the power management
 
 [the examples]: https://github.com/OpenPeerPower/hassos/blob/dev/Documentation/network.md
 
-### [Next step: Onboarding &raquo;][next-step]
+### [Next step: Provisioning &raquo;][next-step]
 
-[next-step]: /getting-started/onboarding/
+[next-step]: /getting-started/provisioning/

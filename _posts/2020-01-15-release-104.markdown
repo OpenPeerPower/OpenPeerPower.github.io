@@ -501,7 +501,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 - Treat BaseException as over-general ([@scop] - [#29573]) ([whois docs])
 - Move imports to top for zha ([@springstan] - [#29555]) ([zha docs])
 - Move imports to top for openuv ([@springstan] - [#29541]) ([openuv docs])
-- Move imports to top for onboarding ([@springstan] - [#29542]) ([onboarding docs])
+- Move imports to top for provisioning ([@springstan] - [#29542]) ([provisioning docs])
 - Update Travis dist to bionic ([@scop] - [#29575])
 - Upgrade pyyaml to 5.2.0 ([@fabaff] - [#29586])
 - Add service to reboot the Freebox ([@SNoof85] - [#29525]) ([freebox docs])

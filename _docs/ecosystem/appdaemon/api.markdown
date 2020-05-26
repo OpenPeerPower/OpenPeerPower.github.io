@@ -392,10 +392,6 @@ For example:
 
 #### User Arguments
 
-Any callback has the ability to allow the App creator to pass through arbitrary keyword arguments that will be presented to the callback when it is run. The arguments are added after the positional parameters just like the constraints. The only restriction is that they cannot be the same as any constraint name for obvious reasons. For example, to pass the parameter `arg1 = "home assistant"` through to a callback you would register a callback as follows:
-
-`self.listen_state(self.motion, "binary_sensor.drive", arg1="home assistant")`
-
 Then in the callback you could use it as follows:
 
 ```python
