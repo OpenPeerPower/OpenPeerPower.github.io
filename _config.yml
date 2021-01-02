@@ -120,6 +120,11 @@ defaults:
       footer: true
       sharing: true
       sidebar: true
+  # Defaults for wheels static files
+  - scope:
+      path: "wheels"
+    values:
+      wheel: true
 
 # Support for files Jekyll will normally exclude
 include:
