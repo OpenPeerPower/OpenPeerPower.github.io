@@ -1,0 +1,14 @@
+docs:
+
+- title: Introduction
+  url: cloud
+
+- title: Amazon Alexa
+  url: cloud/alexa
+
+- title: Google Assistant
+  url: cloud/google_assistant
+
+- title: Troubleshooting
+  url: cloud/troubleshooting
+  

@@ -1,0 +1,13 @@
+<section class="aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">About Open Peer Power</h1>
+  <ul class="divided sidebar-menu">
+    <li>
+      The Open Peer Power Cloud is a cloud-based service provided to supporters of the Open Peer Power project.
+    </li>
+     {% for item in site.data.cloud_navigation.docs %}
+        <li class="{% if item.url == page.url %}active{% endif %}">
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </li>
+     {% endfor %}
+  </ul>
+</div>

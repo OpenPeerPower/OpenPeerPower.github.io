@@ -3,13 +3,12 @@
 .sass-cache
 .gist-cache
 .pygments-cache
-public
-source/_stash
-source/stylesheets/screen.css
-source/.jekyll-cache/
+_site
+_stash
+.jekyll-cache/
 vendor
 node_modules
-source/.jekyll-metadata
+.jekyll-metadata
 *.iml
 .idea/
 .vscode/*
@@ -17,4 +16,3 @@ source/.jekyll-metadata
 !.vscode/extensions.json
 !.vscode/tasks.json
 *.suo
-tags*

@@ -9,6 +9,7 @@ subtitle: Open source home automation that puts local control and privacy first.
 author: Open Peer Power
 simple_search: https://www.google.com/search
 description: Open source home automation that puts local control and privacy first.
+safe: false
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -27,26 +28,20 @@ email:
 # ----------------------- #
 
 permalink: /blog/:year/:month/:day/:title/
-source: source
-destination: public/
 plugins_dir: plugins
 code_dir: downloads/code
 category_dir: blog/categories
 
-markdown: CommonMark
 timezone: UTC
 liquid:
   error_mode: strict
 
-commonmark:
-  options: ["SMART", "FOOTNOTES", "UNSAFE"]
-  extensions: ["strikethrough", "autolink", "table"]
-
-highlighter: none
+highlighter: rouge
 
 plugins:
   - jekyll-redirect-from
   - jekyll-time-to-read
+  
 
 paginate: 10 # Posts per page on the blog index
 paginate_path: "blog/posts/:num" # Directory base for pagination URLs eg. /posts/2/
@@ -73,8 +68,6 @@ collections:
     output: true
   faq:
     output: true
-  lovelace:
-    output: true
 
 # ----------------------- #
 #   3rd Party Settings    #
@@ -92,15 +85,11 @@ facebook_like: true
 
 social:
   visible: false
-  facebook:
-    app_id: 338291289691179
 
-  twitter:
-    account: home_assistant
 
 # Open Peer Power release details
 current_major_version: 0
-current_minor_version: 108
+current_minor_version: 1
 current_patch_version: 0
 date_released: 2020-04-08
 

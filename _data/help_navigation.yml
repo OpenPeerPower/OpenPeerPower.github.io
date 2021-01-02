@@ -1,0 +1,17 @@
+toc:
+  - title: Help
+    url: /help
+
+  - title: Governance
+    subfolderitems:
+      - page: Contributor License Agreement
+        url: /developers/cla
+      - page: Privacy Policy
+        url: /privacy
+      - page: Terms of Service
+        url: /tos
+      - page: Code of Conduct
+        url: /code_of_conduct
+      - page: License
+        url: /developers/license
+      

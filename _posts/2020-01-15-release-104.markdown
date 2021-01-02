@@ -1,0 +1,882 @@
+---
+layout: post
+title: "0.104: Sentry, Signal Messenger, IntesisHome, Sure Petcare, KEF"
+description: "Starting this new year with a packed release! Improved entity loading on startup and multi-select entities, ability to ignore a discovered device."
+date: 2020-01-15 00:00:00
+date_formatted: "January 15, 2020"
+author: Franck Nijhof
+author_twitter: frenck
+comments: true
+categories: Release-Notes
+og_image: /images/blog/2020-01-0.104/components.png
+---
+
+<a href='/integrations/#version/0.104'><img src='/images/blog/2020-01-0.104/components.png' style='border: 0;box-shadow: none;'></a>
+
+The first release of the new decade! Happy New Year!
+
+We are starting this new year with a packed release! So let us dive in!
+
+- [Improved entity handling on startup](/blog/2020/01/15/release-104/#improved-entity-handling-on-startup)
+- [Ignore discovered devices & services](/blog/2020/01/15/release-104/#ignore-discovered-devices--services)
+- [Reload all the input things & bye generated groups](/blog/2020/01/15/release-104/#reload-all-the-input-things--bye-generated-groups)
+- [Multi-select entity management](/blog/2020/01/15/release-104/#multi-select-entity-management)
+- [ZHA configuration panel improvements](/blog/2020/01/15/release-104/#zha-configuration-panel-improvements)
+- [In other news](/blog/2020/01/15/release-104/#in-other-news)
+- [New Integrations](/blog/2020/01/15/release-104/#new-integrations)
+- [New Platforms](/blog/2020/01/15/release-104/#new-platforms)
+- [Breaking Changes](/blog/2020/01/15/release-104/#breaking-changes)
+- [Beta Fixes](/blog/2020/01/15/release-104/#beta-fixes)
+- [All changes](/blog/2020/01/15/release-104/#all-changes)
+
+## Improved entity handling on startup
+
+We are now restoring all entities, stored in the registry,
+on Open Peer Power startup.
+
+During the startup of Open Peer Power, all your configured integrations are
+loaded. Each of those integrations results in one or more devices
+and entities. However, there was a catch!
+
+The loading of some integrations could take a while, which caused some entities
+not to be available immediately. Sometimes, this affected multiple things, like
+missing devices in HomeKit/Google/Alexa or those big red boxes in our UI. We are sure, at some point, we've all experienced that.
+
+As of this release, all these entities, if registered in our entity registry,
+will be restored as "unavailable". That allows other parts of our system to use
+them immediately, solving a lot of common issues during startup.
+
+These restored entities can be differentiated from normal "unavailable" entities
+by an additional state attribute added to those entities: "restored".
+
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/remove-entity.png' alt='Screenshot of a removing an unavailable entity'></a>
+Screenshot of a removing an unavailable entity.
+</p>
+
+As a result, entities will no longer "disappear", so restored and unavailable
+entities are removable, as shown in the screenshot above. Please note that,
+if an integration provides an unavailable entity, the providing integration
+needs to be removed first, or else, those entities can not be deleted.
+
+## Ignore discovered devices & services
+
+Got that one device that gets discovered over and over again?
+
+It is now possible to ignore a specific discovered device with a single click!
+
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/ignore-discovery.png' alt='Screenshot of a discovered Hue bridge'></a>
+Screenshot of a discovered Hue bridge.
+</p>
+
+It requires the integration to be updated to support this. For this release,
+the Hue, Axis, deCONZ, WLED and HomeKit integrations are updated to support
+this new feature.
+
+## Reload all the input things & bye generated groups
+
+All [`input_*` integrations](/integrations/#search/input) now have a `reload`
+service to reload your YAML configuration for these integrations, without
+the need to restart Open Peer Power.
+
+Furthermore, time to say bye-bye, to all generated entity groups
+(`group.all_*`). Chances are, you have never heard of those because they were
+hidden. However, if you rely on those groups for your automations, you
+need to adjust those automations.
+Check out the [breaking changes section](#breaking-changes) for more information.
+
+## Multi-select entity management
+
+Entity management has never been easier; It now allows for changing multiple
+entities at once. Select multiple entities and remove, enable or disable them
+with one click.
+
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/entities-multi-select.png' alt='Screenshot of the entities configuration page with multi selection'></a>
+Screenshot of the entities configuration page with multi selection.
+</p>
+
+## ZHA configuration panel improvements
+
+[@dmulcahey][@dmulcahey] did a lot of work on the ZHA config panel this release.
+
+The navigation for the ZHA configuration panel has been redesigned to provide
+a better user experience on mobile and desktop.
+
+As part of the redesign, full Zigbee group management has been added, allowing
+you to create and manage Zigbee groups right from the UI.
+
+<p class='img'>
+<img src='/images/blog/2020-01-0.104/zha-config-panel.png' alt='Screenshot of the ZHA configuration panel'></a>
+Screenshot of the ZHA configuration panel.
+</p>
+
+In a future releases, the ability to bind devices directly to groups,
+will be added as well.
+
+## In other news
+
+### Meanwhile, HassOS 3.8 got released!
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">HassOS Release-3 build 8 (Stable) released today. Changelog: <a href="https://t.co/kXOXNPldJF">https://t.co/kXOXNPldJF</a> - Next we start the first 4.0 Beta builds include the N2 support and Linux LT 5.4</p>&mdash; Pascal Vizeli (@pvizeli) <a href="https://twitter.com/pvizeli/status/1216668319396368384?ref_src=twsrc%5Etfw">January 13, 2020</a>
+</blockquote>
+
+Besides the release of HassOS 3.8, the first beta version of HassOS 4.0 is
+now available as well. This beta release adds support for
+[Hardkernel's ODROID-N2](https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram/)!
+
+The [ODROID-N2](https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram/)
+is a great and powerful alternative for the Raspberry Pi.
+
+## New Integrations
+
+- Add Elgato Key Light integration ([@frenck] - [#29592]) ([elgato docs]) (new-integration)
+- Add IntesisHome Climate Platform ([@jnimmo] - [#25364]) ([intesishome docs]) (new-integration)
+- Add Signal Messenger integration ([@bbernhard] - [#28537]) ([signalmessenger docs]) (new-integration)
+- Revert Tahoma removal ([@balloob] - [#29840]) ([tahoma docs]) (new-integration)
+- Add GIOS integration ([@bieniu] - [#28719]) ([gios docs]) (new-integration)
+- Add local_ip component ([@issacg] - [#29973]) ([localip docs]) (new-integration)
+- Add KEF speakers integration ([@basnijholt] - [#28959]) ([kef docs]) (new-integration)
+- Add Sentry component ([@dcramer] - [#30422]) ([sentry docs]) (new-integration)
+- Add surepetcare component ([@benleb] - [#24426]) ([surepetcare docs]) (new-integration)
+- Add Brother Printer integration ([@bieniu] - [#30359]) ([brother docs]) (new-integration)
+- Add TMB sensor ([@alemuro] - [#27964]) ([tmb docs]) (new-integration)
+- Add Stookalert integration ([@fwestenberg] - [#30306]) ([stookalert docs]) (new-integration)
+
+## New Platforms
+
+- Add battery sensor to iCloud ([@Quentame] - [#29818]) ([icloud docs]) (new-platform)
+- Add light support to Velbus integration ([@brefra] - [#30323]) ([velbus docs]) (new-platform)
+- Add support for v1 and v2 HomeKit fans. ([@Jc2k] - [#30503]) ([homekit_controller docs]) (new-platform)
+- Add support for homekit air quality sensors ([@Jc2k] - [#30510]) ([homekit_controller docs]) (new-platform)
+- Add pilight dimmer as light component ([@Trekky12] - [#30107]) ([pilight docs]) (new-platform)
+
+## If you need help...
+
+...don't hesitate to use our very active [forums](https://community.openpeerpower.io/) or join us for a little [chat](https://discord.gg/c5DvZ4e).
+
+Experiencing issues introduced by this release? Please report them in our [issue tracker](https://github.com/OpenPeerPower/Open-Peer-Power/issues).
+Make sure to fill in all fields of the issue template, that is helping us a lot!
+
+<!--more-->
+
+## Breaking Changes
+
+- __Default groups__ - Entity integrations will no longer automatically maintain the hidden groups with all of their entities. The following groups are no longer automatically created and maintained:
+
+  - `group.all_automations`
+  - `group.all_covers`
+  - `group.all_devices`
+  - `group.all_fans`
+  - `group.all_lights`
+  - `group.all_locks`
+  - `group.all_plants`
+  - `group.all_remotes`
+  - `group.all_scripts`
+  - `group.all_switches`
+  - `group.all_vacuum_cleaners`
+  - `group.calendar`
+  - `group.remember_the_milk_accounts`
+
+  The automation and script configuration panels are updated to show and manage all automations/scripts. If you want to show cards in your UI with all entities for a single domain, use the auto-entities card. If you want to target all entities in a service call, use `all` as value for `entity_id`.
+
+  ([@balloob] - [#23789]) ([automation docs]) ([calendar docs]) ([cover docs]) ([device_tracker docs]) ([fan docs]) ([light docs]) ([lock docs]) ([plant  docs]) ([remember_the_milk docs]) ([remote docs]) ([script docs]) ([switch docs]) ([vacuum docs]).
+
+- __Hue__ - Hue will no longer import existing authentication from disk. It has not written this authentication to disk since March 2018. The config option has been deprecated and will be removed in 0.106. ([@balloob] - [#30000]) ([hue docs])
+
+- __deCONZ__ - Due to changes to configuration handling, deCONZ groups will be assigned new identifiers in Open Peer Power. As a result, deCONZ groups will be duplicated. Remove any group devices from the registry prior to upgrading or alternatively delete the obsolete entries after the upgrade to eliminate the duplicates. ([#30875]) ([deconz docs])
+
+- __UPnP__ - UPnP/IGD units of measurement have been aligned with other integrations and common uses, they're now kB and kB/s instead of kbyte and kbyte/sec respectively. - ([@scop] - [#29552]) ([upnp docs])
+
+- __Worx Landroid__ - The `worxlandroid` sensor has been changed to not return the hardcoded state values `manual-stop`, `charging`, `charging-complete`, `going-home`, `mowing`, instead use the states given from the Landroid to Open Peer Power.
+
+  This includes the state `idle`, which means that something is broken with the mower. You can use this as a notification to check the physical state of the mower.
+
+  You need to update any automations that depend on the state of the sensor.
+
+  ([@geraldhansen] - [#27453]) ([worxlandroid docs])
+
+- __Apple iCloud__ - The iCloud component is no longer part of the device tracker platform and is now an integration, which is configurable via the UI. The iCloud cookie folder moved from `[HA_dir]/icloud` to `[HA_dir]/.storage/icloud`.- ([@Quentame] - [#28968]) ([icloud docs])
+
+- __Pi-hole__ - The default value for `host` is removed, and now must be specified manually. - ([@johnluetke] - [#27569]) ([pi_hole docs])
+
+    Example configuration:
+
+  ```yaml
+  pi_hole:
+    - host: pi.hole
+      ssl: false
+    - host: backup.pi.hole
+  ```
+
+- __HERE Travel Time__ - HERE has deprecated the usage of `app_code` and new users can only generate an `api_key`. If you are already using HERE Travel Time, you have to follow the [migration guide](https://developer.here.com/documentation/authentication/dev_guide/topics/api-key-credentials.html) to retrieve the, now required, `api_key`. - ([@eifinger] - [#29966]) ([here_travel_time docs])
+
+    Example configuration:
+
+  ```yaml
+  sensor:
+    - platform: here_travel_time
+      api_key: "YOUR_API_KEY"
+      origin_latitude: "51.222975"
+      origin_longitude: "9.267577"
+      destination_latitude: "51.257430"
+      destination_longitude: "9.335892"
+  ```
+
+- __ZHA__ - The default divisor for `active_power` has changed. Now, multiplier and divisor both default to 1 if the device does not support these attributes or when getting those attributes from the device fails. - ([@Adminiuga] - [#30130]) ([zha docs])
+
+- __Keba__ - The unique_ids of the entities have changed and are now more future proof. The default `name` and `entity_id` of the entities have also changed. You need to clear stale entries from the entity registry and update concerned automations and scripts. - ([@dannerph] - [#30125]) ([keba docs])
+
+- __Tesla__ - Config flow has been added for Tesla. Device tracker entity names have changed due to this. They now follow the naming convention of the rest of the Tesla entities. The `id` device tracker entity attribute was also removed because it is a duplicate of `trackr_id`. - ([@alandtse] - [#28744]) ([tesla docs])
+- __Huawei LTE__ - The Huawei LTE notify service name is now configurable. The default name for the Huawei LTE notify service has changed to `notify.huawei_lte` to avoid conflicts with other notify services. An option to provide a name for the service has also been added. - ([@scop] - [#30208]) ([huawei_lte docs])
+
+   Example configuration:
+
+   ```yaml
+   huawei_lte:
+     - url: ...
+       password: ...
+       notify:
+         name: sms
+   ```
+
+- __Amcrest__ *(Removed)* - Amcrest sensors and switches that were deprecated in previous releases have now been removed. - ([@pnbruckner] - [#30308]) ([amcrest docs])
+
+   Example configuration:
+
+   ```yaml
+   amcrest:
+   - ...
+     sensors:
+       # This sensor type is no longer supported and must be removed.
+       - motion_detector
+     # All switch types are no longer supported and must be removed.
+     switches:
+       - motion_detection
+       - motion_recording
+   ```
+
+- __MQTT__ - Added separate command and state topics for the MQTT lock. Two new properties are introduced with `state_locked` (default: LOCKED) and `state_unlocked` (default: UNLOCKED). If you are using the same topic as `state_topic` as for the `command_topic` you can reestablish the old behavior by setting `state_locked` to *LOCK* and `state_unlocked` to *UNLOCK*. Effectively, this change allows you to distinguish commands and states in two topics with different values. - ([@tuxbox] - [#29808]) ([mqtt docs])
+
+   Example configuration:
+
+   ```yaml
+   lock:
+     - platform: mqtt
+       command_topic: "/dev/ha/lock/cmd"
+       state_topic:   "/dev/ha/lock/state"
+       value_template: "{{ value_json.state }}"
+       state_locked: "locked"
+       state_unlocked: "unlocked"
+   ```
+
+- __LG webOS Smart TV__ - The component setup now uses the `webostv` domain instead of `media_player`. The host configuration option is now required and the timeout and filename options have been removed. The state handling for webOStv has also been cleaned up. An entity will have `on` when the tv is on instead of `playing` or `paused` as was previously the case. You need to update automations that depend on the entity state. - ([@bendavid] - [#29296] [#30416]) ([webostv docs])
+
+     Example configuration:
+
+     ```yaml
+     webostv:
+         name: LG TV
+         host: 192.168.1.53
+         #other settings
+         turn_on_action:
+             service: wake_on_lan.send_magic_packet
+             data:
+               mac: "00:00:00:00:00:00"
+         standby_connection: true
+     ```
+
+- __Axis__ - Axis integration will no longer accept manual configuration of devices, all configuration of the Axis integration will now be handled from the integrations panel. - ([@Kane610] - [#30365]) ([axis docs])
+
+  TL;DR This will no longer work:
+
+  ```yaml
+  axis:
+  ```
+
+- __WLED__ - Improved WLED pure white support for RGBW LED strips. When using WLED with RGBW strips, setting the color in Open Peer Power to white, will turn off the RGB LEDs of the strip and use the W channel only. - ([@frenck] - [#30477]) ([wled docs])
+
+- __Timer__ - Fire restarted event on restarting an active timer. This can break automations that should trigger on every timer start event. - ([@mnigbur] - [#30475]) ([timer docs])
+
+- __Vizio__ - Removed `suppress_warning` from configuration options for Vizio integration. The `pyvizio` package now suppresses insecure HTTPS request warnings in a way that doesn't affect global requests from other integrations or Open Peer Power itself. There is no need to globally suppress insecure warnings now. - ([@raman325] - [#30536]) ([vizio docs])
+
+  Example configuration:
+
+  ```yaml
+  media_player:
+    - platform: vizio
+      host: '<IP>:<PORT>'
+      access_token: '<AUTH_TOKEN>'
+      device_class: tv
+  ```
+
+- __RFXtrx__ - Bump pyRFXtrx to 0.25. This update switches the commands for `open` and `close` for RFXtrx covers of the "Rollertrol" type, as they were switched (clicking open resulted in closing of the cover and vice versa). Existing automations should be updated. - ([@Ernst79] - [#30566]) ([rfxtrx docs])
+
+- __Ring__ - Ring is now configurable via a config entry. This means it will no longer store the username and password and you're able to configure accounts that use 2FA. It's no longer possible to set scan interval, monitored conditions or FFmpeg arguments. The defaults are used. - ([@balloob] - [#30564]) ([ring docs])
+
+- __Binary Sensor (Locks)__ - Updated ON/OFF condition and triggers to match the documentation and UI. This change inverts the logic of automations relating to binary sensor with the `lock` device class, but only for automations triggering on the lock state (rather than triggering a lock/unlock action).
+
+  If you already created automations, you will need to check those, as they probably need to be inverted. The text displayed in the trigger or condition dropdowns will now be correct.
+
+  One possible scenario is if you have set an automation using the state of one lock to trigger an action on other lock(s). This change would cause the action to trigger on `locking` if it was previously triggering on `unlocking`. - ([@davet2001] - [#30663]) ([binary_sensor docs])
+
+- __Google Assistant__ - The `api_key` for manual installs is now deprecated and will be removed in 0.105.  To correct this you will need to remove `api_key` from the `configuration.yaml` and switch to using `service_account` instead. - ([@elupus] - [#30402]) ([google_assistant docs])
+
+## Beta Fixes
+
+- Fix upnp raw sensor state formatting when None ([@pnbruckner] - [#30444]) ([upnp docs]) (beta fix)
+- Implement capability attributes ([@balloob] - [#30545]) ([fan docs]) ([media_player docs]) ([vacuum docs]) ([water_heater docs]) (beta fix)
+- Add Ring config flow ([@balloob] - [#30564]) ([ring docs]) (breaking change) (beta fix)
+- Fix problem with restoring POE control ([@Kane610] - [#30597]) ([unifi docs]) (beta fix)
+- Set body size for Proxy / streams to 16mb ([@pvizeli] - [#30608]) ([http docs]) (beta fix)
+- Bump Adafruit_BBIO to 1.1.1 ([@springstan] - [#30630]) ([bbb_gpio docs]) (beta fix)
+- Do not save last_seen if older than prev_seen ([@pnbruckner] - [#30647]) ([life360 docs]) (beta fix)
+- Fix HomeKit with entity registry restoration where supported_features is a non-None falsey ([@Jc2k] - [#30657]) ([homekit docs]) (beta fix)
+- Fix ZHA temperature sensor restoration ([@Adminiuga] - [#30661]) ([zha docs]) (beta fix)
+- Update ON/OFF condition and triggers to match documentation and UI, issue #30462 ([@davet2001] - [#30663]) ([binary_sensor docs]) (breaking change) (beta fix)
+- Upgrade Ring to new version ([@balloob] - [#30666]) ([ring docs]) (beta fix)
+- Fix Error with HomematicIP Cloud Cover ([@SukramJ] - [#30667]) ([homematicip_cloud docs]) (beta fix)
+- Ring OTP improvement ([@balloob] - [#30688]) ([ring docs]) (beta fix)
+- Log error when integration is missing platform setup ([@balloob] - [#30690]) (beta fix)
+- Fix update person validation ([@balloob] - [#30691]) ([person docs]) (beta fix)
+- Fix discovery for oauth2 flow implementations ([@frenck] - [#30700]) (beta fix)
+- Revert "Forget auth token when going offline so we can reconnect (#26630)" ([@pnbruckner] - [#30705]) ([amcrest docs]) (beta fix)
+- Fix Ring wifi sensors ([@balloob] - [#30735]) ([ring docs]) (beta fix)
+- update aiopylgtv to 0.2.5 ([@bendavid] - [#30702]) ([webostv docs]) (beta fix)
+- update aiopylgtv to 0.2.6 ([@bendavid] - [#30739]) ([webostv docs]) (beta fix)
+- Bump ZHA quirks to 0.0.31 ([@dmulcahey] - [#30740]) ([zha docs]) (beta fix)
+- Update Ring to 0.6.0 ([@balloob] - [#30748]) ([ring docs]) (beta fix)
+- Set default locale for cloud Alexa config ([@balloob] - [#30749]) ([alexa docs]) ([cloud docs]) (beta fix)
+- Bump teslajsonpy to 0.2.3 ([@alandtse] - [#30750]) ([tesla docs]) (beta fix)
+- Update pyhomematic to 0.1.63 ([@danielperna84] - [#30594]) ([homematic docs]) (beta fix)
+- Refactor HomeMatic / Fix issue with 0.104/dev ([@pvizeli] - [#30752]) ([homematic docs]) (beta fix)
+- bump aiokef to 0.2.5 which uses locks ([@basnijholt] - [#30753]) ([kef docs]) (beta fix)
+- Fix HomeKit behavior with lights supporting color and temperature ([@frenck] - [#30756]) ([homekit docs]) (beta fix)
+- Revert #29701 ([@pvizeli] - [#30766]) ([zwave docs]) (beta fix)
+- Refactor Ring data handling ([@balloob] - [#30777]) ([ring docs]) (beta fix)
+- Restore unit_of_measurement from entity registry ([@Jc2k] - [#30780]) (beta fix)
+
+## Release 0.104.1 - January 16
+
+- 0.104.0 ([@frenck] - [#30803])
+- Update emulated_roku to 0.1.9 ([@jdeluyck] - [#30791]) ([emulated_roku docs])
+- update to aiopylgtv 0.2.7 ([@bendavid] - [#30797]) ([webostv docs])
+- Fix setup error of Mikrotik ([@springstan] - [#30810]) ([mikrotik docs])
+- Handle no host info in ignored config entries ([@balloob] - [#30822]) ([hue docs])
+- Fix mpd time issue ([@pvizeli] - [#30825]) ([mpd docs])
+- Fix play_media in webostv ([@bendavid] - [#30828]) ([webostv docs])
+- Fix iCloud when no family members (issue #30829) ([@Quentame] - [#30836]) ([icloud docs])
+- Reinstate and deprecate filename option for hue config ([@balloob] - [#30846]) ([hue docs])
+- Fixes issue about messages not being reset after sending it to microsoft teams. ([@peroyvind] - [#30849]) ([msteams docs])
+- Fix sensor type creation with multiple Ambient weather stations ([@bachya] - [#30850]) ([ambient_station docs])
+
+[#30791]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30791
+[#30797]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30797
+[#30803]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30803
+[#30810]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30810
+[#30822]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30822
+[#30825]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30825
+[#30828]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30828
+[#30836]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30836
+[#30846]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30846
+[#30849]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30849
+[#30850]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30850
+[@Quentame]: https://github.com/Quentame
+[@bachya]: https://github.com/bachya
+[@balloob]: https://github.com/balloob
+[@bendavid]: https://github.com/bendavid
+[@frenck]: https://github.com/frenck
+[@jdeluyck]: https://github.com/jdeluyck
+[@peroyvind]: https://github.com/peroyvind
+[@pvizeli]: https://github.com/pvizeli
+[@springstan]: https://github.com/springstan
+[ambient_station docs]: /integrations/ambient_station/
+[emulated_roku docs]: /integrations/emulated_roku/
+[hue docs]: /integrations/hue/
+[icloud docs]: /integrations/icloud/
+[mikrotik docs]: /integrations/mikrotik/
+[mpd docs]: /integrations/mpd/
+[msteams docs]: /integrations/msteams/
+[webostv docs]: /integrations/webostv/
+
+## Release 0.104.2 - January 17
+
+- 0.104.0 ([@frenck] - [#30803])
+- add multistate back ([@dmulcahey] - [#30889]) ([zha docs])
+- Fix missing switch groups of HomematicIP Cloud ([@SukramJ] - [#30903]) ([homematicip_cloud docs])
+- Fix issue with group unique id when normalising bridge id ([@Kane610] - [#30904]) ([deconz docs])
+- Fix Alexa semantics for covers with tilt support. ([@ochlocracy] - [#30911]) ([alexa docs])
+- camera endpoint likes to timeout, catch it. ([@balloob] - [#30919]) ([ring docs])
+- Fix service device refresh calling state update ([@Kane610] - [#30920]) ([deconz docs])
+- Updated frontend to 20200108.2 ([@bramkragten] - [#30921]) ([frontend docs])
+- Fix hue accepting filename ([@balloob] - [#30924]) ([hue docs])
+
+[#30803]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30803
+[#30889]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30889
+[#30903]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30903
+[#30904]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30904
+[#30911]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30911
+[#30919]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30919
+[#30920]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30920
+[#30921]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30921
+[#30924]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30924
+[@Kane610]: https://github.com/Kane610
+[@SukramJ]: https://github.com/SukramJ
+[@balloob]: https://github.com/balloob
+[@bramkragten]: https://github.com/bramkragten
+[@dmulcahey]: https://github.com/dmulcahey
+[@frenck]: https://github.com/frenck
+[@ochlocracy]: https://github.com/ochlocracy
+[alexa docs]: /integrations/alexa/
+[deconz docs]: /integrations/deconz/
+[frontend docs]: /integrations/frontend/
+[homematicip_cloud docs]: /integrations/homematicip_cloud/
+[hue docs]: /integrations/hue/
+[ring docs]: /integrations/ring/
+[zha docs]: /integrations/zha/
+
+## Release 0.104.3 - January 21
+
+[#30960]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30960
+[#30974]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30974
+[#30975]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30975
+[#30993]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30993
+[#31015]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/31015
+[@JeffLIrion]: https://github.com/JeffLIrion
+[@balloob]: https://github.com/balloob
+[@frenck]: https://github.com/frenck
+[@jdeluyck]: https://github.com/jdeluyck
+[@steve-gombos]: https://github.com/steve-gombos
+[deconz docs]: /integrations/deconz/
+[emulated_roku docs]: /integrations/emulated_roku/
+[ring docs]: /integrations/ring/
+[water_heater docs]: /integrations/water_heater/
+
+## All changes
+
+- Move imports to top for decora_wifi ([@springstan] - [#29439]) ([decora_wifi docs])
+- Make hassfest stricter ([@balloob] - [#29494])
+- Move imports to top for ambient_station ([@springstan] - [#29497]) ([ambient_station docs])
+- Move imports to top for google_pubsub ([@springstan] - [#29498]) ([google_pubsub docs])
+- Move imports to top for hue ([@springstan] - [#29501]) ([hue docs])
+- Move imports to top for google_translate ([@springstan] - [#29499]) ([google_translate docs])
+- Move imports to top for http ([@springstan] - [#29500]) ([http docs])
+- Move imports to top for system_log ([@springstan] - [#29465]) ([system_log docs])
+- Move imports to top for group ([@springstan] - [#29485]) ([group docs])
+- Move imports to top for frontend ([@springstan] - [#29487]) ([frontend docs])
+- Move imports to top for ipma ([@springstan] - [#29507]) ([ipma docs])
+- Move imports to top for mediaroom ([@springstan] - [#29509]) ([mediaroom docs])
+- Move imports to top for islamic_prayer_times ([@springstan] - [#29506]) ([islamic_prayer_times docs])
+- Move imports to top for mobile_app ([@springstan] - [#29511]) ([mobile_app docs])
+- Move imports to top for meteoalarm ([@springstan] - [#29510]) ([meteoalarm docs])
+- Move imports to top for statistics ([@springstan] - [#29223]) ([statistics docs])
+- Move imports to top for monoprice ([@springstan] - [#29516]) ([monoprice docs])
+- Move imports to top for mysensors ([@springstan] - [#29517]) ([mysensors docs])
+- Move imports to top for ign_sismologia ([@springstan] - [#29523]) ([ign_sismologia docs])
+- Move imports to top for nextbus ([@springstan] - [#29520]) ([nextbus docs])
+- Move imports to top for switcher_kis ([@springstan] - [#29530]) ([switcher_kis docs])
+- Add full state view for emulated_hue (apps using emulated_hue, 'sleep cycle' and 'sleep as android') ([@orrpan] - [#26650]) ([emulated_hue docs])
+- Move imports to top for mochad ([@springstan] - [#29514]) ([mochad docs])
+- Add input_boolean reload service ([@Adminiuga] - [#29379]) ([input_boolean docs])
+- Move imports to top for izone ([@springstan] - [#29508]) ([izone docs])
+- Move imports to top for modbus ([@springstan] - [#29515]) ([modbus docs])
+- Bump pytest to 5.3.1 ([@frenck] - [#29535])
+- Move imports to top for nx584 ([@springstan] - [#29537]) ([nx584 docs])
+- Move imports to top for pjlink ([@springstan] - [#29540]) ([pjlink docs])
+- Move imports to top for smhi ([@springstan] - [#29545]) ([smhi docs])
+- Move imports to top for sleepiq ([@springstan] - [#29544]) ([sleepiq docs])
+- Move imports to top for toon ([@springstan] - [#29553]) ([toon docs])
+- Move imports to top for influxdb ([@springstan] - [#29513]) ([influxdb docs])
+- Move imports to top for heatmiser ([@springstan] - [#29562]) ([heatmiser docs])
+- Move imports to top for plant ([@springstan] - [#29543]) ([plant docs])
+- Move imports to top for spc ([@springstan] - [#29547]) ([spc docs])
+- Bump lightwave to 0.17 ([@shortbloke] - [#29566]) ([lightwave docs])
+- Add service to set netatmo home heating schedule ([@1v0dev] - [#29244]) ([netatmo docs])
+- Move imports to top for homematic ([@springstan] - [#29558]) ([homematic docs])
+- Use "kB" and "s" as UPnP/IGD units ([@scop] - [#29552]) ([upnp docs]) (breaking change)
+- Upgrade certifi to >=2019.11.28 ([@fabaff] - [#29571])
+- Move imports to top for notion ([@springstan] - [#29539]) ([notion docs])
+- Move imports to top for soundtouch ([@springstan] - [#29546]) ([soundtouch docs])
+- Treat BaseException as over-general ([@scop] - [#29573]) ([whois docs])
+- Move imports to top for zha ([@springstan] - [#29555]) ([zha docs])
+- Move imports to top for openuv ([@springstan] - [#29541]) ([openuv docs])
+- Move imports to top for provisioning ([@springstan] - [#29542]) ([provisioning docs])
+- Update Travis dist to bionic ([@scop] - [#29575])
+- Upgrade pyyaml to 5.2.0 ([@fabaff] - [#29586])
+- Add service to reboot the Freebox ([@SNoof85] - [#29525]) ([freebox docs])
+- Improve Tahoma Velux support ([@butako] - [#27920]) ([tahoma docs])
+- Register automation.reload service as an admin service. ([@Adminiuga] - [#29582]) ([automation docs])
+- Add input_datetime reload service. ([@Adminiuga] - [#29581]) ([input_datetime docs])
+- Add input_number.reload admin service. ([@Adminiuga] - [#29584]) ([input_number docs])
+- change icon for partly-cloudy-night ([@Mariusthvdb] - [#29601]) ([darksky docs])
+- Add additional Magic Cube Model ([@SukramJ] - [#29598]) ([deconz docs])
+- Add Elgato Key Light integration ([@frenck] - [#29592]) ([elgato docs]) (new-integration)
+- Move imports to top for google_assistant ([@springstan] - [#29561]) ([google_assistant docs])
+- Move imports to top for tellduslive ([@springstan] - [#29550]) ([tellduslive docs])
+- Move imports to top for stream ([@springstan] - [#29548]) ([stream docs])
+- Add quarterly cycle for utility_meter component ([@aamcrae] - [#29534]) ([utility_meter docs])
+- bump freebox api version ([@SNoof85] - [#29527]) ([freebox docs])
+- Move imports to top for websocket_api ([@springstan] - [#29556]) ([websocket_api docs])
+- Move imports to top for fido ([@springstan] - [#29557]) ([fido docs])
+- Add Huawei LTE reboot and clear traffic statistics services ([@scop] - [#29594]) ([huawei_lte docs])
+- sort imports according to PEP8 for airly ([@basnijholt] - [#29615]) ([airly docs])
+- sort imports according to PEP8 for alarm_control_panel ([@basnijholt] - [#29616]) ([alarm_control_panel docs])
+- sort imports according to PEP8 for air_quality ([@basnijholt] - [#29614]) ([air_quality docs])
+- sort imports according to PEP8 for ads ([@basnijholt] - [#29613]) ([ads docs])
+- sort imports according to PEP8 for abode ([@basnijholt] - [#29610]) ([abode docs])
+- sort imports according to PEP8 for actiontec ([@basnijholt] - [#29612]) ([actiontec docs])
+- sort imports according to PEP8 for acer_projector ([@basnijholt] - [#29611]) ([acer_projector docs])
+- sort imports according to PEP8 for components ([@basnijholt] - [#29609])
+- sort imports according to PEP8 for yweather ([@basnijholt] - [#29608])
+- Upgrade keyring to 19.3.0 and keyrings.alt to 3.2.0 ([@fabaff] - [#29607])
+- sort imports according to PEP8 for auth ([@basnijholt] - [#29619]) ([auth docs])
+- sort imports according to PEP8 for alexa ([@basnijholt] - [#29618]) ([alexa docs])
+- sort imports according to PEP8 for buienradar ([@basnijholt] - [#29623]) ([buienradar docs])
+- Add IntesisHome Climate Platform ([@jnimmo] - [#25364]) ([intesishome docs]) (new-integration)
+- Don't escape command parameters ([@Hypfer] - [#29504]) ([squeezebox docs])
+- Fix file permission ([@fabaff] - [#29635]) ([dsmr_reader docs]) ([here_travel_time docs]) ([tahoma docs])
+- sort imports according to PEP8 for axis ([@basnijholt] - [#29621]) ([axis docs])
+- Pass in parameters explicitly to DeconzSession ([@Kane610] - [#29617]) ([deconz docs])
+- use isort to sort imports according to PEP8 for fan ([@basnijholt] - [#29632]) ([fan docs])
+- use isort to sort imports according to PEP8 for automation ([@basnijholt] - [#29620]) ([automation docs])
+- use isort to sort imports according to PEP8 for cast ([@basnijholt] - [#29624]) ([cast docs])
+- use isort to sort imports according to PEP8 for binary_sensor ([@basnijholt] - [#29622]) ([binary_sensor docs])
+- Move imports to top for homekit_controller ([@springstan] - [#29564])
+- use isort to sort imports according to PEP8 for climate ([@basnijholt] - [#29625]) ([climate docs])
+- use isort to sort imports according to PEP8 for command_line ([@basnijholt] - [#29627]) ([command_line docs])
+- use isort to sort imports according to PEP8 for config ([@basnijholt] - [#29628]) ([config docs])
+- use isort to sort imports according to PEP8 for cover ([@basnijholt] - [#29629]) ([cover docs])
+- use isort to sort imports according to PEP8 for demo ([@basnijholt] - [#29630]) ([demo docs])
+- use isort to sort imports according to PEP8 for cloud ([@basnijholt] - [#29626]) ([cloud docs])
+- use isort to sort imports according to PEP8 for ecobee ([@basnijholt] - [#29631]) ([ecobee docs])
+- Sort imports according to PEP8 for homekit_controller ([@basnijholt] - [#29646]) ([homekit_controller docs])
+- use isort to sort imports according to PEP8 for mqtt ([@basnijholt] - [#29649]) ([mqtt docs])
+- use isort to sort imports according to PEP8 for light ([@basnijholt] - [#29648]) ([light docs]) ([mqtt docs])
+- Sort imports according to PEP8 for homekit ([@basnijholt] - [#29645]) ([homekit docs])
+- use isort to sort imports according to PEP8 for vacuum ([@basnijholt] - [#29650]) ([mqtt docs]) ([vacuum docs])
+- Fix file permission ([@fabaff] - [#29660]) ([intesishome docs])
+- Sort imports according to PEP8 for recorder ([@basnijholt] - [#29652]) ([recorder docs])
+- Sort imports according to PEP8 for switch ([@basnijholt] - [#29654]) ([switch docs])
+- Sort imports according to PEP8 for template ([@basnijholt] - [#29655]) ([template docs])
+- Sort imports according to PEP8 for hive ([@basnijholt] - [#29669]) ([hive docs])
+- Sort imports according to PEP8 for starline ([@basnijholt] - [#29653]) ([starline docs])
+- Change state values for Worx Landroid sensor ([@geraldhansen] - [#27453]) ([worxlandroid docs]) (breaking change)
+- Sort imports according to PEP8 for plex ([@basnijholt] - [#29708]) ([plex docs])
+- Sort imports according to PEP8 for cert_expiry ([@basnijholt] - [#29705]) ([cert_expiry docs])
+- Sort imports according to PEP8 for geonetnz_volcano ([@basnijholt] - [#29716]) ([geonetnz_volcano docs])
+- Sort imports according to PEP8 for eufy ([@basnijholt] - [#29715]) ([eufy docs])
+- Sort imports according to PEP8 for dialogflow ([@basnijholt] - [#29714]) ([dialogflow docs])
+- Sort imports according to PEP8 for kodi ([@basnijholt] - [#29721]) ([kodi docs])
+- Add tests for vera component ([@vangorra] - [#28340]) ([vera docs])
+- Add Signal Messenger integration ([@bbernhard] - [#28537]) ([signalmessenger docs]) (new-integration)
+- Protect Doorbird platform from failing when individual doorbird fails ([@gjbadros] - [#29374]) ([doorbird docs])
+- Sort imports according to PEP8 for velbus ([@basnijholt] - [#29676]) ([velbus docs])
+- Proactively report Alexa Endpoint Health properties ([@clapbr] - [#29736]) ([alexa docs])
+- Sort imports according to PEP8 for pi_hole ([@basnijholt] - [#29726]) ([pi_hole docs])
+- use isort to sort imports according to PEP8 for openpeerpower ([@basnijholt] - [#29718]) ([openpeerpower docs])
+- use isort to sort imports according to PEP8 for zone ([@basnijholt] - [#29712]) ([zone docs])
+- use isort to sort imports according to PEP8 for group ([@basnijholt] - [#29713])
+- Sort imports according to PEP8 for neato ([@basnijholt] - [#29724]) ([neato docs])
+- Sort imports according to PEP8 for input_text ([@basnijholt] - [#29719]) ([input_text docs])
+- Sort imports according to PEP8 for linky ([@basnijholt] - [#29722]) ([linky docs])
+- Sort imports according to PEP8 for minio ([@basnijholt] - [#29723]) ([minio docs])
+- Sort imports according to PEP8 for netgear_lte ([@basnijholt] - [#29725]) ([netgear_lte docs])
+- Sort imports according to PEP8 for iqvia ([@basnijholt] - [#29720]) ([iqvia docs])
+- Sort imports according to PEP8 for gpslogger ([@basnijholt] - [#29717]) ([gpslogger docs])
+- Sort imports according to PEP8 for soma ([@basnijholt] - [#29709]) ([soma docs])
+- Sort imports according to PEP8 for verisure ([@basnijholt] - [#29711]) ([verisure docs])
+- Sort imports according to PEP8 for darksky ([@basnijholt] - [#29706]) ([darksky docs])
+- Sort imports according to PEP8 for aws ([@basnijholt] - [#29704]) ([aws docs])
+- Sort imports according to PEP8 for device_automation ([@basnijholt] - [#29707]) ([device_automation docs])
+- Sort imports according to PEP8 for arest ([@basnijholt] - [#29703]) ([arest docs])
+- Sort imports according to PEP8 for arduino ([@basnijholt] - [#29702]) ([arduino docs])
+- Sort imports according to PEP8 for almond ([@basnijholt] - [#29688]) ([almond docs])
+- Sort imports according to PEP8 for geonetnz_quakes ([@basnijholt] - [#29668]) ([geonetnz_quakes docs])
+- Move imports to top for nsw_fuel_station ([@springstan] - [#29538]) ([nsw_fuel_station docs])
+- Sort imports according to PEP8 for jewish_calendar ([@basnijholt] - [#29697]) ([jewish_calendar docs])
+- Sort imports according to PEP8 for opentherm_gw ([@basnijholt] - [#29671]) ([opentherm_gw docs])
+- Sort imports according to PEP8 for xiaomi_miio ([@basnijholt] - [#29677]) ([xiaomi_miio docs])
+- Sort imports according to PEP8 for met ([@basnijholt] - [#29699]) ([met docs])
+- Sort imports according to PEP8 for locative ([@basnijholt] - [#29698]) ([locative docs])
+- Sort imports according to PEP8 for file ([@basnijholt] - [#29694]) ([file docs])
+- Sort imports according to PEP8 for ifttt ([@basnijholt] - [#29696]) ([ifttt docs])
+- Sort imports according to PEP8 for geofency ([@basnijholt] - [#29695]) ([geofency docs])
+- Sort imports according to PEP8 for counter ([@basnijholt] - [#29692]) ([counter docs])
+- Sort imports according to PEP8 for ffmpeg ([@basnijholt] - [#29693]) ([ffmpeg docs])
+- use isort to sort imports according to PEP8 for broadlink ([@basnijholt] - [#29690]) ([broadlink docs])
+- Sort imports according to PEP8 for ambiclimate ([@basnijholt] - [#29689]) ([ambiclimate docs])
+- Sort imports according to PEP8 for camera ([@basnijholt] - [#29691]) ([camera docs])
+- use isort to sort imports according to PEP8 for netatmo ([@basnijholt] - [#29682]) ([netatmo docs])
+- Sort imports according to PEP8 for specific_devices ([@basnijholt] - [#29687])
+- Sort imports according to PEP8 for wemo ([@basnijholt] - [#29685]) ([wemo docs])
+- Sort imports according to PEP8 for utility_meter ([@basnijholt] - [#29710]) ([utility_meter docs])
+- Sort imports according to PEP8 for vesync ([@basnijholt] - [#29684]) ([vesync docs])
+- Sort imports according to PEP8 for iaqualink ([@basnijholt] - [#29681]) ([iaqualink docs])
+- Sort imports according to PEP8 for sensor ([@basnijholt] - [#29683]) ([sensor docs])
+- Sort imports according to PEP8 for ring ([@basnijholt] - [#29680])
+- Sort imports according to PEP8 for http ([@basnijholt] - [#29679])
+- Sort imports according to PEP8 for dyson ([@basnijholt] - [#29678])
+- Sort imports according to PEP8 for somfy ([@basnijholt] - [#29675]) ([somfy docs])
+- Sort imports according to PEP8 for nest ([@basnijholt] - [#29670]) ([nest docs])
+- Sort imports according to PEP8 for rest ([@basnijholt] - [#29674]) ([rest docs])
+- Sort imports according to PEP8 for pilight ([@basnijholt] - [#29673]) ([pilight docs])
+- Sort imports according to PEP8 for owntracks ([@basnijholt] - [#29672]) ([owntracks docs])
+- Sort imports according to PEP8 for emulated_hue ([@basnijholt] - [#29667]) ([emulated_hue docs])
+- Sort imports according to PEP8 for device_tracker ([@basnijholt] - [#29666]) ([device_tracker docs])
+- Sort imports according to PEP8 for media_player ([@basnijholt] - [#29665]) ([media_player docs])
+- sort imports according to PEP8 for lock ([@basnijholt] - [#29663]) ([lock docs])
+- Sort imports according to PEP8 for unifi ([@basnijholt] - [#29656]) ([unifi docs])
+- Sort imports according to PEP8 for deconz ([@basnijholt] - [#29659])
+- Sort imports according to PEP8 for zwave ([@basnijholt] - [#29658]) ([zwave docs])
+- Sort imports according to PEP8 for websocket_api ([@basnijholt] - [#29657]) ([websocket_api docs])
+- Sort imports according to PEP8 for pushbullet ([@basnijholt] - [#29748]) ([pushbullet docs])
+- Sort imports according to PEP8 for versasense ([@basnijholt] - [#29753]) ([versasense docs])
+- Sort imports according to PEP8 for remote ([@basnijholt] - [#29749]) ([remote docs])
+- Sort imports according to PEP8 for yeelight ([@basnijholt] - [#29755]) ([yeelight docs])
+- Sort imports according to PEP8 for solarlog ([@basnijholt] - [#29752]) ([solarlog docs])
+- Sort imports according to PEP8 for scene ([@basnijholt] - [#29750]) ([scene docs])
+- Sort imports according to PEP8 for vicare ([@basnijholt] - [#29754]) ([vicare docs])
+- Sort imports according to PEP8 for plaato ([@basnijholt] - [#29747]) ([plaato docs])
+- Sort imports according to PEP8 for shopping_list ([@basnijholt] - [#29751]) ([shopping_list docs])
+- Sort imports according to PEP8 for emulated_roku ([@basnijholt] - [#29756])
+- Sort imports according to PEP8 for sleepiq ([@basnijholt] - [#29759])
+- Sort imports according to PEP8 for mobile_app ([@basnijholt] - [#29758])
+- Sort imports according to PEP8 for hue ([@basnijholt] - [#29757])
+- Sort imports according to PEP8 for vultr ([@basnijholt] - [#29760])
+- Remove Tahoma component #29744 ([@tetienne] - [#29745]) ([tahoma docs]) (breaking change)
+- Sort imports according to PEP8 for components starting with "B" ([@basnijholt] - [#29762])
+- Sort imports according to PEP8 for components starting with "A" ([@basnijholt] - [#29761])
+- Sort imports according to PEP8 for components starting with "E" ([@basnijholt] - [#29765])
+- Sort imports according to PEP8 for components starting with "F" ([@basnijholt] - [#29766])
+- Sort imports according to PEP8 for components starting with "G" ([@basnijholt] - [#29767])
+- Sort imports according to PEP8 for components starting with "H" ([@basnijholt] - [#29768])
+- use isort to sort imports for components starting with 'm' ([@basnijholt] - [#29772])
+- Sort imports according to PEP8 for components starting with "I" ([@basnijholt] - [#29769])
+- Sort imports according to PEP8 for components starting with "L" ([@basnijholt] - [#29771])
+- Sort imports according to PEP8 for components starting with "K" ([@basnijholt] - [#29770]) ([kankun docs]) ([keba docs]) ([keyboard_remote docs])
+- Sort imports according to PEP8 for components starting with "O" ([@basnijholt] - [#29774])
+- Sort imports according to PEP8 for components starting with "P" ([@basnijholt] - [#29775])
+- Sort imports according to PEP8 for components starting with "S" ([@basnijholt] - [#29777])
+- Sort imports according to PEP8 for components starting with "R" ([@basnijholt] - [#29776])
+- Sort imports according to PEP8 for components starting with "T" ([@basnijholt] - [#29778])
+- Sort imports according to PEP8 for components starting with "V" ([@basnijholt] - [#29780])
+- Sort imports according to PEP8 for components starting with "N" ([@basnijholt] - [#29773])
+- Sort imports according to PEP8 for components starting with "W" ([@basnijholt] - [#29781])
+- Sort imports according to PEP8 for components starting with "Q" ([@basnijholt] - [#29785])
+- Sort imports according to PEP8 for components starting with "Y" ([@basnijholt] - [#29783]) ([yale_smart_alarm docs]) ([yamaha docs]) ([yamaha_musiccast docs]) ([yandex_transport docs]) ([yeelightsunflower docs]) ([yessssms docs]) ([yr docs])
+- Sort imports according to PEP8 for components starting with "X" ([@basnijholt] - [#29782]) ([x10 docs]) ([xbox_live docs]) ([xeoma docs]) ([xfinity docs]) ([xiaomi_tv docs]) ([xmpp docs]) ([xs1 docs])
+- Move imports to top for homekit ([@springstan] - [#29560]) ([homekit docs])
+- Cleanup removed component ([@pvizeli] - [#29788])
+- Sort imports according to PEP8 for 'script' folder ([@basnijholt] - [#29790])
+- use isort to sort imports for "setup.py" ([@basnijholt] - [#29792])
+- Sort imports according to PEP8 for 'openpeerpower' folder ([@basnijholt] - [#29789])
+- Sort imports according to PEP8 for 'tests' ([@basnijholt] - [#29791])
+- Add config flow to iCloud ([@Quentame] - [#28968]) ([icloud docs]) (breaking change)
+- Sort imports according to PEP8 for components starting with "D" ([@basnijholt] - [#29764])
+- Move imports to top for ness_alarm ([@springstan] - [#29518]) ([ness_alarm docs])
+- Sort imports according to PEP8 for components starting with "Z" ([@basnijholt] - [#29784]) ([zamg docs]) ([zengge docs]) ([zeroconf docs]) ([zestimate docs]) ([zha docs]) ([zigbee docs])
+- Sort imports according to PEP8 for components starting with "C" ([@basnijholt] - [#29763])
+- Fix 'pytest.register_assert_rewrite("tests.common")' warning ([@basnijholt] - [#29797])
+- Sort imports according to PEP8 for huawei_lte ([@basnijholt] - [#29664]) ([huawei_lte docs])
+- Sort imports according to PEP8 for components starting with "U" ([@basnijholt] - [#29779]) ([ue_smart_radio docs]) ([uk_transport docs]) ([universal docs]) ([updater docs]) ([uscis docs])
+- Fix build, invalid JSON file in icloud component ([@frenck] - [#29798]) ([icloud docs])
+- Sort imports according to PEP8 for google_assistant ([@basnijholt] - [#29633]) ([google_assistant docs])
+- Add ZHA group API ([@dmulcahey] - [#29641]) ([zha docs])
+- Add input_text reload service. ([@Adminiuga] - [#29644]) ([input_text docs])
+- Add input_select reload service. ([@Adminiuga] - [#29647]) ([input_select docs])
+- Add JSON files validation to hassfest ([@frenck] - [#29799])
+- Fix zha circular import ([@Adminiuga] - [#29802])
+- Nextbus: Sort results for upcoming times ([@ViViDboarder] - [#29811]) ([nextbus docs])
+- Adjusts repository README ([@frenck] - [#29805])
+- Install discovery requirements if used ([@balloob] - [#29795]) ([deconz docs]) ([hue docs])
+- Fix isort on a small set of misc files ([@frenck] - [#29803]) ([xiaomi_miio docs])
+- Fix tank utility token ([@proferabg] - [#29801]) ([tank_utility docs])
+- Re-authorize Huawei LTE on login required error ([@scop] - [#29597]) ([huawei_lte docs])
+- Fix withings wrong sleep state entry ([@vangorra] - [#29651]) ([withings docs])
+- Fix input_text initialization with empty config. ([@Adminiuga] - [#29829]) ([input_text docs])
+- Upgrade pydocstyle to 5.0.1 ([@scop] - [#29830])
+- Sort imports for requirements.py and its test using isort ([@basnijholt] - [#29836])
+- Fix Soma integration connection issue ([@ratsept] - [#27692]) ([soma docs])
+- Update rfxtrx component so it can be run as a custom_component ([@foxy82] - [#29638]) ([rfxtrx docs])
+- Revert Tahoma removal ([@balloob] - [#29840]) ([tahoma docs]) (new-integration)
+- Use Bionic's ffmpeg on Travis, jonathonf/ffmpeg-4 is N/A at the moment ([@scop] - [#29860])
+- Fix package import sort on dwd_weather_warnings ([@frenck] - [#29874]) ([dwd_weather_warnings docs])
+- Sort import for tests/components/feedreader/test_init.py ([@basnijholt] - [#29878])
+- Add isort to CI and pre-commit ([@basnijholt] - [#29739])
+- Remove no longer needed auth.util, use secrets instead ([@scop] - [#29861])
+- Revert "Sort import for tests/components/feedreader/test_init.… ([@Adminiuga] - [#29882])
+- Log ZHA bind/unbind operations status ([@Adminiuga] - [#29842]) ([zha docs])
+- (Re)Add support for multiple Pi-Holes ([@johnluetke] - [#27569]) ([pi_hole docs]) (breaking change)
+- ISY994 Node Filter Update ([@randellhodges] - [#28155]) ([isy994 docs])
+- Defer log formatting. ([@Adminiuga] - [#29888]) ([zha docs])
+- Bump python-miio version to 0.4.8 ([@syssi] - [#29890]) ([xiaomi_miio docs])
+- `genericpath` is an internal Python module and shouldn't be imported according to core Python devs. (see [this](https://bugs.python.org/msg358136) comment) ([@basnijholt] - [#29903])
+- Make Python deprecation notice easier to maintain ([@scop] - [#29900])
+- Upgrade Sphinx to 2.2.2 and sphinx-autodoc-typehintsi to 1.10.3 ([@fabaff] - [#29906])
+- Fix incorrect file format yr test fixure ([@frenck] - [#29910])
+- Fixes invalid JSON syntax in devcontainer ([@frenck] - [#29911])
+- Add integration platform helper ([@balloob] - [#29914])
+- Update Tahoma component's tahoma-api requirement's version ([@DjMoren] - [#29918]) ([tahoma docs])
+- Implement Alexa.EventDetectionSensor for Alexa ([@ochlocracy] - [#28276]) ([alexa docs])
+- Update androidtv version to improve source selection support ([@raman325] - [#29579]) ([androidtv docs])
+- Add battery sensor to iCloud ([@Quentame] - [#29818]) ([icloud docs]) (new-platform)
+- bump venstar 0.12 ([@tyler-public] - [#29954])
+- Bump adb-shell to 0.1.0 and androidtv to 0.0.36 ([@JeffLIrion] - [#29938]) ([androidtv docs])
+- Start of using hass state for tests rather than direct object ([@elupus] - [#29377])
+- isort fix on test_media_player ([@caronc] - [#29965])
+- Upgrade keyring to 20.0.0 and keyrings.alt to 3.4.0 ([@fabaff] - [#29960])
+- Fix example value for Todoist service ([@boralyl] - [#29953])
+- Remove deprecated rflink configs ([@scop] - [#29972]) ([rflink docs])
+- Drop Python 3.6 support ([@scop] - [#29978])
+- Support case of unknown/unavailable temperature/humidity ([@elupus] - [#29959]) ([google_assistant docs])
+- Migrate to api_key ([@eifinger] - [#29966]) ([here_travel_time docs]) (breaking change)
+- Remove 'SUPPORT_PLAY_MEDIA' from Volumio ([@JeffLIrion] - [#29969]) ([volumio docs])
+- Make hassfest import detection better ([@balloob] - [#29932]) ([filter docs]) ([history docs])
+- Fixed "condtion_type" to "condition_type" ([@rsnodgrass] - [#29984]) ([fan docs])
+- Fix condition typo ([@balloob] - [#29989]) ([climate docs]) ([device_tracker docs]) ([fan docs]) ([vacuum docs])
+- Don't use the locals parameter on exec. ([@lddubeau] - [#29979]) ([python_script docs])
+- Update binary_sensor.py ([@Emacee] - [#29977]) ([bmw_connected_drive docs])
+- Bump shodan to 1.21.0 ([@frenck] - [#29991]) ([shodan docs])
+- Bump pytest to 5.3.2 ([@frenck] - [#29990])
+- Add check-json to CI and Pre-commit ([@frenck] - [#29912])
+- Add unique ID to config entries ([@balloob] - [#29806])
+- Show current effect in yeelight device ([@zewelor] - [#28975]) ([yeelight docs])
+- Convert Hue to use unique ID ([@balloob] - [#30000]) ([hue docs])
+- Fix modbus service description ([@vzahradnik] - [#30005])
+- Fix persistent setup error notification content ([@frenck] - [#29995])
+- Make tplink light more responsive ([@vangorra] - [#28652]) ([tplink docs])
+- Z-Wave: Fibaro FGR*-222: Add venetian blind support ([@andre-richter] - [#29701]) ([zwave docs])
+- Upgrade matrix-client to 0.3.2 ([@fabaff] - [#30027]) ([matrix docs])
+- Upgrade zeroconf to 0.24.1 ([@fabaff] - [#30028]) ([zeroconf docs])
+- Update Envoy sensor to configure credentials and grab Inverter Date from updated API ([@gtdiehl] - [#28837]) ([enphase_envoy docs])
+- Add option to ignore flows ([@balloob] - [#30008]) ([config docs]) ([hue docs])
+- changed Venstar component temperature to half degree accuracy ([@erikkastelec] - [#30034]) ([venstar docs])
+- Add timer reload service. ([@Adminiuga] - [#30015]) ([timer docs])
+- Guard against future unknown SimpliSafe entity types ([@bachya] - [#30059]) ([simplisafe docs])
+- Set unique id on homekit_controller config entries ([@Jc2k] - [#30035]) ([homekit_controller docs])
+- Remove stream from camera after deps ([@balloob] - [#30057]) ([camera docs])
+- Add unit_of_measurement to various Transmission sensors ([@yegle] - [#30037]) ([transmission docs])
+- Refactor Alexa capabilityResources object into class, Implement Alexa semantics object ([@ochlocracy] - [#29917]) ([alexa docs])
+- Make Hassfest stricter pt 2 ([@balloob] - [#30068]) ([modbus docs]) ([mqtt docs]) ([tuya docs]) ([zamg docs])
+- Init entities as unavailable when offline ([@bieniu] - [#29738]) ([airly docs])
+- Make name of nmbs live sensor customizable via unique_id ([@springstan] - [#29662]) ([nmbs docs])
+- Include all SSDP data in discovery info ([@scop] - [#28197]) ([ssdp docs])
+- Rework tado component ([@michaelarnauts] - [#29246]) ([tado docs])
+- Add an open window sensor for heating zones ([@gppanayotov] - [#30090]) ([tado docs])
+- Explicitly include Alexa interface for image_processing entities. ([@ochlocracy] - [#30101]) ([alexa docs])
+- Don't error on removal of an ignored homekit_controller config entry ([@Jc2k] - [#30083]) ([homekit_controller docs])
+- add --show-diff-on-failure to pre-commit ([@basnijholt] - [#30097])
+- Upgrade mypy to 0.761 ([@scop] - [#30104])
+- Helpers type hint improvements ([@scop] - [#30106])
+- Add device class attribute to modbus sensors ([@vzahradnik] - [#30030]) ([modbus docs])
+- Upgrade python-velbus ([@Cereal2nd] - [#30110]) ([velbus docs])
+- Add a config entry mechanism to rediscover a discovery that was ignored ([@Jc2k] - [#30099]) ([homekit_controller docs])
+- Implement ZHA entity classes registry ([@Adminiuga] - [#30108]) ([zha docs])
+- Clean up mobile app webhooks ([@balloob] - [#30123]) ([http docs]) ([mobile_app docs])
+- Refactor ZHA electrical measurement sensor. ([@Adminiuga] - [#30130]) ([zha docs]) (breaking change)
+- Cleanup ZHAEntity class ([@Adminiuga] - [#30131]) ([zha docs])
+- Upgrade zeroconf to 0.24.2 ([@fabaff] - [#30140]) ([zeroconf docs])
+- Refactor ZHA binary_sensor ([@Adminiuga] - [#30138]) ([zha docs])
+- Update Integration of Keba charging station ([@dannerph] - [#30125]) ([keba docs]) (breaking change)
+- More helpers type improvements ([@scop] - [#30145])
+- Bump sqlalchemy to 1.3.12 ([@frenck] - [#30142]) ([recorder docs]) ([sql docs])
+- Clean up scaffold ([@cgtobi] - [#30135])
+- ZHA binary_sensor cleanup. ([@Adminiuga] - [#30149]) ([zha docs])
+- Add support for input_number entities in Alexa integration ([@ochlocracy] - [#30139]) ([alexa docs])
+- Add icon to Plex sensor ([@Quentame] - [#30172]) ([plex docs])
+- Add cast to state of Dyson Air Quality Sensor ([@springstan] - [#30100]) ([dyson docs])
+- Add icons to Freebox sensors ([@Quentame] - [#30132]) ([freebox docs])
+- Upgrade envoy_reader to 0.11.0 ([@gtdiehl] - [#30179]) ([enphase_envoy docs])
+- Updated formatting of total_blocks value ([@P-Verbrugge] - [#30170]) ([bitcoin docs])
+- New date_time_utc display option added to the time_date sensor platform ([@heckler] - [#30158]) ([time_date docs])
+- Enable config flow for Tesla ([@alandtse] - [#28744]) ([tesla docs]) (breaking change)
+- Protect against bad data stored in ZHA ([@dmulcahey] - [#30183]) ([zha docs])
+- Upgrade zeroconf to 0.24.3 ([@fabaff] - [#30187]) ([zeroconf docs])
+- Fix AdGuard Home safe search sensor name ([@Quentame] - [#30171]) ([adguard docs])
+- Add onewire devices and owserver remote host support ([@garbled1] - [#29948]) ([onewire docs])
+- Bump importlib-metadata to 1.3.0 ([@springstan] - [#30196])
+- Bump datapoint to 0.9.5 ([@springstan] - [#30185]) ([metoffice docs])
+- Implement EqualizerController in Alexa for media_player. ([@ochlocracy] - [#30159]) ([alexa docs])
+- Upgrade youtube_dl to 2019.12.25 ([@BKPepe] - [#30203]) ([media_extractor docs])
+- Pull track position from MPD status ([@ndonegan] - [#28579]) ([mpd docs])
+- Add support for enocean window handle FA 10 00 (Hoppe) ([@rhadamantys] - [#29968]) ([enocean docs])
+- Update Vivotek camera component ([@HarlemSquirrel] - [#30191]) ([vivotek docs])
+- Make Huawei LTE notify service name configurable ([@scop] - [#30208]) ([huawei_lte docs]) (breaking change)
+- Add Huawei LTE integration suspend and resume services ([@scop] - [#30207]) ([huawei_lte docs])
+- Bump teslajsonpy to 0.2.1 ([@alandtse] - [#30217]) ([tesla docs])
+- bump tuyaha 0.0.5 ([@PaulAnnekov] - [#30213]) ([tuya docs])
+- Fix handling of symlinked device descriptors in keyboard_remote and move remaining sync io to executor thread pool ([@bendavid] - [#30206]) ([keyboard_remote docs])
+- Bump ZHA dependencies ([@dmulcahey] - [#30228]) ([zha docs])
+- Bump shodan to 1.21.1 ([@frenck] - [#30234]) ([shodan docs])
+- DECONZ - Added support for Aqara single switch WXKG03LM ([@Kerwood] - [#30240]) ([deconz docs])
+- Bump python-qbittorrent to 0.4.1 ([@springstan] - [#30239]) ([qbittorrent docs])
+- Fix Huawei LTE error message on service call without URL and routers ([@scop] - [#30250]) ([huawei_lte docs])
+- Bump dependency for HomematicIp cloud ([@SukramJ] - [#30237]) ([homematicip_cloud docs])
+- Bump libpurecool to 0.6.0 ([@xlfe] - [#30247])
+- Huawei LTE: Fix YAML options overriding ones set from GUI ([@scop] - [#30249]) ([huawei_lte docs])
+- Add HmIP-MOD_TM to HomematicIP Cloud ([@SukramJ] - [#30255]) ([homematicip_cloud docs])
+- Note Huawei LTE notify service change requires restart ([@scop] - [#30223]) ([huawei_lte docs])
+- Bump python-velbus library to 2.0.32 to fix problems with the glaspanels ([@Cereal2nd] - [#30257]) ([velbus docs])
+- Whitelist Android/iOS auth callbacks ([@balloob] - [#30082]) ([auth docs])
+- Fixing timezone issue which caused wrong selection of data to be used. ([@vangorra] - [#30011]) ([withings docs])
+- Refactor ZHA channel logging ([@Adminiuga] - [#30259]) ([zha docs])
+- Fix ble_tracker randomly pygatt thrown error ([@liollury] - [#28671]) ([bluetooth_le_tracker docs])
+- Fix creating smappee sensors when remote is not active ([@mockersf] - [#30270]) ([smappee docs])
+- Upgrade rflink to 0.0.50, ignore_devices now supports * and ? anywhere ([@scop] - [#30268]) ([rflink docs])
+- Accept homekit_controller pairing codes both with and without dashes ([@Jc2k] - [#30273]) ([homekit_controller docs])
+- Add homekit_controller service.sensor.smoke ([@Jc2k] - [#30269]) ([homekit_controller docs])
+- Upgrade beautifulsoup4 to 4.8.2 ([@fabaff] - [#30274]) ([scrape docs])
+- Add custom validator for countries ([@fabaff] - [#30280]) ([workday docs])
+- Change default icons for Tesla components ([@alandtse] - [#30288]) ([tesla docs])
+- Contributing: Add note about feature suggestions and bug tracking ([@andygrunwald] - [#30225])
+- Bump ihcsdk to 2.4.0 ([@taisholland] - [#30279]) ([ihc docs])
+- Ignore google_maps updates when last_seen goes backwards ([@pnbruckner] - [#30178]) ([google_maps docs])
+- Add GIOS integration ([@bieniu] - [#28719]) ([gios docs]) (new-integration)
+- Store capabilities and supported features in entity registry, restore registered entities on startup ([@balloob] - [#30094])
+- Fix Withings leaking time zone change into other tests ([@frenck] - [#30320])
+- Add local_ip component ([@issacg] - [#29973]) ([localip docs]) (new-integration)
+- Update liveboxplay and pyteleloisirs ([@pschmitt] - [#30093])
+- Add homematic host port config for HMIP-only CCUs ([@sbyx] - [#30077]) ([homematic docs])
+- Bump dependency for HomematicIP Cloud ([@SukramJ] - [#30319]) ([homematicip_cloud docs])
+- Add support for Somfy RTS power socket and Somfy io Temperature sensor ([@rhadamantys] - [#30053]) ([tahoma docs])
+- Reduce solaredge logging severity ([@sdwilsh] - [#30305]) ([solaredge docs])
+- Remove Amcrest deprecated sensors and switches ([@pnbruckner] - [#30308]) ([amcrest docs]) (breaking change)
+- Add support for Velux garage doors ([@cwildt] - [#30214]) ([velux docs])
+- Add separate command and state topics for mqtt lock ([@tuxbox] - [#29808]) ([mqtt docs]) (breaking change)
+- Upgrade Sphinx to 2.3.1 ([@fabaff] - [#30310])
+- Add light support to Velbus integration ([@brefra] - [#30323]) ([velbus docs]) (new-platform)
+- Fix luftdaten integration by adding a sensor for pressure at sealevel ([@Lars-P] - [#30317]) ([luftdaten docs])
+- Simplify Tesla icon get code ([@alandtse] - [#30301]) ([tesla docs])
+- Make the rest of ZHA platforms to use ZHA class registry ([@Adminiuga] - [#30261]) ([zha docs])
+- Improve Withings tests in different time zone ([@frenck] - [#30326])
+- Migrate dsmr tests from coroutine to async/await ([@frenck] - [#30333])
+- Migrate wunderground tests from coroutine to async/await ([@frenck] - [#30330])
+- Bump pyps4-2ndscreen to 1.0.4 ([@frenck] - [#30327]) ([ps4 docs])
+- Bump alarmdecoder to 1.13.9 ([@springstan] - [#30303]) ([alarmdecoder docs])
+- Migrate python_script tests from coroutine to async/await ([@frenck] - [#30335])
+- Migrate api tests from coroutine to async/await ([@frenck] - [#30338])
+- Migrate alexa tests from coroutine to async/await ([@frenck] - [#30332])
+- Migrate xiaomi_miio tests from coroutine to async/await ([@frenck] - [#30329])
+- Migrate emulated_hue tests from coroutine to async/await ([@frenck] - [#30331])
+- Migrate webostv to new library and make integration async with callback state updates ([@bendavid] - [#29296]) ([webostv docs]) (breaking change)
+- Refactor HomeMatic / Fix issue with 0.104/dev ([@pvizeli] - [#30752]) ([homematic docs]) (beta fix)
+- bump aiokef to 0.2.5 which uses locks ([@basnijholt] - [#30753]) ([kef docs]) (beta fix)
+- Fix HomeKit behavior with lights supporting color and temperature ([@frenck] - [#30756]) ([homekit docs]) (beta fix)
+- Revert #29701 ([@pvizeli] - [#30766]) ([zwave docs]) (beta fix)
+- Refactor Ring data handling ([@balloob] - [#30777]) ([ring docs]) (beta fix)
+- Restore unit_of_measurement from entity registry ([@Jc2k] - [#30780]) (beta fix)
+
+[#30740]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30740
+[#30748]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30748
+[#30749]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30749
+[#30750]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30750
+[#30752]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30752
+[#30753]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30753
+[#30756]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30756
+[#30766]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30766
+[#30777]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30777
+[#30780]: https://github.com/OpenPeerPower/Open-Peer-Power/pull/30780
+[@1v0dev]: https://github.com/1v0dev
+[zone docs]: /integrations/zone/
+[zwave docs]: /integrations/zwave/
