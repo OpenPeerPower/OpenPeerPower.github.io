@@ -8,9 +8,8 @@ body_id: wheels-page
 regenerate: false
 ---
 
-<noscript>
-  {% assign whl_files = site.static_files | where: "wheel", true %}
-  {% for mywhl in whl_files %}
-    {{ mywhl.path }}
-  {% endfor %}
-</noscript>
+
+{% assign whl_files = site.static_files | where: "wheel", true %}
+{% for mywhl in whl_files %}
+  {{ mywhl.path }}
+{% endfor %}
