@@ -27,7 +27,7 @@ So here are guidelines:
 
 This guide will help you get Open Peer Power running on a Raspberry Pi, to create an efficient power management hub.
 
-Once you finish your alternative installation, you can continue at the [next step][next-step].
+
 
 ### Suggested hardware
 
