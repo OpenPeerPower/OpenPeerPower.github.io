@@ -11,5 +11,5 @@ regenerate: false
 
 {% assign whl_files = site.static_files | where: "wheel", true %}
 {% for mywhl in whl_files %}
-  {% link {{ mywhl.path }} %}
+  [{{ mywhl.path }}]({{ mywhl.path }})
 {% endfor %}
