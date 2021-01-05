@@ -5,7 +5,7 @@ description: "Documentation for Open Peer Power"
 
 The documentation covers beginner to advanced topics around the installation, setup, configuration, and usage of Open Peer Power.
 
-<div class="text-center hass-option-cards" markdown="0">
+<div class="text-center opp-option-cards" markdown="0">
   <a class='option-card' href='/docs/configuration/'>
     <div class='img-container'>
       <img src='/images/supported_brands/pencil.png' />

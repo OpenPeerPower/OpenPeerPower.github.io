@@ -1,14 +1,14 @@
 ---
-title: "hass"
-description: "Description of hass."
+title: "opp"
+description: "Description of opp."
 ---
 
-The command-line part of Open Peer Power is `hass`.
+The command-line part of Open Peer Power is `opp`.
 
 
 ```bash
-$ hass -h
-usage: hass [-h] [--version] [-c path_to_config_dir] [--demo-mode] [--debug]
+$ opp -h
+usage: opp [-h] [--version] [-c path_to_config_dir] [--demo-mode] [--debug]
             [--open-ui] [--skip-pip] [-v] [--pid-file path_to_pid_file]
             [--log-rotate-days LOG_ROTATE_DAYS] [--log-file LOG_FILE]
             [--log-no-color] [--runner] [--script ...] [--daemon]

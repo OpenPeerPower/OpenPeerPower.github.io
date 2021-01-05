@@ -108,7 +108,7 @@ Or, if there is no result, try to find detailed USB connection info with:
 dmesg | grep USB
 ```
 
-If Open Peer Power (`hass`) runs with another user (e.g., `openpeerpower`) you need to give access to the stick with:
+If Open Peer Power (`opp`) runs with another user (e.g., `openpeerpower`) you need to give access to the stick with:
 
 ```bash
 sudo usermod -aG dialout openpeerpower
@@ -150,7 +150,7 @@ If this applies to your situation:
 
 - Some or all Z-Wave nodes are unreachable after restarting Open Peer Power; not necessarily after every restart but seemingly random.
 - The Z-Wave stick stops responding, needs to be re-plugged or Open Peer Power needs a restart to get Z-Wave back.
-- Your host OS is Debian-based/Ubuntu (for example: you installed Ubuntu, then Docker, then Hass.io).
+- Your host OS is Debian-based/Ubuntu (for example: you installed Ubuntu, then Docker, then Opp.io).
 
 Then chances are high that the ModemManager in the host OS is causing the issue, claiming or interfering with the USB Z-Wave stick like the much used Aeotec ones. In this case you need to disable ModemManager.
 

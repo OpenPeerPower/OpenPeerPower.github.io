@@ -82,17 +82,17 @@ pip3 install openpeerpower
 Start Open Peer Power Core for the first time. This will complete the installation for you, automatically creating the `.openpeerpower` configuration directory in the `/home/openpeerpower` directory, and installing any basic dependencies.
 
 ```bash
-hass
+opp
 ```
 You can now reach your installation on your Raspberry Pi over the web interface on `http://ipaddress:8123`.
 
 <div class='note'>
 
-When you run the `hass` command for the first time, it will download, install and cache the necessary libraries/dependencies. This procedure may take anywhere between 5 to 10 minutes. During that time, you may get "site cannot be reached" error when accessing the web interface. This will only happen for the first time, and subsequent restarts will be much faster.
+When you run the `opp` command for the first time, it will download, install and cache the necessary libraries/dependencies. This procedure may take anywhere between 5 to 10 minutes. During that time, you may get "site cannot be reached" error when accessing the web interface. This will only happen for the first time, and subsequent restarts will be much faster.
 
 </div>
 
-If you want to setup `hass` as a daemon and autostart it on boot please refer to [Autostart Open Peer Power Core](/docs/autostart/).
+If you want to setup `opp` as a daemon and autostart it on boot please refer to [Autostart Open Peer Power Core](/docs/autostart/).
 
 ### Updating
 

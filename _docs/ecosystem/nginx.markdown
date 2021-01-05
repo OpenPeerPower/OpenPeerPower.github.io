@@ -55,7 +55,7 @@ sudo openssl dhparam -out dhparams.pem 2048
 
 ### 5. Install configuration file in NGINX
 
-Create a new file `/etc/nginx/sites-available/hass` and copy the configuration file at the bottom of the page into it.
+Create a new file `/etc/nginx/sites-available/opp` and copy the configuration file at the bottom of the page into it.
 
 <div class='note'>
 
@@ -68,7 +68,7 @@ Some Linux distributions (including CentOS and Fedora) will not have the `/etc/n
 ```bash
 cd /etc/nginx/sites-enabled
 sudo unlink default
-sudo ln ../sites-available/hass default
+sudo ln ../sites-available/opp default
 ```
 
 ### 7. Start NGINX

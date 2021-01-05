@@ -54,7 +54,7 @@ This will not print the actual secret's value to the log.
 *Option 2*: To view where secrets are retrieved from and the contents of all `secrets.yaml` files used, you can use the [`check_config` script](/docs/tools/check_config/) from the command line:
 
 ```bash
-$ hass --script check_config --secrets
+$ opp --script check_config --secrets
 ```
 This will print all your secrets.
 

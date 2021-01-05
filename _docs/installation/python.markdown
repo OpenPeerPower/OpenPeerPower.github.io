@@ -14,7 +14,7 @@ Once Python is installed, execute the following code in a console:
 
 ```bash
 pip3 install openpeerpower
-hass --open-ui
+opp --open-ui
 ```
 
 Running these commands will:

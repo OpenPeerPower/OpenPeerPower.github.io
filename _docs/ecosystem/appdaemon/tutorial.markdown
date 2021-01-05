@@ -54,10 +54,10 @@ particular App, and the same code could be reused to activate completely
 different scenes in a different version of the App.
 
 ```python
-    import appdaemon.plugins.hass.hassapi as hass
+    import appdaemon.plugins.opp.oppapi as opp
 
 
-    class OutsideLights(hass.Hass):
+    class OutsideLights(opp.Opp):
         def initialize(self):
             self.run_at_sunrise(self.sunrise_cb)
             self.run_at_sunset(self.before_sunset_cb, offset=-900)

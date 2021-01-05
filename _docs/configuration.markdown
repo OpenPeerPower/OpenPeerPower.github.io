@@ -17,7 +17,7 @@ The location of the folder differs between operating systems:
 | Linux          | `~/.openpeerpower`         |
 | Windows        | `%APPDATA%/.openpeerpower` |
 
-If you want to use a different folder for configuration, use the configuration command line parameter: `hass --config path/to/config`.
+If you want to use a different folder for configuration, use the configuration command line parameter: `opp --config path/to/config`.
 
 Inside your configuration folder is the file `configuration.yaml`. This is the main file that contains integrations to be loaded with their configurations. Throughout the documentation you will find snippets that you can add to your configuration file to enable functionality.
 
@@ -25,7 +25,7 @@ If you run into trouble while configuring Open Peer Power, have a look at the [c
 
 <div class='note tip'>
 
-  Test any changes to your configuration files from the command line with `hass --script check_config`. This script allows you to test changes without the need to restart Open Peer Power. Remember to run this as the user you run Open Peer Power as.
+  Test any changes to your configuration files from the command line with `opp --script check_config`. This script allows you to test changes without the need to restart Open Peer Power. Remember to run this as the user you run Open Peer Power as.
 
 </div>
 

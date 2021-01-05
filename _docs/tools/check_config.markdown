@@ -6,14 +6,14 @@ description: "Script to perform a check of the current configuration"
 Test any changes to your `configuration.yaml` file before launching Open Peer Power. This script allows you to test changes without the need to restart Open Peer Power.
 
 ```bash
-$ hass --script check_config
+$ opp --script check_config
 ```
 
 The script has further options like checking configuration files which are not located in the default directory or showing your secrets for debugging.
 
 ```bash
-$ hass --script check_config -h
-usage: hass [-h] [--script {check_config}] [-c CONFIG] [-i [INFO]] [-f] [-s]
+$ opp --script check_config -h
+usage: opp [-h] [--script {check_config}] [-c CONFIG] [-i [INFO]] [-f] [-s]
 
 Check Open Peer Power configuration.
 

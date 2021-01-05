@@ -117,12 +117,12 @@ will be added as well.
 
 ## In other news
 
-### Meanwhile, HassOS 3.8 got released!
+### Meanwhile, OppOS 3.8 got released!
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">HassOS Release-3 build 8 (Stable) released today. Changelog: <a href="https://t.co/kXOXNPldJF">https://t.co/kXOXNPldJF</a> - Next we start the first 4.0 Beta builds include the N2 support and Linux LT 5.4</p>&mdash; Pascal Vizeli (@pvizeli) <a href="https://twitter.com/pvizeli/status/1216668319396368384?ref_src=twsrc%5Etfw">January 13, 2020</a>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">OppOS Release-3 build 8 (Stable) released today. Changelog: <a href="https://t.co/kXOXNPldJF">https://t.co/kXOXNPldJF</a> - Next we start the first 4.0 Beta builds include the N2 support and Linux LT 5.4</p>&mdash; Pascal Vizeli (@pvizeli) <a href="https://twitter.com/pvizeli/status/1216668319396368384?ref_src=twsrc%5Etfw">January 13, 2020</a>
 </blockquote>
 
-Besides the release of HassOS 3.8, the first beta version of HassOS 4.0 is
+Besides the release of OppOS 3.8, the first beta version of OppOS 4.0 is
 now available as well. This beta release adds support for
 [Hardkernel's ODROID-N2](https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram/)!
 
@@ -456,7 +456,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 ## All changes
 
 - Move imports to top for decora_wifi ([@springstan] - [#29439]) ([decora_wifi docs])
-- Make hassfest stricter ([@balloob] - [#29494])
+- Make oppfest stricter ([@balloob] - [#29494])
 - Move imports to top for ambient_station ([@springstan] - [#29497]) ([ambient_station docs])
 - Move imports to top for google_pubsub ([@springstan] - [#29498]) ([google_pubsub docs])
 - Move imports to top for hue ([@springstan] - [#29501]) ([hue docs])
@@ -685,7 +685,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 - Add ZHA group API ([@dmulcahey] - [#29641]) ([zha docs])
 - Add input_text reload service. ([@Adminiuga] - [#29644]) ([input_text docs])
 - Add input_select reload service. ([@Adminiuga] - [#29647]) ([input_select docs])
-- Add JSON files validation to hassfest ([@frenck] - [#29799])
+- Add JSON files validation to oppfest ([@frenck] - [#29799])
 - Fix zha circular import ([@Adminiuga] - [#29802])
 - Nextbus: Sort results for upcoming times ([@ViViDboarder] - [#29811]) ([nextbus docs])
 - Adjusts repository README ([@frenck] - [#29805])
@@ -723,7 +723,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 - Add battery sensor to iCloud ([@Quentame] - [#29818]) ([icloud docs]) (new-platform)
 - bump venstar 0.12 ([@tyler-public] - [#29954])
 - Bump adb-shell to 0.1.0 and androidtv to 0.0.36 ([@JeffLIrion] - [#29938]) ([androidtv docs])
-- Start of using hass state for tests rather than direct object ([@elupus] - [#29377])
+- Start of using opp state for tests rather than direct object ([@elupus] - [#29377])
 - isort fix on test_media_player ([@caronc] - [#29965])
 - Upgrade keyring to 20.0.0 and keyrings.alt to 3.4.0 ([@fabaff] - [#29960])
 - Fix example value for Todoist service ([@boralyl] - [#29953])
@@ -732,7 +732,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 - Support case of unknown/unavailable temperature/humidity ([@elupus] - [#29959]) ([google_assistant docs])
 - Migrate to api_key ([@eifinger] - [#29966]) ([here_travel_time docs]) (breaking change)
 - Remove 'SUPPORT_PLAY_MEDIA' from Volumio ([@JeffLIrion] - [#29969]) ([volumio docs])
-- Make hassfest import detection better ([@balloob] - [#29932]) ([filter docs]) ([history docs])
+- Make oppfest import detection better ([@balloob] - [#29932]) ([filter docs]) ([history docs])
 - Fixed "condtion_type" to "condition_type" ([@rsnodgrass] - [#29984]) ([fan docs])
 - Fix condition typo ([@balloob] - [#29989]) ([climate docs]) ([device_tracker docs]) ([fan docs]) ([vacuum docs])
 - Don't use the locals parameter on exec. ([@lddubeau] - [#29979]) ([python_script docs])
@@ -758,7 +758,7 @@ Make sure to fill in all fields of the issue template, that is helping us a lot!
 - Remove stream from camera after deps ([@balloob] - [#30057]) ([camera docs])
 - Add unit_of_measurement to various Transmission sensors ([@yegle] - [#30037]) ([transmission docs])
 - Refactor Alexa capabilityResources object into class, Implement Alexa semantics object ([@ochlocracy] - [#29917]) ([alexa docs])
-- Make Hassfest stricter pt 2 ([@balloob] - [#30068]) ([modbus docs]) ([mqtt docs]) ([tuya docs]) ([zamg docs])
+- Make Oppfest stricter pt 2 ([@balloob] - [#30068]) ([modbus docs]) ([mqtt docs]) ([tuya docs]) ([zamg docs])
 - Init entities as unavailable when offline ([@bieniu] - [#29738]) ([airly docs])
 - Make name of nmbs live sensor customizable via unique_id ([@springstan] - [#29662]) ([nmbs docs])
 - Include all SSDP data in discovery info ([@scop] - [#28197]) ([ssdp docs])

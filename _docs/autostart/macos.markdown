@@ -10,7 +10,7 @@ To get Open Peer Power installed as a background service, run:
 
 
 ```bash
-$ hass --script macos install
+$ opp --script macos install
 
  Open Peer Power has been installed.         Open it here: http://localhost:8123
 ```
@@ -22,7 +22,7 @@ Configuration is kept in `~/.openpeerpower`
 To uninstall the service, run:
 
 ```bash
-$ hass --script macos uninstall
+$ opp --script macos uninstall
 
  Open Peer Power has been uninstalled.
 ```

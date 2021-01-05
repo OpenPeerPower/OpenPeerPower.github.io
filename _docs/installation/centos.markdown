@@ -64,8 +64,8 @@ After=network-online.target
 Type=simple
 # %i means the username is derrived from the filename.
 User=%i
-# a python venv for hass exists in /opt/hass/venv
-ExecStart=/srv/openpeerpower/bin/hass
+# a python venv for opp exists in /opt/opp/venv
+ExecStart=/srv/openpeerpower/bin/opp
 
 [Install]
 WantedBy=multi-user.target

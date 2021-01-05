@@ -16,7 +16,7 @@
 
 @media only screen and (max-width: $palm-end) {
   #components-page {
-    .hass-option-cards {
+    .opp-option-cards {
       .option-card {
         width: 100%;
       }
@@ -75,7 +75,7 @@
 }
 
 // styles for the cards
-.hass-option-cards {
+.opp-option-cards {
   display: -ms-flexbox;
   display: -webkit-box;
   display: -webkit-flexbox;

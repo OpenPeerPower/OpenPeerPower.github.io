@@ -234,6 +234,6 @@ You will also need to install an ODBC Driver. Microsoft ODBC drivers are recomme
 
 <div class='note'>
 
-If you are using Hass.io, FreeTDS is already installed for you. The db_url you need to use is `mssql+pyodbc://username:password@SERVER_IP/DB_NAME?charset=utf8;DRIVER={FreeTDS};Port=1433;`.
+If you are using Opp.io, FreeTDS is already installed for you. The db_url you need to use is `mssql+pyodbc://username:password@SERVER_IP/DB_NAME?charset=utf8;DRIVER={FreeTDS};Port=1433;`.
 
 </div>

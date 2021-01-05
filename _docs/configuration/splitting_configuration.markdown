@@ -154,11 +154,11 @@ If you have issues checkout `open-peer-power.log` in the configuration directory
 
 If you have many configuration files, the `check_config` script allows you to see how Open Peer Power interprets them:
 
-- Listing all loaded files: `hass --script check_config --files`
-- Viewing a component's configuration: `hass --script check_config --info light`
-- Or all components' configuration:  `hass --script check_config --info all`
+- Listing all loaded files: `opp --script check_config --files`
+- Viewing a component's configuration: `opp --script check_config --info light`
+- Or all components' configuration:  `opp --script check_config --info all`
 
-You can get help from the command line using: `hass --script check_config --help`
+You can get help from the command line using: `opp --script check_config --help`
 
 ## Advanced Usage
 

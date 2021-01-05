@@ -14,7 +14,7 @@ If the preceding command returns the string `systemd`, continue with the instruc
 
 A service file is needed to control Open Peer Power with `systemd`. The template below should be created using a text editor. Note, root permissions via `sudo` will likely be needed. The following should be noted to modify the template:
 
-- `ExecStart` contains the path to `hass` and this may vary. Check with `whereis hass` for the location.
+- `ExecStart` contains the path to `opp` and this may vary. Check with `whereis opp` for the location.
 - For most systems, the file is `/etc/systemd/system/open-peer-power@YOUR_USER.service` with YOUR_USER replaced by the user account that Open Peer Power will run as (normally `openpeerpower`).  In particular, this is the case for Ubuntu 16.04.
 - If unfamiliar with command-line text editors, `sudo nano -w [filename]` can be used with `[filename]` replaced with the full path to the file.  Ex. `sudo nano -w /etc/systemd/system/open-peer-power@YOUR_USER.service`.  After text entered, press CTRL-X then press Y to save and exit.
 - If you're running Open Peer Power in a Python virtual environment or a Docker container, please skip to the appropriate template listed below.
@@ -27,7 +27,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=%i
-ExecStart=/usr/bin/hass
+ExecStart=/usr/bin/opp
 
 [Install]
 WantedBy=multi-user.target
@@ -45,7 +45,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=%i
-ExecStart=/srv/openpeerpower/bin/hass -c "/home/%i/.openpeerpower"
+ExecStart=/srv/openpeerpower/bin/opp -c "/home/%i/.openpeerpower"
 
 [Install]
 WantedBy=multi-user.target
@@ -104,10 +104,10 @@ $ sudo systemctl status open-peer-power@YOUR_USER
 ● open-peer-power@fab.service - Open Peer Power for YOUR_USER
    Loaded: loaded (/etc/systemd/system/open-peer-power@YOUR_USER.service; enabled; vendor preset: disabled)
    Active: active (running) since Sat 2016-03-26 12:26:06 CET; 13min ago
- Main PID: 30422 (hass)
+ Main PID: 30422 (opp)
    CGroup: /system.slice/system-home\x2dassistant.slice/open-peer-power@YOUR_USER.service
-           ├─30422 /usr/bin/python3 /usr/bin/hass
-           └─30426 /usr/bin/python3 /usr/bin/hass
+           ├─30422 /usr/bin/python3 /usr/bin/opp
+           └─30426 /usr/bin/python3 /usr/bin/opp
 [...]
 ```
 

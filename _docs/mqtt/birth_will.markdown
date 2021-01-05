@@ -13,9 +13,9 @@ To integrate MQTT Birth and Last Will messages into Open Peer Power, add the fol
 # Example configuration.yaml entry
 mqtt:
   birth_message:
-    topic: 'hass/status'
+    topic: 'opp/status'
     payload: 'online'
   will_message:
-    topic: 'hass/status'
+    topic: 'opp/status'
     payload: 'offline'
 ```

@@ -19,7 +19,7 @@ Now that you installed python, there are two ways to install Open Peer Power:
 
 ```bash
 sudo pip3 install openpeerpower
-hass --open-ui
+opp --open-ui
 ```
 
 Running these commands will:

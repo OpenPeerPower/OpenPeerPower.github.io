@@ -6,7 +6,7 @@ description: "Script to store secrets in a keyring"
 Using [Keyring](https://github.com/jaraco/keyring) is an alternative way to `secrets.yaml`. The secrets can be managed from the command line via the `keyring` script.
 
 ```bash
-$ hass --script keyring --help
+$ opp --script keyring --help
 ```
 
 To store a password in keyring, replace your password or API key with `!secret` and an identifier in `configuration.yaml` file.
@@ -19,13 +19,13 @@ integration1:
 Create an entry in your keyring.
 
 ```bash
-$ hass --script keyring set integration1_key
+$ opp --script keyring set integration1_key
 ```
 
 If you launch Open Peer Power now, you will be prompted for the keyring password to unlock your keyring.
 
 ```bash
-$ hass
+$ opp
 Config directory: /home/openpeerpower/.openpeerpower
 Please enter password for encrypted keyring:
 ```

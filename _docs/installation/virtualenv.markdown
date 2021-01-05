@@ -41,7 +41,7 @@ It should not contain any OS specific instructions.
     ```    
  5. Run Open Peer Power:
     ```bash
-    hass --open-ui
+    opp --open-ui
     ```
  6. You can now reach the web interface on `http://ipaddress:8123/` - the first start may take a couple of minutes before the web interface is available. This can take longer if you're using lower-end hardware like a Raspberry Pi Zero.
  

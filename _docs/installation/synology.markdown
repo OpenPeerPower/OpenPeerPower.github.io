@@ -71,7 +71,7 @@ Create a Open Peer Power configuration directory & switch to it
 
 Hint: alternatively you can also create a "Shared Folder" via Synology WebUI (e.g., via "File Station") - this has the advantage that the folder is visible via "File Station".
 
-Create hass-daemon file using the following code (edit the variables in uppercase if necessary)
+Create opp-daemon file using the following code (edit the variables in uppercase if necessary)
 
 ```bash
 #!/bin/sh
@@ -84,7 +84,7 @@ DNAME="Open Peer Power"
 USER="openpeerpower"
 PYTHON_DIR="/volume1/@appstore/py3k/usr/local/bin"
 PYTHON="$PYTHON_DIR/python3"
-HASS="$PYTHON_DIR/hass"
+OPP="$PYTHON_DIR/opp"
 INSTALL_DIR="/volume1/openpeerpower"
 PID_FILE="$INSTALL_DIR/open-peer-power.pid"
 FLAGS="-v --config $INSTALL_DIR --pid-file $PID_FILE --daemon"
@@ -92,7 +92,7 @@ REDIRECT="> $INSTALL_DIR/open-peer-power.log 2>&1"
 
 start_daemon ()
 {
-    sudo -u ${USER} /bin/sh -c "$PYTHON $HASS $FLAGS $REDIRECT;"
+    sudo -u ${USER} /bin/sh -c "$PYTHON $OPP $FLAGS $REDIRECT;"
 }
 
 stop_daemon ()
@@ -195,7 +195,7 @@ Set the owner and permissions on your configuration folder
 Make the daemon file executable:
 
 ```bash
-# chmod 755 /volume1/openpeerpower/hass-daemon
+# chmod 755 /volume1/openpeerpower/opp-daemon
 ```
 
 Update your firewall (if it is turned on the Synology device):
@@ -219,19 +219,19 @@ Here are some useful commands:
 - Start Open Peer Power:
 
 ```bash
-$ sudo /volume1/openpeerpower/hass-daemon start
+$ sudo /volume1/openpeerpower/opp-daemon start
 ```
 
 - Stop Open Peer Power:
 
 ```bash
-$ sudo /volume1/openpeerpower/hass-daemon stop
+$ sudo /volume1/openpeerpower/opp-daemon stop
 ```
 
 - Restart Open Peer Power:
 
 ```bash
-$ sudo /volume1/openpeerpower/hass-daemon restart
+$ sudo /volume1/openpeerpower/opp-daemon restart
 ```
 
 - Upgrade Open Peer Power::

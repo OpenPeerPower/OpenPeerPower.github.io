@@ -43,7 +43,7 @@ You will then be at the Open Peer Power CLI, where you can run the custom comman
 
 ### Remove the SD and access the files from another computer
 
-The files are on an EXT4 partition (`hassos-data`) and the path is `/mnt/data/supervisor`.
+The files are on an EXT4 partition (`oppos-data`) and the path is `/mnt/data/supervisor`.
 These are easily accessed using another Linux machine with EXT support.
 
 For Windows or macOS you will need third party software. Below are some options.

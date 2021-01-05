@@ -31,7 +31,7 @@ Some best practices to consider before putting your configuration on GitHub:
 
 ### Step 1: Installing and Initializing Git
 
-In order to put your configuration on GitHub, you must install the Git package on your Open Peer Power server (instructions below will work on Raspberry Pi, Ubuntu or any Debian-based system) *Note: this isn't required in Hass.io, it's included as default so proceed to step 2*:
+In order to put your configuration on GitHub, you must install the Git package on your Open Peer Power server (instructions below will work on Raspberry Pi, Ubuntu or any Debian-based system) *Note: this isn't required in Opp.io, it's included as default so proceed to step 2*:
 
 ```bash
 sudo apt-get update
@@ -133,7 +133,7 @@ You may need to adjust the paths in the script depending on your Open Peer Power
 
 cd /home/openpeerpower/.openpeerpower
 source /srv/openpeerpower/bin/activate
-hass --script check_config
+opp --script check_config
 
 git add .
 git status
@@ -166,7 +166,7 @@ before_install:
 install:
   - pip3 install openpeerpower
 script:
-  - hass -c . --script check_config
+  - opp -c . --script check_config
 ```
 
 Since the `secrets.yaml` should _not_ be stored in your repository for security reasons, you won't be able to access it at build time. Creating a dummy `secrets.yaml` is as simple as creating a new file that mimics your existing `secrets.yaml` with the required keys, but not their value.

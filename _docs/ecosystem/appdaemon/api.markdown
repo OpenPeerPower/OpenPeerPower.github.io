@@ -2085,7 +2085,7 @@ Internally, AppDaemon keeps track of its own time relative to when it was starte
 $ appdaemon -s "2016-06-06 19:16:00"
 2016-09-06 17:16:00 INFO AppDaemon Version 1.3.2 starting
 2016-09-06 17:16:00 INFO Got initial state
-2016-09-06 17:16:00 INFO Loading Module: /export/hass/appdaemon_test/conf/test_apps/sunset.py
+2016-09-06 17:16:00 INFO Loading Module: /export/opp/appdaemon_test/conf/test_apps/sunset.py
 ...
 ```
 
@@ -2113,7 +2113,7 @@ AppDaemon can be set to terminate automatically at a specific time. This can be 
 $ appdaemon -e "2016-06-06 10:10:00"
 2016-09-06 17:16:00 INFO AppDaemon Version 1.3.2 starting
 2016-09-06 17:16:00 INFO Got initial state
-2016-09-06 17:16:00 INFO Loading Module: /export/hass/appdaemon_test/conf/test_apps/sunset.py
+2016-09-06 17:16:00 INFO Loading Module: /export/opp/appdaemon_test/conf/test_apps/sunset.py
 ...
 ```
 

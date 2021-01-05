@@ -27,7 +27,7 @@ You can inspect the logs as follows:
 ```bash
 $ docker logs appdaemon
 2016-08-22 10:08:16,575 INFO Got initial state
-2016-08-22 10:08:16,576 INFO Loading Module: /export/hass/appdaemon_test/conf/apps/hello.py
+2016-08-22 10:08:16,576 INFO Loading Module: /export/opp/appdaemon_test/conf/apps/hello.py
 2016-08-22 10:08:16,578 INFO Loading Object hello_world using class HelloWorld from module hello
 2016-08-22 10:08:16,580 INFO Hello from AppDaemon
 2016-08-22 10:08:16,584 INFO You are now ready to run Apps!
@@ -48,7 +48,7 @@ If all is well, you should see something like the following:
 ```bash
 $ appdaemon -c conf/appdaemon.cfg
 2016-08-22 10:08:16,575 INFO Got initial state
-2016-08-22 10:08:16,576 INFO Loading Module: /export/hass/appdaemon_test/conf/apps/hello.py
+2016-08-22 10:08:16,576 INFO Loading Module: /export/opp/appdaemon_test/conf/apps/hello.py
 2016-08-22 10:08:16,578 INFO Loading Object hello_world using class HelloWorld from module hello
 2016-08-22 10:08:16,580 INFO Hello from AppDaemon
 2016-08-22 10:08:16,584 INFO You are now ready to run Apps!

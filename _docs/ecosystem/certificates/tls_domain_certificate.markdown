@@ -48,7 +48,7 @@ Press Enter to Continue
 If your router uses DNSMasq (for example DDWRT) add the following line to DNSMasq options:
 
 ```text
-address=/mydomain.com/<hass IP>
+address=/mydomain.com/<opp IP>
 ```
 
 ### Edit your Open Peer Power configuration to use your certificates

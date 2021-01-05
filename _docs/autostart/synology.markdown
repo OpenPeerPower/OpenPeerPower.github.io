@@ -26,7 +26,7 @@ stop on runlevel [06]
 
 # exec the process. Use fully formed path names so that there is no reliance on
 # the 'www' file is a node.js script which starts the foobar application.
-exec /bin/sh /volume1/openpeerpower/hass-daemon start
+exec /bin/sh /volume1/openpeerpower/opp-daemon start
 ```
 
 Register the autostart

@@ -22,7 +22,7 @@ Enable [`mod_proxy_wstunnel`](https://httpd.apache.org/docs/2.4/mod/mod_proxy_ws
 $ sudo a2enmod proxy_wstunnel
 ```
 
-To be able to access to your Open Peer Power instance by using `https://home.example.org`, add the following file to `/etc/httpd/conf/extra/` as `hass.conf`
+To be able to access to your Open Peer Power instance by using `https://home.example.org`, add the following file to `/etc/httpd/conf/extra/` as `opp.conf`
 
 ```text
 <VirtualHost *:443>
@@ -46,7 +46,7 @@ and make sure that this file is read by Apache's main configuration file `/etc/h
 
 ```text
 ...
-Include conf/extra/hass.conf
+Include conf/extra/opp.conf
 ...
 ```
 
@@ -74,7 +74,7 @@ You want another instance available at `https://countryside.example.org`
 
 You can either :
  * Create a new user, `bob`, to hold the configuration file in `/home/bob/.openpeerpower/configuration.yaml` and run Open Peer Power as this new user
- * Create another configuration directory in `/home/alice/.homeassistan2/configuration.yaml` and run Open Peer Power using `hass --config /home/alice/.openpeerpower2/`
+ * Create another configuration directory in `/home/alice/.homeassistan2/configuration.yaml` and run Open Peer Power using `opp --config /home/alice/.openpeerpower2/`
 
 In both solution, change port number used by modifying `configuration.yaml`
 
@@ -86,7 +86,7 @@ http:
 
 Start Open Peer Power: Now, you have another instance running on `http://localhost:8124`
 
-To access this instance by using `https://countryside.example.org` add to `/etc/httpd/conf/extra/hass.conf`
+To access this instance by using `https://countryside.example.org` add to `/etc/httpd/conf/extra/opp.conf`
 
 ```text
 <VirtualHost *:443>
@@ -102,7 +102,7 @@ To access this instance by using `https://countryside.example.org` add to `/etc/
 
 #### HTTP to HTTPS redirection
 
-Add to your `/etc/httpd/conf/extra/hass.conf`
+Add to your `/etc/httpd/conf/extra/opp.conf`
 
 ```text
 <VirtualHost *:80>

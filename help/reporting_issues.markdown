@@ -18,7 +18,7 @@ Please provide the release which contains the issue.
 
 If possible, provide the latest release of which you know that the integration or platform was working. Open Peer Power is evolving very fast and issues may already be addressed or be introduced by a recent change.
 
-### Operating environment (Hass.io/Docker/Windows/etc.)
+### Operating environment (Opp.io/Docker/Windows/etc.)
 
 
 ### Description of problem

@@ -44,8 +44,8 @@ The sample below shows a configuration entry with possible values:
 # Example configuration.yaml entry
 http:
   server_port: 12345
-  ssl_certificate: /etc/letsencrypt/live/hass.example.com/fullchain.pem
-  ssl_key: /etc/letsencrypt/live/hass.example.com/privkey.pem
+  ssl_certificate: /etc/letsencrypt/live/opp.example.com/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/opp.example.com/privkey.pem
   cors_allowed_origins:
     - https://google.com
     - https://www.openpeerpower.io

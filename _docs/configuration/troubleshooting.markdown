@@ -14,7 +14,7 @@ Whenever an integration or configuration option results in a warning, it will be
 
 When an integration does not show up, many different things can be the case. Before you try any of these steps, make sure to look at the `open-peer-power.log` file and see if there are any errors related to your integration you are trying to set up.
 
-If you have incorrect entries in your configuration files you can use the [`check_config`](/docs/tools/check_config/) script to assist in identifying them: `hass --script check_config`. If you need to provide the path for your configuration you can do this using the `-c` argument like this: `hass --script check_config -c /path/to/your/config/dir`.
+If you have incorrect entries in your configuration files you can use the [`check_config`](/docs/tools/check_config/) script to assist in identifying them: `opp --script check_config`. If you need to provide the path for your configuration you can do this using the `-c` argument like this: `opp --script check_config -c /path/to/your/config/dir`.
 
 #### Problems with dependencies
 

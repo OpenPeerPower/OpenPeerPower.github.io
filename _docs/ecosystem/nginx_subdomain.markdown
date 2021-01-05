@@ -58,7 +58,7 @@ You want another instance available at `https://countryside.example.org`
 
 You can either :
  * Create a new user, `bob`, to hold the configuration file in `/home/bob/.openpeerpower/configuration.yaml` and run Open Peer Power as this new user
- * Create another configuration directory in `/home/alice/.openpeerpower2/configuration.yaml` and run Open Peer Power using `hass --config /home/alice/.openpeerpower2/`
+ * Create another configuration directory in `/home/alice/.openpeerpower2/configuration.yaml` and run Open Peer Power using `opp --config /home/alice/.openpeerpower2/`
 
 In both solution, change port number used by modifying `configuration.yaml` file.
 

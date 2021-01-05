@@ -8,26 +8,26 @@ redirect_from: /getting-started/autostart-init.d/
 
 ## 1. Copy script
 
-Copy either the daemon script or the Python environment script at the end of this page to `/etc/init.d/hass-daemon` depending on your installation.
+Copy either the daemon script or the Python environment script at the end of this page to `/etc/init.d/opp-daemon` depending on your installation.
 
 After that, set the script to be executable:
 
 ```bash
-sudo chmod +x /etc/init.d/hass-daemon
+sudo chmod +x /etc/init.d/opp-daemon
 ```
 
 ## 2. Select a user
 
 Create or pick a user that the Open Peer Power daemon will run under. Update script to set `RUN_AS` to the username that should be used to execute Open Peer Power.
 
-## 3. Change `hass` executable and other variables if required
+## 3. Change `opp` executable and other variables if required
 
-Some installation environments may require a change in the Open Peer Power executable `hass`. Update script to set `HASS_BIN` to the appropriate `hass` executable path. Please also check the other variables for the appropriate value. In general the defaults should work
+Some installation environments may require a change in the Open Peer Power executable `opp`. Update script to set `OPP_OPPBIN` to the appropriate `opp` executable path. Please also check the other variables for the appropriate value. In general the defaults should work
 
 ## 4. Install this service
 
 ```bash
-sudo service hass-daemon install
+sudo service opp-daemon install
 ```
 
 ## 5. Create logrotate rule
@@ -45,7 +45,7 @@ File `/var/log/openpeerpower/open-peer-power.log`:
         delaycompress
         compress
         postrotate
-                invoke-rc.d hass-daemon restart > /dev/null
+                invoke-rc.d opp-daemon restart > /dev/null
         endscript
 }
 
@@ -66,7 +66,7 @@ If any commands need to run before executing Open Peer Power (like loading a vir
 ```bash
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          hass
+# Provides:          opp
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
@@ -77,11 +77,11 @@ If any commands need to run before executing Open Peer Power (like loading a vir
 # /etc/init.d Service Script for Open Peer Power
 # Created with: https://gist.github.com/naholyr/4275302#file-new-service-sh
 PRE_EXEC=""
-# Typically /usr/bin/hass
-HASS_BIN="hass"
+# Typically /usr/bin/opp
+OPP_BIN="opp"
 RUN_AS="openpeerpower"
-PID_DIR="/var/run/hass"
-PID_FILE="$PID_DIR/hass.pid"
+PID_DIR="/var/run/opp"
+PID_FILE="$PID_DIR/opp.pid"
 CONFIG_DIR="/var/opt/openpeerpower"
 LOG_DIR="/var/log/openpeerpower"
 LOG_FILE="$LOG_DIR/open-peer-power.log"
@@ -95,7 +95,7 @@ start() {
     return 1
   fi
   echo -n 'Starting service… ' >&2
-  local CMD="$PRE_EXEC $HASS_BIN $FLAGS"
+  local CMD="$PRE_EXEC $OPP_BIN $FLAGS"
   su -s /bin/bash -c "$CMD" $RUN_AS
   if [ $? -ne 0 ]; then
     echo "Failed" >&2
@@ -117,8 +117,8 @@ stop() {
 }
 
 install() {
-  echo "Installing Open Peer Power Daemon (hass-daemon)"
-  update-rc.d hass-daemon defaults
+  echo "Installing Open Peer Power Daemon (opp-daemon)"
+  update-rc.d opp-daemon defaults
   create_piddir
   mkdir -p $CONFIG_DIR
   chown $RUN_AS $CONFIG_DIR
@@ -138,7 +138,7 @@ uninstall() {
     echo $CONFIG_DIR
     echo "Notice: The log directory has not been removed"
     echo $LOG_DIR
-    update-rc.d -f hass-daemon remove
+    update-rc.d -f opp-daemon remove
     rm -fv "$0"
     echo " Open Peer Power Daemon has been removed. Open Peer Power is still installed."
   fi
@@ -187,7 +187,7 @@ esac
 ```bash
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          hass
+# Provides:          opp
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
@@ -198,11 +198,11 @@ esac
 # /etc/init.d Service Script for Open Peer Power
 # Created with: https://gist.github.com/naholyr/4275302#file-new-service-sh
 PRE_EXEC="cd /srv/openpeerpower; python3 -m venv .; source bin/activate;"
-# Typically /usr/bin/hass
-HASS_BIN="hass"
+# Typically /usr/bin/opp
+OPP_BIN="opp"
 RUN_AS="openpeerpower"
-PID_DIR="/var/run/hass"
-PID_FILE="$PID_DIR/hass.pid"
+PID_DIR="/var/run/opp"
+PID_FILE="$PID_DIR/opp.pid"
 CONFIG_DIR="/home/$RUN_AS/.openpeerpower"
 LOG_DIR="/var/log/openpeerpower"
 LOG_FILE="$LOG_DIR/open-peer-power.log"
@@ -215,7 +215,7 @@ start() {
     return 1
   fi
   echo -n 'Starting service… ' >&2
-  local CMD="$PRE_EXEC $HASS_BIN $FLAGS"
+  local CMD="$PRE_EXEC $OPP_BIN $FLAGS"
   su -s /bin/bash -c "$CMD" $RUN_AS
   if [ $? -ne 0 ]; then
     echo "Failed" >&2
@@ -237,8 +237,8 @@ stop() {
 }
 
 install() {
-  echo "Installing Open Peer Power Daemon (hass-daemon)"
-  update-rc.d hass-daemon defaults
+  echo "Installing Open Peer Power Daemon (opp-daemon)"
+  update-rc.d opp-daemon defaults
   create_piddir
   mkdir -p $CONFIG_DIR
   chown $RUN_AS $CONFIG_DIR
@@ -258,7 +258,7 @@ uninstall() {
     echo $CONFIG_DIR
     echo "Notice: The log directory has not been removed"
     echo $LOG_DIR
-    update-rc.d -f hass-daemon remove
+    update-rc.d -f opp-daemon remove
     rm -fv "$0"
     echo " Open Peer Power Daemon has been removed. Open Peer Power is still installed."
   fi

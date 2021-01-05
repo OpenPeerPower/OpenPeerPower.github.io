@@ -248,7 +248,7 @@ sudo adduser openpeerpower sudo
 
 </div>
 
-If you did not already log in as the user that currently runs Open Peer Power, change to that user (usually `openpeerpower` or `hass` - you may have used a command similar to this in the past):
+If you did not already log in as the user that currently runs Open Peer Power, change to that user (usually `openpeerpower` or `opp` - you may have used a command similar to this in the past):
 
 ```bash
 sudo -u openpeerpower -H -s

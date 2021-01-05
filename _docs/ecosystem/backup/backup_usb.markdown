@@ -37,17 +37,17 @@ Mount the drive (as root) to `/media`
 
 ### Prepare the USB Device
 
-Change to the `/media` directory and create a folder called `hassbackup`. Change the ownership to the user that runs Open Peer Power. In this example case, the user and group are both `openpeerpower`.
+Change to the `/media` directory and create a folder called `oppbackup`. Change the ownership to the user that runs Open Peer Power. In this example case, the user and group are both `openpeerpower`.
 
 ```bash
 # cd /media/
-/media# mkdir hassbackup
-/media# chown openpeerpower:openpeerpower hassbackup/
+/media# mkdir oppbackup
+/media# chown openpeerpower:openpeerpower oppbackup/
 /media# ls -al
 total 28
 drwxr-xr-x  4 root          root           4096 Apr 29 10:36 .
 drwxr-xr-x 22 root          root           4096 Mar 22 18:37 ..
-drwxr-xr-x  2 openpeerpower openpeerpower  4096 Apr 29 10:36 hassbackup
+drwxr-xr-x  2 openpeerpower openpeerpower  4096 Apr 29 10:36 oppbackup
 drwx------  2 root          root          16384 Apr 29 10:18 lost+found
 ```
 
@@ -82,7 +82,7 @@ Edit the script file using your preferred text editor (use nano if you are not a
 ```bash
 $ .openpeerpower/extraconfig/shell_code/usb_backup.sh
 [i] Creating backup
-[i] Backup complete: /media/hassbackup/hass-config_20170429_112728.zip
+[i] Backup complete: /media/oppbackup/opp-config_20170429_112728.zip
 [i] Keeping all files no prunning set
 ```
 

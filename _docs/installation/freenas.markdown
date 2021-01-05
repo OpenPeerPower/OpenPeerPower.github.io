@@ -50,7 +50,7 @@ pip3 install openpeerpower
 While still in the `venv`, start Open Peer Power to populate the configuration directory.
 
 ```bash
-hass --open-ui
+opp --open-ui
 ```
 
 Wait until you see:
@@ -103,7 +103,7 @@ vi /usr/local/etc/rc.d/openpeerpower
 #
 # openpeerpower_config_dir: Directory where openpeerpower config is located.
 #       Default:  "/home/openpeerpower/.openpeerpower"
-#       Change:   `sysrc openpeerpower_config_dir="/home/hass/openpeerpower"`
+#       Change:   `sysrc openpeerpower_config_dir="/home/opp/openpeerpower"`
 #       UnChange: `sysrc -x openpeerpower_config_dir`
 
 # -------------------------------------------------------
@@ -133,7 +133,7 @@ extra_commands="check_config restart test upgrade"
 
 start_precmd=${name}_precmd
 openpeerpower_precmd() {
-    rc_flags="-f -o ${logfile} -P ${pidfile} -p ${pidfile_child} ${openpeerpower_venv}/bin/hass --config ${openpeerpower_config_dir} ${rc_flags}"
+    rc_flags="-f -o ${logfile} -P ${pidfile} -p ${pidfile_child} ${openpeerpower_venv}/bin/opp --config ${openpeerpower_config_dir} ${rc_flags}"
     [ ! -e "${pidfile_child}" ] && install -g ${openpeerpower_group} -o ${openpeerpower_user} -- /dev/null "${pidfile_child}"
     [ ! -e "${pidfile}" ] && install -g ${openpeerpower_group} -o ${openpeerpower_user} -- /dev/null "${pidfile}"
     [ -e "${logfile}" ] && rm -f -- "${logfile}"
@@ -164,10 +164,10 @@ check_config_cmd="${name}_check_config"
 openpeerpower_check_config() {
     [ ! -e "${openpeerpower_config_dir}/configuration.yaml" ] && return 0
     echo "Performing check on Open Peer Power configuration:"
-    #eval "${openpeerpower_venv}/bin/hass --config ${openpeerpower_config_dir} --script check_config"
+    #eval "${openpeerpower_venv}/bin/opp --config ${openpeerpower_config_dir} --script check_config"
     su ${openpeerpower_user} -c '
       source ${1}/bin/activate || exit 2
-      hass --config ${2} --script check_config || exit 3
+      opp --config ${2} --script check_config || exit 3
       deactivate
     ' _ ${openpeerpower_venv} ${openpeerpower_config_dir}
 }
@@ -267,7 +267,7 @@ Reload devfs
 sudo service devfs restart
 ```
 
-Edit the ruleset used by the jail in the FreeNAS GUI by going to Jails -> `hass` -> Edit ->  Jail Properties ->  devfs_ruleset
+Edit the ruleset used by the jail in the FreeNAS GUI by going to Jails -> `opp` -> Edit ->  Jail Properties ->  devfs_ruleset
 Set it to 7
 
 Start the Open Peer Power jail

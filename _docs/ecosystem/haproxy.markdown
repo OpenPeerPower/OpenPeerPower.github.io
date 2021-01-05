@@ -24,7 +24,7 @@ Items to update for your deployment:
  * `bind`: Update the ports HAProxy listens on for forwarding.
  * `subdomain.domain.com`: Your domain to use
  * `ssl crt`: The path to your SSL certificate.
- * `server hass 127.0.0.1:8123`: The IP and port location of your Open Peer Power instance.
+ * `server opp 127.0.0.1:8123`: The IP and port location of your Open Peer Power instance.
 
 ```text
 global
@@ -67,11 +67,11 @@ frontend www-http
 frontend www-https
 	log /dev/log	local0 debug
 	bind *:443 ssl crt /etc/haproxy/certs/MYCERT.pem
-	acl hass-acl hdr(host) -i SUBDOMAIN.DOMAIN.COM
-	use_backend hass-backend if hass-acl
+	acl opp-acl hdr(host) -i SUBDOMAIN.DOMAIN.COM
+	use_backend opp-backend if opp-acl
 
-backend hass-backend
-	server hass < Open Peer Power Server IP>:8123
+backend opp-backend
+	server opp < Open Peer Power Server IP>:8123
 
 	mode http
 	option forwardfor

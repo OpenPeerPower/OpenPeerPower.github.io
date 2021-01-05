@@ -34,7 +34,7 @@ At the end you will have two files called `privkey.pem` and `fullchain.pem`. The
 
 Update the `http:` entry in your `configuration.yaml` file and let it point to your created files.
 
-Hass.io:
+Opp.io:
 
 ```yaml
 http:
@@ -42,7 +42,7 @@ http:
   ssl_key: /ssl/privkey.pem
 ```
 
-Non-Hass.io:
+Non-Opp.io:
 
 ```yaml
 http:
@@ -61,7 +61,7 @@ chown root:root fullchain.pem privkey.pem
 chmod 600 fullchain.pem privkey.pem
 ```
   
-Non-hass-io:
+Non-opp-io:
 
 ```bash
 sudo chown openpeerpower:openpeerpower fullchain.pem privkey.pem
