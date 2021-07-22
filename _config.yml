@@ -89,9 +89,9 @@ social:
 
 # Open Peer Power release details
 current_major_version: 2020
-current_minor_version: 4
-current_patch_version: 0
-date_released: 2020-04-08
+current_minor_version: 7
+current_patch_version: 2
+date_released: 2020-07-08
 
 # Either # or the anchor link to latest release notes in the blog post.
 # Must be prefixed with a # and have double quotes around it.
